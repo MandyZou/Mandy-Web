@@ -10,7 +10,7 @@ import datetime
 import os
 
 headers = {
-    'api_key': '8db02ce0b2a3407d8f5952d93394333e'
+    'api_key': 'key'
 }
 # =================================================
 
