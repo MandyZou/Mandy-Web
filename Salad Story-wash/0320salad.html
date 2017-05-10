@@ -1,0 +1,472 @@
+<html>
+
+<head>
+    <title>Where to Get Salad?</title>
+
+    <meta charset="utf-8" />
+    <script src="sorttable.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <style>
+
+    #salad-list {
+        display : flex;
+        flex-wrap : wrap;
+        align-content : space-around;
+        margin-top : 40px;
+        margin-bottom : 40px;
+        width:100%;
+    }
+    #chicken-salad, #seafood-salad, #vege-salad, #tofu-salad, #ceaser-salad, #non-chicken-salad {
+        display : block;
+        margin : 30px;
+        cursor : pointer;
+    }
+    #salad-result {
+        display : flex;
+        flex-wrap : wrap;
+        align-content : space-around;
+        margin-bottom : 40px;
+    }
+    #salad-result-1, #salad-result-2 {
+        width : 500px;
+        height : 120px;
+    }
+    .salad-title {
+        float : left;
+        margin-right : 20px;
+        margin-left : 20px;
+    }
+    .salad-table {
+        margin : 0 auto;
+    }
+    .sortable {
+        margin : auto;
+    }
+    .salad-names {
+        cursor : pointer;
+    }
+    .salad-table {
+        cursor : pointer;
+    }
+    table.sortable {
+        font-family : arial;
+        background-color : #B2B2B2;
+        margin : auto;
+        font-size : 8pt;
+        width : 100%;
+        text-align : left;
+    }
+    table.sortable thead tr th, table.tablesorter tfoot tr th {
+        background-color : #b88747;
+        border : #FFF solid 1px;
+        font-size : 15pt;
+        padding : 4px;
+        color : white;
+    }
+    table.sortable thead tr .header {
+        background-image : url(bg.gif);
+        background-repeat : no-repeat;
+        background-position : center right;
+        cursor : pointer;
+    }
+    table.sortable tbody td {
+        color : #3D3D3D;
+        padding : 4px;
+        background-color : #FFF;
+        vertical-align : top;
+        font-size : 15px;
+    }
+    table.sortable tbody tr.odd td {
+        background-color : #F0F0F6;
+    }
+    table.sortable thead tr .headerSortUp {
+        background-image : url(asc.gif);
+    }
+    table.sortable thead tr .headerSortDown {
+        background-image : url(desc.gif);
+    }
+    table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+        background-color : #8dbdd8;
+    }
+    .salad-pic {
+        border : #EDF0F5 solid 1px;
+        margin : 10px;
+    }
+    .salad-pic:hover {
+        box-shadow:0px 12px 22px 1px #A5A8AB;
+    }
+
+    #saladInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+    </style>
+    
+</head>
+
+<body>
+    <p>Sandwiches are one of the most popular lunch items for office workers. Whenever it is lunch time, there will always be a long time inside sandwich shops. Facing various sandwiches, how will you choose?</p>
+
+    <p>We summarized sandwiches from six popular sandwich shops. Pick one of your favorite flavors and see where you can get the cheapest or the lowest calories one. The below prices and calories are based on their most basic version. Different customizations may result in different prices and calories.</p>
+
+    <p><b>Click a salad add-on and see the result below:</b></p>
+    <div id="salad-list">
+        <div id="chicken-salad">
+
+            <img class="salad-pic" style="width: 200px; margin-right: 20px;" src="https://www.washingtonian.com/wp-content/uploads/2017/03/tuna-sand.png" />
+            <p class="salad-names" style="text-align: center;">Chicken</p>
+
+        </div>
+        <div id="non-chicken-salad">
+
+            <img class="salad-pic" style="width: 200px; margin-right: 20px;" src="https://www.washingtonian.com/wp-content/uploads/2017/03/chicken-sand.png" />
+            <p class="salad-names" style="text-align: center;">Non-chicken meat</p>
+
+        </div>
+        <div id="seafood-salad">
+
+            <img class="salad-pic" style="width: 200px; margin-right: 20px;" src="https://www.washingtonian.com/wp-content/uploads/2017/03/chicken-sand.png" />
+            <p class="salad-names" style="text-align: center;">Seafood</p>
+
+        </div>
+        <div id="vege-salad">
+
+            <img class="salad-pic" style="width: 200px; margin-right: 20px;" src="https://www.washingtonian.com/wp-content/uploads/2017/03/ham-sand.png" />
+            <p class="salad-names" style="text-align: center;">Only Vege</p>
+
+        </div>
+        <div id="tofu-salad">
+
+            <img class="salad-pic" style="width: 200px; margin-right: 20px;" src="https://www.washingtonian.com/wp-content/uploads/2017/03/bacon-sand.png" />
+            <p class="salad-names" style="text-align: center;">Tofu</p>
+
+        </div>
+        <div id="ceaser-salad">
+
+            <img class="salad-pic" style="width: 200px; margin-right: 20px;" src="https://www.washingtonian.com/wp-content/uploads/2017/03/turkey-sandwich.png" />
+            <p class="salad-names" style="text-align: center;">Ceaser Salad</p>
+
+        </div>
+    </div>
+
+    <div id="salad-result">
+        <div id="salad-result-1">
+            <div class="salad-title">
+                <h4>Cheapest:</h4>
+            </div>
+            <div class="sald-title"><img id="salad-cheap" style="width: 200px;" src="http://staging.washingtonian.com/wp-content/uploads/2017/03/sand-placeholder.png" /></div>
+        </div>
+
+        <div id="salad-result-2">
+            <div class="salad-title">
+                <h4>The Least Calories:</h4>
+            </div>
+            <div class="salad-title"><img id="salad-cal" style="width: 200px;" src="http://staging.washingtonian.com/wp-content/uploads/2017/03/sand-placeholder.png" /></div>
+        </div>
+    </div>
+
+    <div id="salad-most" style="margin-bottom: 20px"></div>
+
+    <p>Find the <a href="http://maps.google.com" target="_blank">nearest store</a>.</p>
+
+    <p>Want to find more about your favorite sandwiches? Check the full list below. Click the header to sort the column:</p>
+    
+    <input type="text" id="saladInput" onkeyup="saladSearch()" placeholder="Search for names..">
+
+    <table class="sortable" style="margin-bottom: 20px;">
+        <thead>
+            <tr>
+            <th>Salad</th>
+            <th>Price</th>
+            <th>Calories</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Pret Chicken & Egg Protein Power Lunch (chicken)</td>
+            <td></td>
+            <td>620</td>
+            </tr>
+            <tr>
+            <td>Pret Chicken Avocado Salad (chicken)</td>
+            <td></td>
+            <td>370</td>
+            </tr>
+            <tr>
+            <td>Pret Coconut Chicken & Miso Sweet Potato (chicken)</td>
+            <td></td>
+            <td>500</td>
+            </tr>
+            <tr>
+            <td>Pret Kale Chicken Caesar Salad (caesar)</td>
+            <td></td>
+            <td>400</td>
+            </tr>
+            <tr>
+            <td>Pret's Chef Salad (turkey, bacon)</td>
+            <td></td>
+            <td>280</td>
+            </tr>
+            <tr>
+            <td>Pret's Cobb Salad (chicken)</td>
+            <td></td>
+            <td>400</td>
+            </tr>
+            <tr>
+            <td>Pret's Grains & Greens Salad (vege)</td>
+            <td></td>
+            <td>330</td>
+            </tr>
+            <tr>
+            <td>Pret Salmon & Pickled Veggies Power Lunch (salmon)</td>
+            <td></td>
+            <td>590</td>
+            </tr>
+            <tr>
+            <td>Pret Southwestern Chicken & Avocado Power Lunch (chicken)</td>
+            <td></td>
+            <td>640</td>
+            </tr>
+            <tr>
+            <td>Pret Turmeric Tofu & Miso Sweet Potato (tofu)</td>
+            <td></td>
+            <td>540</td>
+            </tr>
+            <tr>
+            <td>Chop't Crunchy Vietnamese Salad (chicken)</td>
+            <td></td>
+            <td>350</td>
+            </tr>
+            <tr>
+            <td>Chop't Beekeeper's Quinoa Bowl (vege)</td>
+            <td></td>
+            <td>410</td>
+            </tr>
+            <tr>
+            <td>Chop't Wild Smokehouse Salmon Plate (seafood)</td>
+            <td></td>
+            <td>250</td>
+            </tr>
+            <tr>
+            <td>Chop't Mexican Caeser Salad (vege)</td>
+            <td></td>
+            <td>410</td>
+            </tr>
+            <tr>
+            <td>Chop't Mexican Vegan (vege)</td>
+            <td></td>
+            <td>360</td>
+            </tr>
+            <tr>
+            <td>Chop't Kebab Cobb (Chicken)</td>
+            <td></td>
+            <td>530</td>
+            </tr>
+            <tr>
+            <td>Chop't Kale Caesar (vege)</td>
+            <td></td>
+            <td>290</td>
+            </tr>
+            <tr>
+            <td>Chop't Santa Fe (vege)</td>
+            <td></td>
+            <td>510</td>
+            </tr>
+            <tr>
+            <td>Chop't Classic Cobb (chicken)</td>
+            <td></td>
+            <td>670</td>
+            </tr>
+            <tr>
+            <td>Chop't California Steakhouse (beef)</td>
+            <td></td>
+            <td>230</td>
+            </tr>
+            <tr>
+            <td>Chop't Texas Po'Boy (chicken)</td>
+            <td></td>
+            <td>680</td>
+            </tr>
+            <tr>
+            <td>Chop't Palm Beach (chicken)</td>
+            <td></td>
+            <td>320</td>
+            </tr>
+            <tr>
+            <td>Chop't Palm Beach (shrimp)</td>
+            <td></td>
+            <td>240</td>
+            </tr>
+            <tr>
+            <td>SweetGreen Spicy Sabzi (tofu)</td>
+            <td></td>
+            <td>440</td>
+            </tr>
+            <tr>
+            <td>SweetGreen Kale Caesar (chicken)</td>
+            <td></td>
+            <td>420</td>
+            </tr>
+            <tr>
+            <td>SweetGreen Guacamole Greens (chicken)</td>
+            <td></td>
+            <td>530</td>
+            </tr>
+            <tr>
+            <td>SweetGreen Hummus Tahina (vege)</td>
+            <td></td>
+            <td>495</td>
+            </tr>
+            <tr>
+            <td>SweetGreen Rad Thai (seafood)</td>
+            <td></td>
+            <td>365</td>
+            </tr>
+            <tr>
+            <td>SweetGreen OMG Omega (seafood)</td>
+            <td></td>
+            <td>555</td>
+            </tr>
+            <tr>
+            <td>Corner Bakery Chopped Salad (chicken)</td>
+            <td>$</td>
+            <td>420</td>
+            </tr>
+            <tr>
+            <td>Corner Bakery Harvest Salad (chicken)</td>
+            <td></td>
+            <td>390</td>
+            </tr>
+            <tr>
+            <td>Corner Bakery Santa Fe Ranch (chicken)</td>
+            <td></td>
+            <td>360</td>
+            </tr>
+            <tr>
+            <td>Corner Bakery Asian Wonton (chicken)</td>
+            <td></td>
+            <td>360</td>
+            </tr>
+            <tr>
+            <td>Corner Bakery Spinach Sweet Crisp (vege)</td>
+            <td></td>
+            <td>240</td>
+            </tr>
+            <tr>
+            <td>Corner Bakery Classic Caesar (vege)</td>
+            <td></td>
+            <td>310</td>
+            </tr>
+            <tr>
+            <td>Au Bon Pain Chicken Caesar Asiago (chicken)</td>
+            <td>$7.49</td>
+            <td>530</td>
+            </tr>
+            <tr>
+            <td>Au Bon Pain Chicken Cobb with Avocado (chicken)</td>
+            <td>$8.19</td>
+            <td>630</td>
+            </tr>
+            <tr>
+            <td>Au Bon Pain Harvest Turkey Salad (Turkey)</td>
+            <td>$7.99</td>
+            <td>390</td>
+            </tr>
+            <tr>
+            <td>Au Bon Pain Southwest Chicken (chicken)</td>
+            <td>$7.79</td>
+            <td>510</td>
+            </tr>
+            <tr>
+            <td>Au Bon Pain Thai Peanut Chicken (chicken)</td>
+            <td>$7.59</td>
+            <td>410</td>
+            </tr>
+            <tr>
+            <td>Au Bon Pain Vegetarian Deluxe (vege)</td>
+            <td>$7.19</td>
+            <td>390</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+<script>
+
+
+document.getElementById("chicken-salad").onclick = function() {
+    document.getElementById("salad-cheap").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-1.png";
+    document.getElementById("salad-cal").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-1.png";
+    document.getElementById("salad-most").innerHTML="<I>*The most expensive one is Pret's Tuna & Cucumber sandwich ($7.49) ; the highest calories one is Subway Tuna sandwich (960 Cal).</I>";
+};
+
+document.getElementById("non-chicken-salad").onclick = function() {
+    document.getElementById("salad-cheap").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-3.png";
+    document.getElementById("salad-cal").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-3.png";
+    document.getElementById("salad-most").innerHTML="<I>*The most expensive one is Subway Rotiseerie-Style Chicken sandwich ($8.95) ; the highest calories one is Subway Chicken & Bacon Ranch Melt (1140 Cal).</I>";
+};
+
+document.getElementById("seafood-salad").onclick = function() {
+    document.getElementById("salad-cheap").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-4.png";
+    document.getElementById("salad-cal").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-4.png";
+    document.getElementById("salad-most").innerHTML="<I>*The most expensive one is Corner Bakery Ham & Swiss Pretzel ($8.29) ; the highest calories one is Subway Italian B.M.T (810 Cal).</I>";
+};
+
+document.getElementById("vege-salad").onclick = function() {
+    document.getElementById("salad-cheap").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-5.png";
+    document.getElementById("salad-cal").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-5.png";
+    document.getElementById("salad-most").innerHTML="<I>*The most expensive one is Subway Chicken & Bacon Ranch Melt ($8.25) ; the highest calories one is Subway Chicken & Bacon Ranch Melt (1140 Cal).</I>";
+};
+
+document.getElementById("tofu-salad").onclick = function() {
+    document.getElementById("salad-cheap").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-6.png";
+    document.getElementById("salad-cal").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-6.png";
+    document.getElementById("salad-most").innerHTML="<I>*The most expensive one is Corner Bakery Uptown Turkey Sandwich ($8.79) ; the highest calories one is Subway Melt (750 Cal).</I>";
+};
+
+document.getElementById("ceaser-salad").onclick = function() {
+    document.getElementById("salad-cheap").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-6.png";
+    document.getElementById("salad-cal").src="http://staging.washingtonian.com/wp-content/uploads/2017/03/result-6.png";
+    document.getElementById("salad-most").innerHTML="<I>*The most expensive one is Corner Bakery Uptown Turkey Sandwich ($8.79) ; the highest calories one is Subway Melt (750 Cal).</I>";
+};
+
+function saladSearch() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("saladInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementsByTagName("table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+
+
+$('.sand-pic').click(function(){
+    $('.selected').removeClass('selected');
+    $(this).addClass('selected');
+});
+
+</script>
+
+
+</body>
+
+</html>
