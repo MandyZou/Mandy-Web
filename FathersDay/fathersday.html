@@ -1,0 +1,246 @@
+<html>
+
+<head>
+    <title>To Jimmy Zou</title>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/highlight.pack.js"></script>
+    <script src="js/lib/modernizr.custom.min.js"></script>
+    <script src="js/examples.js"></script>
+
+    <script src="js/lib/greensock/TweenMax.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+    <script src="js/uncompressed/plugins/animation.gsap.js"></script>
+    <script src="js/uncompressed/plugins/debug.addIndicators.js"></script>
+
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+
+    <script src="jquery-3.2.1.min.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Barrio" rel="stylesheet">
+
+    <link href="Hover-master/css/hover.css" rel="stylesheet">
+
+    <script>
+        $(document).ready(function(){
+            alert('请用鼠标缓慢向下滑行，遇见礼物盒请点击~')
+        });
+
+    </script>
+
+    <style>
+
+    p {
+        font-size: 40px;
+        text-align: center;
+        padding-top: 50px;
+        vertical-align: middle;
+        margin: 250px;
+        font-family: 'Barrio', cursive;
+    }
+
+    .gift-text {
+        font-family: 'Barrio', cursive;
+    }
+
+    img {
+        position: relative;
+    }
+
+    .panel {
+        height: 100%;
+        width: 100%;
+    }
+
+    body {
+        background-image: url("img/background10.png");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-color: #a1cba4;
+    }
+
+    .gift-all {
+        display: flex;
+    }
+
+    .gift-list{
+        float: left;
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Emoji -->
+
+    <div id="imagesequence">
+        <img id="myimg" src="img/hug.png" style="width: 20%; display: block; margin-left: auto; margin-right: auto; margin-top: 300px">
+    </div>
+
+        <script>
+        var images = [
+            "img/hug.png",
+            "img/smile.png",
+            "img/kiss.png",
+            "img/rash.png",
+            "img/tougue.png",
+            "img/flower.png",
+            "img/glasses.png",
+        ];
+
+        var obj = {curImg: 0};
+
+        var tween = TweenMax.to(obj, 0.5,
+        {
+            curImg: images.length,
+            roundProps: "curImg",
+            // repeat: 1,
+            immediateRender: true,
+            ease: Linear.easeNone,
+            onUpdate: function () {
+                $("#myimg").attr("src", images[obj.curImg]);
+            }
+        });
+
+        // init controller
+        var controller = new ScrollMagic.Controller();
+
+        // build scene
+        var scene = new ScrollMagic.Scene({triggerElement: "#trigger", duration: 300})
+                        .setTween(tween)
+                        .addTo(controller);
+ 
+
+    </script>
+
+        <!-- Gift Picking -->
+
+    <p style="margin-bottom: 40px">Pick one box!!</p>
+
+    <div class="gift-all" style="text-align: center;">
+        <div class="gift-list">
+            <div class= "gift-pic01 hvr-buzz-out"><img id="gift01" src="img/gift-blue.png" style="width: 50%"></div>
+            <div class= "gift-text" style="padding-top: 40px">Staying healthy</div>
+        </div>
+        <div class="gift-list">
+            <div class= "gift-pic02 hvr-buzz-out"><img id="gift02" src="img/gift-blue.png" style="width: 50%"></div>
+            <div class= "gift-text" style="padding-top: 40px">Great Taste</div>
+        </div>
+        <div class="gift-list">
+            <div class= "gift-pic03 hvr-buzz-out"><img id="gift03" src="img/gift-blue.png" style="width: 50%"></div>
+            <div class= "gift-text" style="padding-top: 40px">Good Fortune</div>
+        </div>
+    </div>
+
+    <script>
+
+    $(document).ready(function(){
+        $('#gift01').click(function(){
+            $(this).attr('src', "img/applewatch.png");
+            $(".gift-pic01 hvr-buzz-out").removeClass("hvr-buzz-out"); //Why this doesn't work???
+        });
+
+        $('#gift02').click(function(){
+            $(this).attr('src', "img/wine.png");
+        });
+
+        $('#gift03').click(function(){
+            $(this).attr('src', "img/bowtie.png");
+        });
+    });
+
+
+
+    // $('.gift-pic01 hvr-buzz-out').click(function(){
+    //     $('#gift01').attr('src', "img/applewatch.png");
+    // });
+
+
+
+    // function clickgift01() {
+    //     document.getElementById('gift01').src="img/applewatch.png"
+    // };
+
+
+
+
+    </script>
+
+
+
+    <!-- Slide -->
+
+    <div class="slide" style="margin-top: 300px">
+    <section class="panel">
+        <p style="position: relative; right: 500px; bottom: 100px">To</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; right: 400px; bottom: 100px">Jimmy:</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; right: 200px;">Happy</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; right: 35px;">Father's</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; left: 110px;">Day</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; left: 170px;">!</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; left: 350px; top: 100px">From</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; left: 480px; top: 100px">Mandy.</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; left: 580px; top: 100px">💖</p>
+    </section>
+
+    <section class="panel">
+        <p style="position: relative; left: 480px;"></p>
+    </section>
+</div>
+
+        <script>
+        $(function () { // wait for document ready
+        // init
+        var controller = new ScrollMagic.Controller({
+            globalSceneOptions: {
+                triggerHook: 'onLeave'
+            }
+        });
+
+        // get all slides
+        var slides = document.querySelectorAll("section.panel");
+
+        // create scene for every slide
+        for (var i=0; i<slides.length; i++) {
+            new ScrollMagic.Scene({
+                    triggerElement: slides[i]
+                })
+                .setPin(slides[i])
+                .addTo(controller);
+        }
+    });
+
+    </script>
+
+</body>
+
+
+
+</html>
