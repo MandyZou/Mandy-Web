@@ -1,0 +1,210 @@
+<html>
+<head>
+    <title>Missouri Workers' Compensation</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+    <style>
+      .axis .domain {
+        display: none;
+      }
+      /*Delete the baseline for x-axis and y-axis, and delete the two end ticks*/
+
+      .toolTip {
+          position: absolute;
+          display: none;
+          min-width: 80px;
+          height: auto;
+          background: none repeat scroll 0 0 #ffffff;
+          border: 1px solid #6F257F;
+          padding: 14px;
+          text-align: center;
+        }
+
+       #Layer_1 {
+        width: 30%;
+        float: left;
+        margin-left: 30%;
+       } 
+
+       .bodypart-text {
+        padding-top: 10%;
+       }
+
+    </style>
+</head>
+
+<body>
+    <div class="body-all">
+        <!-- <div class="body-svg" style="float: left"> -->
+        <?xml version="1.0" encoding="iso-8859-1"?>
+        <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             viewBox="0 0 1024 1128" style="enable-background:new 0 0 1024 1128" xml:space="preserve">
+            <image style="display:none;overflow:visible;" width="564" height="1128" xlink:href="human.jpg"  transform="matrix(1 0 0 1 230 0)">
+            </image>
+            <circle class="body-head" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" cx="497.546" cy="110.572" r="73.604"/>
+            <path class="body-body" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M585.228,568.312H408.944c-6.6,0-12-5.4-12-12l26.998-133.404
+                L396.944,218.33c0-6.6,5.4-12,12-12h176.284c6.6,0,12,5.4,12,12l-20.965,204.578l20.965,133.404
+                C597.228,562.912,591.828,568.312,585.228,568.312z"/>
+            <path class="body-leftarm" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M352.873,534.983l-18.896-1.387
+                c-6.582-0.483-11.572-6.264-11.089-12.846l21.539-293.33c0.483-6.582,6.264-11.572,12.847-11.089l18.896,1.387
+                c6.582,0.483,11.572,6.264,11.089,12.846l-21.539,293.33C365.236,530.476,359.455,535.466,352.873,534.983z"/>
+            <path class="body-rightarm" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M642.293,534.368l18.895-1.387
+                c6.582-0.483,11.572-6.264,11.089-12.846L650.856,228.42c-0.483-6.582-6.264-11.572-12.847-11.089l-18.895,1.387
+                c-6.582,0.483-11.572,6.264-11.089,12.847l21.422,291.714C629.93,529.861,635.711,534.851,642.293,534.368z"/>
+            <polygon class="body-leftleg" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" points="406.33,577.359 497.085,577.359 462.233,785.156 
+                439.845,998.021 392.808,998.021 421.688,787.69 "/>
+            <polygon class="body-rightleg" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" points="597.598,577.359 506.843,577.359 541.694,785.156 
+                564.207,998.021 606.471,998.021 582.24,787.69 "/>
+            <path class="body-leftfeet" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M443.562,1054.247h-69.271c-6.6,0-12-5.4-12-12v-20.739
+                c0-6.6,5.4-12,12-12h69.271c6.6,0,12,5.4,12,12v20.739C455.562,1048.847,450.162,1054.247,443.562,1054.247z"/>
+            <path class="body-rightfeet" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M637.579,1054.247h-69.271c-6.6,0-12-5.4-12-12v-20.739
+                c0-6.6,5.4-12,12-12h69.271c6.6,0,12,5.4,12,12v20.739C649.579,1048.847,644.179,1054.247,637.579,1054.247z"/>
+            <path class="body-leftpinky" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M315.5,557.666l-1.71-0.834
+                c-1.245-0.607-1.767-2.122-1.16-3.367l8.607-17.653c0.607-1.245,2.122-1.767,3.367-1.16l1.71,0.834
+                c1.245,0.607,1.767,2.122,1.16,3.367l-8.607,17.653C318.259,557.751,316.744,558.273,315.5,557.666z"/>
+            <path class="body-leftring" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M329.045,574.762l-1.898-0.138
+                c-1.381-0.101-2.429-1.313-2.328-2.694l2.546-34.94c0.101-1.381,1.313-2.429,2.694-2.328l1.898,0.138
+                c1.381,0.101,2.429,1.313,2.328,2.694l-2.546,34.94C331.638,573.815,330.426,574.863,329.045,574.762z"/>
+            <path class="body-leftmiddle" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M337.539,584.317l-1.898-0.138
+                c-1.381-0.101-2.429-1.313-2.328-2.694l3.091-42.418c0.101-1.381,1.313-2.429,2.694-2.328l1.898,0.138
+                c1.381,0.101,2.429,1.313,2.328,2.694l-3.091,42.418C340.132,583.37,338.92,584.418,337.539,584.317z"/>
+            <path class="body-leftindex" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M347.43,578.791l-1.898-0.138
+                c-1.381-0.101-2.429-1.313-2.328-2.694l2.712-37.224c0.101-1.381,1.313-2.429,2.694-2.328l1.898,0.138
+                c1.381,0.101,2.429,1.313,2.328,2.694l-2.712,37.224C350.023,577.844,348.811,578.891,347.43,578.791z"/>
+            <path class="body-leftthumb" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M359.675,558.471l-1.903-0.01
+                c-1.385-0.007-2.512-1.146-2.505-2.531l0.085-16.652c0.007-1.385,1.146-2.512,2.531-2.505l1.903,0.01
+                c1.385,0.007,2.512,1.146,2.505,2.531l-0.085,16.652C362.199,557.351,361.06,558.478,359.675,558.471z"/>
+            <path class="body-rightpinky" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M678.635,556.775l1.71-0.834
+                c1.245-0.607,1.767-2.122,1.16-3.367l-8.607-17.653c-0.607-1.245-2.122-1.767-3.367-1.16l-1.71,0.834
+                c-1.245,0.607-1.767,2.122-1.16,3.366l8.607,17.653C675.875,556.86,677.39,557.382,678.635,556.775z"/>
+            <path class="body-rightring" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M665.089,573.871l1.898-0.138
+                c1.381-0.101,2.429-1.313,2.328-2.694l-2.546-34.94c-0.101-1.381-1.313-2.429-2.694-2.328l-1.898,0.138
+                c-1.381,0.101-2.429,1.313-2.328,2.694l2.546,34.94C662.496,572.924,663.708,573.972,665.089,573.871z"/>
+            <path class="body-rightmiddle" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M656.596,583.427l1.898-0.138
+                c1.381-0.101,2.429-1.313,2.328-2.694l-3.091-42.418c-0.101-1.381-1.313-2.429-2.694-2.328l-1.898,0.138
+                c-1.381,0.101-2.429,1.313-2.328,2.694l3.091,42.418C654.002,582.48,655.215,583.527,656.596,583.427z"/>
+            <path class="body-rightindex" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M646.705,577.9l1.898-0.138
+                c1.381-0.101,2.429-1.313,2.328-2.694l-2.712-37.224c-0.101-1.381-1.313-2.429-2.694-2.328l-1.898,0.138
+                c-1.381,0.101-2.429,1.313-2.328,2.694l2.712,37.224C644.111,576.953,645.324,578,646.705,577.9z"/>
+            <path class="body-rightthumb" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M634.459,557.58l1.903-0.01
+                c1.385-0.007,2.512-1.146,2.505-2.531l-0.085-16.652c-0.007-1.385-1.146-2.512-2.531-2.505l-1.903,0.01
+                c-1.385,0.007-2.512,1.146-2.505,2.531l0.085,16.652C631.936,556.46,633.075,557.588,634.459,557.58z"/>
+        </svg>
+        <!-- </div> -->
+
+        <div class="bodypart-text" style="float: left">
+            <p>Body Parts:</p><p id="parts"></p>
+            <p>Missouri:</p><p id="moPrice"></p>
+            <p>National Average:</p><p id="naPrice"></p>
+        </div>
+    </div>
+
+    <!-- Workers Compensation Chart -->
+    <svg id="bodychart" width="900" height="500" style="display: block; margin: auto"></svg>
+
+    <script>
+
+    var svg = d3.select("#bodychart"),
+        margin = {top: 20, right: 20, bottom: 30, left: 50},
+        width = +svg.attr("width") - margin.left - margin.right,
+        //+svg.attr("width") is the number of svg width
+        height = +svg.attr("height") - margin.top - margin.bottom,
+        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top +")" ); //Not quite understand (??)
+
+    //The overall chart x   
+    var x0 = d3.scaleBand()
+        .rangeRound([0, width])
+        .paddingInner(0.1);
+
+    //The small nesting chart (the small groups)
+    var x1 = d3.scaleBand()
+        .padding(0.05);
+
+    //The overall chart y
+    var y = d3.scaleLinear()
+    //Band scales are like ordianl scales except the output range is continous and numeric
+        .rangeRound([height, 0]);
+
+    var z = d3.scaleOrdinal()
+              .range(["#343433", "#b5b4b3"]);
+
+    // var z = d3.scaleOrdinal()
+    //     .range(["#fa6956", "#36bfc7"]); For color: after
+
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+    d3.csv("number.csv", function(d, i, columns){
+      for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = + d[columns[i]];
+        return d;
+    }, function(error, data) {
+      if (error) throw error;
+
+      var keys = data.columns.slice(1); //Get all the key and value (columns except BodyParts)
+
+      x0.domain(data.map(function(d) {return d.BodyParts; }));
+      x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+      y.domain([0, d3.max(data, function(d) {return d3.max(keys, function(key) {return d[key]; }); })]);
+
+      g.append("g")
+        .selectAll("g")
+        .data(data)
+        .enter()
+        .append("g")
+          .attr("transform", function(d) {return "translate(" + x0(d.BodyParts) + ",0)"; })
+        // "g" is for the big chart; the rect is for the small nesting column charts
+        .selectAll("rect")
+        .data(function(d) {return keys.map(function(key){return {key: key, value: d[key]}; }); })
+        .enter()
+        .append("rect")
+          .attr("x", function(d) {return x1(d.key);})
+          // Because key is the name. d.key is basically counting the number. x1(d.key) is counting the bandwidth box number (https://github.com/d3/d3-scale)
+          .attr("y", function(d) {return y(d.value);})
+          .attr("width", x1.bandwidth())
+          .attr("height", function(d){return height - y(d.value);})
+          .attr("fill", function(d) {return z(d.key); })
+          .on("mousemove", function(d){
+            tooltip
+              .style("left", d3.event.pageX - 50 + "px")
+              .style("top", d3.event.pageY - 70 + "px")
+              .style("display", "inline-block")
+
+              .html("<span style='font-weight: bold'>"+ (d.key) +"</span>" + ":" + "<br>" + "$" + d3.format(",.0f")(d.value));
+        })
+            .on("mouseout", function(d){ tooltip.style("display", "none");});
+
+        g.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x0));
+
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y).ticks(10, ",.0f"))
+          .append("text")
+            .attr("x", -32)
+            .attr("y", y(y.ticks().pop()) + 0.5)
+            .attr("dy", "-3em")
+            //dy and dx are used to establish fancier multi-line text layouts
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor", "start")
+            .text("Dollars");
+
+    });
+
+    // Materials that helps me study:
+    // https://bl.ocks.org/mbostock/3887051
+    // https://www.dashingd3js.com/lessons/basic-chart-grouped-bar-chart
+    // http://learnjsdata.com/read_data.html
+    // http://learnjsdata.com/group_data.html For slice, group data
+    // https://github.com/d3/d3-axis#axis_tickFormat
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?v=control (understand data.map())
+
+</script>
+    
+
+</body>
+</html>
