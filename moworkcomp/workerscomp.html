@@ -1,12 +1,53 @@
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Missouri Workers' Compensation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Arimo|Crimson+Text|Roboto" rel="stylesheet">
+
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
     <script src="jquery-3.2.1.min.js"></script>
 
+
     <style>
+      .jumbotron {
+        background-image: url("img/feature-image.png");
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 600px;
+      }
+
+      .text-container {
+        padding-top: 350px;
+        color: #fff;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .p-article {
+        text-align: left;
+        margin-left: 20%;
+        margin-right: 20%;
+      }
+
       .axis .domain {
         display: none;
       }
@@ -25,17 +66,64 @@
 
        #Layer_1 {
         width: 60%;
-        padding-left: 70px;
+        padding-left:0;
        } 
 
+       hr.style11 {
+        height: 6px;
+        background: url(http://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
+        border: 0;
+      }
+      /*https://codepen.io/ibrahimjabbari/pen/ozinB*/
+
+      .p-byline {
+        font-family: 'Crimson Text', serif;
+        font-size: 15px;
+      }
+
+      .p-article {
+        font-size: 17px;
+        line-height: 30px;
+        margin-bottom: 25px;
+        font-family: 'Crimson Text', serif;
+      }
+
+      .p-bodytext {
+        font-family: 'Arimo', sans-serif;
+      }
 
     </style>
-</head>
 
-<body>
-  <div>
+  </head>
+
+  <body>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="text-container">
+        <h1 style="font-family: 'Roboto', sans-serif; font-weight: bold;">Missouri Workers’ Compensation Falls Short of National Average</h1>
+        <p style="float: right; font-size: 15px"><em>Photos by Mikala Compton</em></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="starter-template">
+          <p class="p-article">Christopher Hampton started to worry about his job when he was placed on two-week administrative leave from his company, Procter & Gamble Co. in St. Louis.</p>
+          <p class="p-article">It happened a few weeks after Hampton injured his neck while trying to pull out a pallet between railings.</p>
+          <p class="p-article">Two weeks after his leave, Hampton got a call from his company asking him to return. But, when he arrived, he received a notification from a human resource manager that his position was terminated.</p>
+          <p class="p-article">“I did nothing wrong,” said Hampton, who had worked at P&G for six years before the accident occurred. “I was a good little employee for years. I was respected there.”</p>
+          <p class="p-article">Hampton contacted a lawyer after the termination came out, but it was not easy for him to get compensation money out of the company’s pocket.</p>
+          <p class="p-article">“It took forever to receive anything,” said Hampton. “When I did finally receive a check it was months down the road... it was for like, nothing. I think I received a total of maybe a few hundred dollars.”</p>
+          <p class="p-article">Hampton is not alone in facing the difficulty of being compensated for work injury. Missouri’s workers compensation for physical injury is lower than the national average, according to data from ProPublica.</p>
+          <p class="p-article">The website calculated the average compensation for 13 different body parts that could be lost or damaged in workplace injuries. Missouri exceeded that national average for only one limb – the ring finger.</p>
+          <p class="p-article">The lowest payout is for hand injuries. The maximum compensation in Missouri for one hand is $86,821, which is $58,109 short of national average.</p>
+      <!-- Add body svg and chart -->
+
+      <hr class="style11">
   <!-- Body svg -->
-    <div class="body-all" style="float: left">
+    <div class="body-all" style="float: left; padding-left:0">
         <?xml version="1.0" encoding="iso-8859-1"?>
         <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -110,11 +198,11 @@
         </svg>
 
   <!-- Body text -->
-        <div class="bodypart-text" style="padding-left: 100;">
+        <div class="bodypart-text" style="padding-left: 10;">
             <p style="font-size: 10px"><em>Hover over body parts to see the compensation</em></p>
-            <p><strong>Body Parts:</strong> <span id="parts"></span></p>
-            <p><strong>Missouri:</strong> <span id="moPrice"></span></p>
-            <p><strong>National Average:</strong> <span id="naPrice"></span></p>
+            <p class="p-bodytext"><strong>Body Parts:</strong> <span id="parts"></span></p>
+            <p class="p-bodytext"><strong>Missouri:</strong> <span id="moPrice"></span></p>
+            <p class="p-bodytext"><strong>National Average:</strong> <span id="naPrice"></span></p>
         </div>
 
     </div>
@@ -371,12 +459,12 @@
 
 
     <!-- Workers Compensation Chart -->
-    <svg id="bodychart" width="900" height="400" style="float: right; padding-top: 100;"></svg>
+    <svg id="bodychart" width="870" height="500" style="float: left; padding-top: 20; margin-bottom: 50; padding-bottom: 50"></svg>
 
     <script>
 
     var svg = d3.select("#bodychart"),
-        margin = {top: 20, right: 20, bottom: 30, left: 50},
+        margin = {top: 20, right: 50, bottom: 50, left: 50},
         width = +svg.attr("width") - margin.left - margin.right,
         //+svg.attr("width") is the number of svg width
         height = +svg.attr("height") - margin.top - margin.bottom,
@@ -467,7 +555,7 @@
             .call(d3.axisLeft(y).ticks(10, ",.0f"))
           .append("text")
             .attr("x", -32)
-            .attr("y", y(y.ticks().pop()) + 0.5)
+            .attr("y", y(y.ticks().pop()) + 0.1)
             .attr("dy", "-3em")
             //dy and dx are used to establish fancier multi-line text layouts
             .attr("fill", "#000")
@@ -476,19 +564,40 @@
             .text("Dollars");
 
     });
+    </script>
+    <!-- End of body and graphic -->
 
-    // Materials that helps me study:
-    // https://bl.ocks.org/mbostock/3887051
-    // https://www.dashingd3js.com/lessons/basic-chart-grouped-bar-chart
-    // http://learnjsdata.com/read_data.html
-    // http://learnjsdata.com/group_data.html For slice, group data
-    // https://github.com/d3/d3-axis#axis_tickFormat
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?v=control (understand data.map())
+    <hr class="style11">
+      <p class="p-article">For some, this is not enough.</p>
 
-</script>
-</div>
-<!-- Div of all -->
-    
+      <p class="p-article">“Keep in mind when a person is injured, when they’re not working, they often don’t have health care benefits,” said Mark Moreland, a longtime workers’ compensation attorney. “They can’t make their rent payments, or they can’t make their house payments, so their entire family suffers as a result.”</p>
 
-</body>
+      <p class="p-article">Bruce Hess, a former Kraft Foods Group Inc. worker, lost his job after a hip and back injury turned into a permanent disability. Because of Hess’s multiple surgeries, his wife quit her job to care for him and the couple’s income dropped to ⅓ what it was prior to his injuries.</p>
+
+      <p class="p-article">But, workers’ compensation rates may continue to decline in the future.</p>
+
+      <p class="p-article">For the second consecutive year, most Missouri businesses are expected to see a decrease in their workers’ compensation insurance rates in 2016, due to the decreasing number of accidents or injuries, said Chris Cline, director of communications for Missouri Department of Insurance, Financial Institutions and Professional Registration in an email.</p>
+
+      <p class="p-article">Cline also said preliminary figures collected by the Missouri Department of Insurance indicate the National Council on Compensation Insurance, an industry clearinghouse, is proposing an overall rate decrease of 2.4 percent from its 2015 loss costs.</p>
+
+      <p class="p-article">Hampton got his case settled in May 2015.</p>
+
+      <p class="p-article">“For the three years of struggle, I ended up … with less than a year’s wage,” said Hampton. “I think the system needs a little work.”</p>
+
+      <p class="p-article" style="font-size: 15px; margin-bottom: 20px">Text, development, and graphics by <a href="http://www.manyunzou.com" style="text-decoration: none; border-bottom: 2px solid #6DC066; box-shadow: inset 0 -3px 0 #6DC066; color:#000">Manyun Zou.</a></p>
+
+       </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p style="font-family: 'Crimson Text', serif;">This is originally <a href="https://www.manyunzou.com/single-post/2015/12/04/Missouri-workers%E2%80%99-compensation-falls-short-of-national-average">a story pitch</a> for KBIA/NPR.</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+  </body>
 </html>
