@@ -158,11 +158,15 @@
             $("#parts").append("Arm");
             $("#moPrice").append("$115,100");
             $("#naPrice").append("$169,878");
+            $("#115100").css({fill: "#fa6956"});
+            $("#169878").css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-arm").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#115100").css("fill", "");
+            $("#169878").css("fill", "");
           });
         });
 
@@ -173,11 +177,15 @@
             $("#parts").append("Leg");
             $("#moPrice").append("$102,697");
             $("#naPrice").append("$153,221");
+            $("#102697").css({fill: "#fa6956"});
+            $("#153221").css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-leg").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#102697").css("fill", "");
+            $("#153221").css("fill", "");
           });
         });
 
@@ -188,11 +196,15 @@
             $("#parts").append("Hand");
             $("#moPrice").append("$86,821");
             $("#naPrice").append("$144,930");
+            $("#86821").css({fill: "#fa6956"});
+            $("#144930").css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-hand").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#86821").css("fill", "");
+            $("#144930").css("fill", "");
           });
         });
 
@@ -203,11 +215,15 @@
             $("#parts").append("Thumb");
             $("#moPrice").append("$29,767");
             $("#naPrice").append("$42,432");
+            $("#29767").css({fill: "#fa6956"});
+            $("#42432").css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-thumb").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#29767").css("fill", "");
+            $("#42432").css("fill", "");
           });
         });
 
@@ -218,11 +234,15 @@
             $("#parts").append("Index Finger");
             $("#moPrice").append("$22,235");
             $("#naPrice").append("$24,474");
+            $("#22325").css({fill: "#fa6956"});
+            $("#24474").css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-index").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#22325").css("fill", "");
+            $("#24474").css("fill", "");
           });
         });
 
@@ -233,11 +253,15 @@
             $("#parts").append("Middle Finger");
             $("#moPrice").append("$17,364");
             $("#naPrice").append("$20,996");
+            $("#17364").css({fill: "#fa6956"});
+            $("#20996").css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-middle").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#17364").css("fill", "");
+            $("#20996").css("fill", "");
           });
         });
 
@@ -248,11 +272,15 @@
             $("#parts").append("Ring Finger");
             $("#moPrice").append("$17,364");
             $("#naPrice").append("$14,660");
+            $("#17365").css({fill: "#fa6956"});
+            $("#14660").css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-ring").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#17365").css("fill", "");
+            $("#14660").css("fill", "");
           });
         });
 
@@ -263,11 +291,15 @@
             $("#parts").append("Pinky");
             $("#moPrice").append("$10,915");
             $("#naPrice").append("$11,343");
+            $('#10915').css({fill: "#fa6956"});
+            $('#11343').css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-pinky").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#10915").css("fill", "");
+            $("#11343").css("fill", "");
           });
         });
 
@@ -278,11 +310,15 @@
             $("#parts").append("Foot");
             $("#moPrice").append("$74,418");
             $("#naPrice").append("$91,779");
+            $('#74418').css({fill: "#fa6956"});
+            $('#91779').css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-feet").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#74418").css("fill", "");
+            $("#91779").css("fill", "");
           });
         });
 
@@ -294,11 +330,15 @@
             $("#parts").append("Big Toe");
             $("#moPrice").append("$19,845");
             $("#naPrice").append("$23,436");
+            $('#19845').css({fill: "#fa6956"});
+            $('#23436').css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-toe").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $("#19845").css("fill", "");
+            $("#23436").css("fill", "");
           });
         });
 
@@ -309,11 +349,15 @@
             $("#parts").append("Testicle");
             $("#moPrice").append("$0");
             $("#naPrice").append("$27,678");
+            $('#69457').css({fill: "#fa6956"});
+            $('#96700').css({fill: "#36bfc7"});
           }).on("mouseout", function(){
             $(".body-testicle").css({fill: "#fff"});
             $("#parts").empty();
             $("#moPrice").empty();
             $("#naPrice").empty();
+            $('#69457').css("fill", "");
+            $('#96700').css("fill", "");
           });
         });
 
@@ -347,10 +391,10 @@
         .rangeRound([height, 0]);
 
     var z = d3.scaleOrdinal()
-        .range(["#F63014", "#ABABAB"]);
+        .range(["#ababab", "#cccccc"]);
 
-    var z2 = d3.scaleOrdinal()
-        .range(["red", "blue"]);
+        // .range(["#fa6956", "#36bfc7"]);
+
 
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
@@ -387,20 +431,25 @@
           .attr("y", function(d) {return y(d.value);})
           .attr("width", x1.bandwidth())
           .attr("height", function(d){return height - y(d.value);})
-          .attr("fill", function(d) {
-            // if (var i = 1, n = d.BodyParts.length)
-            return z(d.key)
+          .attr("fill", function(d, i) {
+            return z(d.key);
             })
-          .on("mousemove", function(d){
+          .attr("id", function(d){
+            return d.value;
+          })
+          .on("mousemove", function(d, i){
             tooltip
               .style("left", d3.event.pageX - 50 + "px")
               .style("top", d3.event.pageY - 70 + "px")
               .style("display", "inline-block")
 
               .html("<span style='font-weight: bold'>"+ (d.key) +"</span>" + ":" + "<br>" + "$" + d3.format(",.0f")(d.value));
-
         })
-            .on("mouseout", function(d){ tooltip.style("display", "none");});
+          .on("mouseover", function(){d3.select(this).attr("fill","orange");})
+             // .on("mouseover", function(){d3.select(this).select function(){
+             //  return document.getElementById("#body-head").setAttribute("fill", "orange");
+             // })})
+          .on("mouseout", function(d){ tooltip.style("display", "none"); d3.select(this).attr("fill", function(d){return z(d.key); }); });
 
         g.append("g")
           .attr("class", "axis")
