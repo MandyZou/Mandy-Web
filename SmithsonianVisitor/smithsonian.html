@@ -67,7 +67,7 @@
 
     function ready(error, datapoints) {
 
-        var nodes = svg.selectAll("circle")
+        var nodes = svg.selectAll("g")
             .data(datapoints)
             .enter().append("g");
 
