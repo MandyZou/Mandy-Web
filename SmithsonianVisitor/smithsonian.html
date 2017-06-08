@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>The Poopularity Ranking of DC Smithsonian Museums</title>
+
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+
+<style>
+    .circle-text{
+        color: #fff;
+        font-size: 10px;
+    }
+
+</style>
+</head>
+
+<body>
+    <script>
+
+    var width = 1248,
+        height = 600;
+
+    var svg = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(0,0)");
+
+    var radiusScale = d3.scaleSqrt().domain([800, 2600000]).range([10, 100]);
+
+    var tip = d3.select("body")
+        .append("div")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .style("color", "white")
+        .style("padding", "8px")
+        .style("background-color", "rgba(0, 0, 0, 0.75)")
+        .style("border-radius", "6px")
+        .style("font", "12px sans-serif")
+        .text("tooltip");
+
+    var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+//STEP ONE: push them to the middle
+//STEP TWO: don't have them collide!
+    var simulation = d3.forceSimulation()
+        .force("x", d3.forceX(width / 2).strength(0.08))
+        .force("y", d3.forceY(height / 2).strength(0.08))
+//the number means the r of the area for collide; 
+        .force("colide", d3.forceCollide(function(d){
+            return radiusScale(d.Visitors);
+        }));
+
+    d3.queue()
+      .defer(d3.csv, "visitor.csv")
+      .await(ready);
+
+    function ready(error, datapoints) {
+
+        var nodes = svg.selectAll("circle")
+            .data(datapoints)
+            .enter().append("g");
+
+        nodes.append("circle")
+             .style("fill", function(d){
+                return color(d.Museum);
+             })
+             .attr("r", function(d){
+                return radiusScale(d.Visitors);
+             })
+             .on("mouseover", function(d){
+                    tip.html("<strong>" + (d["Museum"]) + "</strong>: <br/>" + d3.format(",.0f")(d["Visitors"]) + " people");
+                    tip.style("visibility", "visible");
+                })
+             .on("mousemove", function() {
+                  return tip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+              })
+             .on("mouseout", function(){
+                return tip.style("visibility", "hidden");
+             });
+
+        nodes.append("text")
+                .selectAll("tspan")
+                .data(function(d){ return d["Museum"].split(/(?=[A-Z])/g); })
+                .enter().append("tspan")
+                    .attr("x", 0)
+                    .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 20; })
+                    .text(function(d){ return d; })
+                    .style("text-anchor", "middle");
+
+        simulation.nodes(datapoints)
+            .on('tick', ticked)
+
+        function ticked() {
+            // nodes
+            nodes.attr("transform", function (d) {
+        var k = "translate(" + d.x + "," + d.y + ")";
+        return k;
+    })
+
+        };
+    };
+
+
+    //Materials: 
+    //https://www.dashingd3js.com/svg-text-element
+    //https://www.youtube.com/watch?v=lPr60pexvEM
+    //https://stackoverflow.com/questions/33928409/how-do-i-add-labels-to-d3-js-force-bubble-chart
+    //https://stackoverflow.com/questions/7888238/javascript-split-string-on-uppercase-characters
+    //http://bl.ocks.org/mmattozzi/7018021
+
+
+
+
+
+
+
+
+   
+
+
+    
+
+
+    
+
+    </script>
+
+
+</body>
+</html>
