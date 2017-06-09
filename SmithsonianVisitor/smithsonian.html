@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
-    <title>The Poopularity Ranking of DC Smithsonian Museums</title>
+    <title>The 2017 Poopularity Ranking of DC Smithsonian Museums</title>
 
     <script src="http://d3js.org/d3.v4.min.js"></script>
 
@@ -44,7 +44,7 @@
 </head>
 
 <body>
-    <h1 style="width: 60%; margin-left: 5%; font-family: 'Viga', sans-serif; line-height: 0.8">THE MOST POPULAR <br/> <span style="font-size: 80px; color: #FFA419">DC SMITHSONIAN MUSEUM</span> <br/>RANKING</h1>
+    <h1 style="width: 60%; margin-left: 5%; font-family: 'Viga', sans-serif; line-height: 0.8">THE 2017 MOST POPULAR <br/> <span style="font-size: 80px; color: #FFA419">DC SMITHSONIAN MUSEUM</span> <br/>RANKING</h1>
 
     <button id="category-split" style="margin-left: 5%;">Category Split</button>
     <button id="year-split" style="margin-left: 5%;">Year Split</button>
@@ -180,7 +180,7 @@
                     .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 20; })
                     .text(function(d){ return d; })
                     .style("text-anchor", "middle")
-                    .style("color", "#ffffff");
+                    .style("fill", "#ffffff");
 
 //Set up the events when you click the button TO SPLIIIIT!
         d3.select("#all-split").on("click", function(d){
