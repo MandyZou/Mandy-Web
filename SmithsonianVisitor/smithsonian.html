@@ -7,6 +7,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Viga" rel="stylesheet">
 
+    <script src="jquery-3.2.1.min.js"></script>
+
 <style>
     .circle-text{
         color: #fff;
@@ -48,7 +50,25 @@
     <button id="year-split" style="margin-left: 5%;">Year Split</button>
     <button id="all-split" style="margin-left: 5%;">All</button>
 
-    <p id="button-text"></p>
+    <script>
+
+    $("#category-split").click(function(){
+        $("#button-text").text("Culture // Science // Art // Other");
+    });
+
+    $("#year-split").click(function(){
+        $("#button-text").text("Before 2000 // After 2000 // Before 1900");
+    });
+
+    $("#all-split").click(function(){
+        $("#button-text").text(" ");
+    });
+
+
+
+    </script>
+
+    <p id="button-text" style="margin-left: 40%; margin-top: 50px"></p>
 
     <script>
 
@@ -141,7 +161,7 @@
                 return radiusScale(d.Visitors);
              })
              .on("mouseover", function(d){
-                    tip.html("<strong>" + (d["Museum"]) + "</strong>: <br/>" + d3.format(",.0f")(d["Visitors"]) + " people");
+                    tip.html("<strong>" + (d["Museum"]) + "</strong>: <br/>" + d3.format(",.0f")(d["Visitors"]) + " people <br/> <em>(" + (d["Year"]) + ")</em>");
                     tip.style("visibility", "visible");
                 })
              .on("mousemove", function() {
@@ -169,6 +189,7 @@
                             .alphaTarget(0.05)
                             .restart();
         });
+
 
         d3.select("#category-split").on("click", function(d){
             return simulation.force("x", ForceXCategory)
