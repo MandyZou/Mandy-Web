@@ -17,14 +17,42 @@
         font-family: 'Viga', sans-serif
     }
 
+    button {
+        margin-top: 20px;
+        background-color: #FFF;
+        border: 2px solid #FFA419;
+        border-radius: 8px;
+        font-size: 15px;
+        padding: 10px 20px;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #FFA419;
+        color: white;
+    }
+
+    button:focus {
+        outline: 0;
+    }
+
 </style>
 </head>
 
 <body>
     <h1 style="width: 60%; margin-left: 5%; font-family: 'Viga', sans-serif; line-height: 0.8">THE MOST POPULAR <br/> <span style="font-size: 80px; color: #FFA419">DC SMITHSONIAN MUSEUM</span> <br/>RANKING</h1>
 
+    <button id="category-split" style="margin-left: 5%;">Category Split</button>
+    <button id="year-split" style="margin-left: 5%;">Year Split</button>
+    <button id="all-split" style="margin-left: 5%;">All</button>
+
+    <p id="button-text"></p>
+
     <script>
 
+//Set up svg element
     var width = 1248,
         height = 600;
 
@@ -35,8 +63,10 @@
                 .append("g")
                 .attr("transform", "translate(0,0)");
 
+//Scale for circles (different r based on number)
     var radiusScale = d3.scaleSqrt().domain([800, 2600000]).range([10, 100]);
 
+//Set up tootips
     var tip = d3.select("body")
         .append("div")
         .style("position", "absolute")
@@ -49,28 +79,60 @@
         .style("font", "12px sans-serif")
         .text("tooltip");
 
+//Set up color scheme
     var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
+//Set up force for different splits
+    var ForceXCombine = d3.forceX(width / 2).strength(0.08);
+
+    var ForceXCategory = d3.forceX(function(d){
+        if (d.Category === "Culture"){
+            return 150;
+        } else if (d.Category === "Science"){
+            return 550;
+        } else if (d.Category === "Art"){
+            return 900;
+        } else {
+            return 1150;
+        }
+    });
+
+    var ForceXYear = d3.forceX(function(d){
+        if (d.Period === "Before 2000"){
+            return 300;
+        } else if (d.Period === "After 2000"){
+            return 700;
+        } else if (d.Period === "Before 1900"){
+            return 1000;
+        }
+    });
+
+//For the force chart
 //STEP ONE: push them to the middle
 //STEP TWO: don't have them collide!
     var simulation = d3.forceSimulation()
-        .force("x", d3.forceX(width / 2).strength(0.08))
+        .force("x", ForceXCombine)
         .force("y", d3.forceY(height / 2).strength(0.08))
 //the number means the r of the area for collide; 
         .force("colide", d3.forceCollide(function(d){
-            return radiusScale(d.Visitors);
+            return radiusScale(d.Visitors) + 3;
         }));
 
+//Set the viz to load until everything has been processed
     d3.queue()
       .defer(d3.csv, "visitor.csv")
       .await(ready);
 
     function ready(error, datapoints) {
 
+//Import data. Put everything in "g" so that text and circle can show up together
+//<g><circle><text> is the right order!
+//<circle><text> is wrong
         var nodes = svg.selectAll("g")
             .data(datapoints)
             .enter().append("g");
 
+//After the "g", append the "circle" and set up everything here
         nodes.append("circle")
              .style("fill", function(d){
                 return color(d.Museum);
@@ -89,6 +151,7 @@
                 return tip.style("visibility", "hidden");
              });
 
+//Then, append text!
         nodes.append("text")
                 .selectAll("tspan")
                 .data(function(d){ return d["Museum"].split(/(?=[A-Z])/g); })
@@ -99,10 +162,32 @@
                     .style("text-anchor", "middle")
                     .style("color", "#A2A2A2");
 
+//Set up the events when you click the button TO SPLIIIIT!
+        d3.select("#all-split").on("click", function(d){
+            return simulation.force("x", ForceXCombine)
+            //Everytime you rewrite simulation force, you need to add the following
+                            .alphaTarget(0.05)
+                            .restart();
+        });
 
+        d3.select("#category-split").on("click", function(d){
+            return simulation.force("x", ForceXCategory)
+                            .alphaTarget(0.5)
+                            .restart();
+        });
+
+
+        d3.select("#year-split").on("click", function(d){
+            return simulation.force("x", ForceXYear)
+                        .alphaTarget(0.5)
+                        .restart();
+        });
+
+//The force is triggered by the "tick." Set up the tick here
         simulation.nodes(datapoints)
             .on('tick', ticked)
 
+//Set up the tick here
         function ticked() {
             // nodes
             nodes.attr("transform", function (d) {
