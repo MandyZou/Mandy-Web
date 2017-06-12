@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<head>
+    <title>Workers' Compensation Change Rate by State</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Introducing TopoJson -->
+    <script src="https://unpkg.com/topojson@3.0.0"></script>
+
+    <style>
+    .states{
+        fill: #cccccc;
+    }
+
+    .state-borders {
+        fill: none;
+        stroke: #fff;
+    }
+
+    .selected {
+        fill: yellow;
+    }
+
+
+    </style>
+</head>
+
+<body>
+    <svg id="usMap" height = "800", width ="960"></svg>
+
+    <script>
+    var margin = {top: 0, left: 50, right: 50, bottom: 30},
+        height = 600 - margin.top - margin.bottom,
+        width = 960 - margin.left - margin.right;
+
+    var svg = d3.select("#usMap")
+                .append("svg")
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("width", width + margin.left + margin.right)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+    // var projection = d3.geoMercator()
+    //                    .translate([width / 2, height / 2]);
+
+    var path = d3.geoPath();
+
+     //Everytime you use typojson, you need to write the following code
+    d3.json("https://d3js.org/us-10m.v1.json", function(error, us){
+        if(error) throw error;
+
+        svg.append("g")
+            .attr("class", "states")
+            .selectAll("path")
+            .data(topojson.feature(us, us.objects.states).features)
+            .enter().append("path")
+            //for graphic using path, you need to include the following line every time
+                .attr("d", path)
+            .attr("id", us.objects.states.geometries.id)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mousemove", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        console.log(us)
+
+        svg.append("path")
+            .attr("class", "state-borders")
+            //The filter function is called once for each candidate arc and takes two arguments, a and b, two geometry objects that share that arc.
+            //https://github.com/topojson/topojson-client/blob/master/README.md#mesh
+            .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b){ return a !== b; })));
+    });
+
+
+    //Resources:
+    //1. https://github.com/topojson/world-atlas
+    //2. https://www.youtube.com/watch?v=aNbgrqRuoiE&t=70s
+    //3. https://bl.ocks.org/mbostock/4090848
+
+    </script>
+
+
+</body>
+</html>
