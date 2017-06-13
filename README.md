@@ -1,2 +1,2 @@
 # Mandy-Web
-This is a repository for Mandy's web design personal projects.
+Hosting Mandy's D3 and web production projects. See gh-page branch for details.
