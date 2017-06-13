@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<head>
+    <title>Affordable Housing by State</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Introducing TopoJson -->
+    <script src="https://unpkg.com/topojson@3.0.0"></script>
+
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <style>
+    .states{
+        fill: #cccccc;
+    }
+
+    .state-borders {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 2px;
+    }
+
+    .selected {
+        fill: #FFFFD6;
+    }
+    svg {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+
+    </style>
+</head>
+
+<body>
+    <svg id="usMap" height = "800", width ="960"></svg>
+
+    <script>
+    var margin = {top: 0, left: 50, right: 50, bottom: 30},
+        height = 600 - margin.top - margin.bottom,
+        width = 960 - margin.left - margin.right;
+
+    var svg = d3.select("#usMap")
+                .append("svg")
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("width", width + margin.left + margin.right)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+   //color, based on the largest and smallest number in the dataset
+    var rent_domain = [400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600];
+    var rent_color = d3.scaleThreshold()
+                    .domain(rent_domain)
+                    .range(d3.schemeYlGn[9]);
+
+
+    var rentData = d3.map();
+
+    var tooltip = d3.select("body")
+            .append("div")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("color", "#2F2F2F")
+            .style("padding", "8px")
+            .style("background-color", "rgba(253, 253, 253, 0.7)")
+            .style("border-style", "solid")
+            .style("border-width", "1px")
+            .style("border-color", "#C5C5C5")
+            .style("font-size", "12px")
+            .style("font-family", "'Roboto', sans-serif")
+            .text("tooltip");
+
+
+    d3.queue()
+        .defer(d3.json, "us-states.json")
+        .defer(d3.csv, "grossrent.csv", function(d){
+            //To parse the data in the dataset
+            rentData.set(d.id, +d.rent)
+        })
+        .await(ready);
+        
+
+     //Everytime you use typojson, you need to write the following code
+    function ready(error, us){
+        if(error) throw error;
+
+        var usStates = topojson.feature(us, {
+            type:"GeometryCollection",
+            geometries: us.objects.cb_2016_us_state_500k.geometries
+        });
+
+        var projection = d3.geoAlbersUsa()
+            .fitExtent([ [20,20], [500,500] ], usStates);
+
+        var path = d3.geoPath()
+            .projection(projection);
+        // console.log(us);
+
+        svg.append("g")
+            .attr("class", "states")
+            .selectAll("path")
+            .data(usStates.features)
+            .enter().append("path")
+            //for graphic using path, you need to include the following line every time
+                .attr("d", path)
+                .attr("fill", function(d){
+                    return rent_color(d.rent = rentData.get(d.properties.GEOID));
+                })
+            // .attr("id", us.objects.states.geometries.id)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true);
+                tooltip.html("<bold>" + (d.properties.NAME) + " Average Rent</bold>:<br/> $" + (d["rent"]));
+                tooltip.style("visibility", "visible");
+                
+            })
+            .on("mousemove", function(d){
+                d3.select(this).classed("selected", true);
+                //Must add the d3.event.pageY and PageX to activate tooltip
+                return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        // console.log(us)
+
+        // svg.append("path")
+        //     .attr("class", "state-borders")
+        //     //The filter function is called once for each candidate arc and takes two arguments, a and b, two geometry objects that share that arc.
+        //     //https://github.com/topojson/topojson-client/blob/master/README.md#mesh
+        //     .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b){ return a !== b; })));
+    };
+
+
+    //Resources:
+    //1. https://github.com/topojson/world-atlas
+    //2. https://www.youtube.com/watch?v=aNbgrqRuoiE&t=70s
+    //3. https://bl.ocks.org/mbostock/4090848
+    //4. https://www.youtube.com/watch?v=suNs5p0IxWk
+
+    // Source:
+    // 1. https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_15_5YR_B25031&prodType=table
+
+    </script>
+
+
+</body>
+</html>
