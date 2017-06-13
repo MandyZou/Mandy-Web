@@ -8,7 +8,8 @@
 
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind|Roboto" rel="stylesheet">
+    <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css">
 
     <style>
     .states{
@@ -35,12 +36,14 @@
 </head>
 
 <body>
-    <svg id="usMap" height = "800", width ="960"></svg>
+    <h1 style="text-align: center; font-size: 30px; padding-top: 30px">Median Bedroom Gross Rent by States</h1>
+    <svg id="usMap" height = "400", width ="560"></svg>
+    <p style="float: right; padding-right: 300px"><em>Source: <a href="https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_15_5YR_B25031&prodType=table" style="text-decoration: none; color: #2F2F2F" target="_blank">US Census</em></a></p>
 
     <script>
-    var margin = {top: 0, left: 50, right: 50, bottom: 30},
-        height = 600 - margin.top - margin.bottom,
-        width = 960 - margin.left - margin.right;
+    var margin = {top: 0, left: 50, right: 50, bottom: 0},
+        height = 400 - margin.top - margin.bottom,
+        width = 560 - margin.left - margin.right;
 
     var svg = d3.select("#usMap")
                 .append("svg")
@@ -112,7 +115,7 @@
             // .attr("id", us.objects.states.geometries.id)
             .on("mouseover", function(d){
                 d3.select(this).classed("selected", true);
-                tooltip.html("<bold>" + (d.properties.NAME) + " Average Rent</bold>:<br/> $" + (d["rent"]));
+                tooltip.html("<bold>" + (d.properties.NAME) + " Median Rent</bold>:<br/> $" + (d["rent"]));
                 tooltip.style("visibility", "visible");
                 
             })
@@ -122,7 +125,8 @@
                 return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
             })
             .on("mouseout", function(d){
-                d3.select(this).classed("selected", false)
+                d3.select(this).classed("selected", false);
+                tooltip.style("visibility", "hidden");
             });
 
         // console.log(us)
