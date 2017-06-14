@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<head>
+    <title>Median Gross Rent Line Graph</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <style>
+    .line {
+      fill: none;
+      stroke: #CCCCCC;
+      stroke-width: 1.5px;
+    }
+
+    .selected {
+        stroke: red;
+    }
+    </style>
+</head>
+
+<body>
+    <svg id="rentLine" width = "1000", height = "900"></svg>
+
+    <script>
+    //Set the chart up
+    var margin = {top: 20, right: 20, left: 60, bottom: 20},
+        width = 1000 - margin.left - margin.right,
+        height = 900 - margin.top - margin.bottom;
+
+    // var parseDate = d3.timeFormat("%b %Y").parse;
+
+    var x = d3.scaleLinear().range([0, width]),
+        y = d3.scaleLinear().range([height, 0]);
+
+    //Import data
+    var valueline1 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Alabama); });
+
+    var valueline2 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Alaska); });
+
+    var valueline3 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Arizona); });
+
+    var valueline4 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Arkansas); });
+
+    var valueline5 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.California); });
+
+    var valueline6 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Colorado); });    
+
+    var valueline7 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Connecticut); });         
+
+    var valueline8 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Delaware); });    
+
+    var valueline9 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.DC); }); 
+
+    var valueline10 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Florida); }); 
+
+    var valueline11 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Georgia); });
+
+    var valueline12 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Hawaii); });
+
+    var valueline13 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Idaho); });
+
+    var valueline14 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Illinois); });
+
+    var valueline15 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Indiana); });
+
+    var valueline16 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Iowa); });
+
+    var valueline17 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Kansas); });
+
+    var valueline18 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Kentucky); });
+
+    var valueline19 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Louisiana); });
+
+    var valueline20 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Maine); });
+
+    var valueline21 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Maryland); });
+
+    var valueline22 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Massachusetts); });
+
+    var valueline23 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Michigan); });
+
+    var valueline24 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Minnesota); });
+
+    var valueline25 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Mississippi); });
+
+    var valueline26 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Missouri); });
+
+    var valueline27 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Montana); });
+
+    var valueline28 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Nebraska); });
+
+    var valueline29 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Nevada); });
+
+    var valueline30 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.New_Hampshire); });
+
+    var valueline31 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.New_Jersey); });
+
+    var valueline32 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.New_Mexico); });
+
+    var valueline33 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.New_York); });
+
+    var valueline34 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.North_Carolina); });
+
+    var valueline35 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.North_Dakota); });
+
+    var valueline36 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Ohio); });
+
+    var valueline37 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Oklahoma); });
+
+    var valueline38 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Oregon); });
+
+    var valueline39 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Pennsylvania); });
+
+    var valueline40 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Rhode_Island); });
+
+    var valueline41 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.South_Carolina); });
+
+    var valueline42 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.South_Dakota); });
+
+    var valueline43 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Tennessee); });
+
+    var valueline44 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Texas); });
+
+    var valueline45 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Utah); });
+
+    var valueline46 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Vermont); });
+
+    var valueline47 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Virginia); });
+
+    var valueline48 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Washington); });
+
+    var valueline49 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.West_Virginia); });
+
+    var valueline50 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Wisconsin); });
+
+    var valueline51 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Wyoming); });
+
+    var valueline52 = d3.line()
+        .x(function(d){ return x(d.Year); })
+        .y(function(d){ return y(d.Puerto_Rico); });
+
+    //Set up svg
+    var svg = d3.select("#rentLine")
+                .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top +")");
+
+    //Get in the data
+    d3.queue()
+        .defer(d3.csv, "grossrent3.csv")
+        .await(ready);
+
+    function ready(error, data){
+        if (error) throw error;
+
+        data.forEach(function(d) {
+            d.Year = d3.format("")(d.Year);
+            // console.log(d.Year)
+            d.Alabama = +d.Alabama;
+            console.log(typeof(d.Alabama))
+            d.Alaska = +d.Alaska;
+            d.Arizona = +d.Arizona;
+            d.Arkansas = +d.Arkansas;
+        });
+
+        x.domain(d3.extent(data, function(d){ return d.Year; }));
+        y.domain([400, d3.max(data, function(d){
+            return Math.max(d.Alabama, d.Alaska, d.Arizona, d.Arkansas, d.California, d.Colorado, d.Connecticut, d.Delaware, d.DC, d.Florida, d.Georgia, d.Hawaii, d.Idaho, d.Illinois, d.Indiana, d.Iowa, d.Kansas, d.Kentucky, d.Louisiana, d.Maine, d.Maryland, d.Massachusetts, d.Michigan, d.Minnesota, d.Mississippi, d.Missouri, d.Montana, d.Nebraska, d.Nevada, d.New_Hampshire, d.New_Jersey, d.New_Mexico, d.New_York, d.North_Carolina, d.North_Dakota, d.Ohio, d.Oklahoma, d.Oregon, d.Pennsylvania, d.Rhode_Island, d.South_Carolina, d.South_Dakota, d.Tennessee, d.Texas, d.Utah, d.Vermont, d.Virginia, d.Washington, d.West_Virginia, d.Wisconsin, d.Wyoming, d.Puerto_Rico);
+        })]);
+
+        //Add valueline1
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline1)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline2
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline2)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+
+        //Add valueline3
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline3)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline4
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline4)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline5
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline5)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline6
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline6)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline7
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline7)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline8
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline8)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline9
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline9)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline10
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline10)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline11
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline11)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline12
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline12)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        //Add valueline13
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline13);
+
+        //Add valueline14
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline14);
+
+        //Add valueline15
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline15);
+
+        //Add valueline16
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline16);
+
+        //Add valueline17
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline17);
+
+        //Add valueline18
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline18);
+
+        //Add valueline19
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline19);
+
+        //Add valueline20
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline20);
+
+        //Add valueline21
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline21);
+
+        //Add valueline22
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline22);
+
+        //Add valueline23
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline23);
+
+        //Add valueline24
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline24);
+
+        //Add valueline25
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline25);
+
+        //Add valueline26
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline26);
+
+        //Add valueline27
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline27);
+
+        //Add valueline28
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline28);
+
+        //Add valueline29
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline29);
+
+        //Add valueline30
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline30);
+
+        //Add valueline31
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline31);
+
+        //Add valueline32
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline32);
+
+        //Add valueline33
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline33);
+
+        //Add valueline34
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline34);
+
+        //Add valueline35
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline35);
+
+        //Add valueline36
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline36);
+
+        //Add valueline37
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline37);
+
+        //Add valueline38
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline38);
+
+        //Add valueline39
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline39);
+
+        //Add valueline40
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline40);
+
+        //Add valueline41
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline41);
+
+        //Add valueline42
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline42);
+
+        //Add valueline43
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline43);
+
+        //Add valueline44
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline44);
+
+        //Add valueline45
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline45);
+
+        //Add valueline46
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline46);
+
+        //Add valueline47
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline47);
+
+        //Add valueline48
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline48);
+
+        //Add valueline49
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline49);
+
+        //Add valueline50
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline50);
+
+        //Add valueline51
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline51);
+
+        //Add valueline52
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline52);
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x)
+                .ticks(5)
+                .tickFormat(d3.format("")));
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+    };
+
+// Resource:
+// 1. https://bl.ocks.org/mbostock/9764126 (tick format)
+
+    </script>
+</body>
+</html>
