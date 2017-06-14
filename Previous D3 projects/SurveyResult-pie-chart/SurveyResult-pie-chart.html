@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Columbia Police Department 2016 Survey</title>
+    <link rel="stylesheet" href="normalize.css">
+    <style>
+      .legend {                                                   
+        font-size: 12px;       
+        fill: rgb(255,255,255);          
+        /*change the color of the text*/
+        cursor: default;
+      }                                                        
+      rect {                                                      
+        stroke-width: 2;
+        stroke: rgb(255, 255, 255);
+        stroke-width: 0.5px;    
+        /*change the color of the stroke of the box*/
+      }
+      h1 {
+        text-align: center;
+      }
+      p {
+        margin: 0 100px 0 100px;
+        text-align: left;
+      }      
+      #chart {
+        text-align: center;
+        margin-top: 30px;
+        position: relative;
+        }
+      .tooltip {       
+        background: #eee;
+        box-shadow: 0 0 5px #999999;
+        color: #333;
+        display: none;
+        font-size: 12px;
+        left: 130px;
+        padding: 10px;
+        position: absolute;
+        text-align: center;
+        top: 95px;
+        width: 80px;
+        z-index: 10;
+      }
+      .label {
+        color: #8750df;
+      }
+      #chart_2 {
+        text-align: center;
+        margin-top: 30px;
+        position: relative;
+      }                                                     
+    </style>
+  </head>
+  <body>
+    <h1> The Expansion of the CSA Unit</h1>
+    <p> In an anonymous survey for the Columbia Police Department, 130 department employees responded to the statement: "The expansion of the CSA unit would benefit patrol."
+    <div id="chart"></div>
+    <hr/>
+    <h1> Ties with the Community</h1>
+    <p> In an anonymous survey for the Columbia Police Department, 133 department employees responded to the statement concerning effectiveness and quality of the departments services and performances.</p>
+    <div id="chart_2"></div>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
+    <script>
+      (function(d3) {
+        'use strict';
+
+        var dataset = [
+            {label:'Agree', count: 55},
+            {label:'Strongly Disagree', count: 2 },
+            {label: 'Disagree', count: 5 },
+            {label:'Strongly Agree', count: 39}
+            ];
+
+        var width = 360;
+        var height = 360;
+        var radius = Math.min(width, height) / 2;
+        // var donutWidth = 75;
+        var legendRectSize = 18;                                  
+        var legendSpacing = 4;                                    
+
+        var color = d3.scale.category20b();
+
+        var svg = d3.select('#chart')
+          .append('svg')
+          .attr('width', width)
+          .attr('height', height)
+          .append('g')
+          .attr('transform', 'translate(' + (width / 2) + 
+            ',' + (height / 2) + ')');
+
+        var arc = d3.svg.arc()
+          // .innerRadius(radius - donutWidth)
+          .outerRadius(radius);
+
+        var pie = d3.layout.pie()
+          .value(function(d) { return d.count; })
+          .sort(null);
+
+        var tooltip = d3.select('#chart')                               
+          .append('div')                                                
+          .attr('class', 'tooltip');                                    
+                      
+        tooltip.append('div')                                           
+          .attr('class', 'label');                                     
+             
+        tooltip.append('div')                                           
+          .attr('class', 'count');                                                                    
+  
+
+        var path = svg.selectAll('path')
+          .data(pie(dataset))
+          .enter()
+          .append('path')
+          .attr('d', arc)
+          .attr('fill', function(d, i) { 
+            return color(d.data.label);
+          })
+          // .style('stroke', color('white'));
+
+        path.on('mouseover', function(d) {                            
+            // var total = d3.sum(dataset.map(function(d) {                
+              // return d.count;                                           
+            // }));                                                        
+            // var percent = Math.round(1000 * d.data.count / total) / 10; 
+            tooltip.select('.label').html(d.data.label+''+':'); 
+                   // .style(fill, color);               
+            tooltip.select('.count').html(d.data.count+' '+'%');               
+            // tooltip.select('.percent').html(percent + '%');             
+            tooltip.style('display', 'block');                         
+          });                                                           
+          
+          path.on('mouseout', function() {                              
+            tooltip.style('display', 'none');                           
+          });                                                           
+
+          path.on('mousemove', function(d) {                            
+            tooltip.style('top', (d3.event.pageY - 100) + 'px')          
+              .style('left', (d3.event.pageX - 100) + 'px');            
+          });                                                           
+          
+        
+        var legend = svg.selectAll('.legend')                     
+          .data(color.domain())                                   
+          .enter()                                                
+          .append('g')                                            
+          .attr('class', 'legend')                                
+          .attr('transform', function(d, i) {                     
+            var height = legendRectSize + legendSpacing;          
+            var offset =  height * color.domain().length / 2;     
+            var horz = 3.3 * legendRectSize;                       
+            var vert = i * height - offset;                       
+            return 'translate(' + horz + ',' + vert + ')';        
+          });                                                     
+
+        legend.append('rect')                                     
+          .attr('width', legendRectSize)                          
+          .attr('height', legendRectSize)                         
+          .style('fill', color);                                                                 
+          
+        legend.append('text')                                     
+          .attr('x', legendRectSize + legendSpacing)              
+          .attr('y', legendRectSize - legendSpacing)              
+          .text(function(d) { return d; })
+                 
+
+      })(window.d3);
+
+    (function(d3) {
+        'use strict';
+
+        var dataset_2 = [
+            {label:'Fair', count: 41 },
+            {label: 'Good', count: 19 },
+            {label:'Very Poor', count: 7},
+            {label:'Poor', count: 34},
+            ];
+
+        var width = 360;
+        var height = 360;
+        var radius = Math.min(width, height) / 2;
+        // var donutWidth = 75;
+        var legendRectSize = 18;                                  
+        var legendSpacing = 4;                                    
+
+        var color = d3.scale.category20b();
+
+        var svg = d3.select('#chart_2')
+          .append('svg')
+          .attr('width', width)
+          .attr('height', height)
+          .append('g')
+          .attr('transform', 'translate(' + (width / 2) + 
+            ',' + (height / 2) + ')');
+
+        var arc = d3.svg.arc()
+          // .innerRadius(radius - donutWidth)
+          .outerRadius(radius);
+
+        var pie = d3.layout.pie()
+          .value(function(d) { return d.count; })
+          .sort(null);
+
+        var tooltip = d3.select('#chart')                               
+          .append('div')                                                
+          .attr('class', 'tooltip');                                    
+                      
+        tooltip.append('div')                                           
+          .attr('class', 'label');                                     
+             
+        tooltip.append('div')                                           
+          .attr('class', 'count');                                                                     
+  
+
+        var path = svg.selectAll('path')
+          .data(pie(dataset_2))
+          .enter()
+          .append('path')
+          .attr('d', arc)
+          .attr('fill', function(d, i) { 
+            return color(d.data.label);
+          })
+          // .style('stroke', color('white'));
+
+        path.on('mouseover', function(d) {                            
+            // var total = d3.sum(dataset.map(function(d) {                
+              // return d.count;                                           
+            // }));                                                        
+            // var percent = Math.round(1000 * d.data.count / total) / 10; 
+            tooltip.select('.label').html(d.data.label+''+':'); 
+                   // .style(fill, color);               
+            tooltip.select('.count').html(d.data.count+' '+'%');               
+            // tooltip.select('.percent').html(percent + '%');             
+            tooltip.style('display', 'block');                         
+          });                                                           
+          
+          path.on('mouseout', function() {                              
+            tooltip.style('display', 'none');                           
+          });                                                           
+
+          path.on('mousemove', function(d) {                            
+            tooltip.style('top', (d3.event.pageY - 100) + 'px')          
+              .style('left', (d3.event.pageX - 100) + 'px');            
+          });                                                           
+          
+        
+        var legend = svg.selectAll('.legend')                     
+          .data(color.domain())                                   
+          .enter()                                                
+          .append('g')                                            
+          .attr('class', 'legend')                                
+          .attr('transform', function(d, i) {                     
+            var height = legendRectSize + legendSpacing;          
+            var offset =  height * color.domain().length / 2;     
+            var horz = 3.3 * legendRectSize;                       
+            var vert = i * height - offset;                       
+            return 'translate(' + horz + ',' + vert + ')';        
+          });                                                     
+
+        legend.append('rect')                                     
+          .attr('width', legendRectSize)                          
+          .attr('height', legendRectSize)                         
+          .style('fill', color);                                                                 
+          
+        legend.append('text')                                     
+          .attr('x', legendRectSize + legendSpacing)              
+          .attr('y', legendRectSize - legendSpacing)              
+          .text(function(d) { return d; })
+                 
+
+      })(window.d3);
+    </script>
+  </body>
+</html>

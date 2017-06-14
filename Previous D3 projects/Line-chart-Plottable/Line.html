@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <title>Median Household Income</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/plottable.js/2.0.0/plottable.css">
+    </head>
+    <style>
+    </style>
+    <body>
+        <svg id="line_chart" width="600px" height="350px"></svg>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/plottable.js/2.0.0/plottable.js"></script>
+        <script>
+        var data = [
+        [           {name:"DC-metro",year:"2006", income:78978},
+                    {name:"DC-metro",year:"2007", income:83200},
+                    {name:"DC-metro",year:"2008", income:85824},
+                    {name:"DC-metro",year:"2009", income:85168},
+                    {name:"DC-metro",year:"2010", income:84523},
+                    {name:"DC-metro",year:"2011", income:86680},
+                    {name:"DC-metro",year:"2012", income:88233},
+                    {name:"DC-metro",year:"2013", income:90149},
+                    {name:"DC-metro",year:"2014", income:91193},
+                    {name:"DC-metro",year:"2015", income:93294}
+        ], [
+                    {name:"DC",year:"2006", income:48451},
+                    {name:"DC",year:"2007", income:50740},
+                    {name:"DC",year:"2008", income:52029},
+                    {name:"DC",year:"2009", income:50221},
+                    {name:"DC",year:"2010", income:50046},
+                    {name:"DC",year:"2011", income:50502},
+                    {name:"DC",year:"2012", income:51371},
+                    {name:"DC",year:"2013", income:52250},
+                    {name:"DC",year:"2014", income:53657},
+                    {name:"DC",year:"2015", income:55775}
+        ]
+        ];
+
+        var xScale = new Plottable.Scales.Category();
+        var yScale = new Plottable.Scales.Linear();
+        yScale.tickGenerator(Plottable.Scales.TickGenerators.integerTickGenerator());
+        var xAxis = new Plottable.Axes.Numeric(xScale, "bottom");
+        var yAxis = new Plottable.Axes.Numeric(yScale, "left");
+
+        var HouseYear = function(d){return +d.year;};
+        var HouseIncome = function(d){return +d.income;};
+
+        var colorScale = new Plottable.Scales.Color();
+        colorScale.domain(["DC-metro","DC"])
+                 .range(["#26A7E0","#EEA83C"]);
+
+        var legend = new Plottable.Components.Legend(colorScale);
+        legend.maxEntriesPerRow(Infinity);
+
+        var linePlot = new Plottable.Plots.Line()
+            .x(function(d) {return d.year; }, xScale)
+            .y(function(d) {return d.income}, yScale)
+            .attr("stroke-width", 3)
+            .attr("stroke", function(d) {return d.name}, colorScale);
+
+        var scatterPlot = new Plottable.Plots.Scatter()
+            .x(function(d) {return d.year;}, xScale)
+            .y(function(d) {return d.income}, yScale)
+            .attr("stroke-width", 3)
+            .size(5)
+            .attr("stroke", function(d) {return d.name;}, colorScale)
+            .attr("fill", function(d) {return d.name;}, colorScale )
+            .attr("opacity", 1);
+
+        data.forEach(function(d) {
+            var dataSet = new Plottable.Dataset(d, {name:d[0].name});
+            linePlot.addDataset(dataSet);
+            scatterPlot.addDataset(dataSet);
+        });
+
+        var plots = new Plottable.Components.Group([linePlot, scatterPlot]);
+
+        var xAxis = new Plottable.Axes.Category(xScale, "bottom");
+        var yAxis = new Plottable.Axes.Numeric(yScale, "left");
+
+        var table = new Plottable.Components.Table([
+            [null, legend],
+            [yAxis, plots],
+            [null, xAxis]
+            ]);
+
+        table.renderTo("svg#line_chart");
+
+        window.addEventListener("resize", function() {
+            plot.redraw();
+        });
+        </script>
+    </body>
+</html>
