@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>2015 Median Gross Rent by States</title>
+    <title>Affordable Housing by State</title>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
@@ -53,7 +53,7 @@
 </head>
 
 <body>
-    <h1 style="text-align: center; font-size: 30px; padding-top: 30px">2015 Median Gross Rent by States</h1>
+    <h1 style="text-align: center; font-size: 30px; padding-top: 30px">Median Bedroom Gross Rent by States</h1>
     <svg id="usMap" height = "300", width ="540"></svg>
     <p style="float: right; padding-right: 300px;"><em>Source: <a href="https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_15_5YR_B25031&prodType=table" style="text-decoration: none; color: #2F2F2F" target="_blank">US Census</em></a></p>
     <br/>
@@ -189,7 +189,9 @@
     };
 </script>
 
-  <p style="text-align: center; padding-top: 50px">Median Bedroom Gross Rent by States from 2010 to 2015</p>
+  <h1 style="text-align: center; padding-top: 50px; font-size: 20px">Median Bedroom Gross Rent by States from 2010 to 2015</h1>
+  <div id="rent-blurb-default" style="text-align: center; font-size: 11px">The highest median rent is in Hawaii ($1438 in 2015) and the lowest rent is in Puerto Rico ($456 in 2015).</div>
+  <div id="rent-blurb" style="text-align: center; font-size: 11px"></div> 
   <svg id="rentLine" width = "900" height = "500"></svg>
 
     <script>
@@ -248,11 +250,15 @@
           currData.push({x: years[j], y: values[j], z: states[i]});
           };
           // console.log(currData);
+          // console.log(currData[i]["y"])
 
         var line = d3.line().x(function(d,i){return x(d.x);}).y(function(d){return y(d.y);});
 
         x.domain([2010, 2015]);
         y.domain([400, 1500]);
+
+        // var valueList = [];
+        var valueLongList = [];
 
         svg.append("path")
             .data([currData])
@@ -261,16 +267,31 @@
             .attr("d", line)
             .on("mouseover", function(d){
                 d3.select(this).classed("selected", true);
+                for (n=0; n<years.length; n++) {
+                  valueLongList.push(d[Object.keys(d)[n]].y);
+                }
+                var valueList = valueLongList.slice(-6);
+                // console.log(valueList);
+                var valueMax = Math.max.apply(Math, valueList);
+                // console.log(valueMax);
+                var valueMin = Math.min.apply(Math, valueList);
+                // console.log(valueMin);
                 // console.log(d[Object.keys(d)[3]].z) OMG it is happening!!! Crying Out Loud!
-                tooltip.html("<bold>" + d[Object.keys(d)[3]].z + "</bold>");
+                tooltip.html(d[Object.keys(d)[3]].z);
+                // console.log(d)
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
                 $("#" + d[Object.keys(d)[3]].z + "-2").attr("style", "fill: #FF6666");
+                var blurb = d[Object.keys(d)[3]].z + "'s highest rent is $" + valueMax + ", its lowest rent is $" + valueMin
+                $("#rent-blurb-default").hide();
+                $("#rent-blurb").html(blurb);
             })
             .on("mouseout", function(d){
                 d3.select(this).classed("selected", false);
                 tooltip.style("visibility", "hidden");
                 $("#" + d[Object.keys(d)[3]].z + "-2").removeAttr("style", "fill: #FF6666");
+                $("#rent-blurb-default").show();
+                $("#rent-blurb").html('');
             })
             .on("click", function(d){
               $("#" + d[Object.keys(d)[3]].z + "-2").attr("style", "fill: #FF6666");
