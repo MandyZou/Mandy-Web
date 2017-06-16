@@ -19,9 +19,7 @@
         var svg = d3.select("#map")
                     .append("svg")
                     .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                    .attr("height", height + margin.top + margin.bottom);
 
         d3.queue()
             .defer(d3.json, "shenzhenroads.json")
@@ -30,25 +28,28 @@
         function ready(error, data){
             if (error) throw error;
 
-            console.log(data)
+            // console.log(data)
 
             var ShenzhenRoads = topojson.feature(data, {
                 type: "GeometryCollection",
                 geometries: data.objects.shenzhen_china_osm_roads.geometries
             });
 
-            var projection = d3.geoMercator().center([23, 114]).scale(100).translate([width/2, height/2]);
-
+            var projection = d3.geoMercator()
+                 .center([114, 22.5])
+                 .scale(500000)
+                 .translate([width/2, height/2]);
+            
             var path = d3.geoPath()
                 .projection(projection);
 
-            svg.select("g")
-                .selectAll("path")
-                .data(ShenzhenRoads.features)
+            svg.selectAll("path")
+               .data(ShenzhenRoads.features)
                 .enter().append("path")
                     .attr("class", "roads")
                     .attr("d", path)
-                    .attr("fill", "#C5C5C5");
+                    .attr("fill", "none")
+                    .attr("stroke", "steelblue");
         };
 
 
