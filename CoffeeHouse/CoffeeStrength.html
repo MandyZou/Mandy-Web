@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<head>
+    <title>The Ranking of Coffee House for Freenlancers☕</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+
+     <!-- Introducing TopoJson -->
+    <script src="https://unpkg.com/topojson@3.0.0"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
+
+    <style>
+         body {
+        font-family: 'Pangolin', cursive;
+        }
+
+        button{
+            margin-top: 20px;
+            font-family: 'Pangolin', cursive;
+            background-color: #D2B48C;
+            border-color: #544838;
+            border-radius: 8px;
+            font-size: 15px;
+            padding: 5px 5px;
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .buttons{
+            float: left;
+            margin-top: 10%;
+            margin-left: 15%;
+            margin-right: 30px;
+            width: 200px;
+        }
+
+        #cubes {
+            float: left;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div class="coffee-bubble">
+        <div class="buttons">
+            <div class="buttons-1">
+            <button id="Store1">Peets at 3299 M</button>
+            <button id="Store2">Starbucks at 2400 M</button>
+            <button id="Store3">Soho Tea & Coffee</button>
+            </div>
+            <div class="buttons-2">
+            <button id="Store4">Starbucks at 2231 Crystal Drive</button>
+            <button id="Store5">PAUL at 555 13th</button>
+            <button id="Store6">Starbucks at 1304 F</button>
+            <button id="Store7">Tryst at 2459 18th</button>
+            </div>
+        </div>
+
+        <div id="Cubes"></div>
+    </div>
+
+    <script>
+    // *You don't need to define margin with strength chart
+    var width = 600,
+        height = 600;
+
+    var svg = d3.select("#Cubes")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                //Remember to add the following two lines
+                .append("g")
+                .attr("transform", "translate(0,0)");
+
+    var ForceXCombine = d3.forceX(width/2).strength(0.08);
+
+     var ForceStore1 = d3.forceX(function(d){
+        if (d.Store1 === "EnvScore") {
+            return 100;
+        } else if (d.Store1 === "AvaScore"){
+            return 300;
+        } else if (d.Store1 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore2 = d3.forceX(function(d){
+        if (d.Store2 === "EnvScore") {
+            return 100;
+        } else if (d.Store2 === "AvaScore"){
+            return 300;
+        } else if (d.Store2 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore3 = d3.forceX(function(d){
+        if (d.Store3 === "EnvScore") {
+            return 100;
+        } else if (d.Store3 === "AvaScore"){
+            return 300;
+        } else if (d.Store3 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore4 = d3.forceX(function(d){
+        if (d.Store4 === "EnvScore") {
+            return 100;
+        } else if (d.Store4 === "AvaScore"){
+            return 300;
+        } else if (d.Store4 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore5 = d3.forceX(function(d){
+        if (d.Store5 === "EnvScore") {
+            return 100;
+        } else if (d.Store5 === "AvaScore"){
+            return 300;
+        } else if (d.Store5 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore6 = d3.forceX(function(d){
+        if (d.Store6 === "EnvScore") {
+            return 100;
+        } else if (d.Store6 === "AvaScore"){
+            return 300;
+        } else if (d.Store6 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore7 = d3.forceX(function(d){
+        if (d.Store7 === "EnvScore") {
+            return 100;
+        } else if (d.Store7 === "AvaScore"){
+            return 300;
+        } else if (d.Store7 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var simulation = d3.forceSimulation()
+        .force("x", ForceXCombine)
+        .force("y", d3.forceY(height/2).strength(0.08))
+        .force("colide", d3.forceCollide(function(d){
+            return 10;
+        }));
+
+    d3.queue()
+        .defer(d3.csv, "ranking.csv")
+        .await(ready);
+
+    function ready(error, datapoints){
+        if (error) throw error;
+
+        console.log(datapoints);
+
+        var nodes = svg.selectAll("g")
+            .data(datapoints)
+            .enter().append("g");
+
+        nodes.append("circle")
+            .attr("r", "10px")
+            .style("fill", "#FF8895");
+
+        // var circles = svg.selectAll(".cube")
+        //         .data(datapoints)
+        //         .enter().append("circle")
+        //         .attr("class", "cube")
+        //         .attr("r", 10)
+        //         .attr("fill", "lightblue");
+
+        d3.select("#Store1").on("click", function(d){
+            return simulation.force("x", ForceStore1)
+                                .alphaTarget(0.5)
+                                .restart();
+                    console.log("click!");
+        });
+
+        d3.select("#Store2").on("click", function(d){
+            return simulation.force("x", ForceStore2)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store3").on("click", function(d){
+            return simulation.force("x", ForceStore3)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store4").on("click", function(d){
+            return simulation.force("x", ForceStore4)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store5").on("click", function(d){
+            return simulation.force("x", ForceStore5)
+                                .alphaTarget(0.5)
+                                .restart();
+            console.log("clicked")
+        });
+
+        d3.select("#Store6").on("click", function(d){
+            return simulation.force("x", ForceStore6)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store7").on("click", function(d){
+            return simulation.force("x", ForceStore7)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        simulation.nodes(datapoints)
+            .on("tick", ticked);
+
+        function ticked(){
+            nodes.attr("transform", function(d){
+                var k = "translate(" + d.x + "," + d.y + ")";
+                return k;
+            })
+        };
+
+        svg.append("text")
+            .attr("dx", 50)
+            .attr("dy", 350)
+            .text("Environment");
+
+        svg.append("text")
+            .attr("dx", 270)
+            .attr("dy", 350)
+            .text("Avability");
+
+        svg.append("text")
+            .attr("dx", 470)
+            .attr("dy", 350)
+            .text("Restroom");
+
+    };
+
+
+
+
+    </script>
+
+</body>
+</html>
