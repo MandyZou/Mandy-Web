@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<head>
+    <title>The Ranking of Coffee House for Freenlancers☕</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+
+     <!-- Introducing TopoJson -->
+    <script src="https://unpkg.com/topojson@3.0.0"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
+
+    <style>
+    body {
+        font-family: 'Pangolin', cursive;
+    }
+
+    #DCmap {
+        display: block;
+        margin: auto;
+    }
+
+    .pinCircle{
+        fill: rgba(67, 48, 3, .5);
+        stroke-width: 2px;
+        cursor: pointer;
+    }
+
+     button{
+            margin-top: 20px;
+            font-family: 'Pangolin', cursive;
+            background-color: #D2B48C;
+            border-color: #544838;
+            border-radius: 8px;
+            font-size: 15px;
+            padding: 5px 5px;
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+    .buttons{
+        float: left;
+        margin-top: 10%;
+        margin-left: 15%;
+        margin-right: 30px;
+        width: 200px;
+    }
+
+    button:hover {
+        background-color: #FFA419;
+        color: white;
+    }
+
+    button:focus {
+        outline: 0;
+        background-color: #FFA419;
+    }
+
+    button:active {
+        background-color: #FFA419;
+    }
+
+    #cubes {
+        float: left;
+    }
+
+
+
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center">Best DC Coffee Shops for Freelancers</h1>
+    <svg id="DCmap" width="600" height="500"></svg>
+
+    <script>
+    var margin = {top: 20, left: 20, right: 20, bottom: 20},
+        width = 600 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+    var projection = d3.geoAlbers()
+        .scale(1)
+        .translate([0, 0]);
+
+    var path = d3.geoPath()
+            .projection(projection);
+
+    var Mapsvg = d3.select("#DCmap")
+                .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
+
+    var tooltip = d3.select("body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("z-index", "10")
+                    .style("visibility", "hidden")
+                    .style("color", "#2F2F2F")
+                    .style("padding", "8px")
+                    .style("background-color", "rgb(253, 253, 253)")
+                    .style("border-style", "solid")
+                    .style("border-width", "1px")
+                    .style("border-color", "#C5C5C5")
+                    .style("font-size", "12px")
+                    .style("font-family", "'Roboto', sans-serif")
+                    .text("tooltip");
+
+    d3.queue()
+        .defer(d3.json, "dcneighborhood.json")
+        .defer(d3.csv, "list.csv")
+        .await(ready);
+
+    function ready(error, data, coffee){
+        if (error) throw error;
+
+        //*Important step to automatically center the map (https://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object)
+        var b = path.bounds(data),
+            s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+            t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+            projection
+            .scale(s)
+            .translate(t);
+
+        // c1 = {name: "starbucks", lat: 38.799111, long: -77.035068};
+        // c2 = {lat: 38.909199, long: -77.047579};
+        // bb = [38.907796, -77.044146];
+
+        Mapsvg.selectAll("path")
+            .data(data.features)
+            .enter().append("path")
+                .attr("class", "neighborhoods")
+                .attr("d", path)
+                .attr("fill", "#FFE5D4")
+                .attr("stroke", "white");
+
+        Mapsvg.selectAll("circle")
+            .data(coffee).enter()
+            .append("circle")
+            .attr("class", "pinCircle")
+            .attr("r", "5px")
+            .attr("fill", "red")
+            .attr("transform", function(d) {return "translate(" + projection([d.long,d.lat]) + ")";})
+            .on("mouseover", function(d){
+                d3.select(this).style("fill", "rgb(67, 48, 3)");
+                d3.select(this).attr("r", "7px");
+                tooltip.html("<span style='font-size: 15px'><strong>" + d.Name + ":</strong></span> <br/>" + d.Address);
+                tooltip.style("visibility", "visible");
+                tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+            })
+            .on("mouseout", function(d){
+                d3.select(this).style("fill", "rgba(67, 48, 3, .5)");
+                d3.select(this).attr("r", "5px");
+                tooltip.style("visibility", "hidden");
+            })
+            .on("click", function(d){
+                // console.log(typeof("." + d.id))
+                $("#"+d.id).trigger("click");
+                $.fn.gotoAnchor = function(anchor) {
+                    location.href = "#coffee-bubble-part";
+                }
+                $(this).gotoAnchor();
+            });
+    };
+
+    </script>
+
+    <!-- <div id="coffeeHeadline" style="text-align: center">Ranking Name</div> -->
+    <div id="coffee-bubble-part" class="coffee-bubble">
+        <div class="buttons">
+            <div class="buttons-1">
+            <button id="Store1">Peets at 3299 M</button>
+            <button id="Store2">Starbucks at 2400 M</button>
+            <button id="Store3">Soho Tea & Coffee</button>
+            </div>
+            <div class="buttons-2">
+            <button id="Store4">Starbucks at 2231 Crystal Drive</button>
+            <button id="Store5">PAUL at 555 13th</button>
+            <button id="Store6">Starbucks at 1304 F</button>
+            <button id="Store7">Tryst at 2459 18th</button>
+            </div>
+        </div>
+
+        <div id="Cubes"></div>
+    </div>
+
+    <script>
+    // *You don't need to define margin with strength chart
+    var width = 600,
+        height = 500;
+
+    var svg = d3.select("#Cubes")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                //Remember to add the following two lines
+                .append("g")
+                .attr("transform", "translate(0,0)");
+
+    var ForceXCombine = d3.forceX(width/2).strength(0.08);
+
+     var ForceStore1 = d3.forceX(function(d){
+        if (d.Store1 === "EnvScore") {
+            return 100;
+        } else if (d.Store1 === "AvaScore"){
+            return 300;
+        } else if (d.Store1 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore2 = d3.forceX(function(d){
+        if (d.Store2 === "EnvScore") {
+            return 100;
+        } else if (d.Store2 === "AvaScore"){
+            return 300;
+        } else if (d.Store2 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore3 = d3.forceX(function(d){
+        if (d.Store3 === "EnvScore") {
+            return 100;
+        } else if (d.Store3 === "AvaScore"){
+            return 300;
+        } else if (d.Store3 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore4 = d3.forceX(function(d){
+        if (d.Store4 === "EnvScore") {
+            return 100;
+        } else if (d.Store4 === "AvaScore"){
+            return 300;
+        } else if (d.Store4 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore5 = d3.forceX(function(d){
+        if (d.Store5 === "EnvScore") {
+            return 100;
+        } else if (d.Store5 === "AvaScore"){
+            return 300;
+        } else if (d.Store5 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore6 = d3.forceX(function(d){
+        if (d.Store6 === "EnvScore") {
+            return 100;
+        } else if (d.Store6 === "AvaScore"){
+            return 300;
+        } else if (d.Store6 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var ForceStore7 = d3.forceX(function(d){
+        if (d.Store7 === "EnvScore") {
+            return 100;
+        } else if (d.Store7 === "AvaScore"){
+            return 300;
+        } else if (d.Store7 === "RestScore"){
+            return 500;
+        } else {
+            return 2000;
+        }
+    });
+
+    var simulation = d3.forceSimulation()
+        .force("x", ForceXCombine)
+        .force("y", d3.forceY(height/2).strength(0.08))
+        .force("colide", d3.forceCollide(function(d){
+            return 10;
+        }));
+
+    d3.queue()
+        .defer(d3.csv, "ranking.csv")
+        .await(ready);
+
+    function ready(error, datapoints){
+        if (error) throw error;
+
+        console.log(datapoints);
+
+        var nodes = svg.selectAll("g")
+            .data(datapoints)
+            .enter().append("g");
+
+        nodes.append("circle")
+            .attr("r", "10px")
+            .style("fill", "#FF8895");
+
+        var blurb = "Coffee House Name",
+            blurb1 = "Peets at 3299 M",
+            blurb2 = "Starbucks at 2400 M",
+            blurb3 = "Soho Tea & Coffee",
+            blurb4 = "Starbucks at 2231 Crystal Drive",
+            blurb5 = "PAUL at 555 13th",
+            blurb6 = "Starbucks at 1304 F",
+            blurb7 = "Tryst at 2459 18th";
+
+        svg.append("text")
+            .attr("dx", 270)
+            .attr("dy", 100)
+            .attr("id", "coffeeHeadline")
+            .text(blurb);
+
+
+        d3.select("#Store1").on("click", function(d){
+            $("#coffeeHeadline").html(blurb1);
+            return simulation.force("x", ForceStore1)
+                                .alphaTarget(0.5)
+                                .restart();
+                // $("#rent-blurb").html(blurb);
+        });
+
+        // d3.select("#Store1").on("click", function(d){
+        //         $("#coffeeHeadline").html(blurb1);
+        // });
+
+
+        d3.select("#Store2").on("click", function(d){
+            $("#coffeeHeadline").html(blurb2);
+            return simulation.force("x", ForceStore2)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store3").on("click", function(d){
+            $("#coffeeHeadline").html(blurb3);
+            return simulation.force("x", ForceStore3)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store4").on("click", function(d){
+            $("#coffeeHeadline").html(blurb4);
+            return simulation.force("x", ForceStore4)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store5").on("click", function(d){
+            $("#coffeeHeadline").html(blurb5);
+            return simulation.force("x", ForceStore5)
+                                .alphaTarget(0.5)
+                                .restart();
+            console.log("clicked")
+        });
+
+        d3.select("#Store6").on("click", function(d){
+            $("#coffeeHeadline").html(blurb6);
+            return simulation.force("x", ForceStore6)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        d3.select("#Store7").on("click", function(d){
+            $("#coffeeHeadline").html(blurb7);
+            return simulation.force("x", ForceStore7)
+                                .alphaTarget(0.5)
+                                .restart();
+        });
+
+        simulation.nodes(datapoints)
+            .on("tick", ticked);
+
+        function ticked(){
+            nodes.attr("transform", function(d){
+                var k = "translate(" + d.x + "," + d.y + ")";
+                return k;
+            })
+        };
+
+        svg.append("text")
+            .attr("dx", 50)
+            .attr("dy", 360)
+            .text("Environment");
+
+        svg.append("text")
+            .attr("dx", 270)
+            .attr("dy", 360)
+            .text("Avaliability");
+
+        svg.append("text")
+            .attr("dx", 470)
+            .attr("dy", 360)
+            .text("Restroom");
+
+        // var blurb1 = "This Peets coffee locates at Georgetown. Its environment is ";
+
+        svg.append("text")
+            .attr("dx", 100)
+            .attr("dy", 430)
+            .style("font-size", "12px")
+            .text("Environment = comfort, cleanliness, crowdedness, and noise level.(4)");
+
+        svg.append("text")
+            .attr("dx", 100)
+            .attr("dy", 450)
+            .style("font-size", "12px")
+            .text("Avaliability = avaliability of table or seats.(4)");
+
+        svg.append("text")
+            .attr("dx", 100)
+            .attr("dy", 470)
+            .style("font-size", "12px")
+            .text("Restroom = avaliability and cleanliness of restroom.(4)");
+    };
+
+    </script>
+
+</body>
+</html>
