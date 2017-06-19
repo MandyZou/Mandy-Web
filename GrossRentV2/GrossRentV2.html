@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<head>
+    <title>Affordable Housing by State</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+
+    <!-- Introducing TopoJson -->
+    <script src="https://unpkg.com/topojson@3.0.0"></script>
+
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Hind|Roboto" rel="stylesheet">
+
+
+    <style>
+
+    .state-borders {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 2px;
+    }
+
+    .mapselected {
+        fill: #FF6666;
+    }
+    
+    svg {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .legend {
+      font-size: 12px;
+    }
+
+    .line {
+      fill: none;
+      stroke: #CCCCCC;
+      stroke-width: 2px;
+    }
+
+    .listSelected {
+      stroke: #09C909;
+      fill: none;
+      stroke-width: 3px;
+    }
+
+    .selected {
+        stroke: #09C909;
+    }
+
+    #States{
+      margin-left: 45%;
+      margin-top: 20px;
+    }
+
+    #State\ Average{
+      stroke: #FF6666;
+    }
+
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center; font-size: 30px; padding-top: 30px">Median Bedroom Gross Rent by States</h1>
+    <svg id="usMap" height = "300", width ="540"></svg>
+    <p style="float: right; padding-right: 300px;"><em>Source: <a href="https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_15_5YR_B25031&prodType=table" style="text-decoration: none; color: #2F2F2F" target="_blank">US Census</em></a></p>
+    <br/>
+
+    <script>
+    var margin = {top: 0, left: 30, right: 30, bottom: 0},
+        height = 300 - margin.top - margin.bottom,
+        width = 540 - margin.left - margin.right;
+
+    var Mapsvg = d3.select("#usMap")
+                .append("svg")
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("width", width + margin.left + margin.right)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+   //color, based on the largest and smallest number in the dataset
+    var rent_domain = [400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600];
+    var ext_rent_domain = [400, 600, 800, 1000, 1200, 1400, 1600];
+    var rent_color = d3.scaleThreshold()
+                    .domain(rent_domain)
+                    .range(d3.schemeYlGn[9]);
+
+    //Add legend for map
+    var legend_labels = ["400", "600", "800", "1000", "1200", "1400", "1600"];
+
+    var legend = Mapsvg.selectAll("g.legend")
+        .data(ext_rent_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+    //Change the position of legend
+      .attr("x", -10)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h - 25;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return rent_color(d); })
+      .style("opacity", 0.8);
+
+  legend.append("text")
+  //Change the positon of legend text
+      .attr("x", 20)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 30;})
+      .text(function(d, i){ return legend_labels[i]; });
+
+
+    //For getting numbers out of csv file
+    var rentData = d3.map();
+
+    var tooltip = d3.select("body")
+            .append("div")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("color", "#2F2F2F")
+            .style("padding", "8px")
+            .style("background-color", "rgba(253, 253, 253, 0.7)")
+            .style("border-style", "solid")
+            .style("border-width", "1px")
+            .style("border-color", "#C5C5C5")
+            .style("font-size", "12px")
+            .style("font-family", "'Roboto', sans-serif")
+            .text("tooltip");
+
+
+    d3.queue()
+        .defer(d3.json, "us-states.json")
+        .defer(d3.csv, "grossrent.csv", function(d){
+            //To parse the data in the dataset
+            rentData.set(d.id, +d.rent)
+        })
+        .await(ready);
+        
+
+     //Everytime you use typojson, you need to write the following code
+    function ready(error, us){
+        if(error) throw error;
+
+        var usStates = topojson.feature(us, {
+            type:"GeometryCollection",
+            geometries: us.objects.cb_2016_us_state_500k.geometries
+        });
+
+        var projection = d3.geoAlbersUsa()
+            .fitExtent([ [20,20], [500,250] ], usStates);
+
+        var path = d3.geoPath()
+            .projection(projection);
+        // console.log(us);
+
+        Mapsvg.append("g")
+            .selectAll("path")
+            .data(usStates.features)
+            .enter().append("path")
+            .attr("class", "states")
+            .attr("id", function(d){ return d.properties.NAME + "-2"; })
+            //for graphic using path, you need to include the following line every time
+                .attr("d", path)
+                .attr("fill", function(d){
+                    return rent_color(d.rent = rentData.get(d.properties.GEOID));
+                })
+            // .attr("id", us.objects.states.geometries.id)
+            .on("mouseover", function(d){
+                d3.select(this).classed("mapselected", true);
+                tooltip.html("<strong>" + (d.properties.NAME) + " Median Rent in 2015</strong>:<br/> $" + (d["rent"]));
+                tooltip.style("visibility", "visible");
+                $("#" + d.properties.NAME).attr("style", "stroke: #09C909");
+                
+            })
+            .on("mousemove", function(d){
+                d3.select(this).classed("mapselected", true);
+                //Must add the d3.event.pageY and PageX to activate tooltip
+                return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+                $("#" + d.properties.NAME).attr("style", "stroke: #09C909");
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("mapselected", false);
+                tooltip.style("visibility", "hidden");
+                $("#" + d.properties.NAME).removeAttr("style", "stroke: #09C909");
+            })
+            .on("click", function(d){
+              // console.log(d.properties.NAME);
+              // d3.select(this).classed("mapselected", false);
+              $("#" + d.properties.NAME).attr("style", "stroke: #09C909");
+              console.log("#" + d.properties.NAME);
+            });
+
+        // console.log(us)
+
+    };
+</script>
+
+  <h1 style="text-align: center; padding-top: 50px; font-size: 20px">Median Bedroom Gross Rent by States from 2010 to 2015</h1>
+  <div id="rent-blurb-default" style="text-align: center; font-size: 11px">The highest median rent is in Hawaii ($1438 in 2015) and the lowest rent is in Puerto Rico ($456 in 2015).</div>
+  <!-- Blurb -->
+  <div id="rent-blurb" style="text-align: center; font-size: 11px"></div> 
+
+  <!-- Dropdown Menu -->
+  <select id="States">
+    <option>State Average</option>
+  </select>
+
+  <script>
+  var statesList = {"1":"Alabama","2":"Alaska","3":"Arizona","4":"Arkansas","5":"California","6":"Colorado","7":"Connecticut","8":"Delaware","9":"District of Columbia","10":"Florida","11":"Georgia","12":"Hawaii","13":"Idaho","14":"Illinois","15":"Indiana","16":"Iowa","17":"Kansas","18":"Kentucky","19":"Louisiana","20":"Maine","21":"Maryland","22":"Massachusetts","23":"Michigan","24":"Minnesota","25":"Mississippi","26":"Missouri","27":"Montana","28":"Nebraska","29":"Nevada","30":"New Hampshire","31":"New Jersey","32":"New Mexico","33":"New York","34":"North Carolina","35":"North Dakota","36":"Ohio","37":"Oklahoma","38":"Oregon","39":"Pennsylvania","40":"Rhode Island","41":"South Carolina","42":"South Dakota","43":"Tennessee","44":"Texas","45":"Utah","46":"Vermont","47":"Virginia","48":"Washington","49":"West Virginia","50":"Wisconsin","51":"Wyoming","52":"Puerto Rico"};
+
+//Add options
+  $.each(statesList, function(key, value){
+    $("#States")
+      .append($("<option>", {key, value})
+      .text(value));
+  });
+
+  // function displayVals() {
+  //   var singleValues = $( "#States" ).val();
+  //   // console.log("'[id=" + "'" + singleValues + "'" + "]'"); 
+  //   //Deal with id name with a space
+  //   $("'[id=" + "'" + singleValues + "'" + "]'").addClass("listSelected")
+  // };
+   
+  // $("select").change(displayVals);
+  // displayVals();
+
+  $("#States").on("change", function(){
+    var singleValue = $(this).val();
+    //Id name with space in 
+    $('.listSelected').attr("class", "line");
+    $("[id='" + singleValue + "']").attr("class","listSelected")
+    // console.log("[id='" + singleValue + "']")
+  });
+
+  </script>
+
+  <!-- Line Chart -->
+  <svg id="rentLine" width = "900" height = "500"></svg>
+
+    <script>
+  var margin = {top: 20, bottom: 20, left: 50, right: 20},
+      height = 500 - margin.top - margin.bottom,
+      width = 900 - margin.left - margin.right;
+
+  var states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming","Puerto Rico", "State Average"];
+
+  var state = {};
+
+  var years = [2015,2014,2013,2012,2011,2010];
+
+  var x = d3.scaleLinear().range([0, width]),
+      y = d3.scaleLinear().range([height, 0]);
+
+  //Set up svg
+  var svg = d3.select("#rentLine")
+          .append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top +")");
+
+  var tooltip = d3.select("body")
+            .append("div")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("color", "#2F2F2F")
+            .style("padding", "8px")
+            .style("background-color", "rgba(253, 253, 253, 0.7)")
+            .style("border-style", "solid")
+            .style("border-width", "1px")
+            .style("border-color", "#C5C5C5")
+            .style("font-size", "12px")
+            .style("font-family", "'Roboto', sans-serif")
+            .text("tooltip");
+
+  d3.queue()
+    .defer(d3.text, "grossrent4.csv")
+    .await(ready);
+
+  function ready(error, data){
+    if (error) throw error;
+
+    var text = d3.csvParseRows(data);
+    // console.log(text)
+
+    for(i=1;i<states.length;i++){
+        //Slice all the y numbers out
+        var values=text[i+1].slice(1,text[i.length]);
+        // console.log(values);
+
+        var currData =[];state[states[i]] = states[i];
+        //*Important* step to puy each year and each value together
+        for(j=0;j<values.length;j++){
+          currData.push({x: years[j], y: values[j], z: states[i]});
+          };
+          // console.log(currData);
+          // console.log(currData[i]["y"])
+
+        var line = d3.line().x(function(d,i){return x(d.x);}).y(function(d){return y(d.y);});
+
+        x.domain([2010, 2015]);
+        y.domain([400, 1500]);
+
+        // var valueList = [];
+        var valueLongList = [];
+
+        svg.append("path")
+            .data([currData])
+            .attr("id", states[i])
+            .attr("class", "line")
+            .attr("d", line)
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true);
+                for (n=0; n<years.length; n++) {
+                  valueLongList.push(d[Object.keys(d)[n]].y);
+                }
+                var valueList = valueLongList.slice(-6);
+                // console.log(valueList);
+                var valueMax = Math.max.apply(Math, valueList);
+                // console.log(valueMax);
+                var valueMin = Math.min.apply(Math, valueList);
+                // console.log(valueMin);
+                // console.log(d[Object.keys(d)[3]].z) OMG it is happening!!! Crying Out Loud!
+                tooltip.html(d[Object.keys(d)[3]].z);
+                // console.log(d)
+                tooltip.style("visibility", "visible");
+                tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+                $("#" + d[Object.keys(d)[3]].z + "-2").attr("style", "fill: #FF6666");
+                var blurb = d[Object.keys(d)[3]].z + "'s highest rent is $" + valueMax + ", its lowest rent is $" + valueMin
+                $("#rent-blurb-default").hide();
+                $("#rent-blurb").html(blurb);
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false);
+                tooltip.style("visibility", "hidden");
+                $("#" + d[Object.keys(d)[3]].z + "-2").removeAttr("style", "fill: #FF6666");
+                $("#rent-blurb-default").show();
+                $("#rent-blurb").html('');
+            })
+            .on("click", function(d){
+              $("#" + d[Object.keys(d)[3]].z + "-2").attr("style", "fill: #FF6666");
+              // console.log("#" + d[Object.keys(d)[3]].z + "-2");
+            });
+
+        var dollarFormat = function(d){ return "$" +  d3.format(",d")(d);};
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x)
+                .ticks(5)
+                .tickFormat(d3.format("")));
+
+        svg.append("g")
+            .call(d3.axisLeft(y)
+              .tickFormat(dollarFormat));
+
+        svg.append("text")
+          .attr("dx", 770)
+          .attr("dy", 270)
+          .style("font-size", "10px")
+          .text("State Average");
+      }};
+
+    </script>
+
+
+</body>
+</html>
