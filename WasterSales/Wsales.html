@@ -96,12 +96,12 @@
                     return headphone_color(d.Headphone = headphoneData.get(d.properties.name));
                 })
             .on("mouseover", function(d){
-                showhidefunc(d)
+                showhidefunc(d);
+                $(".countries").attr("fill","red");
             })
             .on("mouseout", function(d){
-                tooltip.style("visibility", hidden);
+                tooltip.style("visibility","hidden");
             });
-
     };
 
 //Resources:
