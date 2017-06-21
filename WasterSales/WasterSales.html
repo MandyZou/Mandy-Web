@@ -222,7 +222,7 @@
         //Set else if statement for tooltip
         function showhidefunc(d){
             if(d["All"] !== 0) {
-                tooltip.html("<strong>" + (d.properties.name) + " Blue Speaker Sales Volume</strong>:<br/> <span style='color: red'>$" + d3.format(",d")(d["All"]) + "</span>");
+                tooltip.html("<strong>" + (d.properties.name) + " Blue Speaker Sales Volume</strong>:<br/> <span style='color: red'>" + d3.format(",d")(d["All"]) + "</span>");
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
             } else {
@@ -342,7 +342,7 @@
         //Set else if statement for tooltip
         function showhidefunc(d){
             if(d["Cables"] !== 0) {
-                tooltip.html("<strong>" + (d.properties.name) + " Cables Sales Volume</strong>:<br/> <span style='color: red'>$" + d3.format(",d")(d["Cables"]) + "</span>");
+                tooltip.html("<strong>" + (d.properties.name) + " Cables Sales Volume</strong>:<br/> <span style='color: red'>" + d3.format(",d")(d["Cables"]) + "</span>");
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
             } else {
@@ -459,7 +459,7 @@
 
         function showhideearphone(d){
             if(d["earphone"] !== 0){
-                tooltip.html("<strong>" + (d.properties.name) + " Earphone Sales Volume:</strong> <br/><span style='color: red'>$" + d3.format(",d")(d["earphone"]) + "</span>");
+                tooltip.html("<strong>" + (d.properties.name) + " Earphone Sales Volume:</strong> <br/><span style='color: red'>" + d3.format(",d")(d["earphone"]) + "</span>");
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY - 10)+ "px").style("left", (d3.event.pageX + 10) + "px");
             } else {
@@ -576,7 +576,7 @@
         //Set else if statement for tooltip
         function showhidefunc(d){
             if(d["Headphone"] !== 0) {
-                tooltip.html("<strong>" + (d.properties.name) + " Headphone Sales Volume</strong>:<br/> <span style='color: red'>$" + d3.format(",d")(d["Headphone"]) + "</span>");
+                tooltip.html("<strong>" + (d.properties.name) + " Headphone Sales Volume</strong>:<br/> <span style='color: red'>" + d3.format(",d")(d["Headphone"]) + "</span>");
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
             } else {
@@ -693,7 +693,7 @@
         //Set else if statement for tooltip
         function showhidefunc(d){
             if(d["Nap_Zappers"] !== 0) {
-                tooltip.html("<strong>" + (d.properties.name) + " Nap Zappers Sales Volume</strong>:<br/> <span style='color: red'>$" + d3.format(",d")(d["Nap_Zappers"]) + "</span>");
+                tooltip.html("<strong>" + (d.properties.name) + " Nap Zappers Sales Volume</strong>:<br/> <span style='color: red'>" + d3.format(",d")(d["Nap_Zappers"]) + "</span>");
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
             } else {
@@ -808,7 +808,7 @@
         //Set else if statement for tooltip
         function showhidefunc(d){
             if(d["Paper_speakers"] !== 0) {
-                tooltip.html("<strong>" + (d.properties.name) + " Paper Speaker Sales Volume</strong>:<br/> <span style='color: red'>$" + d3.format(",d")(d["Paper_speakers"]) + "</span>");
+                tooltip.html("<strong>" + (d.properties.name) + " Paper Speaker Sales Volume</strong>:<br/> <span style='color: red'>" + d3.format(",d")(d["Paper_speakers"]) + "</span>");
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
             } else {
@@ -926,7 +926,7 @@
         //Set else if statement for tooltip
         function showhidefunc(d){
             if(d["All"] !== 0) {
-                tooltip.html("<strong>" + (d.properties.name) + " Total Sales Volume</strong>:<br/> <span style='color: red'>$" + d3.format(",d")(d["All"]) + "</span>");
+                tooltip.html("<strong>" + (d.properties.name) + " Total Sales Volume</strong>:<br/> <span style='color: red'>" + d3.format(",d")(d["All"]) + "</span>");
                 tooltip.style("visibility", "visible");
                 tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
             } else {
