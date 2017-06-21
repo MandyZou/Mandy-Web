@@ -152,7 +152,7 @@
     var path = d3.geoPath()
         .projection(projection);
 
-    var bluetooth_domain = [0,1000,2000,3000,10000,15000,17000,18000,100000,120000];
+    var bluetooth_domain = [0,1000,2000,3000,10000,15000,17000,100000,120000];
 
     var bluetooth_color = d3.scaleThreshold()
                             .domain(bluetooth_domain)
@@ -165,6 +165,32 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
+     //Add legend for map
+    var ext_bluetooth_domain = [0,1000,3000,10000,17000,120000];
+    
+    var legend_labels = ["Least", , , , ,"Most"];
+
+    var legend = bluetooth_svg.selectAll("g.legend")
+        .data(ext_bluetooth_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+      .attr("x", -30)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return bluetooth_color(d); })
+      .style("opacity", 0.8);
+
+    legend.append("text")
+      .attr("x", -5)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 4;})
+      .text(function(d, i){ return legend_labels[i]; });
+
+    //tooltip
     var tooltip = d3.select("body")
                     .append("div")
                     .style("position", "absolute")
@@ -258,6 +284,33 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
+    //Add legend for map
+    var ext_cables_domain = [0,1000,6000,8000,60000,110000];
+    
+    var legend_labels = ["Least", , , , ,"Most"];
+
+    var legend = cables_svg.selectAll("g.legend")
+        .data(ext_cables_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+      .attr("x", -30)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return cables_color(d); })
+      .style("opacity", 0.8);
+
+    legend.append("text")
+      .attr("x", -5)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 4;})
+      .text(function(d, i){ return legend_labels[i]; });
+
+
+    //Add tooltip
     var tooltip = d3.select("body")
                     .append("div")
                     .style("position", "absolute")
@@ -335,11 +388,11 @@
     var path = d3.geoPath()
         .projection(projection);
 
-    var earphone_domain = [0,9000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 110000, 120000];
+    var earphone_domain = [0,9000, 10000, 30000, 60000, 110000, 120000];
 
     var earphone_color = d3.scaleThreshold()
                             .domain(earphone_domain)
-                            .range(["#f2f0f7", "#EAEAF3", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
+                            .range(["#f2f0f7", "#EAEAF3", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f", "#321755"]);
 
     var earphone_svg = d3.select("#earMap")
                 .append("svg")
@@ -348,6 +401,32 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
+    //Add legend for map
+    var ext_earphone_domain = [0,9000,10000,30000,60000,120000];
+    
+    var legend_labels = ["Least", , , , ,"Most"];
+
+    var legend = earphone_svg.selectAll("g.legend")
+        .data(ext_earphone_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+      .attr("x", -30)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return earphone_color(d); })
+      .style("opacity", 0.8);
+
+    legend.append("text")
+      .attr("x", -5)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 4;})
+      .text(function(d, i){ return legend_labels[i]; });
+
+    //Add tooltip
     var tooltip = d3.select("body")
                     .append("div")
                     .style("position", "absolute")
@@ -439,6 +518,33 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
+    //Add legend for map
+    var ext_headphone_domain = [0,1000,5000,10000,80000,100000];
+    
+    var legend_labels = ["Least", , , , ,"Most"];
+
+    var legend = headphone_svg.selectAll("g.legend")
+        .data(ext_headphone_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+      .attr("x", -30)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return headphone_color(d); })
+      .style("opacity", 0.8);
+
+    legend.append("text")
+      .attr("x", -5)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 4;})
+      .text(function(d, i){ return legend_labels[i]; });
+
+
+    //Add tooltip
     var tooltip = d3.select("body")
                     .append("div")
                     .style("position", "absolute")
@@ -517,7 +623,7 @@
     var path = d3.geoPath()
         .projection(projection);
 
-    var nap_domain = [0,5000,6000,80000,90000,100000,130000,100000,200000,300000];
+    var nap_domain = [0,5000,6000,80000,90000,100000,130000,200000,300000];
 
     var nap_color = d3.scaleThreshold()
                             .domain(nap_domain)
@@ -530,6 +636,32 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
+    //Add legend for map
+    var ext_nap_domain = [0,5000,80000,90000,100000,200000];
+    
+    var legend_labels = ["Least", , , , ,"Most"];
+
+    var legend = nap_svg.selectAll("g.legend")
+        .data(ext_nap_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+      .attr("x", -30)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return nap_color(d); })
+      .style("opacity", 0.8);
+
+    legend.append("text")
+      .attr("x", -5)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 4;})
+      .text(function(d, i){ return legend_labels[i]; });
+
+    //Add tooltip
     var tooltip = d3.select("body")
                     .append("div")
                     .style("position", "absolute")
@@ -620,6 +752,31 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
+     //Add legend for map
+    var ext_paper_domain = [0,5000,6000,7000,50000,700000];
+    
+    var legend_labels = ["Least", , , , ,"Most"];
+
+    var legend = paper_svg.selectAll("g.legend")
+        .data(ext_paper_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+      .attr("x", -30)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return paper_color(d); })
+      .style("opacity", 0.8);
+
+   legend.append("text")
+      .attr("x", -5)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 4;})
+      .text(function(d, i){ return legend_labels[i]; });
+
     var tooltip = d3.select("body")
                     .append("div")
                     .style("position", "absolute")
@@ -699,6 +856,8 @@
 
     var allSales_domain = [0,10000,20000,150000,200000,300000,350000,800000,900000];
 
+    // var ext_allSales_domain = [0,10000,20000,200000,300000,900000];
+
     var allSales_color = d3.scaleThreshold()
                             .domain(allSales_domain)
                             .range(d3.schemeBuPu[9]);
@@ -710,6 +869,32 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
+    //Add legend for map
+    var ext_allSales_domain = [0,10000,20000,200000,300000,900000];
+    
+    var legend_labels = ["Least", , , , ,"Most"];
+
+    var legend = allSales_svg.selectAll("g.legend")
+        .data(ext_allSales_domain)
+        .enter().append("g")
+        .attr("class", "legend")
+
+    var legend_w = 20, legend_h = 20;
+
+    legend.append("rect")
+      .attr("x", -30)
+      .attr("y", function(d, i){ return height - (i*legend_w) - 2*legend_h;})
+      .attr("width", legend_w)
+      .attr("height", legend_h)
+      .style("fill", function(d, i) { return allSales_color(d); })
+      .style("opacity", 0.8);
+
+  legend.append("text")
+      .attr("x", -5)
+      .attr("y", function(d, i){ return height - (i*legend_h) - legend_h - 4;})
+      .text(function(d, i){ return legend_labels[i]; });
+
+//Add tooltip
     var tooltip = d3.select("body")
                     .append("div")
                     .style("position", "absolute")
