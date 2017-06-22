@@ -1,0 +1,2062 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Very Best Restaurant From 1969-2016</title>
+    <link href="https://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+
+     <script type="text/javascript"
+     src="https://maps.google.com/maps/api/js?sensor=false"></script>
+      <script
+     src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+      <script src="http://piotrkrosniak.github.io/simple-slider.js"></script>
+      <link href="http://piotrkrosniak.github.io/simple-slider.css" rel="stylesheet"
+     type="text/css" />
+      <link href="http://piotrkrosniak.github.io/simple-slider-volume.css" rel="stylesheet"
+     type="text/css" />
+
+    <!-- import Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="bootstrap/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="bootstrap/jumbotron.css" rel="stylesheet">
+
+    <!-- For d3 -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="vbr.css">
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDERTFB4hi1rXJuieLm35LRxn46_NPEWno&callback=initMap">
+    </script>
+
+    <script type="text/javascript">
+
+    // Setting up the Map. With help of Google Fusion Map Slider (http://piotrkrosniak.github.io/).
+
+    function initialize() {
+    var myLatLng = new google.maps.LatLng(38.927003, -77.049114);
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+    center: myLatLng,
+    zoom: 12,
+    panControl: false,
+    zoomControl: true,
+    zoomControlOptions: {
+    position: google.maps.ControlPosition.LEFT_CENTER
+    },
+    mapTypeControl: false,
+      mapTypeId: 'roadmap',
+      styles: [
+                    {
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#F5ECCE"
+                      }
+                    ]
+                  },
+
+                  {
+                    "elementType": "labels.icon",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "color": "#424242"
+                      }
+                    ]
+                  },
+
+                  {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                      {
+                        "color": "#f5f5f5"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "labels",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#F5ECCE"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "poi",
+                    "elementType": "labels.text",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "color": "#757575"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "poi.business",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#a5d6a7"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "color": "#9e9e9e"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#ffffff"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "road.arterial",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "color": "#757575"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#ffffff"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "road.highway",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "color": "#616161"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "road.local",
+                    "elementType": "labels",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "road.local",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "color": "#9e9e9e"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "transit.line",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "visibility": "off"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "transit.station",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#eeeeee"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#e1f5fe"
+                      }
+                    ]
+                  },
+
+                  {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                      {
+                        "color": "#9e9e9e"
+                      }]
+                  }         
+                ]
+                    // Generated from https://mapstyle.withgoogle.com
+            });
+            // Setting up the map
+
+            layer1 = new google.maps.FusionTablesLayer({
+                  query: {
+                    select: 'geometry',
+                    from: '1-cavU8nDdbbQpqKbxuvy_6vs9_-K-Q9nGPE8Dh6B'   //1969
+                  },
+                    styleId: 2,
+                    templateId: 2,
+                  map: map, 
+                });
+
+            layer2 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1vCTRr9jDkwpvaKXsB-SEwL-4Wgo08fefUlVUFB8X',   //1970
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer3 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1FRLmDCNc7_eA4RnAsrseK257FZeW8LuiP3pKDMcO',   //1971
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer4 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '11h2QPWyEdvMy4LWUbU7LQ-jw-8cmuQcE76IKFUgc',   //1972
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer5 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1UaKhkZo80Cmwhvnrf91EdbeS7-deQUBTENIVE8FW',   //1973
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer6 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1io74KnBoOvDk9QYB7HUS4MWLg-bSJiEZxSgiSria',   //1974
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer7 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1xby1Xqv3fq0vwzRlfJqrAJQVE24IXHcckDxzJPs0',   //1975
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer8 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1CnC1n27OB2SqPUWA_lCG7v5Jn2JSBZYUwOkkp-wn',   //1976
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer9 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1PaxAXzBvJ0kAm2vsqP56hVK7y-LfDmAhwqArg800',   //1977
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer10 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1lWnH4GHuDqFwVBNootXKmZ6cbiEAJb1BaJFEmdCJ',   //1978
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer11 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1W9UEaQ7VtDPhbokx6rGW4nrO2CUhyA6IVhVsGXN8',   //1979
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer12 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1AmQnJlF4we7LjNZ_87Cwkm2tpVQEEP7gZdnRjVrV',   //1980
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer13 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1rd8zCH_pZocBC1ygqEtFRjc-awH7a4Yi8ou5CMqM',   //1981
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer14 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1xow0JIvH_N30yHMZvzLa3uVBphArevbXcpqRL_U8',   //1982
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer15 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1OeOhZU82FMohb7MgUTdrFoQm4cpU5ZCej5oMh69H',   //1983
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer16 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1uNh3VEavNNPki8AbhtM2qPe9VmNvW_t_UQxQlAVe',   //1984
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer17 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1ilMeAcgwLYoP8zxjLD6Mw0-Jxcoh0AqjC4q9G8cp',   //1985
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer18 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1CaQ62fvojR61ZYe5VGE0HEcQEDARBDfidzADAyik',   //1986
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer19 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1T9q2fl8wlahfBDsshqaC9q4_--z7dH_HgmiPnoWZ',   //1987
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer20 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '14Scb7sAkx9NeprWhgeQmOUQfBT88e0B9m3Ga51jI',   //1988
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer21 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1InxZv5-eqlVse9nDlWal_MkTBBd4VLn9Eh4EiShU',   //1989
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer22 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1jzb6p1DQQl2TVseQ83VHasS4w9M-WPFs2Wp4kcCu',   //1990
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer23 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1F8FGTKn6b901UdLgSrZGALrZUQjzSOX8YwkRo73U',   //1991
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer24 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1X0jGUcOTTqxU9nvOXxnJZhn4hJF72GzyKyxA2gDB',   //1992
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer25 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1YXtUjgpSLeIrGy0wNhB_P4wLtdu2eZ2dLsSNP_lD',   //1993
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer26 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1SEkBKw2WECcD3sztzD4HUDQMCxGKuPGt9UzE0UwD',   //1994
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer27 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1ZejtdZUGpKoqVk8EM0z5IGwD-HukLOggYvWlDYGr',   //1995
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer28 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1mTaoDrO73EFim9oE2GoUNRzNLjL4e97fjNmBy2v9',   //1996
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer29 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1i7UL0LL4sk0j3X7EZLO1KTw7pvW9TaAMl8ByTcU2',   //1997
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer30 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1WUmO6kTp3Tf2lDSrHNC-uv4o6d1wrRu9SESjMysp',   //1998
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer31 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1HJPA12Qg7W2nifmNFIRklCUwwf-9nYltLrRfH-uF',   //1999
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer32 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1_VM21nOmZrKq-34hb3kitGiyLqMljSFNtQ9GodJv',   //2000
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer33 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1CVUJdUc8MjsepI2O8kJ0x6-jXdvbhOt1hFqbjuNB',   //2001
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer34 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1HSLxrZck6QGVzBUjv-Teil2KkOXgJwFSRG9qfjna',   //2002
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer35 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1C666bxWFxtVIma3B3bFQITOAllCeJup6pLflPesv',   //2003
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer36 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1g-HwFMfRdxfzpJJ3pCViu8t34YyMppphWx2QuVDZ',   //2004
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer37 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1NZf4vZKmvMNCVEaIhnmhzAoY-f5WrzSmjhoEp-_L',   //2005
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer38 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1XzmWMPw_bZwzzxJnptvDAoRw4TUVwysoLOv3M4vY',   //2006
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer39 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1QR6S6B91IXU876t8wxKmoK5sL9tS76uH5qgKg3Ba',   //2007
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer40 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1YKuLkn0LvfXHQWCqokFg8DRHMWBnC6C8W2YqZFbB',   //2008
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer41 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1mg7rb_zWvWE_qBye8on6dkay_ABF04Td4CyaP98o',   //2009
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer42 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1qDc7zX6dVJY5ESm2FDBijcoAOVgEGGyYKVq-UgnA',   //2010
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer43 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1KSYtTq2ubjuoZn_lWbepzxdNkU-7mJLvEsdTDhQg',   //2011
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer44 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1K4gPH9n_4Te89IJNwOz41eMGvJ-fd1faEtMPesQ0',   //2012
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer45 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1A_sN5EMpYFNR3raYIFD-9ULPYXz8ZdFNkOzu_HUS',   //2013
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer46 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '18tL9_Y4dQuY3Ti3MGmTlbAV9DN4RRqDRsZUsxJNw',   //2014
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer47 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1j_2uux5y97IR0uP7kToMjHdz3QO3ZWh3XfpLDk2M',   //2015
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer48 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1Lf1bUMPRi3iSxNJ9-FXqbjOxUTzsclaWSALOiz2M',   //2016
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+            layer49 = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'geometry',
+                    from: '1qolwJROG2qzfafkkWdrkvT3ke6fvSHg4hjQR5sc8',   //2017
+                },
+                    styleId: 2,
+                    templateId: 2,
+                map: map, 
+            });
+
+            layer50.setMap(map);
+            }
+
+                tableidselections = 0;
+
+            function changeLayer(tableidselections) {
+
+                if (tableidselections == 1969){
+                    clearmap();
+                    layer1.setMap(map); 
+                }
+
+                if (tableidselections == 1970){
+                    clearmap();
+                    layer2.setMap(map);
+                }
+
+                if (tableidselections == 1971){
+                    clearmap();
+                    layer3.setMap(map);
+                }
+
+                if (tableidselections == 1972){
+                    clearmap();
+                    layer4.setMap(map);
+                }
+
+                if (tableidselections == 1973){
+                    clearmap();
+                    layer5.setMap(map);
+                }
+
+                if (tableidselections == 1974){
+                    clearmap();
+                    layer6.setMap(map);
+                }
+
+                if (tableidselections == 1975){
+                    clearmap();
+                    layer7.setMap(map);
+                }
+
+                if (tableidselections == 1976){
+                    clearmap();
+                    layer8.setMap(map);
+                }
+
+                if (tableidselections == 1977){
+                    clearmap();
+                    layer9.setMap(map);
+                }
+
+                if (tableidselections == 1978){
+                    clearmap();
+                    layer10.setMap(map);
+                }
+
+                if (tableidselections == 1979){
+                    clearmap();
+                    layer11.setMap(map);
+                }
+
+                if (tableidselections == 1980){
+                    clearmap();
+                    layer12.setMap(map);
+                }
+
+                if (tableidselections == 1981){
+                    clearmap();
+                    layer13.setMap(map);
+                }
+
+                if (tableidselections == 1982){
+                    clearmap();
+                    layer14.setMap(map);
+                }
+
+                if (tableidselections == 1983){
+                    clearmap();
+                    layer15.setMap(map);
+                }
+
+                if (tableidselections == 1984){
+                    clearmap();
+                    layer16.setMap(map);
+                }
+
+                if (tableidselections == 1985){
+                    clearmap();
+                    layer17.setMap(map);
+                }
+
+                if (tableidselections == 1986){
+                    clearmap();
+                    layer18.setMap(map);
+                }
+
+                if (tableidselections == 1987){
+                    clearmap();
+                    layer19.setMap(map);
+                }
+
+                if (tableidselections == 1988){
+                    clearmap();
+                    layer20.setMap(map);
+                }
+
+                if (tableidselections == 1989){
+                    clearmap();
+                    layer21.setMap(map);
+                }
+
+                if (tableidselections == 1990){
+                    clearmap();
+                    layer22.setMap(map);
+                }
+
+                if (tableidselections == 1991){
+                    clearmap();
+                    layer23.setMap(map);
+                }
+
+                if (tableidselections == 1992){
+                    clearmap();
+                    layer24.setMap(map);
+                }
+
+                if (tableidselections == 1993){
+                    clearmap();
+                    layer25.setMap(map);
+                }
+
+                if (tableidselections == 1994){
+                    clearmap();
+                    layer26.setMap(map);
+                }
+
+                if (tableidselections == 1995){
+                    clearmap();
+                    layer27.setMap(map);
+                }
+
+                if (tableidselections == 1996){
+                    clearmap();
+                    layer28.setMap(map);
+                }
+
+                if (tableidselections == 1997){
+                    clearmap();
+                    layer29.setMap(map);
+                }
+
+                if (tableidselections == 1998){
+                    clearmap();
+                    layer30.setMap(map);
+                }
+
+                if (tableidselections == 1999){
+                    clearmap();
+                    layer31.setMap(map);
+                }
+
+                if (tableidselections == 2000){
+                    clearmap();
+                    layer32.setMap(map);
+                }
+
+                if (tableidselections == 2001){
+                    clearmap();
+                    layer33.setMap(map);
+                }
+
+                if (tableidselections == 2002){
+                    clearmap();
+                    layer34.setMap(map);
+                }
+
+                if (tableidselections == 2003){
+                    clearmap();
+                    layer35.setMap(map);
+                }
+
+                if (tableidselections == 2004){
+                    clearmap();
+                    layer36.setMap(map);
+                }
+
+                if (tableidselections == 2005){
+                    clearmap();
+                    layer37.setMap(map);
+                }
+
+                if (tableidselections == 2006){
+                    clearmap();
+                    layer38.setMap(map);
+                }
+
+                if (tableidselections == 2007){
+                    clearmap();
+                    layer39.setMap(map);
+                }
+
+                if (tableidselections == 2008){
+                    clearmap();
+                    layer40.setMap(map);
+                }
+
+                if (tableidselections == 2009){
+                    clearmap();
+                    layer41.setMap(map);
+                }
+
+                if (tableidselections == 2010){
+                    clearmap();
+                    layer42.setMap(map);
+                }
+
+                if (tableidselections == 2011){
+                    clearmap();
+                    layer43.setMap(map);
+                }
+
+                if (tableidselections == 2012){
+                    clearmap();
+                    layer44.setMap(map);
+                }
+
+                if (tableidselections == 2013){
+                    clearmap();
+                    layer45.setMap(map);
+                }
+
+                if (tableidselections == 2014){
+                    clearmap();
+                    layer46.setMap(map);
+                }
+
+                if (tableidselections == 2015){
+                    clearmap();
+                    layer47.setMap(map);
+                }
+
+                if (tableidselections == 2016){
+                    clearmap();
+                    layer48.setMap(map);
+                }
+
+                if (tableidselections == 2017){
+                    clearmap();
+                    layer49.setMap(map);
+                }
+            }
+
+            function clearmap() {
+                layer1.setMap(null);
+                layer2.setMap(null);
+                layer3.setMap(null);
+                layer4.setMap(null);
+                layer5.setMap(null);
+                layer6.setMap(null);
+                layer7.setMap(null);
+                layer8.setMap(null);
+                layer9.setMap(null);
+                layer10.setMap(null);
+                layer11.setMap(null);
+                layer12.setMap(null);
+                layer13.setMap(null);
+                layer14.setMap(null);
+                layer15.setMap(null);
+                layer16.setMap(null);
+                layer17.setMap(null);
+                layer18.setMap(null);
+                layer19.setMap(null);
+                layer20.setMap(null);
+                layer21.setMap(null);
+                layer22.setMap(null);
+                layer23.setMap(null);
+                layer24.setMap(null);
+                layer25.setMap(null);
+                layer26.setMap(null);
+                layer27.setMap(null);
+                layer28.setMap(null);
+                layer29.setMap(null);
+                layer30.setMap(null);
+                layer31.setMap(null);
+                layer32.setMap(null);
+                layer33.setMap(null);
+                layer34.setMap(null);
+                layer35.setMap(null);
+                layer36.setMap(null);
+                layer37.setMap(null);
+                layer38.setMap(null);
+                layer39.setMap(null);
+                layer40.setMap(null);
+                layer41.setMap(null);
+                layer42.setMap(null);
+                layer43.setMap(null);
+                layer44.setMap(null);
+                layer45.setMap(null);
+                layer46.setMap(null);
+                layer47.setMap(null);
+                layer48.setMap(null);
+                layer49.setMap(null);
+            }
+
+    </script>
+  
+</head>
+
+<body onload="initialize()">
+
+
+    <div id="map_canvas" style="width: 100%; height: 400px"></div>
+  <p style="font-size: 12px; text-align: center; margin-top: 10px; margin-bottom: 0px"><em>Drag the green button to see every restaurant that's been named to our annual list since 1969.</em></p>
+
+  <div style="margin: 0 auto 25px; display: table; text-align: center;" id="slider" class="container">
+  <div class="slider" style="margin: 0 auto">
+  <input data-slider="true" data-slider-values="1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017" data-slider-highlight="true" data-slider-snap="true" type="text" /></div>
+    </div>
+    <script>
+    $("[data-slider]")
+    .each(function () {
+    var input = $(this);
+    $("<span>")
+    .addClass("output")
+    .insertAfter($(this));
+    })
+    .bind("slider:ready slider:changed", function (event, data) {
+    $(this)
+    .nextAll(".output:first")
+    .html(data.value.toFixed(0));
+    tableidselections = data.value.toFixed(0);
+    changeLayer(tableidselections);
+    });
+    </script>
+
+  <div class="text-section">
+    <h1 style="text-align: center; padding-top: 20px; padding-bottom: 20px;"><strong>This Map Shows How DC Very Best Restaurants Have Changed Over 49 Years</strong></h1>
+
+  <p style="text-align: center; font-size: 15px">Manyun Zou/<a href="https://www.washingtonian.com/2017/02/15/interactive-maps-found-best-restaurants-past-49-years/">Washingtonian</a></p>
+
+    <p>This month marks the 49th time <a href="https://www.washingtonian.com/2017/02/15/100-very-best-restaurants-2017/"><em>Washingtonian</em></a> has ranked the very best restaurants the DC area has to offer. Over those years, many things about our dining scene have changed: popular cuisines, big-name chefs, and where the best restaurants are located.</p>
+
+    <p>Scroll through the years of best-restaurant lists and you'll quickly notice the dramatic migration of the District's best restaurants from west to east. Rents, neighborhood planning, demographic changes, and many other factors played a role in this change. If you haven't been in DC very long, you might be surprised to learn your favorite neighborhood for eating out was a relative food desert just ten years ago.</P> 
+
+    <p>Here are four DC neighborhoods that exemplify the city's shifting food scene.</p>
+
+    <h2>1.Georgetown</h2>
+    <p><span style="font-weight: 400;">Georgetown's culinary heyday lasted well into the '90s, when it was still the center of DC's social scene. Many tasty French restaurants were located there, including La Riva Gauche, Bistro Francais, and La Chaumiere. However, as the rent in the neighborhood grew more and more expensive, and the liquor-license moratorium was implemented in 1989, restaurateurs started staking out fresher, less-developed neighborhoods. Now, instead of being a dining hotspot, it's more of a tourist attraction, with many restaurants geared more toward out-of-towners and college students, although there are still a few that are go-tos for special occasions.</span></p>
+
+    <p>Three Georgetown restaurants make the list this year: <a href="https://www.fiolamaredc.com">Fiola Mare</a>, <a href="http://www.chezbillysud.com">Chez Billy Sud</a>, and <a href="http://1789restaurant.com">1789</a>, which reopened as a tasting-menu restaurant last year.</p>
+
+  <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+
+    <div class="VBR-map-box-all">
+    <div class="VBR-map-box" onmouseover = "onHoverG70()" onmouseout = "offHoverG()">
+
+    <img id="VBR-map-box-g1" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-70.png" />
+    <p class="VBR-map-text">1970</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverG80()" onmouseout = "offHoverG()">
+
+    <img id="VBR-map-box-g2" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-80.png" />
+    <p class="VBR-map-text">1980</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverG90()" onmouseout = "offHoverG()">
+
+    <img id="VBR-map-box-g3" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-90.png" />
+    <p class="VBR-map-text">1990</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverG00()" onmouseout = "offHoverG()">
+
+    <img id="VBR-map-box-g4" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-00.png" />
+    <p class="VBR-map-text">2000</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverG10()" onmouseout = "offHoverG()">
+
+    <img id="VBR-map-box-g5" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-10.png" />
+    <p class="VBR-map-text">2010</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverG17()" onmouseout = "offHoverG()">
+
+    <img id="VBR-map-box-g6" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-17.png" />
+    <p class="VBR-map-text">2017</p>
+
+    </div>
+    <!-- Georgetown Line chart -->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h3 style="padding-left: 1%">Very Best Restaurants in Georgetown</h3>
+    <svg id="g-line" width ="700" height = "300"></svg>
+
+    <script>
+    var margin = {top: 20, left: 20, right: 20, bottom: 20},
+        width = 700 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
+
+    var gsvg = d3.select("#g-line")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleLinear().range([0, width]),
+        y = d3.scaleLinear().range([height, 0]);
+
+
+    var line = d3.line().x(function(d){return x(d.Year); })
+                        .y(function(d){return y(d.Number); });
+
+    d3.queue()
+        .defer(d3.csv, "g-number.csv")
+        .await(ready);
+
+    function ready(error, gData){
+        if (error) throw error;
+
+        console.log(gData)
+
+        // gData.forEach(function(d){
+        //     d.year = d.Year;
+        //     d.number = +d.Number;
+        // });
+
+        // console.log(gData.length);
+
+        x.domain([1969,2017]);
+        y.domain([0,20]);
+
+        gsvg.append("path")
+            .data([gData])
+            // .enter().append("path")
+            .attr("class","gline")
+            .attr("d", line);
+
+        //For tooltips
+        var focus = gsvg.append("g")
+                    .attr("class", "focus")
+                    .style("display","none");
+
+        focus.append("line")
+            .attr("class","x-hover-line hover-line")
+            .attr("y1", "0")
+            .attr("y2", height);
+
+        focus.append("line")
+            .attr("class", "y-hover-line hover-line")
+            .attr("x1", width)
+            .attr("x2", width);
+
+        focus.append("circle")
+            .attr("r", 7.5);
+
+        focus.append("text")
+            .attr("class", "focusText")
+            .attr("x",15)
+            .attr("dy", ".15em");
+
+        gsvg.append("rect")
+            // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function(){focus.style("display", null); })
+            .on("mouseout", function(){focus.style("display", "none"); })
+            .on("mousemove", mousemove);
+
+        var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+        // console.log(gData[1].Year)
+
+        function mousemove() {
+          var x0 = x.invert(d3.mouse(this)[0]),
+              i = bisectDate(gData, x0, 1),
+              d0 = gData[i - 1],
+              d1 = gData[i],
+              d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+          focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Number) + ")");
+          focus.select("text").html(function() { return d.Number + " Very Best Restaurants in " + d.Year; });
+          focus.select(".x-hover-line").attr("y2", height - y(d.Number));
+          focus.select(".y-hover-line").attr("x2", width + width);
+        };
+
+        gsvg.append("g")
+            .attr("class","xaxis")
+            .attr("transform", "translate(0," + height + ")" )
+            .call(d3.axisBottom(x)
+                .ticks(20)
+                .tickFormat(d3.format(""))
+                .tickSize([0]));
+
+        gsvg.append("g")
+            .attr("class","yaxis")
+            .call(d3.axisLeft(y)
+                    .tickSize(-width))
+            .append("text")
+            .attr("x",2)
+            .attr("y", y(y.ticks().pop())+0.5)
+            .attr("dy", "-1em")
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor","start")
+            .text("Restaurants");
+    };
+    </script>
+
+    </div>
+    <h2>2. 14th Street</h2>
+    <p><span style="font-weight: 400;">When Washingtonian first started publishing lists of restaurants, 14th St., Northwest, was still reeling from the 1968 riots that torched the city. Decades later, as DC surged with new residents and real-estate investments, the stretch of 14th Street between Thomas Circle and U Street became perhaps the trendiest part of the city. The relatively low rents and ease of obtaining a liquor license attracted new bars and restaurants. New condo and apartment construction brought in thousands of new residents, make it all the more popular for restaurants.</span></p>
+
+    <p><span style="font-weight: 400;">Before 2000, the Very Best Restaurants ranking didn't include any 14th Street restaurants. But the neighborhood started popping in 2009, when Cork cracked the list, and hit its peak in 2015, with 13 restaurants making the cut, including <a href="http://birchandbarley.com">Birch &amp; Barley</a>, <a href="http://estadio-dc.com">Estadio</a>, <a href="http://ettodc.com">Etto</a>, <a href="http://www.ghibellina.com">Ghibellina</a>, <a href="http://www.pearldivedc.com">Pearl Dive Oyster Palace</a>, <a href="http://doimoidc.com">Doi Moi</a>, and <a href="http://www.barpilar.com">Bar Pilar</a>.</span></p>
+    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+
+    <div class="VBR-map-box-all">
+
+    <div class="VBR-map-box" onmouseover = "onHover1470()" onmouseout = "offHoverG()">
+
+    <img id="VBR-map-box-s1" style="height: 200px; width: 50px;" src="regional-map/14th/14th-70.png" />
+    <p class="VBR-map-text">1970</p>
+
+    </div>
+
+    <div class="VBR-map-box" onmouseover = "onHover1480()" onmouseout = "offHover14()">
+
+    <img id="VBR-map-box-s2" style="height: 200px; width: 50px;" src="regional-map/14th/14th-80.png" />
+    <p class="VBR-map-text">1980</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHover1490()" onmouseout = "offHover14()">
+
+    <img id="VBR-map-box-s3" style="height: 200px; width: 50px;" src="regional-map/14th/14th-90.png" />
+    <p class="VBR-map-text">1990</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHover1400()" onmouseout = "offHover14()">
+
+    <img id="VBR-map-box-s4" style="height: 200px; width: 50px;" src="regional-map/14th/14th-00.png" />
+    <p class="VBR-map-text">2000</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHover1410()" onmouseout = "offHover14()">
+
+    <img id="VBR-map-box-s5" style="height: 200px; width: 50px;" src="regional-map/14th/14th-10.png" />
+    <p class="VBR-map-text">2010</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHover1417()" onmouseout = "offHover14()">
+
+    <img id="VBR-map-box-s6" style="height: 200px; width: 50px;" src="regional-map/14th/14th-17.png" />
+    <p class="VBR-map-text">2017</p>
+
+    </div>
+
+    <!-- 14th Line chart -->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h3>Very Best Restaurants on 14th Street</h3>
+    <svg id="s-line" width ="700" height = "300" style="display: block; margin: 0 auto"></svg>
+
+    <script>
+    var margin = {top: 20, left: 20, right: 20, bottom: 20},
+        width = 700 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
+
+    var ssvg = d3.select("#s-line")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleLinear().range([0, width]),
+        y = d3.scaleLinear().range([height, 0]);
+
+
+    var line = d3.line().x(function(d){return x(d.Year); })
+                        .y(function(d){return y(d.Number); });
+
+    d3.queue()
+        .defer(d3.csv, "14Data.csv")
+        .await(ready);
+
+    function ready(error, sData){
+        if (error) throw error;
+
+        // console.log(gData)
+
+        // gData.forEach(function(d){
+        //     d.year = d.Year;
+        //     d.number = +d.Number;
+        // });
+
+        // console.log(gData.length);
+
+        x.domain([1969,2017]);
+        y.domain([0,20]);
+
+        ssvg.append("path")
+            .data([sData])
+            // .enter().append("path")
+            .attr("class","sline")
+            .attr("d", line);
+
+        //For tooltips
+        var focus = ssvg.append("g")
+                    .attr("class", "focus")
+                    .style("display","none");
+
+        focus.append("line")
+            .attr("class","x-hover-line hover-line")
+            .attr("y1", "0")
+            .attr("y2", height);
+
+        focus.append("line")
+            .attr("class", "y-hover-line hover-line")
+            .attr("x1", width)
+            .attr("x2", width);
+
+        focus.append("circle")
+            .attr("r", 7.5);
+
+        focus.append("text")
+            .attr("class", "focusText")
+            .attr("x",15)
+            .attr("dy", ".15em");
+
+        ssvg.append("rect")
+            // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function(){focus.style("display", null); })
+            .on("mouseout", function(){focus.style("display", "none"); })
+            .on("mousemove", mousemove);
+
+        var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+        // console.log(gData[1].Year)
+
+        function mousemove() {
+          var x0 = x.invert(d3.mouse(this)[0]),
+              i = bisectDate(sData, x0, 1),
+              d0 = sData[i - 1],
+              d1 = sData[i],
+              d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+          focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Number) + ")");
+          focus.select("text").html(function() { return d.Number + " Very Best Restaurants in " + d.Year; });
+          focus.select(".x-hover-line").attr("y2", height - y(d.Number));
+          focus.select(".y-hover-line").attr("x2", width + width);
+        };
+
+        ssvg.append("g")
+            .attr("class","xaxis")
+            .attr("transform", "translate(0," + height + ")" )
+            .call(d3.axisBottom(x)
+                .ticks(20)
+                .tickFormat(d3.format(""))
+                .tickSize([0]));
+
+        ssvg.append("g")
+            .attr("class","yaxis")
+            .call(d3.axisLeft(y)
+                    .tickSize(-width))
+            .append("text")
+            .attr("x",2)
+            .attr("y", y(y.ticks().pop())+0.5)
+            .attr("dy", "-1em")
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor","start")
+            .text("Restaurants");
+    };
+
+
+    </script>
+
+    <!-- End of 14th st line chart -->
+    </div>
+    <h2><strong>3. Chinatown and Penn Quarter</strong></h2>
+    <p><span style="font-weight: 400;">The expansion of the dining industry into Chinatown and Penn Quarter came alongside a series of developments over the past 40 years, including the launch of the Metro in the '70s, the construction of the original Washington convention center in the '80s, and the arrival of the Verizon Center in the '90s. </span></p>
+
+    <p>Following these shifts, many traditional, family-owned Chinese restaurants were priced out of the neighborhood. Replacing them were a host of new restaurants serving various cuisines, from Greek food to Japanese ramen. When Washingtonian first awarded restaurants in 1969 (it was called "The Top One Percent" back then), only two restaurants from Chinatown and Penn Quarter made the ranking: Peking Downtown and Don Pedro's Mexican Cantina, both of which have long since closed. The newest list contains 17 mostly upscale restaurants from the neighborhood, including <a href="http://www.rasikarestaurant.com">Rasika</a>, <a href="http://www.zaytinya.com">Zaytinya</a>, <a href="http://www.centralmichelrichard.com">Central Michel Richard</a>, <a href="http://www.dbgb.com/dc">DBGB</a> and <a href="http://www.bibianadc.com">Bibiana</a>. There's not a single Chinese restaurant among them.</p>
+
+    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+
+    <div class="VBR-map-box-all">
+    <div class="VBR-map-box" onmouseover = "onHoverC70()" onmouseout = "offHoverC()">
+
+    <img id="VBR-map-box-c1" style="width: 190px" src="regional-map/chinatown/chinatown-70.png" />
+    <p class="VBR-map-text">1970</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverC80()" onmouseout = "offHoverC()">
+
+    <img id="VBR-map-box-c2" style="width: 190px" src="regional-map/chinatown/chinatown-80.png" />
+    <p class="VBR-map-text">1980</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverC90()" onmouseout = "offHoverC()">
+
+    <img id="VBR-map-box-c3" style="width: 190px" src="regional-map/chinatown/chinatown-90.png" />
+    <p class="VBR-map-text">1990</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverC00()" onmouseout = "offHoverC()">
+
+    <img id="VBR-map-box-c4" style="width: 190px" src="regional-map/chinatown/chinatown-00.png" />
+    <p class="VBR-map-text">2000</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverC10()" onmouseout = "offHoverC()">
+
+    <img id="VBR-map-box-c5" style="width: 190px" src="regional-map/chinatown/chinatown-10.png" />
+    <p class="VBR-map-text">2010</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverC17()" onmouseout = "offHoverC()">
+
+    <img id="VBR-map-box-c6" style="width: 190px" src="regional-map/chinatown/chinatown-17.png" />
+    <p class="VBR-map-text">2017</p>
+
+    </div>
+
+  <!-- Chinatown Line chart -->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  <h3>Very Best Restaurants in Chinatown and Penn Quarter</h3>
+  <svg id="csvg" width ="700" height = "300"></svg>
+  <script>
+  var margin = {top: 20, left: 20, right: 20, bottom: 20},
+      width = 700 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
+
+  var csvg = d3.select("#csvg")
+              .append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var x = d3.scaleLinear().range([0, width]),
+      y = d3.scaleLinear().range([height, 0]);
+
+  var line = d3.line().x(function(d){return x(d.Year); })
+                      .y(function(d){return y(d.Number);});
+
+  d3.queue()
+    .defer(d3.csv, "cData.csv")
+    .await(ready);
+
+  function ready(error, cData){
+    if (error) throw error;
+
+    x.domain([1969,2017]);
+    y.domain([0,20]);
+
+    csvg.append("path")
+      .data([cData])
+      .attr("class","cLine")
+      .attr("d", line);
+
+    //For tooltips
+    var focus = csvg.append("g")
+                .attr("class", "focus")
+                .style("display","none");
+
+    focus.append("line")
+        .attr("class","x-hover-line hover-line")
+        .attr("y1", "0")
+        .attr("y2", height);
+
+    focus.append("circle")
+        .attr("r", 7.5);
+
+    focus.append("text")
+        .attr("class", "focusText")
+        .attr("x",15)
+        .attr("dy", ".15em");
+
+    csvg.append("rect")
+        // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .attr("class", "overlay")
+        .attr("width", width)
+        .attr("height", height)
+        .on("mouseover", function(){focus.style("display", null); })
+        .on("mouseout", function(){focus.style("display", "none"); })
+        .on("mousemove", mousemove);
+
+    var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+    // console.log(gData[1].Year)
+
+    function mousemove() {
+      var x0 = x.invert(d3.mouse(this)[0]),
+          i = bisectDate(cData, x0, 1),
+          d0 = cData[i - 1],
+          d1 = cData[i],
+          d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+      focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Number) + ")");
+      focus.select("text").html(function() { return d.Number + " Very Best Restaurants in " + d.Year; });
+      focus.select(".x-hover-line").attr("y2", height - y(d.Number));
+      focus.select(".y-hover-line").attr("x2", width + width);
+    };
+
+    csvg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "xAxis")
+        .call(d3.axisBottom(x)
+                .ticks(20)
+                .tickFormat(d3.format(""))
+                .tickSize([0]));
+
+    csvg.append("g")
+        .attr("class", "yAxis")
+        .call(d3.axisLeft(y)
+              .tickSize(-width))
+        .append("text")
+            .attr("x",2)
+            .attr("y", y(y.ticks().pop())+0.5)
+            .attr("dy", "-1em")
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor","start")
+            .text("Restaurants");
+
+  };
+
+
+  </script>
+  </div>
+
+
+    <h2>4. Dupont Circle</h2>
+    <p><span style="font-weight: 400;">Dupont Circle is one of the few neighborhoods in Northwest DC that has consistently been home to a number of our best restaurants. Although it peaked in2008, Dupont Circle still remains a popular dining destination with list mainstays like <a href="http://www.obeliskdc.com">Obelisk</a> and <a href="http://irongaterestaurantdc.com">Iron Gate</a>. </span></p>
+    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+
+    <div class="VBR-map-box-all">
+    <div class="VBR-map-box" onmouseover = "onHoverD70()" onmouseout = "offHoverD()">
+
+    <img id="VBR-map-box-d1" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-70.png" />
+    <p class="VBR-map-text">1970</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverD80()" onmouseout = "offHoverD()">
+
+    <img id="VBR-map-box-d2" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-80.png" />
+    <p class="VBR-map-text">1980</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverD90()" onmouseout = "offHoverD()">
+
+    <img id="VBR-map-box-d3" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-90.png" />
+    <p class="VBR-map-text">1990</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverD00()" onmouseout = "offHoverD()">
+
+    <img id="VBR-map-box-d4" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-00.png" />
+    <p class="VBR-map-text">2000</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverD10()" onmouseout = "offHoverD()">
+
+    <img id="VBR-map-box-d5" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-10.png" />
+    <p class="VBR-map-text">2010</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverD17()" onmouseout = "offHoverD()">
+
+    <img id="VBR-map-box-d6" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-17.png" />
+    <p class="VBR-map-text">2017</p>
+
+    </div>
+    
+     <!-- Dupont Circle Line chart -->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h3>Very Best Restaurants in Dupont Circle</h3>
+  <svg id="dsvg" width ="700" height = "300"></svg>
+  <script>
+  var margin = {top: 20, left: 20, right: 20, bottom: 20},
+      width = 700 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
+
+  var dsvg = d3.select("#dsvg")
+              .append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var x = d3.scaleLinear().range([0, width]),
+      y = d3.scaleLinear().range([height, 0]);
+
+  var line = d3.line().x(function(d){return x(d.Year); })
+                      .y(function(d){return y(d.Number);});
+
+  d3.queue()
+    .defer(d3.csv, "dNumber.csv")
+    .await(ready);
+
+  function ready(error, dData){
+    if (error) throw error;
+
+    x.domain([1969,2017]);
+    y.domain([0,20]);
+
+    dsvg.append("path")
+      .data([dData])
+      .attr("class","dLine")
+      .attr("d", line);
+
+    //For tooltips
+    var focus = dsvg.append("g")
+                .attr("class", "focus")
+                .style("display","none");
+
+    focus.append("line")
+        .attr("class","x-hover-line hover-line")
+        .attr("y1", "0")
+        .attr("y2", height);
+
+    focus.append("circle")
+        .attr("r", 7.5);
+
+    focus.append("text")
+        .attr("class", "focusText")
+        .attr("x",15)
+        .attr("dy", ".15em");
+
+    dsvg.append("rect")
+        // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .attr("class", "overlay")
+        .attr("width", width)
+        .attr("height", height)
+        .on("mouseover", function(){focus.style("display", null); })
+        .on("mouseout", function(){focus.style("display", "none"); })
+        .on("mousemove", mousemove);
+
+    var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+    // console.log(gData[1].Year)
+
+    function mousemove() {
+      var x0 = x.invert(d3.mouse(this)[0]),
+          i = bisectDate(dData, x0, 1),
+          d0 = dData[i - 1],
+          d1 = dData[i],
+          d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+      focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Number) + ")");
+      focus.select("text").html(function() { return d.Number + " Very Best Restaurants in " + d.Year; });
+      focus.select(".x-hover-line").attr("y2", height - y(d.Number));
+      focus.select(".y-hover-line").attr("x2", width + width);
+    };
+
+    dsvg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "xAxis")
+        .call(d3.axisBottom(x)
+                .ticks(20)
+                .tickFormat(d3.format(""))
+                .tickSize([0]));
+
+    dsvg.append("g")
+        .attr("class", "yAxis")
+        .call(d3.axisLeft(y)
+              .tickSize(-width))
+        .append("text")
+            .attr("x",2)
+            .attr("y", y(y.ticks().pop())+0.5)
+            .attr("dy", "-1em")
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor","start")
+            .text("Restaurants");
+
+  };
+
+
+  </script>
+
+    </div>
+
+
+    <p style="margin-top: 20px"><strong>Looking at nearly five decades of the Very Best Restaurants, and you can also see generational shifts toward the Virginia and Maryland suburbs and later back toward the District. Few suburban restaurants made the cut in the first 20 years</strong>. But things changed dramatically over the next decade. As the District fell to its economic and political nadir, in the 1990s, the balance of power on the Very Best Restaurants moved overwhelmingly in the suburbs' favor. Virginia and Maryland accounted for more than 80 of the restaurants listed in 1995. Nizam's, <a href="https://www.unclejulios.com/locations/arlington/">Rio Grande Cafe</a>, <a href="https://www.lacotedorarlington.com">La Cote D'Or Cafe</a>, Morton's of Chicago, Mezze 9, <a href="http://www.goodfortunearlington.com">Good Fortune</a>, Wurzburg-Haus, <a href="http://www.bombaybistro.com">Bombay Bistro</a>, <a href="http://www.sevenseasrestaurant.com">Seven Seas</a>, <a href="http://www.crisfieldseafood.com">Crisfield</a> at Lee Plaza, and other restaurants are all frequent winners during that time.</p>
+
+    <p>But as the District got its finances in order and rebounded in the early 2000s, restaurants started to move back in. Virginia and Maryland both experienced a huge drop in Very Best Restaurant representation around 2005, although Arlington and Bethesda both retain decent representation on contemporary lists. Both have three entries in the 2017: <a href="http://www.ser-restaurant.com">Ser</a>, <a href="http://kapnosdc.com">Kapnos</a>, and <a href="http://greenpigbistro.com">Green Pig Bistro</a> in Arlington; and <a href="http://www.passagetoindia.info">Passage to India</a>, <a href="http://kapnosdc.com">Kapnos</a>, and <a href="http://www.jaleo.com/location/washington-dc/">Jaleo</a> in Bethesda.</p>
+    <h2>Virginia</h2>
+    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+    <div class="VBR-map-box-all">
+
+  <!-- <div class="VBR-map-box-all-p1" style="float: left;">   -->
+    <div class="VBR-map-box" onmouseover = "onHoverV70()" onmouseout = "offHoverV()">
+
+    <img id="VBR-map-box-v1" style="height: 130px" src="regional-map/virginia/v-70.png" />
+    <p class="VBR-map-text">1970</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverV80()" onmouseout = "offHoverV()">
+
+    <img id="VBR-map-box-v2" style="height: 130px" src="regional-map/virginia/v-80.png" />
+    <p class="VBR-map-text">1980</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverV90()" onmouseout = "offHoverV()">
+
+    <img id="VBR-map-box-v3" style="height: 130px" src="regional-map/virginia/v-90.png" />
+    <p class="VBR-map-text">1990</p>
+
+    </div>
+  <!-- </div> -->
+
+  <!-- <div class="VBR-map-box-all-p1" style="float: left;">  -->
+    <div class="VBR-map-box" onmouseover = "onHoverV00()" onmouseout = "offHoverV()">
+
+    <img id="VBR-map-box-v4" style="height: 130px" src="regional-map/virginia/v-00.png" />
+    <p class="VBR-map-text">2000</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverV10()" onmouseout = "offHoverV()">
+
+    <img id="VBR-map-box-v5" style="height: 130px" src="regional-map/virginia/v-10.png" />
+    <p class="VBR-map-text">2010</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverV17()" onmouseout = "offHoverV()">
+
+    <img id="VBR-map-box-v6" style="height: 130px" src="regional-map/virginia/v-17.png" />
+    <p class="VBR-map-text">2017</p>
+
+    </div>
+  <!-- </div> -->
+
+    <p style="text-align: center;"><img id="VBR-map-vNumber" class="aligncenter" style="margin: 0 auto; width: 500px" src="regional-number/virginia/v-original.png" /></p>
+
+    </div>
+    <h2>Maryland</h2>
+    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+    <div class="VBR-map-box-all">
+
+<!--   <div class="VBR-map-box-all-p1" style="float: left;"> -->
+    <div class="VBR-map-box" onmouseover = "onHoverM70()" onmouseout = "offHoverM()">
+
+    <img id="VBR-map-box-m1" style="height: 130px; width: 15;" src="regional-map/maryland/m-70.png" />
+    <p class="VBR-map-text">1970</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverM80()" onmouseout = "offHoverM()">
+
+    <img id="VBR-map-box-m2" style="height: 130px; width: 15;" src="regional-map/maryland/m-80.png" />
+    <p class="VBR-map-text">1980</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverM90()" onmouseout = "offHoverM()">
+
+    <img id="VBR-map-box-m3" style="height: 130px; width: 15;" src="regional-map/maryland/m-90.png" />
+    <p class="VBR-map-text">1990</p>
+
+    </div>
+<!--   </div> -->
+
+  <!-- <div class="VBR-map-box-all-p1" style="float: left;"> -->
+    <div class="VBR-map-box" onmouseover = "onHoverM00()" onmouseout = "offHoverM()">
+
+    <img id="VBR-map-box-m4" style="height: 130px; width: 15;" src="regional-map/maryland/m-00.png" />
+    <p class="VBR-map-text">2000</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverM10()" onmouseout = "offHoverM()">
+
+    <img id="VBR-map-box-m5" style="height: 130px; width: 15;" src="regional-map/maryland/m-10.png" />
+    <p class="VBR-map-text">2010</p>
+
+    </div>
+    <div class="VBR-map-box" onmouseover = "onHoverM17()" onmouseout = "offHoverM()">
+
+    <img id="VBR-map-box-m6" style="height: 130px; width: 15;" src="regional-map/maryland/m-17.png" />
+    <p class="VBR-map-text">2017</p>
+
+    </div>
+  <!-- </div> -->
+
+    <p style="text-align: center;"><img id="VBR-map-mNumber" style="margin: 0 auto; width: 500px" src="regional-number/maryland/m-original.png" /></p>
+
+    </div>
+<!-- End of text section -->
+</div>
+
+<script type="text/javascript">
+
+// Hover over effect
+
+// g-town
+function onHoverG70() {
+  $("#VBR-map-gNumber").attr("src", "regional-number/gtown/gtown-70.png");
+}
+
+function offHoverG() {
+  $('#VBR-map-gNumber').attr("src", "regional-number/gtown/gtown-original.png");
+}
+
+function onHoverG80() {
+  $("#VBR-map-gNumber").attr("src", "regional-number/gtown/gtown-80.png");
+}
+
+function onHoverG90() {
+  $("#VBR-map-gNumber").attr("src", "regional-number/gtown/gtown-90.png");
+}
+
+function onHoverG00() {
+  $("#VBR-map-gNumber").attr("src", "regional-number/gtown/gtown-00.png");
+}
+
+function onHoverG10() {
+  $("#VBR-map-gNumber").attr("src", "regional-number/gtown/gtown-10.png");
+}
+
+function onHoverG17() {
+  $("#VBR-map-gNumber").attr("src", "regional-number/gtown/gtown-17.png");
+}
+
+// 14th ST
+
+function onHover1470() {
+  $("#VBR-map-sNumber").attr("src", "regional-number/14th/14th-70.png");
+}
+
+function offHover14() {
+  $('#VBR-map-sNumber').attr("src", "regional-number/14th/14th-original.png");
+}
+
+function onHover1480() {
+  $("#VBR-map-sNumber").attr("src", "regional-number/14th/14th-80.png");
+}
+
+function onHover1490() {
+  $("#VBR-map-sNumber").attr("src", "regional-number/14th/14th-90.png");
+}
+
+function onHover1400() {
+  $("#VBR-map-sNumber").attr("src", "regional-number/14th/14th-00.png");
+}
+
+function onHover1410() {
+  $("#VBR-map-sNumber").attr("src", "regional-number/14th/14th-10.png");
+}
+
+function onHover1417() {
+  $("#VBR-map-sNumber").attr("src", "regional-number/14th/14th-17.png");
+}
+
+// Chinatown
+
+function onHoverC70() {
+  $("#VBR-map-cNumber").attr("src", "regional-number/chinatown/chinatown-70.png");
+}
+
+function offHoverC() {
+  $('#VBR-map-cNumber').attr("src", "regional-number/chinatown/chinatown-original.png");
+}
+
+function onHoverC80() {
+  $("#VBR-map-cNumber").attr("src", "regional-number/chinatown/chinatown-80.png");
+}
+
+function onHoverC90() {
+  $("#VBR-map-cNumber").attr("src", "regional-number/chinatown/chinatown-90.png");
+}
+
+function onHoverC00() {
+  $("#VBR-map-cNumber").attr("src", "regional-number/chinatown/chinatown-00.png");
+}
+
+function onHoverC10() {
+  $("#VBR-map-cNumber").attr("src", "regional-number/chinatown/chinatown-10.png");
+}
+
+function onHoverC17() {
+  $("#VBR-map-cNumber").attr("src", "regional-number/chinatown/chinatown-17.png");
+}
+
+// Dupont Circle
+
+function onHoverD70() {
+  $("#VBR-map-dNumber").attr("src", "regional-number/dupont/dupont-70.png");
+}
+
+function offHoverD() {
+  $('#VBR-map-dNumber').attr("src", "regional-number/dupont/dupont-original.png");
+}
+
+function onHoverD80() {
+  $("#VBR-map-dNumber").attr("src", "regional-number/dupont/dupont-80.png");
+}
+
+function onHoverD90() {
+  $("#VBR-map-dNumber").attr("src", "regional-number/dupont/dupont-90.png");
+}
+
+function onHoverD00() {
+  $("#VBR-map-dNumber").attr("src", "regional-number/dupont/dupont-00.png");
+}
+
+function onHoverD10() {
+  $("#VBR-map-dNumber").attr("src", "regional-number/dupont/dupont-10.png");
+}
+
+function onHoverD17() {
+  $("#VBR-map-dNumber").attr("src", "regional-number/dupont/dupont-17.png");
+}
+
+// Virginia
+
+function onHoverV70() {
+  $("#VBR-map-vNumber").attr("src", "regional-number/virginia/v-70.png");
+}
+
+function offHoverV() {
+  $('#VBR-map-vNumber').attr("src", "regional-number/virginia/v-original.png");
+}
+
+function onHoverV80() {
+  $("#VBR-map-vNumber").attr("src", "regional-number/virginia/v-80.png");
+}
+
+function onHoverV90() {
+  $("#VBR-map-vNumber").attr("src", "regional-number/virginia/v-90.png");
+}
+
+function onHoverV00() {
+  $("#VBR-map-vNumber").attr("src", "regional-number/virginia/v-00.png");
+}
+
+function onHoverV10() {
+  $("#VBR-map-vNumber").attr("src", "regional-number/virginia/v-10.png");
+}
+
+function onHoverV17() {
+  $("#VBR-map-vNumber").attr("src", "regional-number/virginia/v-17.png");
+}
+
+// Maryland
+
+function onHoverM70() {
+  $("#VBR-map-mNumber").attr("src", "regional-number/maryland/m-70.png");
+}
+
+function offHoverM() {
+  $('#VBR-map-mNumber').attr("src", "regional-number/maryland/m-original.png");
+}
+
+function onHoverM80() {
+  $("#VBR-map-mNumber").attr("src", "regional-number/maryland/m-80.png");
+}
+
+function onHoverM90() {
+  $("#VBR-map-mNumber").attr("src", "regional-number/maryland/m-90.png");
+}
+
+function onHoverM00() {
+  $("#VBR-map-mNumber").attr("src", "regional-number/maryland/m-00.png");
+}
+
+function onHoverM10() {
+  $("#VBR-map-mNumber").attr("src", "regional-number/maryland/m-10.png");
+}
+
+function onHoverM17() {
+  $("#VBR-map-mNumber").attr("src", "regional-number/maryland/m-17.png");
+}
+
+</script>
+</body>
+
+</html> 
