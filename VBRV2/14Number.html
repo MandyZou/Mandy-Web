@@ -7,7 +7,7 @@
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
     <style>
-    .gline {
+    .sline {
         fill: none;
         stroke: #FFA800;
         stroke-width: 3px;
@@ -61,7 +61,7 @@
 </head>
 
 <body>
-    <h1 style="padding-left: 1%">Very Best Restaurants in Georgetown</h1>
+    <h1 style="padding-left: 1%">Very Best Restaurants on 14th Street</h1>
     <svg id="g-line" width ="950" height = "500"></svg>
 
     <script>
@@ -69,7 +69,7 @@
         width = 950 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    var gsvg = d3.select("#g-line")
+    var ssvg = d3.select("#g-line")
                   .append("svg")
                   .attr("width", width + margin.left + margin.right)
                   .attr("height", height + margin.top + margin.bottom)
@@ -84,13 +84,13 @@
                         .y(function(d){return y(d.Number); });
 
     d3.queue()
-        .defer(d3.csv, "g-number.csv")
+        .defer(d3.csv, "14Data.csv")
         .await(ready);
 
-    function ready(error, gData){
+    function ready(error, sData){
         if (error) throw error;
 
-        console.log(gData)
+        // console.log(gData)
 
         // gData.forEach(function(d){
         //     d.year = d.Year;
@@ -102,14 +102,14 @@
         x.domain([1969,2017]);
         y.domain([0,20]);
 
-        gsvg.append("path")
-            .data([gData])
+        ssvg.append("path")
+            .data([sData])
             // .enter().append("path")
-            .attr("class","gline")
+            .attr("class","sline")
             .attr("d", line);
 
         //For tooltips
-        var focus = gsvg.append("g")
+        var focus = ssvg.append("g")
                     .attr("class", "focus")
                     .style("display","none");
 
@@ -131,7 +131,7 @@
             .attr("x",15)
             .attr("dy", ".15em");
 
-        gsvg.append("rect")
+        ssvg.append("rect")
             // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
             .attr("class", "overlay")
             .attr("width", width)
@@ -146,9 +146,9 @@
 
         function mousemove() {
           var x0 = x.invert(d3.mouse(this)[0]),
-              i = bisectDate(gData, x0, 1),
-              d0 = gData[i - 1],
-              d1 = gData[i],
+              i = bisectDate(sData, x0, 1),
+              d0 = sData[i - 1],
+              d1 = sData[i],
               d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
           focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Number) + ")");
           focus.select("text").html(function() { return d.Number + " Very Best Restaurants in " + d.Year; });
@@ -156,7 +156,7 @@
           focus.select(".y-hover-line").attr("x2", width + width);
         };
 
-        gsvg.append("g")
+        ssvg.append("g")
             .attr("class","xaxis")
             .attr("transform", "translate(0," + height + ")" )
             .call(d3.axisBottom(x)
@@ -164,7 +164,7 @@
                 .tickFormat(d3.format(""))
                 .tickSize([0]));
 
-        gsvg.append("g")
+        ssvg.append("g")
             .attr("class","yaxis")
             .call(d3.axisLeft(y)
                     .tickSize(-width))
