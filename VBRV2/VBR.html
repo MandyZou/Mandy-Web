@@ -5,15 +5,15 @@
     <title>Very Best Restaurant From 1969-2016</title>
     <link href="https://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 
-     <script type="text/javascript"
-     src="https://maps.google.com/maps/api/js?sensor=false"></script>
-      <script
-     src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-      <script src="http://piotrkrosniak.github.io/simple-slider.js"></script>
-      <link href="http://piotrkrosniak.github.io/simple-slider.css" rel="stylesheet"
-     type="text/css" />
-      <link href="http://piotrkrosniak.github.io/simple-slider-volume.css" rel="stylesheet"
-     type="text/css" />
+	 <script type="text/javascript"
+	 src="https://maps.google.com/maps/api/js?sensor=false"></script>
+	  <script
+	 src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	  <script src="http://piotrkrosniak.github.io/simple-slider.js"></script>
+	  <link href="http://piotrkrosniak.github.io/simple-slider.css" rel="stylesheet"
+	 type="text/css" />
+	  <link href="http://piotrkrosniak.github.io/simple-slider-volume.css" rel="stylesheet"
+	 type="text/css" />
 
     <!-- import Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
@@ -29,144 +29,12 @@
 
     <!-- For d3 -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="jquery-3.2.1.min.js"></script>
 
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
-    <style>
-    .VBR-map-box {
-    float:left;
-    margin:10px;
-    }
-
-    .VBR-map-text {
-        text-align: center;
-    }
-
-        .VBR-map-box-all {
-          margin: 0 auto;
-        }
-
-        #VBR-map-slider {
-        margin: 0 auto;
-        }
-
-    body {
-      font-family: 'Slabo 27px', serif;
-    }
-
-    .text-section {
-      position: relative;
-      padding: 0 32px;
-      margin: 0 auto;
-      max-width: 714px;
-    }
-
-    h1 {
-      font-size: 50px;
-    }
-
-    h2 {
-      font-size: 40px;
-      font-weight: bold;
-    }
-
-    p {
-      font-size: 17px;
-      line-height: 30px;
-      margin-bottom: 25px;
-    }
-
-    a {
-      color: #FFC500;
-    }
-
-    /* For 14th ST line chart */
-
-    .sline {
-        fill: none;
-        stroke: #FFA800;
-        stroke-width: 3px;
-    }
-
-    .yaxis .domain {
-        display: none;
-      }
-
-    .yaxis line{
-        stroke: lightgrey;
-        stroke-opacity: 0.7;
-        shape-rendering: crispEdges;
-    }
-
-    .yaxis text {
-        margin-left: 20px;
-    }
-
-    .xaxis line{
-        display: none;
-    }
-
-    .focus circle {
-      fill: #F1F3F3;
-      stroke: #FFA800;
-      stroke-width: 5px;
-    }
-      
-    .hover-line {
-      stroke: #FFA800;
-      stroke-width: 2px;
-      stroke-dasharray: 3,3;
-    }
-
-    .overlay {
-      fill: none;
-      pointer-events: all;
-    }
-
-    /* Chinatown */
-
-    .cLine {
-        fill: none;
-        stroke: #FFA800;
-        stroke-width: 3px;
-    }
-
-    .yAxis .domain {
-        display: none;
-      }
-
-    .yAxis line{
-        stroke: lightgrey;
-        stroke-opacity: 0.7;
-        shape-rendering: crispEdges;
-    }
-
-    .yAxis text {
-        margin-left: 20px;
-    }
-
-    .xAxis line{
-        display: none;
-    }
-
-    /* Dupont Circle */
-    .dLine {
-        fill: none;
-        stroke: #FFA800;
-        stroke-width: 3px;
-    }
-    /* Georgetown */
-    .gline {
-        fill: none;
-        stroke: #FFA800;
-        stroke-width: 3px;
-    }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="vbr.css">
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDERTFB4hi1rXJuieLm35LRxn46_NPEWno&callback=initMap">
     </script>
+
 
     <script type="text/javascript">
 
@@ -1168,7 +1036,7 @@
 <body onload="initialize()">
 
 
-  <div id="map_canvas" style="width: 100%; height: 400px"></div>
+	<div id="map_canvas" style="width: 100%; height: 400px"></div>
   <p style="font-size: 12px; text-align: center; margin-top: 10px; margin-bottom: 0px"><em>Drag the green button to see every restaurant that's been named to our annual list since 1969.</em></p>
 
   <div style="margin: 0 auto 25px; display: table; text-align: center;" id="slider" class="container">
@@ -1193,61 +1061,62 @@
     </script>
 
   <div class="text-section">
-    <h1 style="text-align: center; padding-top: 20px; padding-bottom: 20px;"><strong>This Map Shows How DC Very Best Restaurants Have Changed Over 49 Years</strong></h1>
+	<h1 style="text-align: center; padding-top: 20px; padding-bottom: 20px;"><strong>This Map Shows How DC Very Best Restaurants Have Changed Over 49 Years</strong></h1>
 
   <p style="text-align: center; font-size: 15px">Manyun Zou/<a href="https://www.washingtonian.com/2017/02/15/interactive-maps-found-best-restaurants-past-49-years/">Washingtonian</a></p>
 
-    <p>This month marks the 49th time <a href="https://www.washingtonian.com/2017/02/15/100-very-best-restaurants-2017/"><em>Washingtonian</em></a> has ranked the very best restaurants the DC area has to offer. Over those years, many things about our dining scene have changed: popular cuisines, big-name chefs, and where the best restaurants are located.</p>
+	<p>This month marks the 49th time <a href="https://www.washingtonian.com/2017/02/15/100-very-best-restaurants-2017/"><em>Washingtonian</em></a> has ranked the very best restaurants the DC area has to offer. Over those years, many things about our dining scene have changed: popular cuisines, big-name chefs, and where the best restaurants are located.</p>
 
-    <p>Scroll through the years of best-restaurant lists and you'll quickly notice the dramatic migration of the District's best restaurants from west to east. Rents, neighborhood planning, demographic changes, and many other factors played a role in this change. If you haven't been in DC very long, you might be surprised to learn your favorite neighborhood for eating out was a relative food desert just ten years ago.</P> 
+	<p>Scroll through the years of best-restaurant lists and you'll quickly notice the dramatic migration of the District's best restaurants from west to east. Rents, neighborhood planning, demographic changes, and many other factors played a role in this change. If you haven't been in DC very long, you might be surprised to learn your favorite neighborhood for eating out was a relative food desert just ten years ago.</P> 
 
-    <p>Here are four DC neighborhoods that exemplify the city's shifting food scene.</p>
+	<p>Here are four DC neighborhoods that exemplify the city's shifting food scene.</p>
 
-    <h2>1.Georgetown</h2>
-    <p><span style="font-weight: 400;">Georgetown's culinary heyday lasted well into the '90s, when it was still the center of DC's social scene. Many tasty French restaurants were located there, including La Riva Gauche, Bistro Francais, and La Chaumiere. However, as the rent in the neighborhood grew more and more expensive, and the liquor-license moratorium was implemented in 1989, restaurateurs started staking out fresher, less-developed neighborhoods. Now, instead of being a dining hotspot, it's more of a tourist attraction, with many restaurants geared more toward out-of-towners and college students, although there are still a few that are go-tos for special occasions.</span></p>
+	<h2>1.Georgetown</h2>
+	<p><span style="font-weight: 400;">Georgetown's culinary heyday lasted well into the '90s, when it was still the center of DC's social scene. Many tasty French restaurants were located there, including La Riva Gauche, Bistro Francais, and La Chaumiere. However, as the rent in the neighborhood grew more and more expensive, and the liquor-license moratorium was implemented in 1989, restaurateurs started staking out fresher, less-developed neighborhoods. Now, instead of being a dining hotspot, it's more of a tourist attraction, with many restaurants geared more toward out-of-towners and college students, although there are still a few that are go-tos for special occasions.</span></p>
 
-    <p>Three Georgetown restaurants make the list this year: <a href="https://www.fiolamaredc.com">Fiola Mare</a>, <a href="http://www.chezbillysud.com">Chez Billy Sud</a>, and <a href="http://1789restaurant.com">1789</a>, which reopened as a tasting-menu restaurant last year.</p>
+	<p>Three Georgetown restaurants make the list this year: <a href="https://www.fiolamaredc.com">Fiola Mare</a>, <a href="http://www.chezbillysud.com">Chez Billy Sud</a>, and <a href="http://1789restaurant.com">1789</a>, which reopened as a tasting-menu restaurant last year.</p>
 
   <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
 
-    <div class="VBR-map-box-all">
-    <div class="VBR-map-box" onmouseover = "onHoverG70()" onmouseout = "offHoverG()">
+	<div class="VBR-map-box-all">
+	<div class="VBR-map-box" onmouseover = "onHoverG70()" onmouseout = "offHoverG()">
 
-    <img id="VBR-map-box-g1" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-70.png" />
-    <p class="VBR-map-text">1970</p>
+	<img id="VBR-map-box-g1" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-70.png" />
+	<p class="VBR-map-text">1970</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverG80()" onmouseout = "offHoverG()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverG80()" onmouseout = "offHoverG()">
 
-    <img id="VBR-map-box-g2" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-80.png" />
-    <p class="VBR-map-text">1980</p>
+	<img id="VBR-map-box-g2" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-80.png" />
+	<p class="VBR-map-text">1980</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverG90()" onmouseout = "offHoverG()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverG90()" onmouseout = "offHoverG()">
 
-    <img id="VBR-map-box-g3" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-90.png" />
-    <p class="VBR-map-text">1990</p>
+	<img id="VBR-map-box-g3" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-90.png" />
+	<p class="VBR-map-text">1990</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverG00()" onmouseout = "offHoverG()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverG00()" onmouseout = "offHoverG()">
 
-    <img id="VBR-map-box-g4" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-00.png" />
-    <p class="VBR-map-text">2000</p>
+	<img id="VBR-map-box-g4" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-00.png" />
+	<p class="VBR-map-text">2000</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverG10()" onmouseout = "offHoverG()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverG10()" onmouseout = "offHoverG()">
 
-    <img id="VBR-map-box-g5" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-10.png" />
-    <p class="VBR-map-text">2010</p>
+	<img id="VBR-map-box-g5" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-10.png" />
+	<p class="VBR-map-text">2010</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverG17()" onmouseout = "offHoverG()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverG17()" onmouseout = "offHoverG()">
 
-    <img id="VBR-map-box-g6" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-17.png" />
-    <p class="VBR-map-text">2017</p>
+	<img id="VBR-map-box-g6" style="height: 130px; width: 15;" src="regional-map/gtown/gtown-17.png" />
+	<p class="VBR-map-text">2017</p>
 
-    </div>
-    <!-- Georgetown Line chart -->
+	</div>
+
+  <!-- Georgetown Line chart -->
     <br style="clear:both;"/>
     <h3 style="padding-left: 1%">Very Best Restaurants in Georgetown</h3>
     <svg id="g-line" width ="700" height = "300"></svg>
@@ -1366,55 +1235,55 @@
             .text("Restaurants");
     };
     </script>
-
-    </div>
-    <h2>2. 14th Street</h2>
-    <p><span style="font-weight: 400;">When Washingtonian first started publishing lists of restaurants, 14th St., Northwest, was still reeling from the 1968 riots that torched the city. Decades later, as DC surged with new residents and real-estate investments, the stretch of 14th Street between Thomas Circle and U Street became perhaps the trendiest part of the city. The relatively low rents and ease of obtaining a liquor license attracted new bars and restaurants. New condo and apartment construction brought in thousands of new residents, make it all the more popular for restaurants.</span></p>
-
-    <p><span style="font-weight: 400;">Before 2000, the Very Best Restaurants ranking didn't include any 14th Street restaurants. But the neighborhood started popping in 2009, when Cork cracked the list, and hit its peak in 2015, with 13 restaurants making the cut, including <a href="http://birchandbarley.com">Birch &amp; Barley</a>, <a href="http://estadio-dc.com">Estadio</a>, <a href="http://ettodc.com">Etto</a>, <a href="http://www.ghibellina.com">Ghibellina</a>, <a href="http://www.pearldivedc.com">Pearl Dive Oyster Palace</a>, <a href="http://doimoidc.com">Doi Moi</a>, and <a href="http://www.barpilar.com">Bar Pilar</a>.</span></p>
-    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
-
-    <div class="VBR-map-box-all">
-
-    <div class="VBR-map-box" onmouseover = "onHover1470()" onmouseout = "offHoverG()">
-
-    <img id="VBR-map-box-s1" style="height: 200px; width: 50px;" src="regional-map/14th/14th-70.png" />
-    <p class="VBR-map-text">1970</p>
-
     </div>
 
-    <div class="VBR-map-box" onmouseover = "onHover1480()" onmouseout = "offHover14()">
+	<h2>2. 14th Street</h2>
+	<p><span style="font-weight: 400;">When Washingtonian first started publishing lists of restaurants, 14th St., Northwest, was still reeling from the 1968 riots that torched the city. Decades later, as DC surged with new residents and real-estate investments, the stretch of 14th Street between Thomas Circle and U Street became perhaps the trendiest part of the city. The relatively low rents and ease of obtaining a liquor license attracted new bars and restaurants. New condo and apartment construction brought in thousands of new residents, make it all the more popular for restaurants.</span></p>
 
-    <img id="VBR-map-box-s2" style="height: 200px; width: 50px;" src="regional-map/14th/14th-80.png" />
-    <p class="VBR-map-text">1980</p>
+	<p><span style="font-weight: 400;">Before 2000, the Very Best Restaurants ranking didn't include any 14th Street restaurants. But the neighborhood started popping in 2009, when Cork cracked the list, and hit its peak in 2015, with 13 restaurants making the cut, including <a href="http://birchandbarley.com">Birch &amp; Barley</a>, <a href="http://estadio-dc.com">Estadio</a>, <a href="http://ettodc.com">Etto</a>, <a href="http://www.ghibellina.com">Ghibellina</a>, <a href="http://www.pearldivedc.com">Pearl Dive Oyster Palace</a>, <a href="http://doimoidc.com">Doi Moi</a>, and <a href="http://www.barpilar.com">Bar Pilar</a>.</span></p>
+	<p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHover1490()" onmouseout = "offHover14()">
+	<div class="VBR-map-box-all">
 
-    <img id="VBR-map-box-s3" style="height: 200px; width: 50px;" src="regional-map/14th/14th-90.png" />
-    <p class="VBR-map-text">1990</p>
+	<div class="VBR-map-box" onmouseover = "onHover1470()" onmouseout = "offHoverG()">
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHover1400()" onmouseout = "offHover14()">
+	<img id="VBR-map-box-s1" style="height: 200px; width: 50px;" src="regional-map/14th/14th-70.png" />
+	<p class="VBR-map-text">1970</p>
 
-    <img id="VBR-map-box-s4" style="height: 200px; width: 50px;" src="regional-map/14th/14th-00.png" />
-    <p class="VBR-map-text">2000</p>
+	</div>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHover1410()" onmouseout = "offHover14()">
+	<div class="VBR-map-box" onmouseover = "onHover1480()" onmouseout = "offHover14()">
 
-    <img id="VBR-map-box-s5" style="height: 200px; width: 50px;" src="regional-map/14th/14th-10.png" />
-    <p class="VBR-map-text">2010</p>
+	<img id="VBR-map-box-s2" style="height: 200px; width: 50px;" src="regional-map/14th/14th-80.png" />
+	<p class="VBR-map-text">1980</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHover1417()" onmouseout = "offHover14()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHover1490()" onmouseout = "offHover14()">
 
-    <img id="VBR-map-box-s6" style="height: 200px; width: 50px;" src="regional-map/14th/14th-17.png" />
-    <p class="VBR-map-text">2017</p>
+	<img id="VBR-map-box-s3" style="height: 200px; width: 50px;" src="regional-map/14th/14th-90.png" />
+	<p class="VBR-map-text">1990</p>
 
-    </div>
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHover1400()" onmouseout = "offHover14()">
 
-    <!-- 14th Line chart -->
+	<img id="VBR-map-box-s4" style="height: 200px; width: 50px;" src="regional-map/14th/14th-00.png" />
+	<p class="VBR-map-text">2000</p>
+
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHover1410()" onmouseout = "offHover14()">
+
+	<img id="VBR-map-box-s5" style="height: 200px; width: 50px;" src="regional-map/14th/14th-10.png" />
+	<p class="VBR-map-text">2010</p>
+
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHover1417()" onmouseout = "offHover14()">
+
+	<img id="VBR-map-box-s6" style="height: 200px; width: 50px;" src="regional-map/14th/14th-17.png" />
+	<p class="VBR-map-text">2017</p>
+
+	</div>
+
+  <!-- 14th Line chart -->
     <br style="clear:both;"/>
     <h3>Very Best Restaurants on 14th Street</h3>
     <svg id="s-line" width ="700" height = "300" style="display: block; margin: 0 auto"></svg>
@@ -1536,52 +1405,53 @@
 
     </script>
 
-    <!-- End of 14th st line chart -->
-    </div>
-    <h2><strong>3. Chinatown and Penn Quarter</strong></h2>
-    <p><span style="font-weight: 400;">The expansion of the dining industry into Chinatown and Penn Quarter came alongside a series of developments over the past 40 years, including the launch of the Metro in the '70s, the construction of the original Washington convention center in the '80s, and the arrival of the Verizon Center in the '90s. </span></p>
+	</div>
 
-    <p>Following these shifts, many traditional, family-owned Chinese restaurants were priced out of the neighborhood. Replacing them were a host of new restaurants serving various cuisines, from Greek food to Japanese ramen. When Washingtonian first awarded restaurants in 1969 (it was called "The Top One Percent" back then), only two restaurants from Chinatown and Penn Quarter made the ranking: Peking Downtown and Don Pedro's Mexican Cantina, both of which have long since closed. The newest list contains 17 mostly upscale restaurants from the neighborhood, including <a href="http://www.rasikarestaurant.com">Rasika</a>, <a href="http://www.zaytinya.com">Zaytinya</a>, <a href="http://www.centralmichelrichard.com">Central Michel Richard</a>, <a href="http://www.dbgb.com/dc">DBGB</a> and <a href="http://www.bibianadc.com">Bibiana</a>. There's not a single Chinese restaurant among them.</p>
 
-    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+	<h2><strong>3. Chinatown and Penn Quarter</strong></h2>
+	<p><span style="font-weight: 400;">The expansion of the dining industry into Chinatown and Penn Quarter came alongside a series of developments over the past 40 years, including the launch of the Metro in the '70s, the construction of the original Washington convention center in the '80s, and the arrival of the Verizon Center in the '90s. </span></p>
 
-    <div class="VBR-map-box-all">
-    <div class="VBR-map-box" onmouseover = "onHoverC70()" onmouseout = "offHoverC()">
+	<p>Following these shifts, many traditional, family-owned Chinese restaurants were priced out of the neighborhood. Replacing them were a host of new restaurants serving various cuisines, from Greek food to Japanese ramen. When Washingtonian first awarded restaurants in 1969 (it was called "The Top One Percent" back then), only two restaurants from Chinatown and Penn Quarter made the ranking: Peking Downtown and Don Pedro's Mexican Cantina, both of which have long since closed. The newest list contains 17 mostly upscale restaurants from the neighborhood, including <a href="http://www.rasikarestaurant.com">Rasika</a>, <a href="http://www.zaytinya.com">Zaytinya</a>, <a href="http://www.centralmichelrichard.com">Central Michel Richard</a>, <a href="http://www.dbgb.com/dc">DBGB</a> and <a href="http://www.bibianadc.com">Bibiana</a>. There's not a single Chinese restaurant among them.</p>
 
-    <img id="VBR-map-box-c1" style="width: 190px" src="regional-map/chinatown/chinatown-70.png" />
-    <p class="VBR-map-text">1970</p>
+	<p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverC80()" onmouseout = "offHoverC()">
+	<div class="VBR-map-box-all">
+	<div class="VBR-map-box" onmouseover = "onHoverC70()" onmouseout = "offHoverC()">
 
-    <img id="VBR-map-box-c2" style="width: 190px" src="regional-map/chinatown/chinatown-80.png" />
-    <p class="VBR-map-text">1980</p>
+	<img id="VBR-map-box-c1" style="width: 190px" src="regional-map/chinatown/chinatown-70.png" />
+	<p class="VBR-map-text">1970</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverC90()" onmouseout = "offHoverC()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverC80()" onmouseout = "offHoverC()">
 
-    <img id="VBR-map-box-c3" style="width: 190px" src="regional-map/chinatown/chinatown-90.png" />
-    <p class="VBR-map-text">1990</p>
+	<img id="VBR-map-box-c2" style="width: 190px" src="regional-map/chinatown/chinatown-80.png" />
+	<p class="VBR-map-text">1980</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverC00()" onmouseout = "offHoverC()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverC90()" onmouseout = "offHoverC()">
 
-    <img id="VBR-map-box-c4" style="width: 190px" src="regional-map/chinatown/chinatown-00.png" />
-    <p class="VBR-map-text">2000</p>
+	<img id="VBR-map-box-c3" style="width: 190px" src="regional-map/chinatown/chinatown-90.png" />
+	<p class="VBR-map-text">1990</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverC10()" onmouseout = "offHoverC()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverC00()" onmouseout = "offHoverC()">
 
-    <img id="VBR-map-box-c5" style="width: 190px" src="regional-map/chinatown/chinatown-10.png" />
-    <p class="VBR-map-text">2010</p>
+	<img id="VBR-map-box-c4" style="width: 190px" src="regional-map/chinatown/chinatown-00.png" />
+	<p class="VBR-map-text">2000</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverC17()" onmouseout = "offHoverC()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverC10()" onmouseout = "offHoverC()">
 
-    <img id="VBR-map-box-c6" style="width: 190px" src="regional-map/chinatown/chinatown-17.png" />
-    <p class="VBR-map-text">2017</p>
+	<img id="VBR-map-box-c5" style="width: 190px" src="regional-map/chinatown/chinatown-10.png" />
+	<p class="VBR-map-text">2010</p>
 
-    </div>
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverC17()" onmouseout = "offHoverC()">
+
+	<img id="VBR-map-box-c6" style="width: 190px" src="regional-map/chinatown/chinatown-17.png" />
+	<p class="VBR-map-text">2017</p>
+
+	</div>
 
   <!-- Chinatown Line chart -->
     <br style="clear:both;"/>
@@ -1688,52 +1558,53 @@
 
 
   </script>
+
   </div>
 
 
-    <h2>4. Dupont Circle</h2>
-    <p><span style="font-weight: 400;">Dupont Circle is one of the few neighborhoods in Northwest DC that has consistently been home to a number of our best restaurants. Although it peaked in2008, Dupont Circle still remains a popular dining destination with list mainstays like <a href="http://www.obeliskdc.com">Obelisk</a> and <a href="http://irongaterestaurantdc.com">Iron Gate</a>. </span></p>
-    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+	<h2>4. Dupont Circle</h2>
+	<p><span style="font-weight: 400;">Dupont Circle is one of the few neighborhoods in Northwest DC that has consistently been home to a number of our best restaurants. Although it peaked in2008, Dupont Circle still remains a popular dining destination with list mainstays like <a href="http://www.obeliskdc.com">Obelisk</a> and <a href="http://irongaterestaurantdc.com">Iron Gate</a>. </span></p>
+	<p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
 
-    <div class="VBR-map-box-all">
-    <div class="VBR-map-box" onmouseover = "onHoverD70()" onmouseout = "offHoverD()">
+	<div class="VBR-map-box-all">
+	<div class="VBR-map-box" onmouseover = "onHoverD70()" onmouseout = "offHoverD()">
 
-    <img id="VBR-map-box-d1" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-70.png" />
-    <p class="VBR-map-text">1970</p>
+	<img id="VBR-map-box-d1" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-70.png" />
+	<p class="VBR-map-text">1970</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverD80()" onmouseout = "offHoverD()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverD80()" onmouseout = "offHoverD()">
 
-    <img id="VBR-map-box-d2" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-80.png" />
-    <p class="VBR-map-text">1980</p>
+	<img id="VBR-map-box-d2" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-80.png" />
+	<p class="VBR-map-text">1980</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverD90()" onmouseout = "offHoverD()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverD90()" onmouseout = "offHoverD()">
 
-    <img id="VBR-map-box-d3" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-90.png" />
-    <p class="VBR-map-text">1990</p>
+	<img id="VBR-map-box-d3" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-90.png" />
+	<p class="VBR-map-text">1990</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverD00()" onmouseout = "offHoverD()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverD00()" onmouseout = "offHoverD()">
 
-    <img id="VBR-map-box-d4" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-00.png" />
-    <p class="VBR-map-text">2000</p>
+	<img id="VBR-map-box-d4" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-00.png" />
+	<p class="VBR-map-text">2000</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverD10()" onmouseout = "offHoverD()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverD10()" onmouseout = "offHoverD()">
 
-    <img id="VBR-map-box-d5" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-10.png" />
-    <p class="VBR-map-text">2010</p>
+	<img id="VBR-map-box-d5" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-10.png" />
+	<p class="VBR-map-text">2010</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverD17()" onmouseout = "offHoverD()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverD17()" onmouseout = "offHoverD()">
 
-    <img id="VBR-map-box-d6" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-17.png" />
-    <p class="VBR-map-text">2017</p>
+	<img id="VBR-map-box-d6" style="height: 150px; width: 15;" src="regional-map/dupont/dupont-17.png" />
+	<p class="VBR-map-text">2017</p>
 
-    </div>
-    
-     <!-- Dupont Circle Line chart -->
+	</div>
+	
+   <!-- Dupont Circle Line chart -->
     <br style="clear:both;"/>
     <h3>Very Best Restaurants in Dupont Circle</h3>
   <svg id="dsvg" width ="700" height = "300"></svg>
@@ -1839,110 +1710,108 @@
 
   </script>
 
-    </div>
+	</div>
+	<p><strong>Looking at nearly five decades of the Very Best Restaurants, and you can also see generational shifts toward the Virginia and Maryland suburbs and later back toward the District. Few suburban restaurants made the cut in the first 20 years</strong>. But things changed dramatically over the next decade. As the District fell to its economic and political nadir, in the 1990s, the balance of power on the Very Best Restaurants moved overwhelmingly in the suburbs' favor. Virginia and Maryland accounted for more than 80 of the restaurants listed in 1995. Nizam's, <a href="https://www.unclejulios.com/locations/arlington/">Rio Grande Cafe</a>, <a href="https://www.lacotedorarlington.com">La Cote D'Or Cafe</a>, Morton's of Chicago, Mezze 9, <a href="http://www.goodfortunearlington.com">Good Fortune</a>, Wurzburg-Haus, <a href="http://www.bombaybistro.com">Bombay Bistro</a>, <a href="http://www.sevenseasrestaurant.com">Seven Seas</a>, <a href="http://www.crisfieldseafood.com">Crisfield</a> at Lee Plaza, and other restaurants are all frequent winners during that time.</p>
 
-
-    <p style="margin-top: 20px"><strong>Looking at nearly five decades of the Very Best Restaurants, and you can also see generational shifts toward the Virginia and Maryland suburbs and later back toward the District. Few suburban restaurants made the cut in the first 20 years</strong>. But things changed dramatically over the next decade. As the District fell to its economic and political nadir, in the 1990s, the balance of power on the Very Best Restaurants moved overwhelmingly in the suburbs' favor. Virginia and Maryland accounted for more than 80 of the restaurants listed in 1995. Nizam's, <a href="https://www.unclejulios.com/locations/arlington/">Rio Grande Cafe</a>, <a href="https://www.lacotedorarlington.com">La Cote D'Or Cafe</a>, Morton's of Chicago, Mezze 9, <a href="http://www.goodfortunearlington.com">Good Fortune</a>, Wurzburg-Haus, <a href="http://www.bombaybistro.com">Bombay Bistro</a>, <a href="http://www.sevenseasrestaurant.com">Seven Seas</a>, <a href="http://www.crisfieldseafood.com">Crisfield</a> at Lee Plaza, and other restaurants are all frequent winners during that time.</p>
-
-    <p>But as the District got its finances in order and rebounded in the early 2000s, restaurants started to move back in. Virginia and Maryland both experienced a huge drop in Very Best Restaurant representation around 2005, although Arlington and Bethesda both retain decent representation on contemporary lists. Both have three entries in the 2017: <a href="http://www.ser-restaurant.com">Ser</a>, <a href="http://kapnosdc.com">Kapnos</a>, and <a href="http://greenpigbistro.com">Green Pig Bistro</a> in Arlington; and <a href="http://www.passagetoindia.info">Passage to India</a>, <a href="http://kapnosdc.com">Kapnos</a>, and <a href="http://www.jaleo.com/location/washington-dc/">Jaleo</a> in Bethesda.</p>
-    <h2>Virginia</h2>
-    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
-    <div class="VBR-map-box-all">
+	<p>But as the District got its finances in order and rebounded in the early 2000s, restaurants started to move back in. Virginia and Maryland both experienced a huge drop in Very Best Restaurant representation around 2005, although Arlington and Bethesda both retain decent representation on contemporary lists. Both have three entries in the 2017: <a href="http://www.ser-restaurant.com">Ser</a>, <a href="http://kapnosdc.com">Kapnos</a>, and <a href="http://greenpigbistro.com">Green Pig Bistro</a> in Arlington; and <a href="http://www.passagetoindia.info">Passage to India</a>, <a href="http://kapnosdc.com">Kapnos</a>, and <a href="http://www.jaleo.com/location/washington-dc/">Jaleo</a> in Bethesda.</p>
+	<h2>Virginia</h2>
+	<p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+	<div class="VBR-map-box-all">
 
   <!-- <div class="VBR-map-box-all-p1" style="float: left;">   -->
-    <div class="VBR-map-box" onmouseover = "onHoverV70()" onmouseout = "offHoverV()">
+	<div class="VBR-map-box" onmouseover = "onHoverV70()" onmouseout = "offHoverV()">
 
-    <img id="VBR-map-box-v1" style="height: 130px" src="regional-map/virginia/v-70.png" />
-    <p class="VBR-map-text">1970</p>
+	<img id="VBR-map-box-v1" style="height: 130px" src="regional-map/virginia/v-70.png" />
+	<p class="VBR-map-text">1970</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverV80()" onmouseout = "offHoverV()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverV80()" onmouseout = "offHoverV()">
 
-    <img id="VBR-map-box-v2" style="height: 130px" src="regional-map/virginia/v-80.png" />
-    <p class="VBR-map-text">1980</p>
+	<img id="VBR-map-box-v2" style="height: 130px" src="regional-map/virginia/v-80.png" />
+	<p class="VBR-map-text">1980</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverV90()" onmouseout = "offHoverV()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverV90()" onmouseout = "offHoverV()">
 
-    <img id="VBR-map-box-v3" style="height: 130px" src="regional-map/virginia/v-90.png" />
-    <p class="VBR-map-text">1990</p>
+	<img id="VBR-map-box-v3" style="height: 130px" src="regional-map/virginia/v-90.png" />
+	<p class="VBR-map-text">1990</p>
 
-    </div>
+	</div>
   <!-- </div> -->
 
   <!-- <div class="VBR-map-box-all-p1" style="float: left;">  -->
-    <div class="VBR-map-box" onmouseover = "onHoverV00()" onmouseout = "offHoverV()">
+	<div class="VBR-map-box" onmouseover = "onHoverV00()" onmouseout = "offHoverV()">
 
-    <img id="VBR-map-box-v4" style="height: 130px" src="regional-map/virginia/v-00.png" />
-    <p class="VBR-map-text">2000</p>
+	<img id="VBR-map-box-v4" style="height: 130px" src="regional-map/virginia/v-00.png" />
+	<p class="VBR-map-text">2000</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverV10()" onmouseout = "offHoverV()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverV10()" onmouseout = "offHoverV()">
 
-    <img id="VBR-map-box-v5" style="height: 130px" src="regional-map/virginia/v-10.png" />
-    <p class="VBR-map-text">2010</p>
+	<img id="VBR-map-box-v5" style="height: 130px" src="regional-map/virginia/v-10.png" />
+	<p class="VBR-map-text">2010</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverV17()" onmouseout = "offHoverV()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverV17()" onmouseout = "offHoverV()">
 
-    <img id="VBR-map-box-v6" style="height: 130px" src="regional-map/virginia/v-17.png" />
-    <p class="VBR-map-text">2017</p>
+	<img id="VBR-map-box-v6" style="height: 130px" src="regional-map/virginia/v-17.png" />
+	<p class="VBR-map-text">2017</p>
 
-    </div>
+	</div>
   <!-- </div> -->
 
-    <p style="text-align: center;"><img id="VBR-map-vNumber" class="aligncenter" style="margin: 0 auto; width: 500px" src="regional-number/virginia/v-original.png" /></p>
+	<p style="text-align: center;"><img id="VBR-map-vNumber" class="aligncenter" style="margin: 0 auto; width: 500px" src="regional-number/virginia/v-original.png" /></p>
 
-    </div>
-    <h2>Maryland</h2>
-    <p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
-    <div class="VBR-map-box-all">
+	</div>
+	<h2>Maryland</h2>
+	<p style="font-size: 12px; margin: 0;"><em> Hover over the map to get the number in the chart!</em></p>
+	<div class="VBR-map-box-all">
 
 <!--   <div class="VBR-map-box-all-p1" style="float: left;"> -->
-    <div class="VBR-map-box" onmouseover = "onHoverM70()" onmouseout = "offHoverM()">
+	<div class="VBR-map-box" onmouseover = "onHoverM70()" onmouseout = "offHoverM()">
 
-    <img id="VBR-map-box-m1" style="height: 130px; width: 15;" src="regional-map/maryland/m-70.png" />
-    <p class="VBR-map-text">1970</p>
+	<img id="VBR-map-box-m1" style="height: 130px; width: 15;" src="regional-map/maryland/m-70.png" />
+	<p class="VBR-map-text">1970</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverM80()" onmouseout = "offHoverM()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverM80()" onmouseout = "offHoverM()">
 
-    <img id="VBR-map-box-m2" style="height: 130px; width: 15;" src="regional-map/maryland/m-80.png" />
-    <p class="VBR-map-text">1980</p>
+	<img id="VBR-map-box-m2" style="height: 130px; width: 15;" src="regional-map/maryland/m-80.png" />
+	<p class="VBR-map-text">1980</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverM90()" onmouseout = "offHoverM()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverM90()" onmouseout = "offHoverM()">
 
-    <img id="VBR-map-box-m3" style="height: 130px; width: 15;" src="regional-map/maryland/m-90.png" />
-    <p class="VBR-map-text">1990</p>
+	<img id="VBR-map-box-m3" style="height: 130px; width: 15;" src="regional-map/maryland/m-90.png" />
+	<p class="VBR-map-text">1990</p>
 
-    </div>
+	</div>
 <!--   </div> -->
 
   <!-- <div class="VBR-map-box-all-p1" style="float: left;"> -->
-    <div class="VBR-map-box" onmouseover = "onHoverM00()" onmouseout = "offHoverM()">
+	<div class="VBR-map-box" onmouseover = "onHoverM00()" onmouseout = "offHoverM()">
 
-    <img id="VBR-map-box-m4" style="height: 130px; width: 15;" src="regional-map/maryland/m-00.png" />
-    <p class="VBR-map-text">2000</p>
+	<img id="VBR-map-box-m4" style="height: 130px; width: 15;" src="regional-map/maryland/m-00.png" />
+	<p class="VBR-map-text">2000</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverM10()" onmouseout = "offHoverM()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverM10()" onmouseout = "offHoverM()">
 
-    <img id="VBR-map-box-m5" style="height: 130px; width: 15;" src="regional-map/maryland/m-10.png" />
-    <p class="VBR-map-text">2010</p>
+	<img id="VBR-map-box-m5" style="height: 130px; width: 15;" src="regional-map/maryland/m-10.png" />
+	<p class="VBR-map-text">2010</p>
 
-    </div>
-    <div class="VBR-map-box" onmouseover = "onHoverM17()" onmouseout = "offHoverM()">
+	</div>
+	<div class="VBR-map-box" onmouseover = "onHoverM17()" onmouseout = "offHoverM()">
 
-    <img id="VBR-map-box-m6" style="height: 130px; width: 15;" src="regional-map/maryland/m-17.png" />
-    <p class="VBR-map-text">2017</p>
+	<img id="VBR-map-box-m6" style="height: 130px; width: 15;" src="regional-map/maryland/m-17.png" />
+	<p class="VBR-map-text">2017</p>
 
-    </div>
+	</div>
   <!-- </div> -->
 
-    <p style="text-align: center;"><img id="VBR-map-mNumber" style="margin: 0 auto; width: 500px" src="regional-number/maryland/m-original.png" /></p>
+	<p style="text-align: center;"><img id="VBR-map-mNumber" style="margin: 0 auto; width: 500px" src="regional-number/maryland/m-original.png" /></p>
 
-    </div>
+	</div>
 <!-- End of text section -->
 </div>
 
@@ -2132,4 +2001,4 @@ function onHoverM17() {
 </script>
 </body>
 
-</html> 
+</html>
