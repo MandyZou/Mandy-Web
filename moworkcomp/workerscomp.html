@@ -21,6 +21,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Arimo|Crimson+Text|Roboto" rel="stylesheet">
 
+    <!-- For scroll page and animation -->
+    <link href="animate.css" rel="stylesheet">
+    <script src="noframework.waypoints.min.js"></script>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
@@ -564,6 +567,23 @@
             .text("Dollars");
 
     });
+
+    $("#bodychart").css("opacity", 0);
+
+    var waypoint = new Waypoint({
+        element: document.getElementById('#bodychart'),
+        handler: function(direction) {
+          notify(this.element.id + ' triggers at ' + this.triggerPoint)
+        },
+        offset: '75%'
+      });
+
+    // $("#bodychart").waypoint(function(){
+
+    //   $("#bodychart").addClass("rotateOutUpRight");
+
+    // },{offset: "80%"});
+
     </script>
     <!-- End of body and graphic -->
 
