@@ -1,0 +1,115 @@
+html, body{
+        height: 100%;
+        width: 100%;
+    }
+
+/* Selected color palette */
+   .selected {
+    fill: steelblue;
+   }
+
+   .selected02 {
+    fill: #ff4e50;
+   }
+
+   .selected03 {
+    fill: #fc913a;
+   }
+
+   .selected04 {
+    fill: #f9d62e;
+   }
+
+   .selected05 {
+    fill: #eae374;
+   }
+
+   .selected06 {
+    fill: #e2f4c7;
+   }
+
+   .selected07{
+    fill: #b7f92e;
+   }
+
+   .selected08{
+    fill: #F9572E;
+   }
+
+/* End of color palette */
+
+   #wrap {
+    width: 90%;
+    margin: 0 auto;
+    height: 800px;
+   }
+
+   #tMap{
+    width: 40%;
+    float: left;
+   }
+
+
+   #text {
+    width: 30%;
+    float: right;
+    padding-left: 10%;
+
+   }
+
+/* City text chunk */
+  #cities1{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    /*display: none;*/
+   }
+
+  #cities2{
+    margin-bottom: 40px;
+   }
+
+  #cities3{
+    margin-bottom: 40px;
+   }
+
+  #cities4{
+    margin-bottom: 40px;
+   }
+
+   #cities5{
+    margin-bottom: 40px;
+   }
+
+   #cities6{
+    margin-bottom: 40px;
+   }
+
+   #cities7{
+    margin-bottom: 40px;
+   }
+
+   #cities8{
+    margin-bottom: 40px;
+   }
+
+   #cities9{
+    margin-bottom: 40px;
+   }
+
+   #cities10{
+    margin-bottom: 40px;
+   }
+
+/* End of City text chunk */
+
+   .beforeScroll{
+    display: none;
+/*    width: 30%;
+    float: right;
+    padding-left: 10%;*/
+   }
+
+   .afterScroll {
+    margin-bottom: 150%;
+    display: block;
+   }
