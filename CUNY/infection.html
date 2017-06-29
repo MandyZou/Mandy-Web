@@ -5,6 +5,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <style>
+
+    #chart {
+      width: 560px;
+      height: 500px;
+    }
+
     .line {
         fill: none;
         stroke: #ed992f;
@@ -46,36 +52,19 @@
         display: none;
     }
 
-   /* .overlay {
-      fill: none;
-      pointer-events: all;
-    }*/
-    .focus circle {
-      fill: #F1F3F3;
-      stroke: #FFA800;
-      stroke-width: 5px;
-    }
-      
-    .hover-line {
-      stroke: #FFA800;
-      stroke-width: 2px;
-      stroke-dasharray: 3,3;
+    div.tooltip {
+      position: absolute;
+      text-align: center;
+      width: 100px;
+      height: 40px;
+      padding: 2px;
+      font: 12px sans-serif;
+      background: white;
+      border: 1px #2c2c2c solid;
+      border-radius: 8px;
     }
 
-/*    .focus {
-        color: red;
-    }*/
-
-    .overlay {
-      fill: none;
-      pointer-events: all;
-    }
-
-    #chart {
-      width: 560px;
-      height: 500px;
-    }
-
+  
 
     </style>
 </head>
@@ -144,6 +133,55 @@
       .attr("font-wight", "bold")
       .attr("text-anchor", "start")
       .text("New HIV Infection Cases");
+
+//Add tooltip
+  var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 4)
+        .style("fill", "white")
+        .style("stroke", "#ed992f")
+        .attr("cx", function(d){return x(d.Year);})
+        .attr("cy", function(d){return y(d.infections); })
+        .on("mouseover", function(d){
+          div.transition()
+              .duration(200)
+              .style("opacity", .9);
+          div.html("In " + d.Year + ", <span style='color: red'>" + d.infections + "</span> new HIV infection cases")
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY -28) + "px");
+        })
+        .on("mouseout", function(d){
+          div.transition()
+            .duration(500)
+            .style("opacity", 0);
+        });
+
+    svg.selectAll("dot")
+        .data(tdata)
+        .enter().append("circle")
+        .attr("r", 4)
+        .attr("cx", function(d){return x(d.Year);})
+        .attr("cy", function(d){return y(d.infections); })
+        .style("fill", "white")
+        .style("stroke", "#ed992f")
+        .on("mouseover", function(d){
+          div.transition()
+              .duration(200)
+              .style("opacity", .9);
+          div.html("In " + d.Year + ", the target is <span style='color: red'>" + d.infections + "</span> new HIV infection cases")
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY -28) + "px");
+        })
+        .on("mouseout", function(d){
+          div.transition()
+            .duration(500)
+            .style("opacity", 0);
+        });
 
 //Add legend
     var legendContainer = d3.select("#chart")
