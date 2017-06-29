@@ -29,10 +29,12 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= citiesPosition.top){
             getCities.addClass("afterScroll");
+            getCities.addClass('animated fadeIn');
             $(".Jiangxi").addClass("selected02");
+            $(".Jiangxi").addClass('animated fadeIn');
             // console.log("add!")
-        } else if (scrollBarPosition  >= (citiesPosition.top + 3)) {
-            getCities.css({"visibility": "hidden"});
+        } else {
+            $(".Jiangxi").removeClass('animated fadeIn');
         }
     });
 
@@ -47,8 +49,11 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition2.top + 20)){
             getCities2.addClass("afterScroll");
+            getCities2.addClass("animated fadeIn");
             $(".Jiangxi").addClass("selected03");
+            $(".Jiangxi").addClass('animated fadeIn');
             $(".Hubei").addClass("selected03");
+            $(".Hubei").addClass('animated fadeIn');
             // console.log("add2!")
         } else {
             // s.removeClass("afterScroll");
@@ -64,9 +69,11 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition3.top + 40)){
             getCities3.addClass("afterScroll");
+            getCities3.addClass("animated fadeIn");
             $(".Jiangxi").removeClass("selected03");
             $(".Hubei").removeClass("selected03");
             $(".Beijing").addClass("selected04");
+            $(".Beijing").addClass('animated fadeIn');
         } else {
             // s.removeClass("afterScroll");
         }
@@ -81,8 +88,10 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition4.top + 60)){
             getCities4.addClass("afterScroll");
+            getCities4.addClass("animated fadeIn");
             $(".Beijing").removeClass("selected04");
             $(".Jiangxi").addClass("selected05");
+            $(".Jiangxi").addClass('animated fadeIn');
         } else {
             // s.removeClass("afterScroll");
         }
@@ -97,8 +106,10 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition5.top + 80)){
             getCities5.addClass("afterScroll");
+            getCities5.addClass("animated fadeIn");
             $(".Jiangxi").removeClass("selected05");
             $(".Shanxi").addClass("selected06");
+            $(".Shanxi").addClass('animated fadeIn');
         } else {
             // s.removeClass("afterScroll");
         }
@@ -113,7 +124,9 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition6.top + 100)){
             getCities6.addClass("afterScroll");
+            getCities6.addClass("animated fadeIn");
             $(".Jiangxi").addClass("selected07");
+            $(".Jiangxi").addClass('animated fadeIn');
         } else {
             // s.removeClass("afterScroll");
         }
@@ -128,10 +141,14 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition7.top + 120)){
             getCities7.addClass("afterScroll");
+            getCities7.addClass("animated fadeIn");
             $(".Jiangxi").removeClass("selected07");
             $(".Hongkong").addClass("selected08");
+            $(".Hongkong").addClass('animated fadeIn');
             $(".Macao").addClass("selected08");
+            $(".Macao").addClass('animated fadeIn');
             $(".Guangdong").addClass("selected08");
+            $(".Guangdong").addClass('animated fadeIn');
         } else {
             // s.removeClass("afterScroll");
         }
@@ -146,6 +163,7 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition8.top + 140)){
             getCities8.addClass("afterScroll");
+            getCities8.addClass("animated fadeIn");
             $(".Hongkong").removeClass("selected08");
             $(".Macao").removeClass("selected08");
             $(".Guangdong").removeClass("selected08");
@@ -164,6 +182,7 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition9.top + 160)){
             getCities9.addClass("afterScroll");
+            getCities9.addClass("animated fadeIn");
             $(".Jiangxi").addClass("selected03");
             $(".Liaoning").removeClass("selected02");
         } else {
@@ -180,6 +199,7 @@ $(document).ready(function(){
 
         if (scrollBarPosition >= (citiesPosition10.top + 180)){
             getCities10.addClass("afterScroll");
+            getCities10.addClass("animated fadeIn");
             $(".Sichuan").addClass("selected04");
             $(".Jiangxi").removeClass("selected03");
         } else {
