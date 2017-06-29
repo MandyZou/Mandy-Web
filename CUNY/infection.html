@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>New HIV Affection Number</title>
+    <title>New HIV Infection Number</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -70,6 +70,7 @@
 </head>
 
 <body>
+  <h1 style="padding-left: 5px"><span style="color:#ed992f">NEW INFECTIONS</span> Goal: <br/><span style="font-size: 20px; font-weight: normal">Reduce the number of new HIV infections to <span style="color:#ed992f">750</span> by the year of 2020</span>
   <div id="chart"></div>
 
   <script>
@@ -171,7 +172,7 @@
         .style("stroke", "#ed992f")
         .on("mouseover", function(d){
           div.transition()
-              .duration(200)
+              .duration(100)
               .style("opacity", .9);
           div.html("In " + d.Year + ", the target is <span style='color: red'>" + d.infections + "</span> new HIV infection cases")
             .style("left", (d3.event.pageX) + "px")
