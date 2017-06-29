@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+    <title>Jane's Travel Map</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Introducing TopoJson -->
+    <script src="https://unpkg.com/topojson@3.0.0"></script>
+
+    <script src="jquery-3.2.1.min.js"></script>
+
+    <!-- ScrollReveal -->
+    <!-- // <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script> -->
+
+    <script src="jquery.waypoints.min.js"></script>
+
+    <script src="twocolumn.js"></script>
+
+    <style>
+    html, body{
+        height: 100%;
+        width: 100%;
+    }
+
+   .selected {
+    fill: steelblue;
+   }
+
+   #tMap {
+    width: 60%;
+    /*margin: 0 auto;*/
+   }
+
+    </style>
+
+</head>
+<body>
+    <h1 style="text-align: center">Jane's Travel Map</h1>
+    <div id="tMap"></div>
+
+    <script>
+    var margin = {top: 20, left: 20, right:20, bottom: 20},
+        width = 820 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
+
+    var svg = d3.select("#tMap")
+                .append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var projection = d3.geoMercator()
+                    .center([107,31])
+                    .scale(700)
+                    .translate([width/2, height/2]);
+
+    var path = d3.geoPath()
+                .projection(projection); 
+
+    d3.queue()
+        .defer(d3.json, "china.json")
+        .await(ready);
+
+    function ready(error,data){
+        if (error) throw error;
+
+        var china = topojson.feature(data, {
+            type:"GeometryCollection",
+            geometries: data.objects.CHN_adm1.geometries,
+        });
+
+        svg.selectAll("path")
+            .data(china.features).enter()
+            .append("path")
+                .attr("d", path)
+            .attr("class",function(d){
+                return d.properties.NAME_1;
+            })
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+            .on("mouseover", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mousemove", function(d){
+                d3.select(this).classed("selected", true)
+            })
+            .on("mouseout", function(d){
+                d3.select(this).classed("selected", false)
+            });
+
+        // svg.selectAll("text")
+        //   .data(china.features).enter()    
+        // .append("text")
+        //   .attr("x", function (d) { return path.centroid(d)[0]; })
+        //   .attr("y", function (d) { return path.centroid(d)[1]; })
+        //   .text(function (d) { return d.properties.NL_NAME_1; }); 
+    };
+
+    </script>
+
+    <p>How a place feels is more important than it used to be—it’s why Whole Foods can sell a 12-pack of La Croix for two dollars more than it costs at Walmart. The places we shop in say something about us: our morning coffee isn’t just the first thing we drink, it’s the first story of our day. It’s why DC Wawa will serve up exposed brick, along with nitro cold-brew. We’re buying more than we transact for.</p>
+
+        <p>How a place feels is more important than it used to be—it’s why Whole Foods can sell a 12-pack of La Croix for two dollars more than it costs at Walmart. The places we shop in say something about us: our morning coffee isn’t just the first thing we drink, it’s the first story of our day. It’s why DC Wawa will serve up exposed brick, along with nitro cold-brew. We’re buying more than we transact for.</p>
+
+        <P>How a place feels is more important than it used to be—it’s why Whole Foods can sell a 12-pack of La Croix for two dollars more than it costs at Walmart. The places we shop in say something about us: our morning coffee isn’t just the first thing we drink, it’s the first story of our day. It’s why DC Wawa will serve up exposed brick, along with nitro cold-brew. We’re buying more than we transact for.</p>
+
+        <p>How a place feels is more important than it used to be—it’s why Whole Foods can sell a 12-pack of La Croix for two dollars more than it costs at Walmart. The places we shop in say something about us: our morning coffee isn’t just the first thing we drink, it’s the first story of our day. It’s why DC Wawa will serve up exposed brick, along with nitro cold-brew. We’re buying more than we transact for.</p>
+
+        <p>How a place feels is more important than it used to be—it’s why Whole Foods can sell a 12-pack of La Croix for two dollars more than it costs at Walmart. The places we shop in say something about us: our morning coffee isn’t just the first thing we drink, it’s the first story of our day. It’s why DC Wawa will serve up exposed brick, along with nitro cold-brew. We’re buying more than we transact for.</p>
+
+        <p>How a place feels is more important than it used to be—it’s why Whole Foods can sell a 12-pack of La Croix for two dollars more than it costs at Walmart. The places we shop in say something about us: our morning coffee isn’t just the first thing we drink, it’s the first story of our day. It’s why DC Wawa will serve up exposed brick, along with nitro cold-brew. We’re buying more than we transact for.</p>
+
+        <p>How a place feels is more important than it used to be—it’s why Whole Foods can sell a 12-pack of La Croix for two dollars more than it costs at Walmart. The places we shop in say something about us: our morning coffee isn’t just the first thing we drink, it’s the first story of our day. It’s why DC Wawa will serve up exposed brick, along with nitro cold-brew. We’re buying more than we transact for.</p>
+
+</body>
+</html>
