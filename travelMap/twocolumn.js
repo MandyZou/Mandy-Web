@@ -149,16 +149,16 @@ $(document).ready(function(){
     $(window).scroll(function(){
         var scrollBarPosition = $(window).scrollTop();
 
-        if (scrollBarPosition >= (citiesPosition7.top + 140)){
+        if (scrollBarPosition >= (citiesPosition7.top + 130)){
             getCities7.addClass("afterScroll");
             getCities7.addClass("animated fadeIn");
             $(".Jiangxi").removeClass("selected02");
-            $(".Hongkong").addClass("selected02");
             $(".Hongkong").addClass('animated fadeIn');
-            $(".Macao").addClass("selected02");
+            $(".Hongkong").addClass("selected02");
             $(".Macao").addClass('animated fadeIn');
-            $(".Guangdong").addClass("selected02");
+            $(".Macao").addClass("selected02");
             $(".Guangdong").addClass('animated fadeIn');
+            $(".Guangdong").addClass("selected02");
             $("#16Jan").text("2017.01");
         } else {
             // s.removeClass("afterScroll");
@@ -172,12 +172,13 @@ $(document).ready(function(){
     $(window).scroll(function(){
         var scrollBarPosition = $(window).scrollTop();
 
-        if (scrollBarPosition >= (citiesPosition8.top + 160)){
+        if (scrollBarPosition >= (citiesPosition8.top + 200)){
             getCities8.addClass("afterScroll");
             getCities8.addClass("animated fadeIn");
             $(".Hongkong").removeClass("selected02");
             $(".Macao").removeClass("selected02");
             $(".Guangdong").removeClass("selected02");
+            $(".Liaoning").addClass("animated fadeIn");
             $(".Liaoning").addClass("selected02");
             $("#16Jan").text("2017.03");
         } else {
@@ -192,7 +193,7 @@ $(document).ready(function(){
     $(window).scroll(function(){
         var scrollBarPosition = $(window).scrollTop();
 
-        if (scrollBarPosition >= (citiesPosition9.top + 200)){
+        if (scrollBarPosition >= (citiesPosition9.top + 250)){
             getCities9.addClass("afterScroll");
             getCities9.addClass("animated fadeIn");
             $(".Jiangxi").addClass("selected02");
@@ -210,7 +211,7 @@ $(document).ready(function(){
     $(window).scroll(function(){
         var scrollBarPosition = $(window).scrollTop();
 
-        if (scrollBarPosition >= (citiesPosition10.top + 330)){
+        if (scrollBarPosition >= (citiesPosition10.top + 380)){
             getCities10.addClass("afterScroll");
             getCities10.addClass("animated fadeIn");
             $(".Sichuan").addClass("selected02");
