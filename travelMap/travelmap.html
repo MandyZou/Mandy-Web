@@ -21,10 +21,12 @@
 
     <link rel="stylesheet" type="text/css" href="style.css" />
 
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
 </head>
 <body>
     <div id="wrap">
-    <div id="tMap"></div>
+    <div id="tMap"><h3 id="16Jan">Date</h3></div>
 
     <script>
     var margin = {top: 0, left: 0, right:0, bottom: 0},
@@ -76,7 +78,6 @@
             .on("mouseout", function(d){
                 d3.select(this).classed("selected", false)
             });
-
         // svg.selectAll("text")
         //   .data(china.features).enter()    
         // .append("text")
@@ -89,7 +90,7 @@
 
     <!-- Text part -->
     <div id="text">
-        <h1 style="text-align: center">Jane's Travel Map</h1>
+        <h1 style="text-align: center">Jane's Travel Map&#9834;</h1>
 
         <div id="cities1" class="beforeScroll">
             2016.01 Jiujiang, Jiangxi
@@ -108,7 +109,7 @@
         </div>
 
         <div id="cities5" class="beforeScroll">
-            2016.08 Taiyuan, Xian
+            2016.08 Taiyuan, Xian, Shanxi
         </div>
 
         <div id="cities6" class="beforeScroll">
