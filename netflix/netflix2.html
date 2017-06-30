@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<head>
+    <title>Netflix rating and score</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <style>
+    #cubes{
+        width: 960px;
+        height: 500px;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div id="cubes"></div>
+    <script>
+    var margin = {top: 50, left: 50, right: 20, bottom: 20},
+        width = 960 - margin.left - margin.right,
+        height = 1500 - margin.top - margin.bottom,
+        box_w = ((width - margin.left) / 12) + 1,
+        box_h = ((height - margin.top) / 51) + 1;
+
+    var svg = d3.select("#cubes")
+                .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
+
+    var x = d3.scaleBand().range([0, (box_w + 1) * 12]),
+        y = d3.scaleBand().range([0, (box_h + 1) * 51]);
+
+    var color = d3.scaleThreshold()
+                    .domain([1,5])
+                    .range(d3.schemeBlues[4]);
+
+    d3.queue()  
+      .defer(d3.csv, "netflix.csv")
+      .await(ready);
+
+    function ready(error, data){
+        if(error) throw error;
+
+        x.domain(["TV-Y", "TV-Y7", "TV-Y7-FV", "TV-G", "G", "TV-PG", "PG", "TV-14", "PG-13", "TV-MA", "R", "NR"]);
+        //https://en.wikipedia.org/wiki/Motion_Picture_Association_of_America_film_rating_system
+        //https://en.wikipedia.org/wiki/TV_Parental_Guidelines
+        y.domain(50, 100, 51);
+
+        var tvCount = d3.nest()
+            .key(function(d){return d.rating; })
+            .key(function(d){return d.score; })
+            .rollup(function(leaves){return leaves.length;})
+            .entries(data);
+
+       //To build a new array with objects including rate, score, and count
+        var tvData_Rate = []
+
+        //Add rate to objects
+        var tvRate = [];
+
+        for(var i = 0; i < tvCount.length; i++){
+            var rate = tvCount[i].key;
+            tvRate.push(rate);
+        }
+
+        tvRate.forEach(function(element){
+            var key = "rate";
+            var obj = {};
+            obj[key] = element;
+            tvData_Rate.push(obj);
+        });
+
+        // console.log(tvData_Rate[11])
+
+        var tvData_Score = []
+
+        //Add score to objects
+        var tvScore = [];
+
+        for(var i = 0; i< tvRate.length; i++){
+            var score = tvCount[i].values;
+            tvScore.push(score);
+        };
+        // console.log(tvScore)
+
+        var tv0 = tvScore[0];
+        for(var i = 0; i<tv0.length; i++){
+            var scole = tv0[i];
+            // tv0_data.push(scole)
+            scole["rate"] = "TV-MA";
+            // tv0_data.push(scole);   
+        };
+        // console.log(tv0)
+
+
+        var tv1 = tvScore[1];
+        for(var i = 0; i<tv1.length; i++){
+            var scole = tv1[i];
+            scole["rate"] = "TV-14";  
+        };
+        // console.log(tv1)
+        
+        var tv2 = tvScore[2];
+        for(var i = 0; i<tv2.length; i++){
+            var scole = tv2[i];
+            scole["rate"] = "PG";
+        };
+        // console.log(tv2);
+
+        var tv3 = tvScore[3];
+        for(var i = 0; i<tv3.length; i++){
+            var scole = tv3[i];
+            scole["rate"] = "TV-PG"; 
+        };
+        // console.log(tv3);
+
+        var tv4 = tvScore[4];
+        for(var i = 0; i<tv4.length; i++){
+            var scole = tv4[i];
+            scole["rate"] = "R";
+        };
+        // console.log(tv4);
+
+        var tv5 = tvScore[5];
+        for(var i = 0; i<tv5.length; i++){
+            var scole = tv5[i];
+            scole["rate"] = "NR"; 
+        };
+        // console.log(tv5);
+
+        var tv6 = tvScore[6];
+
+        for(var i = 0; i<tv6.length; i++){
+            var scole = tv6[i];
+            scole["rate"] = "NR";
+        };
+        // console.log(tv6);
+
+        var tv7 = tvScore[7];
+
+        for(var i = 0; i<tv7.length; i++){
+            var scole = tv7[i];
+            scole["rate"] = "TV-G";
+        };
+        // console.log(tv7);
+
+        var tv8 = tvScore[8];
+
+        for(var i = 0; i<tv8.length; i++){
+            var scole = tv8[i];
+            scole["rate"] = "PG-13";
+        };
+        // console.log(tv8);
+
+        var tv9 = tvScore[9];
+
+        for(var i = 0; i<tv9.length; i++){
+            var scole = tv9[i];
+            scole["rate"] = "TV-Y7-FV"; 
+        };
+        // console.log(tv9);
+
+        var tv10 = tvScore[10];
+
+        for(var i = 0; i<tv10.length; i++){
+            var scole = tv10[i];
+            scole["rate"] = "TV-Y7";
+        };
+        // console.log(tv10);
+
+        var tv11 = tvScore[11];
+
+        for(var i = 0; i<tv11.length; i++){
+            var scole = tv11[i];
+            scole["rate"] = "TV-Y";
+        };
+        // console.log(tv11);
+
+        //Combine all the arrays together!!!!
+        var tvData = tv0.concat(tv1,tv2,tv3,tv4,tv5,tv6,tv7,tv8,tv9,tv10,tv11);
+        console.log(tvData);
+
+
+        svg.selectAll("rect")
+            .data(tvData)
+            .enter().append("rect")
+            .attr("class", function(d){return d.value; })
+            .attr("width", box_w)
+            .attr("height", box_h)
+            .attr("x", function(d){return x(d.rate); })
+            .attr("y", function(d){return y(d.key); })
+            .attr("fill", function(d){
+                return color(d.value);
+            });
+       
+
+
+       
+
+        
+
+
+
+    }
+
+
+
+    </script>
+<!-- Inspiration: https://bost.ocks.org/mike/miserables/ -->
+<!-- Example: http://jsfiddle.net/zy1kxy0c/ -->
+<!-- https://adambard.com/blog/plotting-reddit-post-frequencies-with-d3/ -->
+<!-- http://bl.ocks.org/phoebebright/raw/3176159/ -->
+</body>
+</html>
