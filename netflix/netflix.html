@@ -15,6 +15,18 @@
         display: none;
     }
 
+    .tooltip {
+          position: absolute;
+          display: none;
+          min-width: 80px;
+          height: auto;
+          background: none repeat scroll 0 0 rgba(255,255,255,.7);
+          border: 1px solid #BEBCBC;
+          border-radius: 5px;
+          padding: 6px;
+          text-align: center;
+        }
+
     </style>
 </head>
 
@@ -39,8 +51,10 @@
         y2 = d3.scaleLinear().range([height, 0]);
 
     var color = d3.scaleThreshold()
-                    .domain([1,5])
-                    .range(d3.schemeBlues[4]);
+                    .domain([0,5])
+                    .range(d3.schemeBlues[5]);
+
+    var tooltip = d3.select("body").append("div").attr("class","tooltip");
 
     d3.queue()  
       .defer(d3.csv, "netflix.csv")
@@ -193,13 +207,23 @@
         svg.selectAll("rect")
             .data(tvData)
             .enter().append("rect")
-            .attr("class", function(d){return d.value; })
+            .attr("class", "rect")
             .attr("width", box_w)
             .attr("height", box_h)
             .attr("x", function(d){return x(d.rate); })
             .attr("y", function(d){return y2(d.key); })
             .attr("fill", function(d){
                 return color(d.value);
+            })
+            .on("mouseover", function(d,i){
+                tooltip
+                    .style("left",d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY - 40 + "px")
+                    .style("display", "inline-block")
+                    .html("<span style='color: #19A7F6; font-weight: bold'>" + d.value +"</span>" + " " + d.rate + "-rated shows on Netflix score " + d.key);
+            })
+            .on("mouseout", function(d){
+                tooltip.style("display", "none");
             });
 
         svg.append("g")
@@ -223,7 +247,7 @@
             .attr("text-anchor", "end")
             .text("Number of Shows");
 
-    }
+    };
 
 
 
