@@ -4,11 +4,18 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Gudea" rel="stylesheet">
 
     <style>
+    body{
+        font-family: 'Gudea', sans-serif;
+    }
+
     #cubes{
-        width: 960px;
-        height: 500px;
+        width: 550px;
+        height: 700px;
+        margin: 0;
+        float: left;
     }
 
     .yaxis .domain {
@@ -27,10 +34,24 @@
           text-align: center;
         }
 
+    .text{
+        padding-top: 40px;
+        padding-left: 50px;
+        float: left;
+        width: 40%;
+    }
+
+    p{
+        line-height: 30px;
+    }
+
     </style>
 </head>
 
 <body>
+    <h1 style="text-align: center">How do shows with different ratings perform on Netflix?</h1>
+
+    <div class="container">
     <div id="cubes"></div>
     <script>
     var margin = {top: 50, left: 50, right: 20, bottom: 20},
@@ -252,6 +273,18 @@
 
 
     </script>
+    <div class="text">
+    <h3><bold>A few takeaways from this chart:</bold></h3>
+    <p>(1) Maybe because of the demographics of users, more shows for grown-ups are receiving scores than shows for children.</p>
+    <p>(2) <span style="border-bottom: 3px solid #19A7F6; box-shadow: inset 0 -4px 0 #19A7F6">TV-14</span> shows perform the best on Netflix since it is the only rating has more than 10 shows being graded above 95.</p>
+    <p>(3) Netflix users tend to grade shows they like rather than the shows they hate? Since most shows are either not receiving any grades at all, or just receiving few low grades. This can also reflect that Netflix users <span style="border-bottom: 3px solid #19A7F6; box-shadow: inset 0 -4px 0 #19A7F6">don't actively grade shows</span> very often.</p>
+    <p style="text-align: right;"><em>Data Source: data.world</em></p>   
+    </div>
+
+
+</div>
+<!-- End of container div -->
+
 <!-- Inspiration: https://bost.ocks.org/mike/miserables/ -->
 <!-- Example: http://jsfiddle.net/zy1kxy0c/ -->
 <!-- https://adambard.com/blog/plotting-reddit-post-frequencies-with-d3/ -->
