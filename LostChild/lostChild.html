@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+    <title>Missing Children</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+
+    <!-- Introducing TopoJson -->
+    <script src="https://unpkg.com/topojson@3.0.0"></script>
+
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <style>
+    #childMap{
+        width: 960px;
+        height: 500px;
+    }
+
+    .states {
+        fill: #ddd;
+        stroke: white;
+        stroke-width: 1.5px;
+    }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="childMap"></div>
+    <script>
+    var margin = {top: 0, left: 50, right: 50, bottom: 0},
+        height = 500 - margin.top - margin.bottom,
+        width = 960 - margin.left - margin.right;
+
+    var svg = d3.select("#childMap")
+                .append("svg")
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("width", width + margin.left + margin.right)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top +")");
+
+    var projection = d3.geoAlbersUsa()
+                   .translate([width/2, height/2]) 
+                   .scale([1000]);
+
+    var path = d3.geoPath()
+                .projection(projection);
+
+    d3.queue()
+        .defer(d3.json, "us-states.json")
+        .await(ready);
+
+    function ready(error, us){
+        if (error) throw error;
+
+         var usStates = topojson.feature(us, {
+            type:"GeometryCollection",
+            geometries: us.objects.cb_2016_us_state_500k.geometries
+        });
+
+         svg.selectAll("path")
+            .data(usStates.features)
+            .enter().append("path")
+            .attr("class", "states")
+            .attr("d", path);
+
+        // svg.append("path")
+        //     .datum(topojson.mesh(us, us.))
+
+    }
+
+
+
+
+    </script>
+
+</body>
+</html>
