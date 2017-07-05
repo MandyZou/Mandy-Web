@@ -11,6 +11,10 @@
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
     <style>
+    h1{
+        margin: 0;
+    }
+
     #childMap{
         width: 2000px;
         height: 900px;
@@ -32,7 +36,9 @@
 </head>
 
 <body>
-    <div id="childMap"></div>
+    <div id="childMap">
+        <h1>Lost Children by States over Last 10 Years</h1>
+    </div>
     <script>
     var margin = {top: 30, left: 10, right: 1000, bottom: 40},
         height = 600 - margin.top - margin.bottom,
@@ -50,6 +56,18 @@
         y = d3.scaleLinear().range([height,0]);
 
     var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+    var tip = d3.select("body")
+        .append("div")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .style("color", "white")
+        .style("padding", "8px")
+        .style("background-color", "rgba(0, 0, 0, 0.75)")
+        .style("border-radius", "6px")
+        .style("font", "12px sans-serif")
+        .text("tooltip");
 
     d3.queue()
         .defer(d3.csv, "childoutput.csv")
@@ -79,18 +97,27 @@
                 return radiusScale(d.Number);
                 })
             .style("fill", function(d){return color(d.Year);})
-            .append("g")
-            .attr("transform","translate(0, 90)");
+            .on("mouseover", function(d){
+                tip.html(d.State + ": <br/>" + d.Number + " children in " + d.Year);
+                // console.log(d.State)
+                tip.style("visibility", "visible");
+                tip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+            })
+            .on("mouseout", function(d){
+                return tip.style("visibility","hidden");
+            });
+            // .append("g")
+            // .attr("transform","translate(300, 90)");
 
         svg.append("g")
             .attr("class", "xaxis")
-            .attr("transform","translate(0," + (height+20) + ")")
+            .attr("transform","translate(-8," + (height+20) + ")")
             .call(d3.axisBottom(x)
                         .tickSize([0]));
 
         svg.append("g")
             .attr("class","yaxis")
-            .attr("transform","translate(" + (width*2.3) + ",0)")
+            .attr("transform","translate(" + (width*2.27) + ",0)")
             .call(d3.axisLeft(y)
                     .tickSize([0])
                     // .tickPadding([10])
