@@ -34,7 +34,7 @@
 <body>
     <div id="childMap"></div>
     <script>
-    var margin = {top: 60, left: 10, right: 1000, bottom: 40},
+    var margin = {top: 30, left: 10, right: 1000, bottom: 40},
         height = 600 - margin.top - margin.bottom,
         width = 1500 - margin.left - margin.right,
         box_w = ((width - margin.left) / 52) + 80;
@@ -63,7 +63,7 @@
 
         for (var i = 0; i<data.length; i++){
 
-        var radiusScale = d3.scaleSqrt().domain([0, d3.max(data[i]["Number"], function(d){return d[1]; })])
+        var radiusScale = d3.scaleSqrt().domain([0, 144])
                                         .range([2,9]);
 
         // console.log(data)
@@ -72,32 +72,26 @@
             .data(data)
             .enter().append("circle")
             .attr("cx", function(d,i){return x(d.State); })
-            .attr("cy", function(d,i){return y(d.Year)});
+            .attr("cy", function(d,i){return y(d.Year)})
+            .attr("r", function(d){
+                return radiusScale(d.Number);
+            })
+            .append("g")
+            .attr("transform","translate(0, 90)");
 
         svg.append("g")
             .attr("class", "xaxis")
-            .attr("transform","translate(0," + height + ")")
+            .attr("transform","translate(0," + (height+20) + ")")
             .call(d3.axisBottom(x)
                         .tickSize([0]));
 
         svg.append("g")
             .attr("class","yaxis")
-            .attr("transform","translate(" + (width*2.3) + ",-40)")
+            .attr("transform","translate(" + (width*2.3) + ",0)")
             .call(d3.axisLeft(y)
                     .tickSize([0])
                     // .tickPadding([10])
                     .tickFormat(d3.format("")));
-
-
-        // var parser = d3.timeParse("%m/%d/%Y");
-        // var format = d3.timeFormat("%Y-%m-%d");
-
-        // for (var i =0; i<data.length; i++){
-        //     var time = format(parser(data[i]["missingfromyear"]));
-        //     console.log(time);
-        // };
-
-        // console.log(data)
 
 
          
