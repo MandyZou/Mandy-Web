@@ -49,6 +49,8 @@
     var x = d3.scaleBand().range([0, (box_w + 1) * 12]),
         y = d3.scaleLinear().range([height,0]);
 
+    var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
     d3.queue()
         .defer(d3.csv, "childoutput.csv")
         .await(ready);
@@ -71,11 +73,12 @@
         svg.selectAll("circle")
             .data(data)
             .enter().append("circle")
-            .attr("cx", function(d,i){return x(d.State); })
-            .attr("cy", function(d,i){return y(d.Year)})
-            .attr("r", function(d){
+                .attr("cx", function(d,i){return x(d.State); })
+                .attr("cy", function(d,i){return y(d.Year)})
+                .attr("r", function(d){
                 return radiusScale(d.Number);
-            })
+                })
+            .style("fill", function(d){return color(d.Year);})
             .append("g")
             .attr("transform","translate(0, 90)");
 
