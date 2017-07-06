@@ -122,7 +122,7 @@
                 })
             .style("fill", function(d){return color(d.Year);})
             .on("mouseover", function(d){
-                tip.html(d.stateName + ": <br/>" + d.Number + " children in " + d.Year);
+                tip.html("<strong>" + d.stateName + ":</strong> <br/>" + d.Number + " children in " + d.Year);
                 // console.log(d.State)
                 tip.style("visibility", "visible");
                 tip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
@@ -130,33 +130,23 @@
             .on("mouseout", function(d){
                 return tip.style("visibility","hidden");
             });
-            // .append("g")
-            // .attr("transform","translate(300, 90)");
 
         svg.append("g")
             .attr("class", "xaxis")
             .attr("transform","translate(-8," + (height-530) + ")")
             .call(d3.axisTop(x)
-                        .tickSize([3]));
+                        .tickSize([3])
+                        .tickSizeOuter(0));
 
         svg.append("g")
             .attr("class","yaxis")
             .attr("transform","translate(" + (width*2.27) + ",0)")
             .call(d3.axisLeft(y)
                     .tickSize([0])
-                    // .tickPadding([10])
                     .tickFormat(d3.format("")));
 
-
-         
-
-    }; //End of i loop
-        
-
+    }; 
     };
-
-
-
 
     </script>
 <p style="padding-top: 8px"><em>*2017 Data only includes January to March.</em></p>
