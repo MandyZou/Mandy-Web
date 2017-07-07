@@ -5,8 +5,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
 
-    <!-- Introducing TopoJson -->
-    <script src="https://unpkg.com/topojson@3.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
@@ -33,13 +32,33 @@
         background-color: white;
         color: black;
         border: 1px solid #696969;
+        border-radius: 2px;
+        padding: 5px 10px;
+    }
+
+    button:active{
+        background-color: #696969;
+        color: white;
+        cursor: pointer;
+    } 
+
+    button:hover{
+        background-color: #696969;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:focus{
+        background-color: #696969;
+        color: white;
+        cursor: pointer;
+        outline: 0;
     }
 
     .paragraph{
         padding-left: 30px;
         width: 80%
     }
-
 
     .hightlight2010{
         color: white;
@@ -110,7 +129,7 @@
     <h1 style="font-size: 50px">Missing Children by States over Last 10 Years</h1>
     <p class="paragraph">The number of missing children took off in recent three years. In 2015, <span class="hightlight2010">204</span> children were missing, which is nearly 4 times the number in 2010. Things get worse in 2016, as <span class="hightlight2016">919</span> lost children cases occurred across the country. The situation is also not very positive for 2017. While the chart only includes data from January to March this year, <span class="hightlight2017">432</span> cases have already been reported.</p>
     <div class="buttons">
-        <button># of Missing Children</button><button># of Population</button>
+        <button id="chilren"># of Missing Children</button><button id="population"># of Population</button>
     </div> 
     <div id="childMap"></div>
     <div id="populationMap"></div>
@@ -255,6 +274,16 @@
                     .tickFormat(d3.format("")));
 
     };
+
+    $("#chilren").click(function(){
+        $("#populationMap").hide();
+        $("#childMap").show();
+    });
+
+    $("#population").click(function(){
+        $("#populationMap").show();
+        $("#childMap").hide();
+    })
 
     </script>
 <p class="byline"><em>*2017 Data only includes January to March</em>
