@@ -125,14 +125,14 @@
     </style>
 </head>
 
-<body>
+<body onload="document.getElementById('chilren').focus(); $('#populationMap').hide()">
     <h1 style="font-size: 50px">Missing Children by States over Last 10 Years</h1>
     <p class="paragraph">The number of missing children took off in recent three years. In 2015, <span class="hightlight2010">204</span> children were missing, which is nearly 4 times the number in 2010. Things get worse in 2016, as <span class="hightlight2016">919</span> lost children cases occurred across the country. The situation is also not very positive for 2017. While the chart only includes data from January to March this year, <span class="hightlight2017">432</span> cases have already been reported.</p>
     <div class="buttons">
         <button id="chilren"># of Missing Children</button><button id="population"># of Population</button>
     </div> 
-    <div id="childMap"></div>
     <div id="populationMap"></div>
+    <div id="childMap"></div>
     <script>
     var margin = {top: 55, left: 10, right: 1000, bottom: 30},
         height = 600 - margin.top - margin.bottom,
@@ -240,6 +240,8 @@
         var radiusScaleP = d3.scaleSqrt().domain([522833, 39250017])
                                          .range([1,15]);
 
+        var numberformat = d3.format(",d");  
+
         psvg.selectAll("circle")
             .data(data)
             .enter().append("circle")
@@ -250,7 +252,7 @@
                 })
                 .style("fill", function(d){return color(d.Year); })
                 .on("mouseover", function(d){
-                    tip.html("<strong>" + d.stateName + ":</strong> <br/>" + d.population + " people in " + d.Year);
+                    tip.html("<strong>" + d.stateName + ":</strong> <br/>" + numberformat(d.population) + " people in " + d.Year);
                     // console.log(d.State)
                     tip.style("visibility", "visible");
                     tip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
@@ -284,6 +286,7 @@
         $("#populationMap").show();
         $("#childMap").hide();
     })
+
 
     </script>
 <p class="byline"><em>*2017 Data only includes January to March</em>
