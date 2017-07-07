@@ -127,7 +127,7 @@
 
 <body onload="document.getElementById('chilren').focus(); $('#populationMap').hide()">
     <h1 style="font-size: 50px">Missing Children by States over Last 10 Years</h1>
-    <p class="paragraph">The number of missing children took off in recent three years. In 2015, <span class="hightlight2010">204</span> children were missing, which is nearly 4 times the number in 2010. Things get worse in 2016, as <span class="hightlight2016">919</span> lost children cases occurred across the country. The situation is also not very positive for 2017. While the chart only includes data from January to March this year, <span class="hightlight2017">432</span> cases have already been reported.</p>
+    <p class="paragraph">The number of missing children took off in recent three years, especially comparing to population growth. In 2015, <span class="hightlight2010">204</span> children were missing, which is nearly 4 times the number in 2010. Things get worse in 2016, as <span class="hightlight2016">919</span> lost children cases occurred across the country. The situation is also not very positive for 2017. While the chart only includes data from January to March this year, <span class="hightlight2017">432</span> cases have already been reported.</p>
     <div class="buttons">
         <button id="chilren"># of Missing Children</button><button id="population"># of Population</button>
     </div> 
@@ -200,7 +200,7 @@
         // console.log(data)
 
         //for #
-        var radiusScale = d3.scaleSqrt().domain([0, 144])
+        var radiusScale = d3.scaleSqrt().domain([1, 144])
                                         .range([1,15]);
 
         svg.selectAll("circle")
@@ -237,7 +237,7 @@
                     .tickFormat(d3.format("")));
 
         //for population
-        var radiusScaleP = d3.scaleSqrt().domain([522833, 39250017])
+        var radiusScaleP = d3.scaleSqrt().domain([500000, 39250017])
                                          .range([1,15]);
 
         var numberformat = d3.format(",d");  
