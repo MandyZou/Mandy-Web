@@ -115,15 +115,28 @@
 
     d3.queue()
         .defer(d3.csv, "childoutput.csv")
+        .defer(d3.csv, "statepopulation.csv")
         .await(ready);
 
-    function ready(error, data){
+    function ready(error, data, population){
         if (error) throw error;
 
         x.domain(["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","GU","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MH","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PW","PA","SC","SD","TN","TX","UT","VA","WA","WV","WI","WY"]);
         y.domain([2008,2017]);
 
         // console.log(typeof(domain))
+        data.forEach(function(item){
+            var result = population.filter(function(item2){
+                return item2.Geography === item.stateName &&
+                    item2.Year === item.Year
+            });
+            // item.item2 = (result[0] !== undefined) ? result[0].name : null;
+            // console.log(result)
+            item.population = (result[0] !== undefined) ? result[0].population : null;
+        });
+
+        console.log(data)
+
 
         for (var i = 0; i<data.length; i++){
 
