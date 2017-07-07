@@ -16,11 +16,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Arimo|Crimson+Text|Roboto" rel="stylesheet">
-
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
@@ -129,8 +125,6 @@
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
            viewBox="-15.963 -385.217 438.421 895.657" style="enable-background:new -15.963 -385.217 438.421 895.657;"
            xml:space="preserve">
-        <image style="display:none;overflow:visible;enable-background:new    ;" width="564" height="1128" xlink:href="human.jpg"  transform="matrix(1 0 0 1 -66 -435.411)">
-        </image>
         <circle id="body-head" style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" cx="201.546" cy="-300.439" r="73.604"/>
         <path style="fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;" d="M272.668,85.284H125.754c-5.5,0-10.001-4.5-10.001-10.001
           l22.5-111.177l-22.5-170.494c0-5.5,4.5-10.001,10.001-10.001l73.84,17.196l73.074-17.196c5.5,0,10.001,4.5,10.001,10.001
@@ -489,7 +483,6 @@
 
         // .range(["#fa6956", "#36bfc7"]);
 
-
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
     d3.csv("number.csv", function(d, i, columns){
@@ -509,7 +502,7 @@
       x1.domain(keys).rangeRound([0, x0.bandwidth()]);
       y.domain([0, d3.max(data, function(d) {return d3.max(keys, function(key) {return d[key]; }); })]);
 
-      console.log(data)
+      // console.log(data)
 
       g.append("g")
         .selectAll("g")
@@ -531,14 +524,13 @@
             return z(d.key);
             })
           .attr("class", function(d){
-            console.log(d)
+            // console.log(d)
           })
           .on("mousemove", function(d, i){
             tooltip
               .style("left", d3.event.pageX - 50 + "px")
               .style("top", d3.event.pageY - 70 + "px")
               .style("display", "inline-block")
-
               .html("<span style='font-weight: bold'>"+ (d.key) +"</span>" + ":" + "<br>" + "$" + d3.format(",.0f")(d.value));
         })
           .on("mouseover", function(){d3.select(this).attr("fill","orange");})
@@ -546,6 +538,29 @@
              //  return document.getElementById("#body-head").setAttribute("fill", "orange");
              // })})
           .on("mouseout", function(d){ tooltip.style("display", "none"); d3.select(this).attr("fill", function(d){return z(d.key); }); });
+
+        var numberformat = d3.format(",d");
+
+        g.selectAll("text.labels")
+            .data(data)
+            .enter().append("text")
+            .text(function(d){return "$" + numberformat(d.Missouri); })
+            .attr("class", function(d,i){
+              return "monumber" + i; })
+            .attr("x", function(d,i){return i * (width/data.length) })
+            .attr("y", function(d){return y(d.Missouri); })
+            .style("text-anchor", "start")
+            .style("visibility","hidden");
+
+        g.selectAll("text.values")
+            .data(data)
+            .enter().append("text")
+            .text(function(d){return "$" + numberformat(d.National_Average); })
+            .attr("class", function(d,i) {return "nanumber" + i; })
+            .attr("x", function(d,i){return i * (width/data.length) + 60; })
+            .attr("y", function(d){return y(d.National_Average) -20; })
+            .style("text-anchor", "end")
+            .style("visibility","hidden");        
 
         g.append("g")
           .attr("class", "axis")
