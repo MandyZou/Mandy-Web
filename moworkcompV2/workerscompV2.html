@@ -505,14 +505,41 @@
 
       y.domain(data.map(function(d){return d.BodyParts; }));
 
-      svg.selectAll("circle.mo")
+      data.forEach(function(d){
+        d["Missouri"] = +d["Missouri"];
+        d["National_Average"] = +d["National_Average"];
+      });
+
+      //for lines
+      for(var i = 0; i<data.length; i++){
+        svg.selectAll("line" + data[i]["BodyParts"])
+            .data([data])
+            .enter().append("line")
+            .attr("x1", function(d){
+                      return x(d[i]["Missouri"]);
+                     })
+            .attr("y1", function(d){
+                      return y(d[i]["BodyParts"]);
+                  })
+            .attr("x2", function(d){
+                      return x(d[i]["National_Average"]);
+                  })
+            .attr("y2", function(d){
+                      return y(d[i]["BodyParts"]);
+                  })
+            .attr("d", line)
+            .style("stroke", "#999");
+      }
+
+      //for Circles
+            svg.selectAll("circle.mo")
          .data(data)
          .enter().append("circle")
             .attr("cx", function(d,i){return x(d.Missouri); })
             .attr("cy", function(d,i){return y(d.BodyParts); })
             .attr("r", 6)
-            .style("fill", "rgba(70,130,180,.5)")
-            .style("stroke", "steelblue");
+            .style("fill", "rgb(252,119,160)")
+            .style("stroke", "#FB1D61");
 
       svg.selectAll("text")
           .data(data)
@@ -530,19 +557,8 @@
             .attr("cx", function(d,i){return x(d.National_Average); })
             .attr("cy", function(d,i){return y(d.BodyParts); })
             .attr("r", 6)
-            .style("fill", "rgba(255,25,25,.5)")
-            .style("stroke", "red");
-
-      data.forEach(function(d){
-        d["Missouri"] = +d["Missouri"];
-        d["National_Average"] = +d["National_Average"];
-      });
-
-      svg.append("path")
-          .data([data])
-          .attr("fill", "none")
-          .attr("stroke", "#999")
-          .attr("d", line);
+            .style("fill", "rgb(125,167,202)")
+            .style("stroke", "steelblue");
 
 
       //Setting up axis
