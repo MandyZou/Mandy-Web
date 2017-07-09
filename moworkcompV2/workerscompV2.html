@@ -60,6 +60,7 @@
 
       .xaxis .tick text{
         transform: rotate(90deg);
+        fill: #999;
       }  
 
       .toolTip {
@@ -466,13 +467,13 @@
 
 
     <!-- Workers Compensation Chart -->
-    <svg id="bodychart" width="870" height="600" style="float: left; padding-top: 20; margin-bottom: 50; padding-bottom: 50"></svg>
+    <div id="bodychart" width="870" height="700" style="float: left; padding-top: 20; margin-bottom: 50; padding-bottom: 50"></div>
 
     <script>
-    var margin = {top: 20, left: 20, right: 20, bottom: 50},
+    var margin = {top: 20, left: 20, right: 50, bottom: 50},
         width = 870 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom,
-        box_h = ((height - margin.top) / 13) + 1;
+        height = 600 - margin.top - margin.bottom,
+        box_h = ((height - margin.top) / 14) + 1;
 
     var svg = d3.select("#bodychart")
                 .append("svg")
@@ -482,10 +483,10 @@
                 .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
     var x = d3.scaleLinear()
-          .domain([0, 169878])
+          .domain([0, 180000])
           .range([0, width]);
 
-    var y = d3.scaleBand().range([0, (box_h + 1) * 13]);
+    var y = d3.scaleBand().range([0, (box_h) * 13]);
 
     var line = d3.line()
         .x(function(d){return x(d.National_Average); })
@@ -501,28 +502,37 @@
       y.domain(data.map(function(d){return d.BodyParts; }));
 
       data.forEach(function(d){
-        d["Missouri"] = +d["Missouri"];
-        d["National_Average"] = +d["National_Average"];
-        var x0 = d["Missouri"];
-        var x1 = d["National_Average"];
+        d["Numbers"] = +d["Numbers"];
       });
 
-      svg.append("path")
-          .data(data)
-          .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("d", line);
+      svg.selectAll("circle.mo")
+         .data(data)
+         .enter().append("circle")
+            .attr("cx", function(d,i){return x(d.Missouri); })
+            .attr("cy", function(d,i){return y(d.BodyParts); })
+            .attr("r", 4)
+            .style("fill", "none")
+            .style("stroke", "steelblue");
 
-      // function make_y_gridlines() {   
-      //   return d3.axisLeft(y)
-      //           .ticks(5)
-      // };
+      svg.selectAll("circle.na")
+         .data(data)
+         .enter().append("circle")
+            .attr("cx", function(d,i){return x(d.National_Average); })
+            .attr("cy", function(d,i){return y(d.BodyParts); })
+            .attr("r", 4)
+            .style("fill", "none")
+            .style("stroke", "red");
 
+
+      //Setting up axis
       svg.append("g")
           .attr("class", "xaxis")
           .attr("transform", "translate(0," + height +")")
           .call(d3.axisBottom(x)
-                  .tickSize(-height))
+                  .tickSize(-height)
+                  .tickPadding([4])
+                  .tickFormat(d3.format(",d")))
+          .style("text-anchor", "end")
           .select(".domain")
           .remove();
 
@@ -531,7 +541,15 @@
           .attr("transform", "translate(" + width + ",0)")
           .call(d3.axisLeft(y));
 
-    }
+      // svg.selectAll("text")
+      //     .append("text")
+      //     .attr("class", "mtext")
+      //     .attr("x", 400)
+      //     .attr("y", 400)
+      //     .attr("fill", "#000")
+      //     .text("Dollars($)");
+
+    };
 
     </script>
     <!-- End of body and graphic -->
