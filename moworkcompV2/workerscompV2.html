@@ -44,10 +44,23 @@
         margin-right: 20%;
       }
 
-      .axis .domain {
+      .yaxis .domain {
+        display: none;
+      }
+
+      .yaxis line{
         display: none;
       }
       /*Delete the baseline for x-axis and y-axis, and delete the two end ticks*/
+
+      .tick line{
+        stroke: #ccc;
+        stroke-dasharray: 5,5;
+      }
+
+      .xaxis .tick text{
+        transform: rotate(90deg);
+      }  
 
       .toolTip {
           position: absolute;
@@ -453,11 +466,73 @@
 
 
     <!-- Workers Compensation Chart -->
-    <svg id="bodychart" width="870" height="500" style="float: left; padding-top: 20; margin-bottom: 50; padding-bottom: 50"></svg>
+    <svg id="bodychart" width="870" height="600" style="float: left; padding-top: 20; margin-bottom: 50; padding-bottom: 50"></svg>
 
     <script>
+    var margin = {top: 20, left: 20, right: 20, bottom: 50},
+        width = 870 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom,
+        box_h = ((height - margin.top) / 13) + 1;
 
-   
+    var svg = d3.select("#bodychart")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleLinear()
+          .domain([0, 169878])
+          .range([0, width]);
+
+    var y = d3.scaleBand().range([0, (box_h + 1) * 13]);
+
+    var line = d3.line()
+        .x(function(d){return x(d.National_Average); })
+        .y(function(d){return y(d.BodyParts); });
+
+    d3.queue()
+      .defer(d3.csv, "number.csv")
+      .await(ready);
+
+    function ready(error, data){
+      if (error) throw error;
+
+      y.domain(data.map(function(d){return d.BodyParts; }));
+
+      data.forEach(function(d){
+        d["Missouri"] = +d["Missouri"];
+        d["National_Average"] = +d["National_Average"];
+        var x0 = d["Missouri"];
+        var x1 = d["National_Average"];
+      });
+
+      svg.append("path")
+          .data(data)
+          .attr("fill", "none")
+          .attr("stroke", "steelblue")
+          .attr("d", line);
+
+      // function make_y_gridlines() {   
+      //   return d3.axisLeft(y)
+      //           .ticks(5)
+      // };
+
+      svg.append("g")
+          .attr("class", "xaxis")
+          .attr("transform", "translate(0," + height +")")
+          .call(d3.axisBottom(x)
+                  .tickSize(-height))
+          .select(".domain")
+          .remove();
+
+      svg.append("g")
+          .attr("class", "yaxis")
+          .attr("transform", "translate(" + width + ",0)")
+          .call(d3.axisLeft(y));
+
+    }
+
     </script>
     <!-- End of body and graphic -->
 
