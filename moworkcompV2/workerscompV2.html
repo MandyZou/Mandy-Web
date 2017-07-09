@@ -44,6 +44,10 @@
         margin-right: 20%;
       }
 
+      #bodychart{
+        cursor: crosshair;
+      }
+
       .yaxis .domain {
         display: none;
       }
@@ -122,7 +126,7 @@
 
       <hr class="style11">
   <!-- Body svg -->
-    <div class="body-all" style="float: left; padding-left:0">
+    <div class="body-all" style="float: left; padding-left:0; padding-top: 50px">
         <?xml version="1.0" encoding="iso-8859-1"?>
         <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -210,9 +214,9 @@
       $(document).ready(function(){
         $(".body-Eye").on("mouseover", function(){
           $(".body-Eye").css({fill: "#FF261B"});
-          $("#parts").append("Eye");
-          $("#moPrice").append("$69,457");
-          $("#naPrice").append("$96,700");
+          $("#parts").text("Eye");
+          $("#moPrice").text("$69,457");
+          $("#naPrice").text("$96,700");
           $("#69457").css({fill: "#EB2348"});
           $("#96700").css({fill: "#6DC066"});
         }).on("mouseout", function(){
@@ -229,9 +233,9 @@
       $(document).ready(function(){
           $(".body-Ear").on("mouseover", function(){
             $(".body-Ear").css({fill: "#FF261B"});
-            $("#parts").append("Ear");
-            $("#moPrice").append("$24,310");
-            $("#naPrice").append("$38,050");
+            $("#parts").text("Ear");
+            $("#moPrice").text("$24,310");
+            $("#naPrice").text("$38,050");
             $("#24310").css({fill: "#EB2348"});
             $("#38050").css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -248,9 +252,9 @@
       $(document).ready(function(){
           $(".body-Arm").on("mouseover", function(){
             $(".body-Arm").css({fill: "#FF261B"});
-            $("#parts").append("Arm");
-            $("#moPrice").append("$115,100");
-            $("#naPrice").append("$169,878");
+            $("#parts").text("Arm");
+            $("#moPrice").text("$115,100");
+            $("#naPrice").text("$169,878");
             $("#115100").css({fill: "#EB2348"});
             $("#169878").css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -267,9 +271,9 @@
       $(document).ready(function(){
           $(".body-Leg").on("mouseover", function(){
             $(".body-Leg").css({fill: "#FF261B"});
-            $("#parts").append("Leg");
-            $("#moPrice").append("$102,697");
-            $("#naPrice").append("$153,221");
+            $("#parts").text("Leg");
+            $("#moPrice").text("$102,697");
+            $("#naPrice").text("$153,221");
             $("#102697").css({fill: "#EB2348"});
             $("#153221").css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -286,9 +290,9 @@
       $(document).ready(function(){
           $(".body-Hand").on("mouseover", function(){
             $(".body-Hand").css({fill: "#FF261B"});
-            $("#parts").append("Hand");
-            $("#moPrice").append("$86,821");
-            $("#naPrice").append("$144,930");
+            $("#parts").text("Hand");
+            $("#moPrice").text("$86,821");
+            $("#naPrice").text("$144,930");
             $("#86821").css({fill: "#EB2348"});
             $("#144930").css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -305,9 +309,9 @@
       $(document).ready(function(){
           $(".body-Thumb").on("mouseover", function(){
             $(".body-Thumb").css({fill: "#FF261B"});
-            $("#parts").append("Thumb");
-            $("#moPrice").append("$29,767");
-            $("#naPrice").append("$42,432");
+            $("#parts").text("Thumb");
+            $("#moPrice").text("$29,767");
+            $("#naPrice").text("$42,432");
             $("#29767").css({fill: "#EB2348"});
             $("#42432").css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -324,9 +328,9 @@
       $(document).ready(function(){
           $(".body-Index").on("mouseover", function(){
             $(".body-Index").css({fill: "#FF261B"});
-            $("#parts").append("Index Finger");
-            $("#moPrice").append("$22,235");
-            $("#naPrice").append("$24,474");
+            $("#parts").text("Index Finger");
+            $("#moPrice").text("$22,235");
+            $("#naPrice").text("$24,474");
             $("#22325").css({fill: "#EB2348"});
             $("#24474").css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -343,9 +347,9 @@
       $(document).ready(function(){
           $(".body-Middle").on("mouseover", function(){
             $(".body-Middle").css({fill: "#FF261B"});
-            $("#parts").append("Middle Finger");
-            $("#moPrice").append("$17,364");
-            $("#naPrice").append("$20,996");
+            $("#parts").text("Middle Finger");
+            $("#moPrice").text("$17,364");
+            $("#naPrice").text("$20,996");
             $("#17364").css({fill: "#EB2348"});
             $("#20996").css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -362,9 +366,9 @@
       $(document).ready(function(){
           $(".body-Ring").on("mouseover", function(){
             $(".body-Ring").css({fill: "#6DC066"});
-            $("#parts").append("Ring Finger");
-            $("#moPrice").append("$17,364");
-            $("#naPrice").append("$14,660");
+            $("#parts").text("Ring Finger");
+            $("#moPrice").text("$17,364");
+            $("#naPrice").text("$14,660");
             $("#17365").css({fill: "#6DC066"});
             $("#14660").css({fill: "#EB2348"});
           }).on("mouseout", function(){
@@ -381,9 +385,9 @@
       $(document).ready(function(){
           $(".body-Pinky").on("mouseover", function(){
             $(".body-Pinky").css({fill: "#FF261B"});
-            $("#parts").append("Pinky");
-            $("#moPrice").append("$10,915");
-            $("#naPrice").append("$11,343");
+            $("#parts").text("Pinky");
+            $("#moPrice").text("$10,915");
+            $("#naPrice").text("$11,343");
             $('#10915').css({fill: "#EB2348"});
             $('#11343').css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -400,9 +404,9 @@
       $(document).ready(function(){
           $(".body-Foot").on("mouseover", function(){
             $(".body-Foot").css({fill: "#FF261B"});
-            $("#parts").append("Foot");
-            $("#moPrice").append("$74,418");
-            $("#naPrice").append("$91,779");
+            $("#parts").text("Foot");
+            $("#moPrice").text("$74,418");
+            $("#naPrice").text("$91,779");
             $('#74418').css({fill: "#EB2348"});
             $('#91779').css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -420,9 +424,9 @@
       $(document).ready(function(){
           $(".body-Toe").on("mouseover", function(){
             $(".body-Toe").css({fill: "#FF261B"});
-            $("#parts").append("Big Toe");
-            $("#moPrice").append("$19,845");
-            $("#naPrice").append("$23,436");
+            $("#parts").text("Big Toe");
+            $("#moPrice").text("$19,845");
+            $("#naPrice").text("$23,436");
             $('#19845').css({fill: "#EB2348"});
             $('#23436').css({fill: "#6DC066"});
           }).on("mouseout", function(){
@@ -439,9 +443,9 @@
       $(document).ready(function(){
           $(".body-Testicle").on("mouseover", function(){
             $(".body-Testicle").css({fill: "#FF261B"});
-            $("#parts").append("Testicle");
-            $("#moPrice").append("$0");
-            $("#naPrice").append("$27,678");
+            $("#parts").text("Testicle");
+            $("#moPrice").text("$0");
+            $("#naPrice").text("$27,678");
             $('#27678').css({fill: "#6DC066"});
           }).on("mouseout", function(){
             $(".body-Testicle").css({fill: "#fff"});
