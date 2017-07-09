@@ -63,17 +63,6 @@
         fill: #999;
       }  
 
-      .tooltip {
-          position: absolute;
-          display: none;
-          min-width: 80px;
-          height: auto;
-          background: none repeat scroll 0 0 #ffffff;
-          border: 1px solid #6F257F;
-          padding: 14px;
-          text-align: center;
-        }
-
        #Layer_1 {
         width: 60%;
         padding-left:0;
@@ -497,8 +486,6 @@
     var line = d3.line()
         .x(function(d){return x(d.National_Average, d.Missouri); })
         .y(function(d){return y(d.BodyParts); });
-
-    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
     d3.queue()
       .defer(d3.csv, "number.csv")
