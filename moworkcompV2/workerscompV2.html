@@ -565,14 +565,27 @@
             .on("mouseout", function(d){
               $(".body-" + d.BodyParts).mouseout();
             });
+            "#999"
 
       svg.selectAll("text")
           .data(data)
           .enter().append("text")
-          .attr("x", function(d){return x(d.National_Average) + 12; })
+          .attr("x", function(d){
+            if (d.BodyParts === "Ring Finger"){
+              return x(d.National_Average) + 22;
+            } else{
+              return x(d.National_Average) + 12;
+            };
+           })
           .attr("y", function(d){return y(d.BodyParts) + 4; })
           .text(function(d){return d.BodyParts; })
-          .style("fill", "#999")
+          .style("fill", function(d){
+            if (d.BodyParts === "Ring Finger"){
+              return "red";
+            } else{
+              return "#999";
+            };
+          })
           .style("font-size", "10px")
           .on("mouseover", function(d){
               $(".body-" + d.BodyParts).mouseover();
