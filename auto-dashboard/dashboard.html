@@ -64,10 +64,12 @@
            .attr("class", "line")
            .attr("d", line);
 
-        // svg.append("path")
-        //    .data([tdata])
-        //    .attr("class", "dottedLine")
-        //    .attr("d", line);
+        svg.append("path")
+           .data([tdata])
+           .attr("class", "dottedLine")
+           .attr("d", line);
+
+           console.log([tdata])
 
         svg.append("g")
            .attr("class", "xaxis")
@@ -108,29 +110,15 @@
                 .style("opacity", 0);
             });
 
-        // svg.selectAll("dot")
-        //     .data(tdata)
-        //     .enter().append("circle")
-        //     .attr("r", 4)
-        //     .attr("cx", function(d){return x(d.Year);})
-        //     .attr("cy", function(d){return y(d.infections); })
-        //     .style("fill", "white")
-        //     .style("stroke", "#ed992f")
-        //     .on("mouseover", function(d){
-        //       div.transition()
-        //           .duration(200)
-        //           .style("opacity", .9);
-        //       div.html("In " + d.Year + ", the target is <span style='color: red'>" + d.infections + "</span> new HIV infection cases")
-        //         .style("left", (d3.event.pageX) + "px")
-        //         .style("top", (d3.event.pageY -28) + "px");
-        //     })
-        //     .on("mouseout", function(d){
-        //       div.transition()
-        //         .duration(500)
-        //         .style("opacity", 0);
-        //     });   
-
       };
+
+      svg.append("g")
+        .append("text")
+        .attr("x", 430)
+        .attr("y", 10)
+        .attr("fill", "red")
+        .style("font-size","10px")
+        .text("Target: 2,800");
 
         </script>
     </div>

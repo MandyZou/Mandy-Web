@@ -11,8 +11,8 @@
 
     .dottedLine {
         fill: none;
-        stroke: #ed992f;
-        stroke-width: 3px;
+        stroke: red;
+        stroke-width: 2px;
         stroke-dasharray: 7, 5;
     }
 
