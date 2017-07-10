@@ -1,0 +1,61 @@
+#chart {
+      width: 560px;
+      height: 500px;
+    }
+
+    .line {
+        fill: none;
+        stroke: #4393E6;
+        stroke-width: 3px;
+    }
+
+    .dottedLine {
+        fill: none;
+        stroke: #ed992f;
+        stroke-width: 3px;
+        stroke-dasharray: 7, 5;
+    }
+
+    .dottedLegend{
+      stroke-width: 3px;
+      stroke-dasharray: 4, 5;
+
+    }
+
+    .lineLegend{
+      stroke-width: 3px;
+    }
+
+    .yaxis .domain {
+        display: none;
+      }
+
+    .yaxis line{
+        stroke: lightgrey;
+        stroke-opacity: 0.7;
+        shape-rendering: crispEdges;
+    }
+
+    .yaxis text {
+        margin-left: 20px;
+    }
+
+    .xaxis line{
+        display: none;
+    }
+
+    .xaxis .domain{
+        display: none;
+    }
+
+    div.tooltip {
+      position: absolute;
+      text-align: center;
+      width: 100px;
+      height: 40px;
+      padding: 2px;
+      font: 12px sans-serif;
+      background: white;
+      border: 1px #2c2c2c solid;
+      border-radius: 8px;
+    }

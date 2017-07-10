@@ -1,0 +1,115 @@
+/* Using rems to easily scale these gauges */
+html {
+  font-size:150%;
+}
+
+.gauge {
+  display:inline-block;
+  position:relative;
+  width:10rem;
+  height:5rem;
+  overflow:hidden;
+  left: 5em;
+}
+
+.gauge:before, .gauge:after, .meter {
+  position:absolute;
+  display:block;
+  content:"";
+}
+
+.gauge:before, .meter { width:10rem; height:5rem; }
+.gauge:before { border-radius:5rem 5rem 0 0; background:#D8D8D8; }
+
+.gauge:after {
+  position:absolute;
+  bottom:0;
+  left:2.5rem;
+  width:5rem;
+  height:2.5rem;
+  background:#fff;
+  border-radius:2.5rem 2.5rem 0 0;
+}
+
+.gauge-all{
+  margin-left: 10%;
+}
+
+.meter {
+  top:100%;
+  transition:1.5s;
+  transform-origin:center top;
+  border-radius:0 0 6rem 6rem;
+  background:#4393E6;
+}
+
+.gauge:hover .meter { transform:rotate(.5turn); }
+
+/* Pointer ==================== */
+
+.needle {
+  width: 1em;
+  margin: 0 auto;
+  animation: needle-ani 2000ms ease-in-out infinite alternate;
+  transform-origin: 2em 8.5em;
+  transform: rotateZ(-85deg);
+}
+
+.pointer {
+  position: absolute;
+  top: -2em;
+  left: -0.5em;
+  width: 1em;
+  height: 2em;
+  background: #4393E6;
+}
+
+.pointer:after, .pointer:before {
+  content: "";
+  display: block;
+  position: absolute;  
+  top: -0.2em;
+  width: 0.8em;
+  height: 2.2em;
+  background: rgb(255,255,255);
+}
+
+.pointer:after {
+  left: -0.5em; 
+  transform: rotateZ(8deg);
+}
+
+.pointer:before { 
+  left: 0.8em; 
+  transform: rotateZ(-8deg);
+}
+
+@keyframes needle-ani {
+  0% {transform: rotateZ(-3deg);}
+  100% {transform: rotateZ(3deg);}
+}
+
+/* Demo code ==================== */
+
+.meter { animation:empty 1.5s linear both; }
+  @keyframes empty { 0%{ transform:rotate(180deg); } }
+.overload .meter { animation-delay:.4s; }
+.percentage .meter { animation-delay:.8s; }
+
+
+html { position:relative; height:100%; }
+html, body { display:-webkit-flex; display:flex; }
+
+figure { 
+  flex:1;
+  margin-left: 130%;
+  display: table;
+}
+
+figcaption { 
+  display:block; 
+  font:10pt "Avenir"; 
+  color:#444; 
+  user-select:none;
+  text-align: center;
+}
