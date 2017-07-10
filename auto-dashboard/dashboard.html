@@ -39,7 +39,7 @@
                   .append("g")
                     .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
-        var x = d3.scaleBand().range([0, width]),
+        var x = d3.scaleBand().range([0,width]),
             y = d3.scaleLinear().range([height, 0]);
 
         var line = d3.line().x(function(d){return x(d.Weekday) + 30; })
@@ -72,8 +72,6 @@
            .attr("class", "xaxis")
            .attr("transform", "translate(0," + height + ")")
            .call(d3.axisBottom(x)
-                    .ticks(8)
-                    .tickFormat(d3.format(""))
                     .tickSize([9]));
 
         svg.append("g")
