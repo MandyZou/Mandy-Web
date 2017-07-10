@@ -10,3 +10,30 @@ body{
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
     background:white !important;
 }
+
+button {
+        background-color: white;
+        color: black;
+        border: 1px solid #696969;
+        border-radius: 2px;
+        padding: 5px 10px;
+    }
+
+button:active{
+        background-color: #696969;
+        color: white;
+        cursor: pointer;
+    } 
+
+button:hover{
+        background-color: #696969;
+        color: white;
+        cursor: pointer;
+    }
+
+button:focus{
+        background-color: #696969;
+        color: white;
+        cursor: pointer;
+        outline: 0;
+    }
