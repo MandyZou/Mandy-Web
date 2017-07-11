@@ -213,11 +213,19 @@
           donut_tooltip1.style("display","block").style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
           donut_tooltip1.html("<span style='font-size: 15px'><strong>" + d.data.Social + "</strong>:</span><br/>" + d.data.Count + " Users <br/>" + percentageFormat(d.data.Percentage));
-        })
+        });
 
         path1.on("mouseout", function(d){
           donut_tooltip1.style("display","none");
-        })
+        });
+
+        svg1.append("g")
+            .append("text")
+            .attr("x", -55)
+            .attr("y", 5)
+            .attr("fill","#2c2c2c")
+            .style("font-size","25px")
+            .text("Facebook");
 
         //Second donut chart
         var path2 = svg2.selectAll("path")
@@ -234,11 +242,19 @@
           donut_tooltip2.style("display","block").style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
           donut_tooltip2.html("<span style='font-size: 15px'><strong>" + d.data.Social + "</strong>:</span><br/>" + d.data.Count + " Users <br/>" + percentageFormat(d.data.Percentage));
-        })
+        });
 
         path2.on("mouseout", function(d){
           donut_tooltip2.style("display","none");
-        })
+        });
+
+        svg2.append("g")
+            .append("text")
+            .attr("x", -40)
+            .attr("y", 5)
+            .attr("fill","#2c2c2c")
+            .style("font-size","25px")
+            .text("Twitter");
 
         //Third donut chart
         var path3 = svg3.selectAll("path")
@@ -255,11 +271,19 @@
           donut_tooltip3.style("display","block").style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
           donut_tooltip3.html("<span style='font-size: 15px'><strong>" + d.data.Social + "</strong>:</span><br/>" + d.data.Count + " Users <br/>" + percentageFormat(d.data.Percentage));
-        })
+        });
 
         path3.on("mouseout", function(d){
           donut_tooltip3.style("display","none");
-        })
+        });
+
+        svg3.append("g")
+            .append("text")
+            .attr("x", -50)
+            .attr("y", 5)
+            .attr("fill","#2c2c2c")
+            .style("font-size","25px")
+            .text("Google+");
 
         //Legend for all
         var legendRectSize = 18,
