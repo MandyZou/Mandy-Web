@@ -29,7 +29,7 @@
         <div id="chart"></div>
 
         <script>
-        var margin = {top: 50, left: 30, right: 20, bottom: 20},
+        var margin = {top: 50, left: 20, right: 50, bottom: 20},
             width = 560 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
 
@@ -127,31 +127,31 @@
       <div id="donut"></div>
       <script>
       //https://bl.ocks.org/vickygisel/c3f4eb2b16b86dd0f641263383f05a13
-      var width = 200,
-          height = 200,
-          margin = {top: 20, left: 40, right: 20, bottom: 20},
-          radius = Math.min(width, height)/2;
+      var donut_width = 160,
+          donut_height = 160,
+          donut_margin = {top: 20, left: 40, right: 20, bottom: 20},
+          radius = Math.min(width, height)/2.3;
 
       var svg1 = d3.select("#donut")
                   .append("svg")
-                  .attr("width", width)
-                  .attr("height", height + margin.bottom)
+                  .attr("width", donut_width + donut_margin.right + donut_margin.left)
+                  .attr("height", donut_height + donut_margin.top + donut_margin.bottom)
                   .append("g")
-                  .attr("transform", "translate(" + (width/2) + "," + (height/2 + 20) + ")");
+                  .attr("transform", "translate(" + (donut_width/2 + 20) + "," + (donut_height/2 + 20) + ")");
 
       var svg2 = d3.select("#donut")
                   .append("svg")
-                  .attr("width", width + margin.left)
-                  .attr("height", height)
+                  .attr("width", donut_width + donut_margin.right + donut_margin.left)
+                  .attr("height", donut_height + donut_margin.top + donut_margin.bottom)
                   .append("g")
-                  .attr("transform", "translate(" + (width/2 + 40) + "," + (height/2) + ")");
+                  .attr("transform", "translate(" + (donut_width/2 + 20) + "," + (donut_height/2 + 20) + ")");
 
       var svg3 = d3.select("#donut")
                   .append("svg")
-                  .attr("width", width + margin.left)
-                  .attr("height", height)
+                  .attr("width", donut_width + donut_margin.right + donut_margin.left)
+                  .attr("height", donut_height + donut_margin.top + donut_margin.bottom)
                   .append("g")
-                  .attr("transform", "translate(" + (width/2 + 40) + "," + (height/2) + ")");
+                  .attr("transform", "translate(" + (donut_width/2 + 20) + "," + (donut_height/2 + 20) + ")");
 
 
       var color = d3.scaleOrdinal()
