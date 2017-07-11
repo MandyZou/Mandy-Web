@@ -125,8 +125,8 @@
     <!-- Part 2 starts here -->
     <div class="part2">
       <div id="donut"></div>
+
       <script>
-      //https://bl.ocks.org/vickygisel/c3f4eb2b16b86dd0f641263383f05a13
       var donut_width = 160,
           donut_height = 160,
           donut_margin = {top: 20, left: 40, right: 20, bottom: 20},
@@ -257,6 +257,38 @@
         path3.on("mouseout", function(d){
           donut_tooltip3.style("display","none");
         })
+
+        //Legend for all
+        var legendRectSize = 18,
+            legendSpacing = 4;
+
+        var legendContainer = d3.select("#donut")
+                                .append("svg")
+                                .attr("width", 800)
+                                .attr("height", legendRectSize*5);
+
+        var legend = legendContainer.selectAll(".legend")
+              .data(color.domain())
+              .enter().append("g")
+              .attr("class", "legend")
+              .attr('transform', function(d, i) {
+            var height = legendRectSize + legendSpacing;
+            var offset =  height * color.domain().length;
+            var horz = i * legendRectSize * 5 - offset;
+            var vert = legendRectSize;
+            return 'translate(' + (horz + 250) + ',' + vert + ')';
+          });
+
+          legend.append("rect")
+            .attr("width", legendRectSize)
+            .attr("height", legendRectSize)
+            .style("fill", color)
+            .style("stroke", color);
+
+          legend.append("text")
+            .attr("x", legendRectSize + legendSpacing)
+            .attr("y", legendRectSize - legendSpacing +3)
+            .text(function(d){return d; });
 
 
       }
