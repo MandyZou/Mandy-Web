@@ -7,7 +7,7 @@
 }
 .main {
   display: flex;
-  margin: 0.7em 0 0.7em 0.7em;
+  margin: 0em 0 0.7em 0.7em;
   transition: 0.5s all ease;
   transform-style: preserve-3d;
   position: relative;
