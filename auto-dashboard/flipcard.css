@@ -16,7 +16,7 @@
   min-width: 200px;
   max-width: 250px;
   height: 160px;
-  box-shadow: 1px 1px 5px #000;
+  /*box-shadow: 1px 1px 5px #000;*/
 }
 .main .front{
   /*background: #34495e;*/
