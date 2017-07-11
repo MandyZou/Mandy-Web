@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="main.css"></link>
     <link rel="stylesheet" type="text/css" href="meter.css"></link>
     <link rel="stylesheet" type="text/css" href="linechart.css"></link>
-
+    <link rel="stylesheet" type="text/css" href="donutchart.css"></link>
 
 </head>
 <body onload="document.getElementById('week').focus()">
@@ -69,8 +69,6 @@
            .attr("class", "dottedLine")
            .attr("d", line);
 
-           console.log([tdata])
-
         svg.append("g")
            .attr("class", "xaxis")
            .attr("transform", "translate(0," + height + ")")
@@ -124,8 +122,98 @@
     </div>
     <!-- End of part 1 -->
 
+    <!-- Part 2 starts here -->
+    <div class="part2">
+      <div id="donut"></div>
+      <script>
+      //https://bl.ocks.org/vickygisel/c3f4eb2b16b86dd0f641263383f05a13
+      var width = 200,
+          height = 200,
+          margin = {top: 20, left: 40, right: 20, bottom: 20},
+          radius = Math.min(width, height)/2;
+
+      var svg1 = d3.select("#donut")
+                  .append("svg")
+                  .attr("width", width)
+                  .attr("height", height + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + (width/2) + "," + (height/2 + 20) + ")");
+
+      var svg2 = d3.select("#donut")
+                  .append("svg")
+                  .attr("width", width + margin.left)
+                  .attr("height", height)
+                  .append("g")
+                  .attr("transform", "translate(" + (width/2 + 40) + "," + (height/2) + ")");
+
+      var svg3 = d3.select("#donut")
+                  .append("svg")
+                  .attr("width", width + margin.left)
+                  .attr("height", height)
+                  .append("g")
+                  .attr("transform", "translate(" + (width/2 + 40) + "," + (height/2) + ")");
 
 
+      var color = d3.scaleOrdinal()
+                    .domain(["Like","Share","Comment"])
+                    .range(["#FE42AC","#4AC6FC","#FF7800"]);
+
+      var donutWidth = 40;
+
+      var arc = d3.arc()
+                .innerRadius(radius - donutWidth)
+                .outerRadius(radius);
+
+      d3.queue()
+        .defer(d3.csv, "donutnumber1.csv")
+        .defer(d3.csv, "donutnumber2.csv")
+        .defer(d3.csv, "donutnumber3.csv")
+        .defer(d3.csv, "donutnumber4.csv")
+        .await(ready);
+
+      function ready(error, data1, data2, data3, data4){
+        if(error) throw error;
+
+        var pie = d3.pie()
+                .value(function(d){return d.Percentage; })
+                .sort(null);
+
+        svg1.selectAll("path")
+            .data(pie(data1))
+            .enter()
+            .append("path")
+            .attr("d", arc)
+            .attr("class", "arc")
+            .attr("fill", function(d){
+              return color(d.data.Social);
+            });
+
+        svg2.selectAll("path")
+            .data(pie(data2))
+            .enter()
+            .append("path")
+            .attr("d", arc)
+            .attr("class", "arc2")
+            .attr("fill",function(d){
+              return color(d.data.Social);
+            });
+
+        svg3.selectAll("path")
+            .data(pie(data3))
+            .enter()
+            .append("path")
+            .attr("d", arc)
+            .attr("class", "arc2")
+            .attr("fill",function(d){
+              return color(d.data.Social);
+            });
+
+
+      }
+
+
+      </script>
+    </div>
 
 
 
