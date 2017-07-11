@@ -9,6 +9,7 @@ body{
     padding:20px 10px 20px 10px;
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
     background:white !important;
+    height:100%;
 }
 
 button {
