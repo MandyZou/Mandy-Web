@@ -1,6 +1,7 @@
 #chart {
       width: 560px;
       height: 500px;
+      position: absolute;
       font-family: "Avenir";
     }
 
@@ -60,3 +61,10 @@
       border: 1px #2c2c2c solid;
       border-radius: 8px;
     }
+
+    #monthchart{
+      width: 560px;
+      height: 500px;
+      position: absolute;
+    }
+
