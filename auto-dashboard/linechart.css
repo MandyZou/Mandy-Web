@@ -1,6 +1,7 @@
 #chart {
       width: 560px;
       height: 500px;
+      font-family: "Avenir";
     }
 
     .line {

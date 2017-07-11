@@ -279,7 +279,7 @@
             var offset =  height * color.domain().length;
             var horz = i * legendRectSize * 5 - offset;
             var vert = legendRectSize;
-            return 'translate(' + (horz + 250) + ',' + vert + ')';
+            return 'translate(' + (horz + 280) + ',' + vert + ')';
           });
 
           legend.append("rect")
@@ -290,8 +290,9 @@
 
           legend.append("text")
             .attr("x", legendRectSize + legendSpacing)
-            .attr("y", legendRectSize - legendSpacing +3)
-            .text(function(d){return d; });
+            .attr("y", legendRectSize - legendSpacing)
+            .text(function(d){return d; })
+            .style("font-size","15px");
 
 
       }
