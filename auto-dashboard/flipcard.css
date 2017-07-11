@@ -2,17 +2,17 @@
 .container {
   /*margin: 10vh auto;*/
   /*justify-content: center;*/
-  display: block;
-  /*flex-flow: row wrap;*/
+  display: flex;
+  flex-flow: row wrap;
 }
 .main {
-  /*display: flex;*/
-  margin: 0.7em;
+  display: flex;
+  margin: 0.7em 0 0.7em 0.7em;
   transition: 0.5s all ease;
   transform-style: preserve-3d;
   position: relative;
   cursor: pointer;
-  width: 33.3%;
+  width: 30%;
   min-width: 240px;
   max-width: 350px;
   height: 200px;
