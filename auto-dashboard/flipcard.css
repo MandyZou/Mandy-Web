@@ -12,20 +12,20 @@
   transform-style: preserve-3d;
   position: relative;
   cursor: pointer;
-  width: 30%;
-  min-width: 240px;
-  max-width: 350px;
-  height: 200px;
+  width: 20%;
+  min-width: 200px;
+  max-width: 250px;
+  height: 160px;
   box-shadow: 1px 1px 5px #000;
 }
 .main .front{
   /*background: #34495e;*/
   background: white;
   position: absolute;
-  width: 50%;
-  min-width: 240px;
-  max-width: 350px;
-  height: 200px;
+  width: 30%;
+  min-width: 200px;
+  max-width: 250px;
+  height: 160px;
   transition: 0.5s all ease;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
@@ -35,10 +35,10 @@
   /*background: #34495e;*/
   background: white;
   position: absolute;
-  width: 50%;
-  min-width: 240px;
-  max-width: 350px;
-  height: 200px;
+  width: 30%;
+  min-width: 200px;
+  max-width: 250px;
+  height: 160px;
   transition: 0.5s all ease;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
