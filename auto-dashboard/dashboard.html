@@ -153,10 +153,27 @@
                   .append("g")
                   .attr("transform", "translate(" + (donut_width/2 + 20) + "," + (donut_height/2 + 20) + ")");
 
+      var percentageFormat = d3.format(",.1%");
+
+      //for donut_tooltip1
+      var donut_tooltip1 = d3.select("#donut")
+                    .append("div")
+                    .attr("class", "donutTooltip1");
+
+      //for donut_tooltip2
+      var donut_tooltip2 = d3.select("#donut")
+                    .append("div")
+                    .attr("class", "donutTooltip2");
+
+      //for donut_tooltip3
+      var donut_tooltip3 = d3.select("#donut")
+                    .append("div")
+                    .attr("class", "donutTooltip3");
 
       var color = d3.scaleOrdinal()
                     .domain(["Like","Share","Comment"])
                     .range(["#FE42AC","#4AC6FC","#FF7800"]);
+
 
       var donutWidth = 40;
 
@@ -175,10 +192,11 @@
         if(error) throw error;
 
         var pie = d3.pie()
-                .value(function(d){return d.Percentage; })
+                .value(function(d){return d.Count; })
                 .sort(null);
 
-        svg1.selectAll("path")
+        //First donut chart
+        var path1 = svg1.selectAll("path")
             .data(pie(data1))
             .enter()
             .append("path")
@@ -188,7 +206,18 @@
               return color(d.data.Social);
             });
 
-        svg2.selectAll("path")
+        path1.on("mouseover", function(d){
+          donut_tooltip1.style("display","block").style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY) + "px");
+          donut_tooltip1.html("<span style='font-size: 15px'><strong>" + d.data.Social + "</strong>:</span><br/>" + d.data.Count + " Users <br/>" + percentageFormat(d.data.Percentage));
+        })
+
+        path1.on("mouseout", function(d){
+          donut_tooltip1.style("display","none");
+        })
+
+        //Second donut chart
+        var path2 = svg2.selectAll("path")
             .data(pie(data2))
             .enter()
             .append("path")
@@ -198,7 +227,18 @@
               return color(d.data.Social);
             });
 
-        svg3.selectAll("path")
+        path2.on("mouseover", function(d){
+          donut_tooltip2.style("display","block").style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY) + "px");
+          donut_tooltip2.html("<span style='font-size: 15px'><strong>" + d.data.Social + "</strong>:</span><br/>" + d.data.Count + " Users <br/>" + percentageFormat(d.data.Percentage));
+        })
+
+        path2.on("mouseout", function(d){
+          donut_tooltip2.style("display","none");
+        })
+
+        //Third donut chart
+        var path3 = svg3.selectAll("path")
             .data(pie(data3))
             .enter()
             .append("path")
@@ -207,6 +247,16 @@
             .attr("fill",function(d){
               return color(d.data.Social);
             });
+
+        path3.on("mouseover", function(d){
+          donut_tooltip3.style("display","block").style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY) + "px");
+          donut_tooltip3.html("<span style='font-size: 15px'><strong>" + d.data.Social + "</strong>:</span><br/>" + d.data.Count + " Users <br/>" + percentageFormat(d.data.Percentage));
+        })
+
+        path3.on("mouseout", function(d){
+          donut_tooltip3.style("display","none");
+        })
 
 
       }
