@@ -10,6 +10,10 @@ $(document).ready(function(){
                             .force("y", ForceYCategory)
                             .alphaTarget(0.3)
                             .restart();
+        } else {
+            return simulation.force("x", ForceXCombine)
+                        .force("y", d3.forceY(300).strength(0.08))
+                        .force("colide", d3.forceCollide(8));
         }
     });
 
