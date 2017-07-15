@@ -7,10 +7,13 @@
 
     <script src="jquery-3.2.1.min.js"></script>
 
+    <script src="scroll.js"></script>
+
 <style>
     #trump{
-        margin-left: 10%;
+        /*margin-left: 10%;*/
         float: left;
+        height: 1000px;
     }
 
 /*    button {
@@ -46,15 +49,15 @@
 <body>
     <h1>Trump White House Salary</h1>
 
-<!--     <button id="category-split" style="margin-left: 5%;">Category Split</button>
-    <button id="year-split" style="margin-left: 5%;">Year Split</button>
-    <button id="all-split" style="margin-left: 5%;">All</button> -->
+    <button id="category-split" style="margin-left: 5%;">Category Split</button>
+    <!-- <button id="year-split" style="margin-left: 5%;">Year Split</button> -->
+    <!-- <button id="all-split" style="margin-left: 5%;">All</button> -->
 
     <script>
 
-    // $("#category-split").click(function(){
-    //     $("#button-text").text("Culture // Science // Art // Other");
-    // });
+    $("#category-split").click(function(){
+        // $("#button-text").text("Culture // Science // Art // Other");
+    });
 
     // $("#year-split").click(function(){
     //     $("#button-text").text("Before 2000 // After 2000 // Before 1900");
@@ -73,8 +76,8 @@
     <script>
 
 //Set up svg element
-    var width = 500,
-        height = 600;
+    var width = 1024,
+        height = 1000;
 
     var svg = d3.select("body")
                 .append("svg")
@@ -85,7 +88,7 @@
                 .attr("transform", "translate(0,0)");
 
 //Scale for circles (different r based on number)
-    var radiusScale = d3.scaleSqrt().domain([0, 187100]).range([1, 10]);
+    // var radiusScale = d3.scaleSqrt().domain([0, 187100]).range([1, 5]);
 
 //Set up tootips
     var tip = d3.select("body")
@@ -105,19 +108,84 @@
     var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
 //Set up force for different splits
-    var ForceXCombine = d3.forceX(width / 2).strength(0.08);
+    var ForceXCombine = d3.forceX(700).strength(0.08);
 
-    // var ForceXCategory = d3.forceX(function(d){
-    //     if (d.Category === "Culture"){
-    //         return 150;
-    //     } else if (d.Category === "Science"){
-    //         return 550;
-    //     } else if (d.Category === "Art"){
-    //         return 900;
-    //     } else {
-    //         return 1150;
-    //     }
-    // });
+    var ForceXCategory = d3.forceX(function(d){
+        if (d.Category === "Advisor"){
+            return 300;
+        } else if (d.Category === "Analyst"){
+            return 550;
+        } else if (d.Category === "Assistant"){
+            return 800;
+        } else if (d.Category === "Assistant staff"){
+            return 1000;
+        } else if (d.Category === "Assistant to"){
+            return 300;
+        } else if (d.Category === "Assistant to President"){
+            return 550;
+        } else if (d.Category === "Chief"){
+            return 800;
+        } else if (d.Category === "Coordinator"){
+            return 1000;
+        } else if (d.Category === "Counsel"){
+            return 300;
+        } else if (d.Category === "Director"){
+            return 550;
+        } else if (d.Category === "Manager"){
+            return 800;
+        } else if (d.Category === "Operator"){
+            return 1000;
+        } else if (d.Category === "Staff"){
+            return 300;
+        } else if (d.Category === "Secretary"){
+            return 550;
+        } else if (d.Category === "Strategist"){
+            return 800;
+        } else if (d.Category === "Specialist"){
+            return 1000;
+        } else if (d.Category === "Supervisor"){
+            return 300;
+        }
+    });
+
+    var ForceYCategory = d3.forceY(function(d){
+        if (d.Category === "Advisor"){
+            return 100;
+        } else if (d.Category === "Analyst"){
+            return 100;
+        } else if (d.Category === "Assistant"){
+            return 110;
+        } else if (d.Category === "Assistant staff"){
+            return 100;
+        } else if (d.Category === "Assistant to"){
+            return 250;
+        } else if (d.Category === "Assistant to President"){
+            return 250;
+        } else if (d.Category === "Chief"){
+            return 250;
+        } else if (d.Category === "Coordinator"){
+            return 250;
+        } else if (d.Category === "Counsel"){
+            return 400;
+        } else if (d.Category === "Director"){
+            return 400;
+        } else if (d.Category === "Manager"){
+            return 400;
+        } else if (d.Category === "Operator"){
+            return 400;
+        } else if (d.Category === "Staff"){
+            return 550;
+        } else if (d.Category === "Secretary"){
+            return 550;
+        } else if (d.Category === "Strategist"){
+            return 550;
+        } else if (d.Category === "Specialist"){
+            return 550;
+        } else if (d.Category === "Supervisor"){
+            return 700;
+        }
+    });
+
 
     // var ForceXYear = d3.forceX(function(d){
     //     if (d.Period === "Before 2000"){
@@ -134,10 +202,8 @@
 //STEP TWO: don't have them collide!
     var simulation = d3.forceSimulation()
         .force("x", ForceXCombine)
-        .force("y", d3.forceY(height / 2).strength(0.08))
-        .force("colide", d3.forceCollide(function(d){
-            return radiusScale(d.SALARY) + 3;
-        }));
+        .force("y", d3.forceY(300).strength(0.08))
+        .force("colide", d3.forceCollide(8));
 
 //Set the viz to load until everything has been processed
     d3.queue()
@@ -159,11 +225,9 @@
              .style("fill", function(d){
                 return color(d.Category);
              })
-             .attr("r", function(d){
-                return radiusScale(d.SALARY);
-             })
+             .attr("r", 5)
              .on("mouseover", function(d){
-                    tip.html("<strong>" + (d["Position"]) + "</strong>: <br/>$" + d3.format(",.0f")(d["SALARY"]));
+                    tip.html("<strong>" + (d["Category"]) + "</strong>: <br/>$" + d3.format(",.0f")(d["SALARY"]));
                     tip.style("visibility", "visible");
                 })
              .on("mousemove", function() {
@@ -194,16 +258,17 @@
 
         d3.select("#category-split").on("click", function(d){
             return simulation.force("x", ForceXCategory)
-                            .alphaTarget(0.5)
+                            .force("y", ForceYCategory)
+                            .alphaTarget(0.3)
                             .restart();
         });
 
 
-        d3.select("#year-split").on("click", function(d){
-            return simulation.force("x", ForceXYear)
-                        .alphaTarget(0.5)
-                        .restart();
-        });
+        // d3.select("#year-split").on("click", function(d){
+        //     return simulation.force("x", ForceXYear)
+        //                 .alphaTarget(0.5)
+        //                 .restart();
+        // });
 
 //The force is triggered by the "tick." Set up the tick here
         simulation.nodes(datapoints)
@@ -229,7 +294,7 @@
 
     </script>
 
-    <div class="trump-text">Total: 377 People</div>
+    <!-- <div class="trump-text">Total: 377 People</div> -->
 
 </body>
 </html>
