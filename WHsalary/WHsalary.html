@@ -5,21 +5,15 @@
 
     <script src="http://d3js.org/d3.v4.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Viga" rel="stylesheet">
-
     <script src="jquery-3.2.1.min.js"></script>
 
 <style>
-    .circle-text{
-        color: #fff;
-        font-size: 10px;
+    #trump{
+        margin-left: 10%;
+        float: left;
     }
 
-    body {
-        font-family: 'Viga', sans-serif
-    }
-
-    button {
+/*    button {
         margin-top: 20px;
         background-color: #FFF;
         border: 2px solid #FFA419;
@@ -38,6 +32,12 @@
 
     button:focus {
         outline: 0;
+    }*/
+
+    .trump-text{
+        float: left;
+        padding-top: 250px;
+        padding-left: 250px;
     }
 
 </style>
@@ -68,16 +68,17 @@
 
     </script>
 
-    <p id="button-text" style="margin-left: 40%; margin-top: 50px"></p>
+    
 
     <script>
 
 //Set up svg element
-    var width = 1248,
+    var width = 500,
         height = 600;
 
     var svg = d3.select("body")
                 .append("svg")
+                .attr("id","trump")
                 .attr("width", width)
                 .attr("height", height)
                 .append("g")
@@ -92,9 +93,10 @@
         .style("position", "absolute")
         .style("z-index", "10")
         .style("visibility", "hidden")
-        .style("color", "white")
+        .style("color", "#2c2c2c")
         .style("padding", "8px")
-        .style("background-color", "rgba(0, 0, 0, 0.75)")
+        .style("background-color", "rgb(255,255,255)")
+        .style("border","1px solid #2c2c2c")
         .style("border-radius", "6px")
         .style("font", "12px sans-serif")
         .text("tooltip");
@@ -227,8 +229,7 @@
 
     </script>
 
-    <p style="text-align: right; font-size: 15px; margin-right: 30px; margin-top: 0; font-family: 'Source Sans Pro', sans-serif;"><em>Source: Smithsonian Institute</em></p>
-
+    <div class="trump-text">Total: 377 People</div>
 
 </body>
 </html>
