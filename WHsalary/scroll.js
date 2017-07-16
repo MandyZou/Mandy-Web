@@ -13,7 +13,9 @@ $(document).ready(function(){
         } else {
             return simulation.force("x", ForceXCombine)
                             .force("y", d3.forceY(200).strength(0.08))
-                            .force("colide", d3.forceCollide(8));
+                            .force("colide", d3.forceCollide(8))
+                            .alphaTarget(0.05)
+                            .restart();
         }
     });
 
@@ -23,7 +25,7 @@ $(document).ready(function(){
             $(".text-all").attr("visibility","hidden");
             $(".text-category").attr("visibility","visible").addClass('animated flipInX');
         } else {
-            $(".text-all").attr("visibility","visible").addClass('animated fadeInDown');
+            $(".text-all").attr("visibility","visible").addClass('animated flipInX');
             $(".text-category").attr("visibility","hidden");
         }
     });
