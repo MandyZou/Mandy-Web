@@ -108,7 +108,6 @@
     var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
 //Set up force for different splits
-    var ForceXCombine = d3.forceX(700).strength(0.08);
 
     var ForceXCategory = d3.forceX(function(d){
         if (d.Category === "Advisor"){
@@ -186,14 +185,14 @@
         }
     });
 
-
+var ForceXCombine = d3.forceX(650).strength(0.08);
 
 //For the force chart
 //STEP ONE: push them to the middle
 //STEP TWO: don't have them collide!
     var simulation = d3.forceSimulation()
         .force("x", ForceXCombine)
-        .force("y", d3.forceY(300).strength(0.08))
+        .force("y", d3.forceY(200).strength(0.08))
         .force("colide", d3.forceCollide(8));
 
 //Set the viz to load until everything has been processed
@@ -262,8 +261,8 @@
 
     //text for all
     svg.append("text")
-        .attr("x", 660)
-        .attr("y", 500)
+        .attr("x", 600)
+        .attr("y", 400)
         .attr("class","text-all")
         .text("Total: 377");
 
