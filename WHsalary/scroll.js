@@ -23,7 +23,7 @@ $(document).ready(function(){
         var scrollBarPosition = $(window).scrollTop();
         if (scrollBarPosition >= tMapPosition.top + 20){
             $(".text-all").attr("visibility","hidden");
-            $(".text-category").attr("visibility","visible").addClass('animated flipInX');
+            $(".text-category").attr("visibility","visible").addClass('animated fadeIn');
         } else {
             $(".text-all").attr("visibility","visible").addClass('animated flipInX');
             $(".text-category").attr("visibility","hidden");
@@ -47,6 +47,13 @@ $(document).ready(function(){
                             .force("colide", d3.forceCollide(8))
                             .alphaTarget(0.18)
                             .restart();
+        }
+    });
+
+    $(window).scroll(function(){
+        var scrollBarPosition = $(window).scrollTop();
+        if (scrollBarPosition >= tMapPosition.top + 500){
+            $(".text-high").addClass('animated fadeIn');
         }
     });
 
