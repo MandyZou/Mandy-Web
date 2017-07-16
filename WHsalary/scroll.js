@@ -36,16 +36,17 @@ $(document).ready(function(){
         if (scrollBarPosition >= tMapPosition.top + 500){
             return simulation.force("x", ForceXChart)
                             .force("y", ForceYChart)
-                            .force("colide", d3.forceCollide(0))
+                            .force("colide", d3.forceCollide(0.9))
                             .alphaTarget(0.5)
                             .restart();
+                    nodes.attr("r", 8);
             // console.log("hey!")
-        } else {
-            // return simulation.force("x", ForceXCombine)
-            //                 .force("y", d3.forceY(200).strength(0.08))
-            //                 .force("colide", d3.forceCollide(8))
-            //                 .alphaTarget(0.05)
-            //                 .restart();
+        } else if (scrollBarPosition >= tMapPosition.top + 20){
+            return simulation.force("x", ForceXCategory)
+                            .force("y", ForceYCategory)
+                            .force("colide", d3.forceCollide(8))
+                            .alphaTarget(0.18)
+                            .restart();
         }
     });
 

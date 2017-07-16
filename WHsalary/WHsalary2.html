@@ -43,8 +43,6 @@
 
 <body>
     <h1 style="text-align: center">Trump White House Salary</h1>
-
-
     
 
     <script>
@@ -65,12 +63,6 @@
         chart_height = 700 - chart_margin.top - chart_margin.bottom,
         chart_width = 1500 - chart_margin.left - chart_margin.right,
         box_w = ((chart_width - chart_margin.left) / 17) + 2;
-
-        // svg
-        //         .attr("width", chart_width + chart_margin.left + chart_margin.right)
-        //         .attr("height", chart_height + chart_margin.top + chart_margin.bottom)
-        //         .append("g")
-        //         .attr("transform", "translate(" + (chart_margin.top+20) + "," + (chart_margin.left+600) + ")");
 
     var x = d3.scaleBand()
               .domain(["Advisor","Analyst","Assistant","Assistant staff","Assistant to","Assistant to President","Chief","Coordinator","Counsel","Director","Manager","Operator","Secretary","Specialist","Staff","Strategist","Supervisor"])
@@ -95,7 +87,9 @@
         .text("tooltip");
 
 //Set up color scheme
-    var color = d3.scaleOrdinal(d3.schemeCategory20c);
+    var color = d3.scaleOrdinal()
+                  .domain(["Advisor","Analyst","Assistant","Assistant staff","Assistant to","Assistant to President","Chief","Coordinator","Counsel","Director","Manager","Operator","Secretary","Specialist","Staff","Strategist","Supervisor"])
+                  .range(["rgba(49,130,189,.5)","rgba(107,174,214,.5)","rgba(158,202,225,.5)","rgba(198,219,239,.5)","rgba(230,85,13,.5)","rgba(253,141,60,.5)","rgba(253,174,107,.5)","rgba(253,208,162,.5)","rgba(49,163,84,.5)","rgba(116,196,118,.5)","rgba(161,217,155,.5)","rgba(199,233,192,.5)","rgba(158,154,200,.5)","rgba(188,189,220,.5)","rgba(117,107,177,.5)","rgba(218,218,235,.5)","rgba(99,99,99,.5)"]);
 
 //Set up force for different splits
 
