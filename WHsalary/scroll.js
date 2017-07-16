@@ -21,9 +21,9 @@ $(document).ready(function(){
         var scrollBarPosition = $(window).scrollTop();
         if (scrollBarPosition >= tMapPosition.top + 20){
             $(".text-all").attr("visibility","hidden");
-            $(".text-category").attr("visibility","visible");
+            $(".text-category").attr("visibility","visible").addClass('animated flipInX');
         } else {
-            $(".text-all").attr("visibility","visible");
+            $(".text-all").attr("visibility","visible").addClass('animated fadeInDown');
             $(".text-category").attr("visibility","hidden");
         }
     });
