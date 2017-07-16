@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
-    <title>Trump White House Salary</title>
+    <title>How does Trump pay his White House Staff?</title>
 
     <script src="http://d3js.org/d3.v4.min.js"></script>
 
@@ -23,7 +23,7 @@
     #trump{
         /*margin-left: 10%;*/
         float: left;
-        height: 800px;
+        height: 1600px;
     }
 
     .xaxis .domain{
@@ -42,15 +42,13 @@
 </head>
 
 <body>
-    <h1 style="text-align: center">Trump White House Salary</h1>
-
-
+    <h1 style="text-align: center">How does Trump pay his White House Staff?</h1>
     
 
     <script>
 //Set up svg element
     var width = 1500,
-        height = 800;
+        height = 1800;
 
     var svg = d3.select("body")
                 .append("svg")
@@ -59,6 +57,20 @@
                 .attr("height", height)
                 .append("g")
                 .attr("transform", "translate(0,0)");
+
+//Set up charts
+    var chart_margin = {top: 50, left: 50, right: 20, bottom:50},
+        chart_height = 700 - chart_margin.top - chart_margin.bottom,
+        chart_width = 1500 - chart_margin.left - chart_margin.right,
+        box_w = ((chart_width - chart_margin.left) / 17) + 2;
+
+    var x = d3.scaleBand()
+              .domain(["Advisor","Analyst","Assistant","Assistant staff","Assistant to","Assistant to President","Chief","Coordinator","Counsel","Director","Manager","Operator","Secretary","Specialist","Other","Strategist","Supervisor"])
+              .range([0, (box_w + 1) * 17]);
+
+    var y = d3.scaleLinear()
+              .domain([0,200000])
+              .range([chart_height,0]);
 
 //Set up tootips
     var tip = d3.select("body")
@@ -75,45 +87,47 @@
         .text("tooltip");
 
 //Set up color scheme
-    var color = d3.scaleOrdinal(d3.schemeCategory20c);
+    var color = d3.scaleOrdinal()
+                  .domain(["Advisor","Analyst","Assistant","Assistant staff","Assistant to","Assistant to President","Chief","Coordinator","Counsel","Director","Manager","Operator","Secretary","Specialist","Other","Strategist","Supervisor"])
+                  .range(["rgba(49,130,189,.5)","rgba(107,174,214,.5)","rgba(158,202,225,.5)","rgba(198,219,239,.5)","rgba(230,85,13,.5)","rgba(253,141,60,.5)","rgba(253,174,107,.5)","rgba(253,208,162,.5)","rgba(49,163,84,.5)","rgba(116,196,118,.5)","rgba(161,217,155,.5)","rgba(199,233,192,.5)","rgba(158,154,200,.5)","rgba(188,189,220,.5)","rgba(117,107,177,.5)","rgba(218,218,235,.5)","rgba(99,99,99,.5)"]);
 
 //Set up force for different splits
 
     var ForceXCategory = d3.forceX(function(d){
         if (d.Category === "Advisor"){
-            return 300;
+            return 350;
         } else if (d.Category === "Analyst"){
-            return 550;
+            return 590;
         } else if (d.Category === "Assistant"){
-            return 800;
+            return 870;
         } else if (d.Category === "Assistant staff"){
-            return 1000;
+            return 1090;
         } else if (d.Category === "Assistant to"){
-            return 300;
+            return 350;
         } else if (d.Category === "Assistant to President"){
-            return 550;
+            return 590;
         } else if (d.Category === "Chief"){
-            return 800;
+            return 870;
         } else if (d.Category === "Coordinator"){
-            return 1000;
+            return 1090;
         } else if (d.Category === "Counsel"){
-            return 300;
+            return 350;
         } else if (d.Category === "Director"){
-            return 550;
+            return 590;
         } else if (d.Category === "Manager"){
-            return 800;
+            return 870;
         } else if (d.Category === "Operator"){
-            return 1000;
-        } else if (d.Category === "Staff"){
-            return 300;
+            return 1090;
+        } else if (d.Category === "Other"){
+            return 350;
         } else if (d.Category === "Secretary"){
-            return 550;
+            return 590;
         } else if (d.Category === "Strategist"){
-            return 800;
+            return 870;
         } else if (d.Category === "Specialist"){
-            return 1000;
+            return 1090;
         } else if (d.Category === "Supervisor"){
-            return 70;
+            return 120;
         }
     });
 
@@ -142,7 +156,7 @@
             return 480;
         } else if (d.Category === "Operator"){
             return 480;
-        } else if (d.Category === "Staff"){
+        } else if (d.Category === "Other"){
             return 670;
         } else if (d.Category === "Secretary"){
             return 670;
@@ -155,14 +169,22 @@
         }
     });
 
-var ForceXCombine = d3.forceX(650).strength(0.08);
+var ForceXChart = d3.forceX(function(d,i){
+        return x(d.Category) + 80;
+    });
+
+    var ForceYChart = d3.forceY(function(d,i){
+        return y(d.SALARY) + 880;
+    });
+
+var ForceXCombine = d3.forceX(700).strength(0.08);
 
 //For the force chart
 //STEP ONE: push them to the middle
 //STEP TWO: don't have them collide!
     var simulation = d3.forceSimulation()
         .force("x", ForceXCombine)
-        .force("y", d3.forceY(200).strength(0.08))
+        .force("y", d3.forceY(300).strength(0.08))
         .force("colide", d3.forceCollide(8));
 
 //Set the viz to load until everything has been processed
@@ -187,7 +209,7 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
              })
              .attr("r", 5)
              .on("mouseover", function(d){
-                    tip.html("<strong>" + (d["NAME"]) + "</strong><br/>$" + d3.format(",.0f")(d["SALARY"]));
+                    tip.html("<strong>" + (d["NAME"]) + "</strong><br/>" + d["Position"] + "<br/>$" + d3.format(",.0f")(d["SALARY"]));
                     tip.style("visibility", "visible");
                 })
              .on("mousemove", function() {
@@ -213,8 +235,6 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
         });
 
 
-
-
 //The force is triggered by the "tick." Set up the tick here
         simulation.nodes(datapoints)
             .on('tick', ticked);
@@ -231,125 +251,125 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
     //text for all
     svg.append("text")
         .attr("x", 600)
-        .attr("y", 400)
+        .attr("y", 500)
         .attr("class","text-all")
-        .text("Total: 377");
+        .text("Total staff number: 377");
 
     //text for diff categories
     svg.append("text")
-        .attr("x", 260)
+        .attr("x", 300)
         .attr("y", 240)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Advisor: 18");
 
     svg.append("text")
-        .attr("x", 510)
+        .attr("x", 550)
         .attr("y", 240)
         .attr("class","text-category")
         .attr("visibility","hidden")
-        .text("Advisor: 20");
+        .text("Analyst: 20");
 
     svg.append("text")
-        .attr("x", 760)
+        .attr("x", 820)
         .attr("y", 240)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Assistant: 54");
 
     svg.append("text")
-        .attr("x", 950)
+        .attr("x", 1050)
         .attr("y", 240)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Assistant staff: 9");
 
     svg.append("text")
-        .attr("x", 260)
+        .attr("x", 300)
         .attr("y", 380)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Assistant to: 32");
 
     svg.append("text")
-        .attr("x", 510)
+        .attr("x", 550)
         .attr("y", 380)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Assistant to President: 28");
 
     svg.append("text")
-        .attr("x", 760)
+        .attr("x", 820)
         .attr("y", 380)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Chief: 12");
 
     svg.append("text")
-        .attr("x", 950)
+        .attr("x", 1050)
         .attr("y", 380)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Coordinator: 4");
 
     svg.append("text")
-        .attr("x", 260)
+        .attr("x", 300)
         .attr("y", 580)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Counsel: 29");
 
     svg.append("text")
-        .attr("x", 510)
+        .attr("x", 550)
         .attr("y", 580)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Director: 109");
 
     svg.append("text")
-        .attr("x", 760)
+        .attr("x", 820)
         .attr("y", 580)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Manager: 10");
 
     svg.append("text")
-        .attr("x", 950)
+        .attr("x", 1050)
         .attr("y", 580)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Operator: 12");
 
     svg.append("text")
-        .attr("x", 510)
+        .attr("x", 300)
+        .attr("y", 750)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Other: 25");
+
+    svg.append("text")
+        .attr("x", 550)
         .attr("y", 750)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Secretary: 5");
 
     svg.append("text")
-        .attr("x", 950)
-        .attr("y", 750)
-        .attr("class","text-category")
-        .attr("visibility","hidden")
-        .text("Specialist: 3");
-
-    svg.append("text")
-        .attr("x", 260)
-        .attr("y", 750)
-        .attr("class","text-category")
-        .attr("visibility","hidden")
-        .text("Staff: 25");
-
-    svg.append("text")
-        .attr("x", 760)
+        .attr("x", 820)
         .attr("y", 750)
         .attr("class","text-category")
         .attr("visibility","hidden")
         .text("Strategist: 2");
 
     svg.append("text")
-        .attr("x", 40)
+        .attr("x", 1050)
+        .attr("y", 750)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Specialist: 3");
+
+    svg.append("text")
+        .attr("x", 80)
         .attr("y", 750)
         .attr("class","text-category")
         .attr("visibility","hidden")
@@ -357,134 +377,19 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
 
 
 // Column-ish chart starts here
-    var chart_margin = {top: 50, left: 50, right: 20, bottom:50},
-        chart_height = 700 - chart_margin.top - chart_margin.bottom,
-        chart_width = 1500 - chart_margin.left - chart_margin.right,
-        box_w = ((chart_width - chart_margin.left) / 17) + 2;
 
-    var chart = d3.select("body")
-                .append("svg")
-                .attr("id","trumpchart")
-                .attr("width", chart_width + chart_margin.left + chart_margin.right)
-                .attr("height", chart_height + chart_margin.top + chart_margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + (chart_margin.top+20) + "," + chart_margin.left + ")");
-
-    var x = d3.scaleBand()
-              .domain(["Advisor","Analyst","Assistant","Assistant staff","Assistant to","Assistant to President","Chief","Coordinator","Counsel","Director","Manager","Operator","Secretary","Specialist","Staff","Strategist","Supervisor"])
-              .range([0, (box_w + 1) * 17]);
-
-    var y = d3.scaleLinear()
-              .domain([0,200000])
-              .range([chart_height,0]);
-
-    // var ForceXCategory = d3.forceX(function(d){
-    //     if (d.Category === "Advisor"){
-    //         return 300;
-    //     } else if (d.Category === "Analyst"){
-    //         return 550;
-    //     } else if (d.Category === "Assistant"){
-    //         return 800;
-    //     } else if (d.Category === "Assistant staff"){
-    //         return 1000;
-    //     } else if (d.Category === "Assistant to"){
-    //         return 300;
-    //     } else if (d.Category === "Assistant to President"){
-    //         return 550;
-    //     } else if (d.Category === "Chief"){
-    //         return 800;
-    //     } else if (d.Category === "Coordinator"){
-    //         return 1000;
-    //     } else if (d.Category === "Counsel"){
-    //         return 300;
-    //     } else if (d.Category === "Director"){
-    //         return 550;
-    //     } else if (d.Category === "Manager"){
-    //         return 800;
-    //     } else if (d.Category === "Operator"){
-    //         return 1000;
-    //     } else if (d.Category === "Staff"){
-    //         return 300;
-    //     } else if (d.Category === "Secretary"){
-    //         return 550;
-    //     } else if (d.Category === "Strategist"){
-    //         return 800;
-    //     } else if (d.Category === "Specialist"){
-    //         return 1000;
-    //     } else if (d.Category === "Supervisor"){
-    //         return 70;
-    //     }
-    // });
-
-    // var ForceYCategory = d3.forceY(function(d){
-    //     if (d.Category === "Advisor"){
-    //         return 150;
-    //     } else if (d.Category === "Analyst"){
-    //         return 150;
-    //     } else if (d.Category === "Assistant"){
-    //         return 160;
-    //     } else if (d.Category === "Assistant staff"){
-    //         return 150;
-    //     } else if (d.Category === "Assistant to"){
-    //         return 300;
-    //     } else if (d.Category === "Assistant to President"){
-    //         return 300;
-    //     } else if (d.Category === "Chief"){
-    //         return 300;
-    //     } else if (d.Category === "Coordinator"){
-    //         return 300;
-    //     } else if (d.Category === "Counsel"){
-    //         return 480;
-    //     } else if (d.Category === "Director"){
-    //         return 480;
-    //     } else if (d.Category === "Manager"){
-    //         return 480;
-    //     } else if (d.Category === "Operator"){
-    //         return 480;
-    //     } else if (d.Category === "Staff"){
-    //         return 670;
-    //     } else if (d.Category === "Secretary"){
-    //         return 670;
-    //     } else if (d.Category === "Strategist"){
-    //         return 670;
-    //     } else if (d.Category === "Specialist"){
-    //         return 670;
-    //     } else if (d.Category === "Supervisor"){
-    //         return 670;
-    //     }
-    // });
-
-    chart.selectAll("circle")
-            .data(datapoints)
-            .enter().append("circle")
-                .attr("cx", function(d,i){return x(d.Category); })
-                .attr("cy", function(d,i){return y(d.SALARY)})
-                .attr("r", 5)
-            .style("fill", function(d){
-                return color(d.Category);
-             })
-            .on("mouseover", function(d){
-                    tip.html("<strong>" + (d["NAME"]) + "</strong><br/>$" + d3.format(",.0f")(d["SALARY"]));
-                    tip.style("visibility", "visible");
-                })
-            .on("mousemove", function() {
-                  return tip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
-              })
-            .on("mouseout", function(){
-                return tip.style("visibility", "hidden");
-             });
-
-    chart.append("g")
+//Chart axis
+    svg.append("g")
             .attr("class", "xaxis")
-            .attr("transform","translate(-42," + (chart_height+15) + ")")
+            .attr("transform","translate(40," + (chart_height+900) + ")")
             .call(d3.axisBottom(x)
                         .tickSize([3])
                         .tickSizeOuter(0)
                         .tickPadding([5]));
 
-    chart.append("g")
+    svg.append("g")
             .attr("class","yaxis")
-            .attr("transform","translate(-20,0)")
+            .attr("transform","translate(50,880)")
             .call(d3.axisLeft(y)
                     .tickSize([6])
                     .tickFormat(d3.format(",d")))
@@ -496,6 +401,23 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
             .attr("font-wight", "bold")
             .attr("text-anchor", "start")
             .text("Dollars($)");
+
+    svg.append("text")
+        .attr("x", 90)
+        .attr("y", 910)
+        .attr("class","text-high")
+        .style("font-size","10px")
+        .style("fill","#999")
+        .style("font-weight","bold")
+        .text("Highest Payment");
+
+    svg.append("line")
+        .attr("x1", 90)
+        .attr("x2", 85)
+        .attr("y1", 910)
+        .attr("y2", 915)
+        .attr("class","text-high")
+        .attr("stroke","#999");
 
     };
 

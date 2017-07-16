@@ -50,15 +50,4 @@ $(document).ready(function(){
         }
     });
 
-    // $(window).scroll(function(){
-    //     var scrollBarPosition = $(window).scrollTop();
-    //     if (scrollBarPosition >= tMapPosition.top + 800){
-    //         $(".text-all").attr("visibility","hidden");
-    //         $(".text-category").attr("visibility","visible").addClass('animated flipInX');
-    //     } else {
-    //         $(".text-all").attr("visibility","visible").addClass('animated flipInX');
-    //         $(".text-category").attr("visibility","hidden");
-    //     }
-    // });
-
     });
