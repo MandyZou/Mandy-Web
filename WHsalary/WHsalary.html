@@ -76,7 +76,7 @@
     <script>
 
 //Set up svg element
-    var width = 1024,
+    var width = 1500,
         height = 1000;
 
     var svg = d3.select("body")
@@ -86,9 +86,6 @@
                 .attr("height", height)
                 .append("g")
                 .attr("transform", "translate(0,0)");
-
-//Scale for circles (different r based on number)
-    // var radiusScale = d3.scaleSqrt().domain([0, 187100]).range([1, 5]);
 
 //Set up tootips
     var tip = d3.select("body")
@@ -144,58 +141,49 @@
         } else if (d.Category === "Specialist"){
             return 1000;
         } else if (d.Category === "Supervisor"){
-            return 300;
+            return 70;
         }
     });
 
     var ForceYCategory = d3.forceY(function(d){
         if (d.Category === "Advisor"){
-            return 100;
+            return 150;
         } else if (d.Category === "Analyst"){
-            return 100;
+            return 150;
         } else if (d.Category === "Assistant"){
-            return 110;
+            return 160;
         } else if (d.Category === "Assistant staff"){
-            return 100;
+            return 150;
         } else if (d.Category === "Assistant to"){
-            return 250;
+            return 300;
         } else if (d.Category === "Assistant to President"){
-            return 250;
+            return 300;
         } else if (d.Category === "Chief"){
-            return 250;
+            return 300;
         } else if (d.Category === "Coordinator"){
-            return 250;
+            return 300;
         } else if (d.Category === "Counsel"){
-            return 400;
+            return 480;
         } else if (d.Category === "Director"){
-            return 400;
+            return 480;
         } else if (d.Category === "Manager"){
-            return 400;
+            return 480;
         } else if (d.Category === "Operator"){
-            return 400;
+            return 480;
         } else if (d.Category === "Staff"){
-            return 550;
+            return 670;
         } else if (d.Category === "Secretary"){
-            return 550;
+            return 670;
         } else if (d.Category === "Strategist"){
-            return 550;
+            return 670;
         } else if (d.Category === "Specialist"){
-            return 550;
+            return 670;
         } else if (d.Category === "Supervisor"){
-            return 700;
+            return 670;
         }
     });
 
 
-    // var ForceXYear = d3.forceX(function(d){
-    //     if (d.Period === "Before 2000"){
-    //         return 300;
-    //     } else if (d.Period === "After 2000"){
-    //         return 700;
-    //     } else if (d.Period === "Before 1900"){
-    //         return 1000;
-    //     }
-    // });
 
 //For the force chart
 //STEP ONE: push them to the middle
@@ -237,17 +225,6 @@
                 return tip.style("visibility", "hidden");
              });
 
-//Then, append text!
-        // nodes.append("text")
-        //         .selectAll("tspan")
-        //         .data(function(d){ return d["Museum"].split(/(?=[A-Z])/g); })
-        //         .enter().append("tspan")
-        //             .attr("x", 0)
-        //             .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 20; })
-        //             .text(function(d){ return d; })
-        //             .style("text-anchor", "middle")
-        //             .style("fill", "#ffffff");
-
 //Set up the events when you click the button TO SPLIIIIT!
         d3.select("#all-split").on("click", function(d){
             return simulation.force("x", ForceXCombine)
@@ -264,11 +241,7 @@
         });
 
 
-        // d3.select("#year-split").on("click", function(d){
-        //     return simulation.force("x", ForceXYear)
-        //                 .alphaTarget(0.5)
-        //                 .restart();
-        // });
+
 
 //The force is triggered by the "tick." Set up the tick here
         simulation.nodes(datapoints)
@@ -284,12 +257,132 @@
         };
     };
 
-    //Materials: 
-    //https://www.dashingd3js.com/svg-text-element
-    //https://www.youtube.com/watch?v=lPr60pexvEM
-    //https://stackoverflow.com/questions/33928409/how-do-i-add-labels-to-d3-js-force-bubble-chart
-    //https://stackoverflow.com/questions/7888238/javascript-split-string-on-uppercase-characters
-    //http://bl.ocks.org/mmattozzi/7018021
+    //text for all
+    svg.append("text")
+        .attr("x", 660)
+        .attr("y", 500)
+        .attr("class","text-all")
+        .text("Total: 377");
+
+    //text for diff categories
+    svg.append("text")
+        .attr("x", 260)
+        .attr("y", 240)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Advisor: 18");
+
+    svg.append("text")
+        .attr("x", 510)
+        .attr("y", 240)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Advisor: 20");
+
+    svg.append("text")
+        .attr("x", 760)
+        .attr("y", 240)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Assistant: 54");
+
+    svg.append("text")
+        .attr("x", 950)
+        .attr("y", 240)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Assistant staff: 9");
+
+    svg.append("text")
+        .attr("x", 260)
+        .attr("y", 380)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Assistant to: 32");
+
+    svg.append("text")
+        .attr("x", 510)
+        .attr("y", 380)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Assistant to President: 28");
+
+    svg.append("text")
+        .attr("x", 760)
+        .attr("y", 380)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Chief: 12");
+
+    svg.append("text")
+        .attr("x", 950)
+        .attr("y", 380)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Coordinator: 4");
+
+    svg.append("text")
+        .attr("x", 260)
+        .attr("y", 580)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Counsel: 29");
+
+    svg.append("text")
+        .attr("x", 510)
+        .attr("y", 580)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Director: 109");
+
+    svg.append("text")
+        .attr("x", 760)
+        .attr("y", 580)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Manager: 10");
+
+    svg.append("text")
+        .attr("x", 950)
+        .attr("y", 580)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Operator: 12");
+
+    svg.append("text")
+        .attr("x", 510)
+        .attr("y", 750)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Secretary: 5");
+
+    svg.append("text")
+        .attr("x", 950)
+        .attr("y", 750)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Specialist: 3");
+
+    svg.append("text")
+        .attr("x", 260)
+        .attr("y", 750)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Staff: 25");
+
+    svg.append("text")
+        .attr("x", 760)
+        .attr("y", 750)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Strategist: 2");
+
+    svg.append("text")
+        .attr("x", 40)
+        .attr("y", 750)
+        .attr("class","text-category")
+        .attr("visibility","hidden")
+        .text("Supervisor: 5");
 
 
     </script>
