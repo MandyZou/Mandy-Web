@@ -12,8 +12,8 @@ $(document).ready(function(){
                             .restart();
         } else {
             return simulation.force("x", ForceXCombine)
-                        .force("y", d3.forceY(300).strength(0.08))
-                        .force("colide", d3.forceCollide(8));
+                            .force("y", d3.forceY(200).strength(0.08))
+                            .force("colide", d3.forceCollide(8));
         }
     });
 
