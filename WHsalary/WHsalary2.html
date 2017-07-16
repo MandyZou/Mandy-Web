@@ -23,7 +23,7 @@
     #trump{
         /*margin-left: 10%;*/
         float: left;
-        height: 2000px;
+        height: 1600px;
     }
 
     .xaxis .domain{
@@ -50,7 +50,7 @@
     <script>
 //Set up svg element
     var width = 1500,
-        height = 2000;
+        height = 1800;
 
     var svg = d3.select("body")
                 .append("svg")
@@ -429,6 +429,19 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
             .attr("font-wight", "bold")
             .attr("text-anchor", "start")
             .text("Dollars($)");
+
+    svg.append("text")
+        .attr("x", 100)
+        .attr("y", 900)
+        .style("fill","#2c2c2c")
+        .text("Highest Payment");
+
+    svg.append("line")
+        .attr("x1", 100)
+        .attr("x2", 85)
+        .attr("y1", 900)
+        .attr("y2", 915)
+        .attr("stroke","#2c2c2c");
 
     };
 

@@ -36,7 +36,8 @@ $(document).ready(function(){
         if (scrollBarPosition >= tMapPosition.top + 500){
             return simulation.force("x", ForceXChart)
                             .force("y", ForceYChart)
-                            .alphaTarget(0.18)
+                            .force("colide", d3.forceCollide(0))
+                            .alphaTarget(0.5)
                             .restart();
             // console.log("hey!")
         } else {
