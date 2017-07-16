@@ -50,7 +50,7 @@
     <script>
 //Set up svg element
     var width = 1500,
-        height = 800;
+        height = 2000;
 
     var svg = d3.select("body")
                 .append("svg")
@@ -59,6 +59,26 @@
                 .attr("height", height)
                 .append("g")
                 .attr("transform", "translate(0,0)");
+
+//Set up charts
+    var chart_margin = {top: 50, left: 50, right: 20, bottom:50},
+        chart_height = 700 - chart_margin.top - chart_margin.bottom,
+        chart_width = 1500 - chart_margin.left - chart_margin.right,
+        box_w = ((chart_width - chart_margin.left) / 17) + 2;
+
+        // svg
+        //         .attr("width", chart_width + chart_margin.left + chart_margin.right)
+        //         .attr("height", chart_height + chart_margin.top + chart_margin.bottom)
+        //         .append("g")
+        //         .attr("transform", "translate(" + (chart_margin.top+20) + "," + (chart_margin.left+600) + ")");
+
+    var x = d3.scaleBand()
+              .domain(["Advisor","Analyst","Assistant","Assistant staff","Assistant to","Assistant to President","Chief","Coordinator","Counsel","Director","Manager","Operator","Secretary","Specialist","Staff","Strategist","Supervisor"])
+              .range([0, (box_w + 1) * 17]);
+
+    var y = d3.scaleLinear()
+              .domain([0,200000])
+              .range([chart_height,0]);
 
 //Set up tootips
     var tip = d3.select("body")
@@ -155,6 +175,14 @@
         }
     });
 
+var ForceXChart = d3.forceX(function(d,i){
+        return x(d.Category) + 80;
+    });
+
+    var ForceYChart = d3.forceY(function(d,i){
+        return y(d.SALARY) + 880;
+    });
+
 var ForceXCombine = d3.forceX(650).strength(0.08);
 
 //For the force chart
@@ -187,7 +215,7 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
              })
              .attr("r", 5)
              .on("mouseover", function(d){
-                    tip.html("<strong>" + (d["NAME"]) + "</strong><br/>$" + d3.format(",.0f")(d["SALARY"]));
+                    tip.html("<strong>" + (d["NAME"]) + "</strong><br/>" + d["Position"] + "<br/>$" + d3.format(",.0f")(d["SALARY"]));
                     tip.style("visibility", "visible");
                 })
              .on("mousemove", function() {
@@ -248,7 +276,7 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
         .attr("y", 240)
         .attr("class","text-category")
         .attr("visibility","hidden")
-        .text("Advisor: 20");
+        .text("Analyst: 20");
 
     svg.append("text")
         .attr("x", 760)
@@ -357,103 +385,7 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
 
 
 // Column-ish chart starts here
-    var chart_margin = {top: 50, left: 50, right: 20, bottom:50},
-        chart_height = 700 - chart_margin.top - chart_margin.bottom,
-        chart_width = 1500 - chart_margin.left - chart_margin.right,
-        box_w = ((chart_width - chart_margin.left) / 17) + 2;
-
-    var chart = d3.select("#trump")
-                .append("svg")
-                .attr("id","trumpchart")
-                .attr("width", chart_width + chart_margin.left + chart_margin.right)
-                .attr("height", chart_height + chart_margin.top + chart_margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + (chart_margin.top+20) + "," + (chart_margin.left+600) + ")");
-
-    var x = d3.scaleBand()
-              .domain(["Advisor","Analyst","Assistant","Assistant staff","Assistant to","Assistant to President","Chief","Coordinator","Counsel","Director","Manager","Operator","Secretary","Specialist","Staff","Strategist","Supervisor"])
-              .range([0, (box_w + 1) * 17]);
-
-    var y = d3.scaleLinear()
-              .domain([0,200000])
-              .range([chart_height,0]);
-
-    // var ForceXCategory = d3.forceX(function(d){
-    //     if (d.Category === "Advisor"){
-    //         return 300;
-    //     } else if (d.Category === "Analyst"){
-    //         return 550;
-    //     } else if (d.Category === "Assistant"){
-    //         return 800;
-    //     } else if (d.Category === "Assistant staff"){
-    //         return 1000;
-    //     } else if (d.Category === "Assistant to"){
-    //         return 300;
-    //     } else if (d.Category === "Assistant to President"){
-    //         return 550;
-    //     } else if (d.Category === "Chief"){
-    //         return 800;
-    //     } else if (d.Category === "Coordinator"){
-    //         return 1000;
-    //     } else if (d.Category === "Counsel"){
-    //         return 300;
-    //     } else if (d.Category === "Director"){
-    //         return 550;
-    //     } else if (d.Category === "Manager"){
-    //         return 800;
-    //     } else if (d.Category === "Operator"){
-    //         return 1000;
-    //     } else if (d.Category === "Staff"){
-    //         return 300;
-    //     } else if (d.Category === "Secretary"){
-    //         return 550;
-    //     } else if (d.Category === "Strategist"){
-    //         return 800;
-    //     } else if (d.Category === "Specialist"){
-    //         return 1000;
-    //     } else if (d.Category === "Supervisor"){
-    //         return 70;
-    //     }
-    // });
-
-    // var ForceYCategory = d3.forceY(function(d){
-    //     if (d.Category === "Advisor"){
-    //         return 150;
-    //     } else if (d.Category === "Analyst"){
-    //         return 150;
-    //     } else if (d.Category === "Assistant"){
-    //         return 160;
-    //     } else if (d.Category === "Assistant staff"){
-    //         return 150;
-    //     } else if (d.Category === "Assistant to"){
-    //         return 300;
-    //     } else if (d.Category === "Assistant to President"){
-    //         return 300;
-    //     } else if (d.Category === "Chief"){
-    //         return 300;
-    //     } else if (d.Category === "Coordinator"){
-    //         return 300;
-    //     } else if (d.Category === "Counsel"){
-    //         return 480;
-    //     } else if (d.Category === "Director"){
-    //         return 480;
-    //     } else if (d.Category === "Manager"){
-    //         return 480;
-    //     } else if (d.Category === "Operator"){
-    //         return 480;
-    //     } else if (d.Category === "Staff"){
-    //         return 670;
-    //     } else if (d.Category === "Secretary"){
-    //         return 670;
-    //     } else if (d.Category === "Strategist"){
-    //         return 670;
-    //     } else if (d.Category === "Specialist"){
-    //         return 670;
-    //     } else if (d.Category === "Supervisor"){
-    //         return 670;
-    //     }
-    // });
-
+    
     // chart.selectAll("circle")
     //         .data(datapoints)
     //         .enter().append("circle")
@@ -474,17 +406,18 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
     //             return tip.style("visibility", "hidden");
     //          });
 
-    chart.append("g")
+//Chart axis
+    svg.append("g")
             .attr("class", "xaxis")
-            .attr("transform","translate(-42," + (chart_height+15) + ")")
+            .attr("transform","translate(40," + (chart_height+900) + ")")
             .call(d3.axisBottom(x)
                         .tickSize([3])
                         .tickSizeOuter(0)
                         .tickPadding([5]));
 
-    chart.append("g")
+    svg.append("g")
             .attr("class","yaxis")
-            .attr("transform","translate(-20,0)")
+            .attr("transform","translate(50,880)")
             .call(d3.axisLeft(y)
                     .tickSize([6])
                     .tickFormat(d3.format(",d")))
