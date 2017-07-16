@@ -185,7 +185,7 @@ var ForceXCombine = d3.forceX(600).strength(0.08);
 //STEP TWO: don't have them collide!
     var simulation = d3.forceSimulation()
         .force("x", ForceXCombine)
-        .force("y", d3.forceY(250).strength(0.08))
+        .force("y", d3.forceY(300).strength(0.08))
         .force("colide", d3.forceCollide(8));
 
 //Set the viz to load until everything has been processed
@@ -251,7 +251,7 @@ var ForceXCombine = d3.forceX(600).strength(0.08);
 
     //text for all
     svg.append("text")
-        .attr("x", 700)
+        .attr("x", 800)
         .attr("y", 400)
         .attr("class","text-all")
         .text("Total staff number: 377");
