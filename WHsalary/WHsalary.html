@@ -438,6 +438,23 @@ var ForceXCombine = d3.forceX(600).strength(0.08);
         .attr("class","text-high")
         .attr("stroke","#999");
 
+    svg.append("text")
+        .attr("x", 1300)
+        .attr("y", 1209)
+        .attr("class","line-median")
+        .text("Median: $89,000")
+        .style("font-size","10px")
+        .style("fill","#999");
+
+    svg.append("line")
+        .attr("x1", 60)
+        .attr("x2", 1450)
+        .attr("y1", 1212)
+        .attr("y2", 1212)
+        .attr("class","line-median")
+        .style("stroke","#999")
+        .style("stroke-dasharray", "5,5");
+
     };
 
     </script>
