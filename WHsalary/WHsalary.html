@@ -52,15 +52,15 @@
 <body>
     <h1>Trump White House Salary</h1>
 
-    <button id="category-split" style="margin-left: 5%;">Category Split</button>
+    <!-- <button id="category-split" style="margin-left: 5%;">Category Split</button> -->
     <!-- <button id="year-split" style="margin-left: 5%;">Year Split</button> -->
     <!-- <button id="all-split" style="margin-left: 5%;">All</button> -->
 
     <script>
 
-    $("#category-split").click(function(){
+    // $("#category-split").click(function(){
         // $("#button-text").text("Culture // Science // Art // Other");
-    });
+    // });
 
     // $("#year-split").click(function(){
     //     $("#button-text").text("Before 2000 // After 2000 // Before 1900");
@@ -217,7 +217,7 @@ var ForceXCombine = d3.forceX(650).strength(0.08);
              })
              .attr("r", 5)
              .on("mouseover", function(d){
-                    tip.html("<strong>" + (d["Category"]) + "</strong>: <br/>$" + d3.format(",.0f")(d["SALARY"]));
+                    tip.html("<strong>" + (d["NAME"]) + "</strong>: <br/>$" + d3.format(",.0f")(d["SALARY"]));
                     tip.style("visibility", "visible");
                 })
              .on("mousemove", function() {
