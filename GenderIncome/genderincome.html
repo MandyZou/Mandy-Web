@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>Education v. Income: Gender Gap</title>
+
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+<style>
+    #chart {
+        width: 800px;
+        height: 600px;
+    }
+
+
+</style>
+
+</head>
+
+<body onload="document.getElementById('change2015').click()">
+    <h1>Income Gender Gap by Degrees</h1>
+    <div id="chart"></div>
+    <button id="change2015" onclick="update2015()">2015</button>
+    <button class="change2014" onclick="update2014()">2014</button>
+    <script>
+        var margin = {top: 20, left: 20, right: 20, bottom: 20},
+            width = 600 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
+        var x = d3.scaleLinear()
+                .domain([0,85000])
+                .range([0,width]),
+            y = d3.scaleBand()
+                  .range([height, 0]);
+
+        var svg = d3.select("#chart")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")");          
+
+        function update2015() {
+            d3.csv("male2015.csv", function(error, mdata){
+
+            if (error) throw error;
+            console.log(mdata)
+
+            // var nested_data = d3.nest()
+            //     .key(function(d){return d.Year; })
+            //     .entries(mdata);
+
+            // y.domain(nested_data.map(function(d,i){return d.values[i]["Degree"]; })).padding(0.1);
+            y.domain(mdata.map(function(d){return d.Degree; }));
+
+            svg.selectAll(".bar")
+                .data(mdata)
+                .enter().append("rect")
+                .attr("class","bar")
+                .attr("width", function(d){
+                        // x(d.values[i]["Income"]);
+                        // return x(d["2011"])
+                })
+                .attr("x",0)
+                .attr("height", y.bandwidth())
+                .attr("y",function(d){
+                        // y(d.values[i]["Degree"]); 
+                        return y(d["2011"]);
+                })
+                .on("mouseover",function(d){ 
+                    console.log(d)
+                         });
+
+            svg.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(500,0)")
+                .call(d3.axisRight(y));  
+
+            // };
+
+            });
+        };
+
+//function2014
+        function update2014() {
+            d3.csv("male3.csv", function(error, mdata){
+
+            if (error) throw error;
+
+            y.domain(mdata.map(function(d){return d.Degree; })).padding(0.1);
+
+            // var svg = d3.select("#chart").transition();
+
+            // svg.selectAll(".bar")
+            //     .duration(750);
+            console.log(mdata)
+
+            svg.selectAll(".bar")
+                .data(mdata.filter(function(d){return d.Year === "2014"}))
+                .enter().append("rect")
+                .attr("class","bar")
+                .attr("width", function(d){return x(d.Income); })
+                .attr("x",0)
+                .attr("height", y.bandwidth())
+                .attr("y",function(d){return y(d.Degree); })
+                .on("mouseover",function(d){ 
+                    console.log(d.Income) });
+
+            svg.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(500,0)")
+                .call(d3.axisRight(y));  
+
+            });
+
+
+            };
+
+
+    </script>
+
+</body>
+</html>
