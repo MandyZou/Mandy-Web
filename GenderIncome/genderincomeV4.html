@@ -7,10 +7,21 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
 
 <style>
+    body{
+        font-family: 'Zilla Slab', serif;
+    }
+
+    h1{
+        margin:0;
+        padding-left: 30px;
+        padding-top: 10px;
+    }
+
     .xaxis .domain{
         display: none;
     }
@@ -81,15 +92,7 @@
 </head>
 
 <body>
-    <h1>Income Gender Gap by Degrees</h1>
-<!--     <div class="buttons">
-    <button id="Less than high school graduate">Less than high school graduate</button>
-    <button id="High school graduate (includes equivalency)">High school graduate (includes equivalency)</button>
-    <button id="Some college or associate's degree">Some college or associate's degree</button>
-    <button id="Bachelor's degree">Bachelor's degree</button>
-    <button id="Graduate or professional degree">Graduate or professional degree</button>
-    <button id="All">All</button>
-    </div> -->
+    <h1>How Gender Pay Gap Vary in Education Degrees</h1>
     <div id="chart"></div>
     <script>
         var margin = {top: 70, left: 40, right: 40, bottom: 30},
@@ -110,6 +113,10 @@
         var y = d3.scaleLinear()
                   .domain([14000,85000])
                   .range([height,0]);
+
+        var z = d3.scaleOrdinal()
+                  .domain(["Male","Female"])
+                  .range(["#6BD653","#F4B7C0"]);
 
         var line = d3.line()
                 .x(function(d){return x(d.Year); })
@@ -138,7 +145,7 @@
             svg.append("path")
                 .data([data0])
                 .attr("fill","none")
-                .attr("stroke","#6BD653")
+                .attr("stroke","#F4B7DF")
                 .attr("stroke-width", 2)
                 .attr("d",line2);
 
@@ -227,7 +234,7 @@
             svg2.append("path")
                 .data([data1])
                 .attr("fill","none")
-                .attr("stroke","#6BD653")
+                .attr("stroke","#F4B7DF")
                 .attr("stroke-width", 2)
                 .attr("d",line22);
 
@@ -311,7 +318,7 @@
             svg3.append("path")
                 .data([data2])
                 .attr("fill","none")
-                .attr("stroke","#6BD653")
+                .attr("stroke","#F4B7DF")
                 .attr("stroke-width", 2)
                 .attr("d",line32);
 
@@ -389,7 +396,7 @@
             svg4.append("path")
                 .data([data3])
                 .attr("fill","none")
-                .attr("stroke","#6BD653")
+                .attr("stroke","#F4B7DF")
                 .attr("stroke-width", 2)
                 .attr("d",line42);
 
@@ -467,7 +474,7 @@
             svg5.append("path")
                 .data([data4])
                 .attr("fill","none")
-                .attr("stroke","#6BD653")
+                .attr("stroke","#F4B7DF")
                 .attr("stroke-width", 2)
                 .attr("d",line52);
 
@@ -545,7 +552,7 @@
             svg6.append("path")
                 .data([data5])
                 .attr("fill","none")
-                .attr("stroke","#6BD653")
+                .attr("stroke","#F4B7DF")
                 .attr("stroke-width", 2)
                 .attr("d",line62);
 
