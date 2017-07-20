@@ -22,6 +22,12 @@
         padding-top: 10px;
     }
 
+    p{
+        margin:0;
+        padding-left: 30px;
+        padding-top: 10px;
+    }
+
     .xaxis .domain{
         display: none;
     }
@@ -93,6 +99,7 @@
 
 <body>
     <h1>How Gender Pay Gap Vary in Education Degrees</h1>
+    <p>The higher the degree is, the bigger the gender pay gap. Plus, the gap doesn't change much over the past 6 years.</p>
     <div id="chart"></div>
     <script>
         var margin = {top: 70, left: 40, right: 40, bottom: 30},
@@ -133,7 +140,7 @@
         function ready(error, data0){
             if(error) throw error;
 
-            console.log(data0)
+            // console.log(data0)
 
             svg.append("path")
                 .data([data0])
@@ -168,9 +175,9 @@
                         .tickPadding([6]))
                 .append("text")
                 .attr("dy","1em")
-                .attr("transform","translate(-378,0)")
+                .attr("transform","translate(-341,0)")
                 .style("fill","#000")
-                .text("Dollars($)");
+                .text("Median Income($)");
 
             svg.append("text")
                 .attr("x", 100)
