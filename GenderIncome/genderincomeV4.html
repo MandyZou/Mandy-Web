@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>Education v. Income: Gender Gap</title>
+
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+<style>
+    .xaxis .domain{
+        display: none;
+    }
+
+    .xaxis line{
+        stroke: #e0e0e0;
+    }
+
+    .xaxis text{
+        font-size: 13px;
+    }
+
+    .yaxis .domain{
+        display: none;
+    }
+
+    .yaxis line{
+        stroke: #e0e0e0;
+        stroke-width: 0.5px;
+    }
+
+    #chart {
+        width: 520px;
+        height: 360px;
+        margin-left: 30px;
+        float: left;
+    }
+
+    #chart2{
+        width: 520px;
+        height: 360px;
+        margin-left: 30px;
+        float: left;
+    }
+
+    #chart3{
+        width: 520px;
+        height: 360px;
+        margin-left: 30px;
+        float: left;
+    }
+
+    #chart4{
+        width: 520px;
+        height: 360px;
+        margin-left: 30px;
+        float: left;
+    }
+
+    #chart5{
+        width: 520px;
+        height: 360px;
+        margin-left: 30px;
+        float: left;
+    }
+
+    #chart6{
+        width: 520px;
+        height: 360px;
+        margin-left: 30px;
+        float: left;
+    }
+
+
+
+</style>
+
+</head>
+
+<body>
+    <h1>Income Gender Gap by Degrees</h1>
+<!--     <div class="buttons">
+    <button id="Less than high school graduate">Less than high school graduate</button>
+    <button id="High school graduate (includes equivalency)">High school graduate (includes equivalency)</button>
+    <button id="Some college or associate's degree">Some college or associate's degree</button>
+    <button id="Bachelor's degree">Bachelor's degree</button>
+    <button id="Graduate or professional degree">Graduate or professional degree</button>
+    <button id="All">All</button>
+    </div> -->
+    <div id="chart"></div>
+    <script>
+        var margin = {top: 70, left: 40, right: 40, bottom: 30},
+            width = 500 - margin.left - margin.right,
+            height = 350 - margin.top - margin.bottom;
+
+        var svg = d3.select("#chart")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+
+        var x = d3.scaleLinear()
+                  .domain([2010,2015])
+                  .range([0,width]);
+
+        var y = d3.scaleLinear()
+                  .domain([14000,85000])
+                  .range([height,0]);
+
+        var line = d3.line()
+                .x(function(d){return x(d.Year); })
+                .y(function(d){return y(d.Male); });
+
+        var line2 = d3.line()
+                    .x(function(d){return x(d.Year); })
+                    .y(function(d){return y(d.Female); });
+
+        d3.queue()
+          .defer(d3.csv,"lessHighschool.csv")
+          .await(ready);
+
+        function ready(error, data0){
+            if(error) throw error;
+
+            console.log(data0)
+
+            svg.append("path")
+                .data([data0])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line);
+
+            svg.append("path")
+                .data([data0])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line2);
+
+            svg.append("g")
+                .attr("class","xaxis")
+                .attr("transform","translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                        .ticks(6)
+                        .tickPadding([10])
+                        .tickFormat(d3.format(" "))
+                        .tickSizeOuter(0));
+
+            svg.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(" + width + ",0)")
+                .call(d3.axisLeft(y)
+                        .tickFormat(d3.format(",d"))
+                        .tickSize(width)
+                        .tickSizeOuter(0)
+                        .tickPadding([6]))
+                .append("text")
+                .attr("dy","1em")
+                .attr("transform","translate(-378,0)")
+                .style("fill","#000")
+                .text("Dollars($)");
+
+            svg.append("text")
+                .attr("x", 100)
+                .attr("y", 0)
+                .text("Less than High School Graduate");
+
+        }; 
+
+
+
+//Resources: https://stackoverflow.com/questions/39431032/using-d3-filter-in-an-update-function
+
+
+    </script>
+
+    <div id="chart2"></div>
+        <script>
+        var margin = {top: 70, left: 40, right: 40, bottom: 30},
+            width = 500 - margin.left - margin.right,
+            height = 350 - margin.top - margin.bottom;
+
+        var svg2 = d3.select("#chart2")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+
+        var x = d3.scaleLinear()
+                  .domain([2010,2015])
+                  .range([0,width]);
+
+        var y2 = d3.scaleLinear()
+                  .domain([14000,85000])
+                  .range([height,0]);
+
+        var line12 = d3.line()
+                .x(function(d){return x(d.Year); })
+                .y(function(d){return y2(d.Male); });
+
+        var line22 = d3.line()
+                    .x(function(d){return x(d.Year); })
+                    .y(function(d){return y2(d.Female); });
+
+        d3.queue()
+          .defer(d3.csv,"highschool.csv")
+          .await(ready);
+
+        function ready(error, data1){
+            if(error) throw error;
+
+            // console.log(data1)
+
+            svg2.append("path")
+                .data([data1])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line12);
+
+            svg2.append("path")
+                .data([data1])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line22);
+
+            svg2.append("g")
+                .attr("class","xaxis")
+                .attr("transform","translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                        .ticks(6)
+                        .tickPadding([10])
+                        .tickFormat(d3.format(" "))
+                        .tickSizeOuter(0));
+
+            svg2.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(" + width + ",0)")
+                .call(d3.axisLeft(y2)
+                        .tickFormat(d3.format(",d"))
+                        .tickSize(width)
+                        .tickSizeOuter(0)
+                        .tickPadding([6]));
+
+            svg2.append("text")
+                .attr("x", 70)
+                .attr("y", 0)
+                .text("High School Graduate (includes equivalency)");
+
+        }; 
+
+
+
+//Resources: https://stackoverflow.com/questions/39431032/using-d3-filter-in-an-update-function
+
+
+    </script>
+
+    <div id="chart3"></div>
+        <script>
+        var margin = {top: 70, left: 40, right: 40, bottom: 30},
+            width = 500 - margin.left - margin.right,
+            height = 350 - margin.top - margin.bottom;
+
+        var svg3 = d3.select("#chart3")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+
+        var x = d3.scaleLinear()
+                  .domain([2010,2015])
+                  .range([0,width]);
+
+        var y3 = d3.scaleLinear()
+                  .domain([14000,85000])
+                  .range([height,0]);
+
+        var line3 = d3.line()
+                .x(function(d){return x(d.Year); })
+                .y(function(d){return y3(d.Male); });
+
+        var line32 = d3.line()
+                    .x(function(d){return x(d.Year); })
+                    .y(function(d){return y3(d.Female); });
+
+        d3.queue()
+          .defer(d3.csv,"associate.csv")
+          .await(ready);
+
+        function ready(error, data2){
+            if(error) throw error;
+
+            // console.log(data1)
+
+            svg3.append("path")
+                .data([data2])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line3);
+
+            svg3.append("path")
+                .data([data2])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line32);
+
+            svg3.append("g")
+                .attr("class","xaxis")
+                .attr("transform","translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                        .ticks(6)
+                        .tickPadding([10])
+                        .tickFormat(d3.format(" "))
+                        .tickSizeOuter(0));
+
+            svg3.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(" + width + ",0)")
+                .call(d3.axisLeft(y3)
+                        .tickFormat(d3.format(",d"))
+                        .tickSize(width)
+                        .tickSizeOuter(0)
+                        .tickPadding([6]));
+
+            svg3.append("text")
+                .attr("x", 70)
+                .attr("y", 0)
+                .text("Some College or Associate's Degree");
+
+        }; 
+</script>
+
+ <div id="chart4"></div>
+        <script>
+        var margin = {top: 70, left: 40, right: 40, bottom: 30},
+            width = 500 - margin.left - margin.right,
+            height = 350 - margin.top - margin.bottom;
+
+        var svg4 = d3.select("#chart4")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+
+        var x = d3.scaleLinear()
+                  .domain([2010,2015])
+                  .range([0,width]);
+
+        var y4 = d3.scaleLinear()
+                  .domain([14000,85000])
+                  .range([height,0]);
+
+        var line4 = d3.line()
+                .x(function(d){return x(d.Year); })
+                .y(function(d){return y4(d.Male); });
+
+        var line42 = d3.line()
+                    .x(function(d){return x(d.Year); })
+                    .y(function(d){return y4(d.Female); });
+
+        d3.queue()
+          .defer(d3.csv,"bachelor.csv")
+          .await(ready);
+
+        function ready(error, data3){
+            if(error) throw error;
+
+            // console.log(data1)
+
+            svg4.append("path")
+                .data([data3])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line4);
+
+            svg4.append("path")
+                .data([data3])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line42);
+
+            svg4.append("g")
+                .attr("class","xaxis")
+                .attr("transform","translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                        .ticks(6)
+                        .tickPadding([10])
+                        .tickFormat(d3.format(" "))
+                        .tickSizeOuter(0));
+
+            svg4.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(" + width + ",0)")
+                .call(d3.axisLeft(y4)
+                        .tickFormat(d3.format(",d"))
+                        .tickSize(width)
+                        .tickSizeOuter(0)
+                        .tickPadding([6]));
+
+            svg4.append("text")
+                .attr("x", 120)
+                .attr("y", 0)
+                .text("Bachelor's degree");
+
+        }; 
+</script>
+
+<div id="chart5"></div>
+        <script>
+        var margin = {top: 70, left: 40, right: 40, bottom: 30},
+            width = 500 - margin.left - margin.right,
+            height = 350 - margin.top - margin.bottom;
+
+        var svg5 = d3.select("#chart5")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+
+        var x = d3.scaleLinear()
+                  .domain([2010,2015])
+                  .range([0,width]);
+
+        var y5 = d3.scaleLinear()
+                  .domain([14000,85000])
+                  .range([height,0]);
+
+        var line5 = d3.line()
+                .x(function(d){return x(d.Year); })
+                .y(function(d){return y5(d.Male); });
+
+        var line52 = d3.line()
+                    .x(function(d){return x(d.Year); })
+                    .y(function(d){return y5(d.Female); });
+
+        d3.queue()
+          .defer(d3.csv,"graduate.csv")
+          .await(ready);
+
+        function ready(error, data4){
+            if(error) throw error;
+
+            // console.log(data1)
+
+            svg5.append("path")
+                .data([data4])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line5);
+
+            svg5.append("path")
+                .data([data4])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line52);
+
+            svg5.append("g")
+                .attr("class","xaxis")
+                .attr("transform","translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                        .ticks(6)
+                        .tickPadding([10])
+                        .tickFormat(d3.format(" "))
+                        .tickSizeOuter(0));
+
+            svg5.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(" + width + ",0)")
+                .call(d3.axisLeft(y5)
+                        .tickFormat(d3.format(",d"))
+                        .tickSize(width)
+                        .tickSizeOuter(0)
+                        .tickPadding([6]));
+
+            svg5.append("text")
+                .attr("x", 130)
+                .attr("y", 0)
+                .text("Graduate or Professional Degree");
+
+        }; 
+</script>
+
+<div id="chart6"></div>
+        <script>
+        var margin = {top: 70, left: 40, right: 40, bottom: 30},
+            width = 500 - margin.left - margin.right,
+            height = 350 - margin.top - margin.bottom;
+
+        var svg6 = d3.select("#chart6")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+
+        var x = d3.scaleLinear()
+                  .domain([2010,2015])
+                  .range([0,width]);
+
+        var y6 = d3.scaleLinear()
+                  .domain([14000,85000])
+                  .range([height,0]);
+
+        var line6 = d3.line()
+                .x(function(d){return x(d.Year); })
+                .y(function(d){return y6(d.Male); });
+
+        var line62 = d3.line()
+                    .x(function(d){return x(d.Year); })
+                    .y(function(d){return y6(d.Female); });
+
+        d3.queue()
+          .defer(d3.csv,"all.csv")
+          .await(ready);
+
+        function ready(error, data5){
+            if(error) throw error;
+
+            // console.log(data1)
+
+            svg6.append("path")
+                .data([data5])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line6);
+
+            svg6.append("path")
+                .data([data5])
+                .attr("fill","none")
+                .attr("stroke","#6BD653")
+                .attr("stroke-width", 2)
+                .attr("d",line62);
+
+            svg6.append("g")
+                .attr("class","xaxis")
+                .attr("transform","translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                        .ticks(6)
+                        .tickPadding([10])
+                        .tickFormat(d3.format(" "))
+                        .tickSizeOuter(0));
+
+            svg6.append("g")
+                .attr("class","yaxis")
+                .attr("transform","translate(" + width + ",0)")
+                .call(d3.axisLeft(y6)
+                        .tickFormat(d3.format(",d"))
+                        .tickSize(width)
+                        .tickSizeOuter(0)
+                        .tickPadding([6]));
+
+            svg6.append("text")
+                .attr("x", 170)
+                .attr("y", 0)
+                .text("All");
+
+        }; 
+</script>
+
+</body>
+</html>
