@@ -177,6 +177,36 @@
                 .attr("y", 0)
                 .text("Less than High School Graduate");
 
+            svg.append("line")
+                .attr("x1", 0)
+                .attr("x2", 30)
+                .attr("y1", -40)
+                .attr("y2", -40)
+                .attr("class","lines")
+                .style("stroke","#6BD653")
+                .style("stroke-width","4px");
+
+            svg.append("text")
+                .attr("x",35)
+                .attr("y", -35)
+                .style("font-size","15px")
+                .text("Male");
+
+            svg.append("line")
+                .attr("x1", 80)
+                .attr("x2", 110)
+                .attr("y1", -40)
+                .attr("y2", -40)
+                .attr("class","lines")
+                .style("stroke","#F4B7DF")
+                .style("stroke-width","4px");
+
+            svg.append("text")
+                .attr("x",115)
+                .attr("y", -35)
+                .style("font-size","15px")
+                .text("Female");
+
         }; 
 
 
