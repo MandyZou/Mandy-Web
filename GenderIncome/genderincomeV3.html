@@ -11,15 +11,19 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
 <style>
+/*    .buttons{
+
+    }*/
+
     #chart {
-        width: 600px;
+        width: 400px;
         height: 600px;
         margin:0;
         float: left;
     }
 
     #chart2{
-        width: 600px;
+        width: 500px;
         height: 600px;
         float: left;
     }
@@ -30,18 +34,15 @@
 
 <body>
     <h1>Income Gender Gap by Degrees</h1>
+    <div class="buttons">
+    <button id="2015">2015</button><button id="2014">2014</button><button id="2013">2013</button><button id="2012">2012</button><button id="2011">2011</button><button id="2010">2010</button>
+    </div>
     <div id="chart"></div>
     <div id="chart2"></div>
-    <button id="2015">2015</button>
-    <button id="2014">2014</button>
-    <button id="2013">2013</button>
-    <button id="2012">2012</button>
-    <button id="2011">2011</button>
-    <button id="2010">2010</button>
     <script>
         var margin = {top: 20, left: 20, right: 20, bottom: 20},
-            width = 600 - margin.left - margin.right,
-            height = 600 - margin.top - margin.bottom;
+            width = 400 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
 
         var x = d3.scaleLinear()
                 .domain([0,85000])
@@ -66,7 +67,7 @@
         //female 
      var svg2 = d3.select("#chart2")
                     .append("svg")
-                    .attr("width", width + margin.left + margin.right)
+                    .attr("width", 800 + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
@@ -74,8 +75,7 @@
         svg2.append("g")
                 .attr("class","xaxis")
                 .attr("transform","translate(0," + height + ")")
-                .call(d3.axisBottom(x));            
-
+                .call(d3.axisBottom(x));     
 
         d3.csv("male.csv", function(error, mdata){
             d3.csv("female.csv", function(error, fdata){
@@ -93,7 +93,7 @@
 
             var newData = mdata.filter(function(d){return d.Year == myYear; })
 
-            console.log(newData)
+            // console.log(newData)
 
             var bars = svg.selectAll(".bar")
                         .data(newData);
@@ -153,6 +153,42 @@
             });
 
             });
+
+    svg2.append("text")
+        .attr("x", 370)
+        .attr("y", 30)
+        .style("fill","#2c2c2c")
+        .text("Total");
+
+    svg2.append("text")
+        .attr("x", 370)
+        .attr("y", 70)
+        .style("fill","#2c2c2c")
+        .text("Graduate or professional degree");
+
+    svg2.append("text")
+        .attr("x", 370)
+        .attr("y", 110)
+        .style("fill","#2c2c2c")
+        .text("Bachelor's degree");
+
+    svg2.append("text")
+        .attr("x", 370)
+        .attr("y", 150)
+        .style("fill","#2c2c2c")
+        .text("Some college or associate's degree");
+
+    svg2.append("text")
+        .attr("x", 370)
+        .attr("y", 190)
+        .style("fill","#2c2c2c")
+        .text("High school graduate (includes equivalency)");
+
+    svg2.append("text")
+        .attr("x", 370)
+        .attr("y", 230)
+        .style("fill","#2c2c2c")
+        .text("Less than high school graduate");
 
 //Resources: https://stackoverflow.com/questions/39431032/using-d3-filter-in-an-update-function
 
