@@ -104,7 +104,7 @@
 
 <body>
     <h1>How Gender Pay Gap Vary in Education Degrees</h1>
-    <p>The higher the degree is, the bigger the gender pay gap. Plus, the gap doesn't change much over the past 6 years.</p>
+    <p>In general, a higher degree triggers a bigger pay gap between male and female. Plus, the gap doesn't change much over the past 6 years.</p>
     <div id="chart"></div>
     <script>
         var margin = {top: 70, left: 40, right: 40, bottom: 30},
@@ -263,7 +263,7 @@
 
             var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
 
-            // console.log(gData[1].Year)
+            var numberFormat = d3.format(",d");
 
             function mousemove() {
               var x0 = x.invert(d3.mouse(this)[0]),
@@ -272,10 +272,10 @@
                   d1 = data0[i],
                   d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
               focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
               focus.select("text.female").html(function() { return "$" + d.Male; });
               focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
               // console.log(d.values)
             };
@@ -402,6 +402,7 @@
                 .on("mousemove", mousemove);
 
             var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+            var numberFormat = d3.format(",d");
 
             function mousemove() {
               var x0 = x.invert(d3.mouse(this)[0]),
@@ -410,10 +411,10 @@
                   d1 = data1[i],
                   d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
               focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
               focus.select("text.female").html(function() { return "$" + d.Male; });
               focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
               // console.log(d.values)
             };
@@ -541,6 +542,7 @@
                 .on("mousemove", mousemove);
 
             var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+            var numberFormat = d3.format(",d");
 
             function mousemove() {
               var x0 = x.invert(d3.mouse(this)[0]),
@@ -549,10 +551,10 @@
                   d1 = data2[i],
                   d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
               focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
               focus.select("text.female").html(function() { return "$" + d.Male; });
               focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
               // console.log(d.values)
             };
@@ -673,6 +675,7 @@
                 .on("mousemove", mousemove);
 
             var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+            var numberFormat = d3.format(",d");
 
             function mousemove() {
               var x0 = x.invert(d3.mouse(this)[0]),
@@ -681,10 +684,10 @@
                   d1 = data3[i],
                   d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
               focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
               focus.select("text.female").html(function() { return "$" + d.Male; });
               focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
               // console.log(d.values)
             };
@@ -806,6 +809,7 @@
                 .on("mousemove", mousemove);
 
             var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+            var numberFormat = d3.format(",d");
 
             function mousemove() {
               var x0 = x.invert(d3.mouse(this)[0]),
@@ -814,10 +818,10 @@
                   d1 = data4[i],
                   d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
               focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
               focus.select("text.female").html(function() { return "$" + d.Male; });
               focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
               // console.log(d.values)
             };
@@ -860,6 +864,7 @@
                 .on("mousemove", mousemove);
 
             var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+            var numberFormat = d3.format(",d");
 
             function mousemove() {
               var x0 = x.invert(d3.mouse(this)[0]),
@@ -868,12 +873,11 @@
                   d1 = data4[i],
                   d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
               focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
               focus.select("text.female").html(function() { return "$" + d.Male; });
               focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
-              // console.log(d.values)
             };
 
 
@@ -993,6 +997,7 @@
                 .on("mousemove", mousemove);
 
             var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+            var numberFormat = d3.format(",d");
 
             function mousemove() {
               var x0 = x.invert(d3.mouse(this)[0]),
@@ -1001,10 +1006,10 @@
                   d1 = data5[i],
                   d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
               focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
               focus.select("text.female").html(function() { return "$" + d.Male; });
               focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
               // console.log(d.values)
             };
