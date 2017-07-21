@@ -224,13 +224,13 @@
                 .style("font-size","15px")
                 .text("Female");
 
-            //Add focus for male line
+            //add focus for lines
             var focus = svg.append("g")
                         .attr("class","focus")
                         .style("display","none");
 
             focus.append("circle")
-                 .attr("r","5");
+                 .attr("r","3");
 
             focus.append("text")
                  .attr("class","focusText")
@@ -242,7 +242,7 @@
                         .style("display","none");
 
             focus2.append("circle")
-                 .attr("r","5");
+                 .attr("r","3");
 
             focus2.append("text")
                  .attr("class","focusText")
@@ -279,18 +279,6 @@
               focus2.select("text.female").html(function() { return "$" + d.Female; });
               // console.log(d.values)
             };
-
-    //         function mousemove() {
-    //           var x0 = x.invert(d3.mouse(this)[0]),
-    //       i = bisectDate(cData, x0, 1),
-    //       d0 = cData[i - 1],
-    //       d1 = cData[i],
-    //       d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
-    //   focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Number) + ")");
-    //   focus.select("text").html(function() { return d.Number + " Very Best Restaurants in " + d.Year; });
-    //   focus.select(".x-hover-line").attr("y2", height - y(d.Number));
-    //   focus.select(".y-hover-line").attr("x2", width + width);
-    // };
 
         }; 
 
@@ -376,6 +364,61 @@
                 .attr("y", 0)
                 .text("High School Graduate (includes equivalency)");
 
+            //add focus for lines
+            var focus = svg2.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg2.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg2.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(data1, x0, 1),
+                  d0 = data1[i - 1],
+                  d1 = data1[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+              // console.log(d.values)
+            };
+
+
         }; 
 
 
@@ -460,6 +503,60 @@
                 .attr("y", 0)
                 .text("Some College or Associate's Degree");
 
+            //add focus for lines
+            var focus = svg3.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg3.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg3.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(data2, x0, 1),
+                  d0 = data2[i - 1],
+                  d1 = data2[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+              // console.log(d.values)
+            };
+
         }; 
 </script>
 
@@ -537,6 +634,60 @@
                 .attr("x", 150)
                 .attr("y", 0)
                 .text("Bachelor's degree");
+
+            //add focus for lines
+            var focus = svg4.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg4.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg4.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(data3, x0, 1),
+                  d0 = data3[i - 1],
+                  d1 = data3[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+              // console.log(d.values)
+            };
 
         }; 
 </script>
@@ -616,6 +767,116 @@
                 .attr("y", -5)
                 .text("Graduate or Professional Degree");
 
+
+            //add focus for lines
+            var focus = svg5.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg5.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg5.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(data4, x0, 1),
+                  d0 = data4[i - 1],
+                  d1 = data4[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+              // console.log(d.values)
+            };
+
+             //add focus for lines
+            var focus = svg5.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","1.5em");
+
+            var focus2 = svg5.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg5.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(data4, x0, 1),
+                  d0 = data4[i - 1],
+                  d1 = data4[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+              // console.log(d.values)
+            };
+
+
         }; 
 </script>
 
@@ -693,6 +954,60 @@
                 .attr("x", 170)
                 .attr("y", 0)
                 .text("All");
+
+            //add focus for lines
+            var focus = svg6.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg6.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg6.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(data5, x0, 1),
+                  d0 = data5[i - 1],
+                  d1 = data5[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+              // console.log(d.values)
+            };
 
         }; 
 </script>
