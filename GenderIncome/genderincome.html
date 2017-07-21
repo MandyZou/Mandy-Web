@@ -91,6 +91,11 @@
         float: left;
     }
 
+    .overlay {
+      fill: none;
+      pointer-events: all;
+    }
+
 
 
 </style>
@@ -121,13 +126,13 @@
                   .domain([14000,85000])
                   .range([height,0]);
 
+        var z = d3.scaleOrdinal(d3.schemeCategory10)
+                .domain(["Male","Female"])
+                .range(["#17927C","#F4B7DF"]);
+
         var line = d3.line()
                 .x(function(d){return x(d.Year); })
-                .y(function(d){return y(d.Male); });
-
-        var line2 = d3.line()
-                    .x(function(d){return x(d.Year); })
-                    .y(function(d){return y(d.Female); });
+                .y(function(d){return y(d.Income); });
 
         d3.queue()
           .defer(d3.csv,"lessHighschool.csv")
@@ -136,23 +141,31 @@
         function ready(error, data0){
             if(error) throw error;
 
-            // console.log(data0)
+            var genders = data0.columns.slice(1).map(function(id){
+                return {
+                    id:id,
+                    values:data0.map(function(d){
+                        return {Year: d.Year, Income: d[id]};
+                    })
+                };
+            });
 
-            svg.append("path")
-                .data([data0])
-                .attr("fill","none")
-                .attr("stroke","#17927C")
-                .attr("stroke-width", 2)
-                .attr("d",line);
+            // console.log(genders)
 
-            svg.append("path")
-                .data([data0])
-                .attr("fill","none")
-                .attr("stroke","#F4B7DF")
-                .attr("stroke-width", 2)
-                .attr("d",line2);
+            var chart = svg.selectAll(".gender")
+                        .data(genders)
+                        .enter().append("g")
+                            .attr("class","gender");
 
-            svg.append("g")
+            chart.append("path")
+                .attr("class","line")
+                .attr("d", function(d){return line(d.values); })
+                .style("stroke", function(d){return z(d.id); })
+                .style("stroke-width",2)
+                .attr("fill","none");
+
+            //add axis
+            chart.append("g")
                 .attr("class","xaxis")
                 .attr("transform","translate(0," + height + ")")
                 .call(d3.axisBottom(x)
@@ -180,6 +193,7 @@
                 .attr("y", 0)
                 .text("Less than High School Graduate");
 
+            //Add legend
             svg.append("line")
                 .attr("x1", 0)
                 .attr("x2", 30)
@@ -209,6 +223,74 @@
                 .attr("y", -35)
                 .style("font-size","15px")
                 .text("Female");
+
+            //Add focus for male line
+            var focus = svg.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","5");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","5");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            // console.log(gData[1].Year)
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(data0, x0, 1),
+                  d0 = data0[i - 1],
+                  d1 = data0[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + d.Male; });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + d.Female; });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+              // console.log(d.values)
+            };
+
+    //         function mousemove() {
+    //           var x0 = x.invert(d3.mouse(this)[0]),
+    //       i = bisectDate(cData, x0, 1),
+    //       d0 = cData[i - 1],
+    //       d1 = cData[i],
+    //       d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+    //   focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Number) + ")");
+    //   focus.select("text").html(function() { return d.Number + " Very Best Restaurants in " + d.Year; });
+    //   focus.select(".x-hover-line").attr("y2", height - y(d.Number));
+    //   focus.select(".y-hover-line").attr("x2", width + width);
+    // };
 
         }; 
 
