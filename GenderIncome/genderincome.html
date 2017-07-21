@@ -79,7 +79,7 @@
 
     #chart5{
         width: 520px;
-        height: 360px;
+        height: 400px;
         margin-left: 30px;
         float: left;
     }
@@ -697,9 +697,9 @@
 
 <div id="chart5"></div>
         <script>
-        var margin = {top: 70, left: 40, right: 40, bottom: 30},
+        var margin = {top: 70, left: 40, right: 40, bottom: 100},
             width = 500 - margin.left - margin.right,
-            height = 350 - margin.top - margin.bottom;
+            height = 420 - margin.top - margin.bottom;
 
         var svg5 = d3.select("#chart5")
                     .append("svg")
@@ -879,6 +879,14 @@
               focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
               focus2.select("text.female").html(function() { return "$" + d.Female; });
             };
+
+        svg5.append("text")
+            .attr("x",-40)
+            .attr("y",320)
+            .text("Source: US Census Bureau")
+            .style("fill","#000")
+            .style("font-style","italic")
+            .style("font-size","13px");
 
 
         }; 
