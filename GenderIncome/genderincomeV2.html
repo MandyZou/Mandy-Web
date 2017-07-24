@@ -194,7 +194,17 @@
                 .text("Less than High School Graduate");
 
             //Fill area
-            //https://stackoverflow.com/questions/35857014/shade-area-between-two-lines-using-d3
+            var area = d3.area()
+                        .x0(function(d){return x(d.Year); })
+                        .x1(function(d){return x(d.Year); })
+                        .y0(function(d){return y(d.Male); })
+                        .y1(function(d){return y(d.Female); });
+
+            svg.append("path")
+                .datum(data0)
+                .attr("class","area")
+                .attr("d", area)
+                .style("fill","rgb(235,235,235)");
 
             //Add legend
             svg.append("line")
@@ -367,6 +377,20 @@
                 .attr("y", 0)
                 .text("High School Graduate (includes equivalency)");
 
+             //Fill area
+            var area2 = d3.area()
+                        .x0(function(d){return x(d.Year); })
+                        .x1(function(d){return x(d.Year); })
+                        .y0(function(d){return y(d.Male); })
+                        .y1(function(d){return y(d.Female); });
+
+            svg2.append("path")
+                .datum(data1)
+                .attr("class","area")
+                .attr("d", area2)
+                .style("fill","rgb(235,235,235)");
+
+
             //add focus for lines
             var focus = svg2.append("g")
                         .attr("class","focus")
@@ -507,6 +531,20 @@
                 .attr("y", 0)
                 .text("Some College or Associate's Degree");
 
+             //Fill area
+            var area3 = d3.area()
+                        .x0(function(d){return x(d.Year); })
+                        .x1(function(d){return x(d.Year); })
+                        .y0(function(d){return y(d.Male); })
+                        .y1(function(d){return y(d.Female); });
+
+            svg3.append("path")
+                .datum(data2)
+                .attr("class","area")
+                .attr("d", area3)
+                .style("fill","rgb(235,235,235)");
+
+
             //add focus for lines
             var focus = svg3.append("g")
                         .attr("class","focus")
@@ -640,6 +678,20 @@
                 .attr("y", 0)
                 .text("Bachelor's degree");
 
+            //Fill area
+            var area4 = d3.area()
+                        .x0(function(d){return x(d.Year); })
+                        .x1(function(d){return x(d.Year); })
+                        .y0(function(d){return y(d.Male); })
+                        .y1(function(d){return y(d.Female); });
+
+            svg4.append("path")
+                .datum(data3)
+                .attr("class","area")
+                .attr("d", area4)
+                .style("fill","rgb(235,235,235)");
+
+
             //add focus for lines
             var focus = svg4.append("g")
                         .attr("class","focus")
@@ -772,6 +824,20 @@
                 .attr("x", 100)
                 .attr("y", -5)
                 .text("Graduate or Professional Degree");
+
+            //Fill area
+            var area5 = d3.area()
+                        .x0(function(d){return x(d.Year); })
+                        .x1(function(d){return x(d.Year); })
+                        .y0(function(d){return y(d.Male); })
+                        .y1(function(d){return y(d.Female); });
+
+            svg5.append("path")
+                .datum(data4)
+                .attr("class","area")
+                .attr("d", area5)
+                .style("fill","rgb(235,235,235)");
+
 
 
             //add focus for lines
@@ -969,6 +1035,19 @@
                 .attr("x", 170)
                 .attr("y", 0)
                 .text("All");
+
+            //Fill area
+            var area6 = d3.area()
+                        .x0(function(d){return x(d.Year); })
+                        .x1(function(d){return x(d.Year); })
+                        .y0(function(d){return y(d.Male); })
+                        .y1(function(d){return y(d.Female); });
+
+            svg6.append("path")
+                .datum(data5)
+                .attr("class","area")
+                .attr("d", area6)
+                .style("fill","rgb(235,235,235)");
 
             //add focus for lines
             var focus = svg6.append("g")
