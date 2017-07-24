@@ -197,6 +197,20 @@
                 .style("stroke-width",4)
                 .attr("fill","none");
 
+            //Fill area
+            var area = d3.area()
+                        .x0(function(d){return x(d.Year); })
+                        .x1(function(d){return x(d.Year); })
+                        .y0(function(d){return y(d.Male); })
+                        .y1(function(d){return y(d.Female); });
+
+            svg.append("path")
+                .datum(data0.filter(function(d){return d.Degree == "highschool"; }))
+                .attr("class","area")
+                .attr("d", area)
+                .style("fill","rgb(235,235,235)");
+
+            //add button function
             d3.selectAll("button")
                 .on("click", function(){
                     draw(this.id);
@@ -219,6 +233,7 @@
                 // console.log(genders2);
 
                 d3.selectAll(".income").remove();
+                d3.select(".area").remove();
 
                 var newLine = svg.selectAll(".gender")
                 .append("path");
@@ -232,6 +247,14 @@
                         .ease(d3.easeLinear)
                     .style("stroke-width",4)
                     .attr("fill","none");
+
+                //Fill area
+                svg.append("path")
+                    .datum(data0.filter(function(d){return d.Degree == Degree; }))
+                    .attr("class","area")
+                    .attr("d", area)
+                    .style("fill","rgb(235,235,235)");
+
 
 
                 // lines.exit()
@@ -259,19 +282,6 @@
         //         .attr("x", 100)
         //         .attr("y", 0)
         //         .text("Less than High School Graduate");
-
-        //     //Fill area
-        //     var area = d3.area()
-        //                 .x0(function(d){return x(d.Year); })
-        //                 .x1(function(d){return x(d.Year); })
-        //                 .y0(function(d){return y(d.Male); })
-        //                 .y1(function(d){return y(d.Female); });
-
-        //     svg.append("path")
-        //         .datum(data0)
-        //         .attr("class","area")
-        //         .attr("d", area)
-        //         .style("fill","rgb(235,235,235)");
 
         //     //Add legend
         //     svg.append("line")
