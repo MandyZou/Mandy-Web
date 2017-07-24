@@ -162,6 +162,42 @@
                 .style("fill","#000")
                 .text("Median Income($)");
 
+                svg.append("text")
+                .attr("x", 100)
+                .attr("y", 0)
+                .text("Less than High School Graduate");
+
+            //Add legend
+            svg.append("line")
+                .attr("x1", 0)
+                .attr("x2", 30)
+                .attr("y1", -40)
+                .attr("y2", -40)
+                .attr("class","lines")
+                .style("stroke","#17927C")
+                .style("stroke-width","4px");
+
+            svg.append("text")
+                .attr("x",35)
+                .attr("y", -35)
+                .style("font-size","15px")
+                .text("Male");
+
+            svg.append("line")
+                .attr("x1", 80)
+                .attr("x2", 110)
+                .attr("y1", -40)
+                .attr("y2", -40)
+                .attr("class","lines")
+                .style("stroke","#F4B7DF")
+                .style("stroke-width","4px");
+
+            svg.append("text")
+                .attr("x",115)
+                .attr("y", -35)
+                .style("font-size","15px")
+                .text("Female");
+
         d3.queue()
           .defer(d3.csv,"combine1.csv")
           .await(ready);
@@ -197,6 +233,7 @@
                 .style("stroke-width",4)
                 .attr("fill","none");
 
+
             //Fill area
             var area = d3.area()
                         .x0(function(d){return x(d.Year); })
@@ -209,6 +246,64 @@
                 .attr("class","area")
                 .attr("d", area)
                 .style("fill","rgb(235,235,235)");
+
+              //add focus for lines
+            var focus = svg.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            var numberFormat = d3.format(",d");
+
+            var currentData = data0.filter(function(d){return d.Degree == "highschool"; });
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(currentData, x0, 1),
+                  d0 = currentData[i - 1],
+                  d1 = currentData[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+            }; //end of mousemove function
+            
 
             //add button function
             d3.selectAll("button")
@@ -255,6 +350,63 @@
                     .attr("d", area)
                     .style("fill","rgb(235,235,235)");
 
+            //add focus for lines
+            var focus = svg.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus.append("circle")
+                 .attr("r","3");
+
+            focus.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            var focus2 = svg.append("g")
+                        .attr("class","focus")
+                        .style("display","none");
+
+            focus2.append("circle")
+                 .attr("r","3");
+
+            focus2.append("text")
+                 .attr("class","focusText")
+                 .attr("x",-23)
+                 .attr("dy","-0.7em");
+
+            svg.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function(){
+                    focus.style("display", null); 
+                    focus2.style("display", null);})
+                .on("mouseout", function(){
+                    focus.style("display", "none"); 
+                    focus2.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
+
+            var numberFormat = d3.format(",d");
+
+            var currentData = data0.filter(function(d){return d.Degree == Degree; });
+
+            function mousemove() {
+              var x0 = x.invert(d3.mouse(this)[0]),
+                  i = bisectDate(currentData, x0, 1),
+                  d0 = currentData[i - 1],
+                  d1 = currentData[i],
+                  d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+              focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
+              focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
+              focus.select("text.female").html(function() { return "$" + d.Male; });
+              focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
+              focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
+              focus2.select("text.female").html(function() { return "$" + d.Female; });
+            }; //end of mousemove function
+
 
 
                 // lines.exit()
@@ -277,98 +429,6 @@
 
 
             }; //end of data function
-
-        //     svg.append("text")
-        //         .attr("x", 100)
-        //         .attr("y", 0)
-        //         .text("Less than High School Graduate");
-
-        //     //Add legend
-        //     svg.append("line")
-        //         .attr("x1", 0)
-        //         .attr("x2", 30)
-        //         .attr("y1", -40)
-        //         .attr("y2", -40)
-        //         .attr("class","lines")
-        //         .style("stroke","#17927C")
-        //         .style("stroke-width","4px");
-
-        //     svg.append("text")
-        //         .attr("x",35)
-        //         .attr("y", -35)
-        //         .style("font-size","15px")
-        //         .text("Male");
-
-        //     svg.append("line")
-        //         .attr("x1", 80)
-        //         .attr("x2", 110)
-        //         .attr("y1", -40)
-        //         .attr("y2", -40)
-        //         .attr("class","lines")
-        //         .style("stroke","#F4B7DF")
-        //         .style("stroke-width","4px");
-
-        //     svg.append("text")
-        //         .attr("x",115)
-        //         .attr("y", -35)
-        //         .style("font-size","15px")
-        //         .text("Female");
-
-        //     //add focus for lines
-        //     var focus = svg.append("g")
-        //                 .attr("class","focus")
-        //                 .style("display","none");
-
-        //     focus.append("circle")
-        //          .attr("r","3");
-
-        //     focus.append("text")
-        //          .attr("class","focusText")
-        //          .attr("x",-23)
-        //          .attr("dy","-0.7em");
-
-        //     var focus2 = svg.append("g")
-        //                 .attr("class","focus")
-        //                 .style("display","none");
-
-        //     focus2.append("circle")
-        //          .attr("r","3");
-
-        //     focus2.append("text")
-        //          .attr("class","focusText")
-        //          .attr("x",-23)
-        //          .attr("dy","-0.7em");
-
-        //     svg.append("rect")
-        //         .attr("class", "overlay")
-        //         .attr("width", width)
-        //         .attr("height", height)
-        //         .on("mouseover", function(){
-        //             focus.style("display", null); 
-        //             focus2.style("display", null);})
-        //         .on("mouseout", function(){
-        //             focus.style("display", "none"); 
-        //             focus2.style("display", "none"); })
-        //         .on("mousemove", mousemove);
-
-        //     var bisectDate = d3.bisector(function(d) { return d.Year; }).left;
-
-        //     var numberFormat = d3.format(",d");
-
-        //     function mousemove() {
-        //       var x0 = x.invert(d3.mouse(this)[0]),
-        //           i = bisectDate(data0, x0, 1),
-        //           d0 = data0[i - 1],
-        //           d1 = data0[i],
-        //           d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
-        //       focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.Male) + ")");
-        //       focus.select("text").html(function() { return "$" + numberFormat(d.Male); });
-        //       focus.select("text.female").html(function() { return "$" + d.Male; });
-        //       focus2.attr("transform", "translate(" + x(d.Year) + "," + y(d.Female) + ")");
-        //       focus2.select("text").html(function() { return "$" + numberFormat(d.Female); });
-        //       focus2.select("text.female").html(function() { return "$" + d.Female; });
-        //       // console.log(d.values)
-        //     };
 
 
 
