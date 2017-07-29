@@ -84,6 +84,7 @@
 
     button:focus {
         outline: 0;
+        background-color: rgb(235,235,235);
     }
 
 
@@ -93,7 +94,7 @@
 
 </head>
 
-<body>
+<body onload="document.getElementById('Less Highschool').focus()">
     <h1>How Gender Pay Gap Vary in Education Degrees</h1>
     <p>In general, a higher degree triggers a bigger pay gap between male and female. Plus, the gap doesn't change much over the past 6 years.</p>
     <div class="buttons">
@@ -221,13 +222,13 @@
                         .enter().append("g")
                             .attr("class","gender");
 
-            chart.append("path")
+            var path = chart.append("path")
                 .attr("class","income")
                 .attr("d", function(d){return line(d.values); })
                 .style("stroke", function(d){return z(d.id); })
                 .transition()
                     .duration(1000)
-                    .ease(d3.easeLinear)
+                    .ease(d3.easeSin)
                 .style("stroke-width",4)
                 .attr("fill","none");
 
