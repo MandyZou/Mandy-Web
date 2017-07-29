@@ -160,6 +160,7 @@
                 .style("fill","#000")
                 .text("Median Income($)");
 
+        //Add text
         svg.append("text")
                 .attr("x", 120)
                 .attr("y", 0)
@@ -222,13 +223,16 @@
                         .enter().append("g")
                             .attr("class","gender");
 
-            var path = chart.append("path")
+            chart.append("path")
                 .attr("class","income")
                 .attr("d", function(d){return line(d.values); })
                 .style("stroke", function(d){return z(d.id); })
+                .attr("stroke-dasharray", function(d){return this.getTotalLength() })
+                .attr("stroke-dashoffset", function(d){return this.getTotalLength() })
                 .transition()
-                    .duration(1000)
+                    .duration(3000)
                     .ease(d3.easeSin)
+                    .attr("stroke-dashoffset", 0)
                 .style("stroke-width",4)
                 .attr("fill","none");
 
@@ -335,9 +339,12 @@
                     .attr("d", function(d){return line(d.values); })
                     .attr("class","income")
                     .style("stroke", function(d){return z(d.id); })
+                    .attr("stroke-dasharray", function(d){return this.getTotalLength() })
+                    .attr("stroke-dashoffset", function(d){return this.getTotalLength() })
                     .transition()
                         .duration(1000)
                         .ease(d3.easeLinear)
+                        .attr("stroke-dashoffset", 0)
                     .style("stroke-width",4)
                     .attr("fill","none");
 
