@@ -97,6 +97,7 @@
 <body onload="document.getElementById('Less Highschool').focus()">
     <h1>How Gender Pay Gap Vary in Education Degrees</h1>
     <p>In general, a higher degree triggers a bigger pay gap between male and female. Plus, the gap doesn't change much over the past 6 years.</p>
+    <p>Hover over the chart to see the numbers.</p>
     <div class="buttons">
         <button id="Less Highschool">Less than High School Graduate</button>
         <button id="Highschool">High School Graduate</button>
@@ -233,21 +234,21 @@
                     .duration(3000)
                     .ease(d3.easeSin)
                     .attr("stroke-dashoffset", 0)
-                .style("stroke-width",4)
+                .style("stroke-width",3)
                 .attr("fill","none");
 
             //Fill area
-            var area = d3.area()
-                        .x0(function(d){return x(d.Year); })
-                        .x1(function(d){return x(d.Year); })
-                        .y0(function(d){return y(d.Male); })
-                        .y1(function(d){return y(d.Female); });
+            // var area = d3.area()
+            //             .x0(function(d){return x(d.Year); })
+            //             .x1(function(d){return x(d.Year); })
+            //             .y0(function(d){return y(d.Male); })
+            //             .y1(function(d){return y(d.Female); });
 
-            svg.append("path")
-                .datum(data0.filter(function(d){return d.Degree == "Less Highschool"; }))
-                .attr("class","area")
-                .attr("d", area)
-                .style("fill","rgb(235,235,235)");
+            // svg.append("path")
+            //     .datum(data0.filter(function(d){return d.Degree == "Less Highschool"; }))
+            //     .attr("class","area")
+            //     .attr("d", area)
+            //     .style("fill","rgb(235,235,235)");
 
               //add focus for lines
             var focus = svg.append("g")
@@ -345,16 +346,16 @@
                         .duration(1000)
                         .ease(d3.easeLinear)
                         .attr("stroke-dashoffset", 0)
-                    .style("stroke-width",4)
+                    .style("stroke-width",3)
                     .attr("fill","none");
 
 
                 //Fill area
-                svg.append("path")
-                    .datum(data0.filter(function(d){return d.Degree == Degree; }))
-                    .attr("class","area")
-                    .attr("d", area)
-                    .style("fill","rgb(235,235,235)");
+                // svg.append("path")
+                //     .datum(data0.filter(function(d){return d.Degree == Degree; }))
+                //     .attr("class","area")
+                //     .attr("d", area)
+                //     .style("fill","rgb(235,235,235)");
 
             //add focus for lines
             var focus = svg.append("g")
@@ -415,7 +416,6 @@
 
             d3.select(".title")
                 .text(Degree + " Degree");
-
 
                 // lines.exit()
                 //     .transition()
