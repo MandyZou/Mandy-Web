@@ -12,6 +12,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+    <script type="text/javascript" src="sorttable.js"></script>
+
     <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Hind|Roboto" rel="stylesheet">
@@ -72,6 +74,10 @@
       color: red;
       padding-left: 60px;
       font-weight: bold;
+    }
+
+    table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
     }
 
     </style>
@@ -310,7 +316,7 @@
 
         var alpha = d3.scaleLinear().domain([450, 1450]).range([0, 1]);
 
-        var table = d3.select("#table").append("table");
+        var table = d3.select("#table").append("table").classed("sortable", true);
 
         var header = table.append("thead").append("tr");
 
