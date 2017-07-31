@@ -80,6 +80,10 @@
     content: " \25B4\25BE" 
     }
 
+    table.sortable th{
+      cursor: pointer;
+    }
+
     </style>
 </head>
 
@@ -316,7 +320,7 @@
 
         var alpha = d3.scaleLinear().domain([450, 1450]).range([0, 1]);
 
-        var table = d3.select("#table").append("table").classed("sortable", true);
+        var table = d3.select("#table").append("table").classed("sortable", true).attr("id","table_rent");
 
         var header = table.append("thead").append("tr");
 
@@ -363,6 +367,8 @@
         // }
 
         // console.log(numData);
+
+        sorttable.makeSortable(document.getElementById('table_rent'));
     });
 
 </script>
