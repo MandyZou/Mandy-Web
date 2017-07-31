@@ -358,16 +358,8 @@
                 });
 
         $('*[class^="+"]').attr("style", "padding-left: 60px");
-        // var numData = []
-
-        // var rows = tablebody.selectAll('tr').data(tablebody.data()[0]);
-        // for(var i = 0; i <rows.length; i++){
-        //   var num = rows[i][1]
-        //   numData.push(num);
-        // }
-
-        // console.log(numData);
-
+        
+        //Important for table made by js
         sorttable.makeSortable(document.getElementById('table_rent'));
     });
 
