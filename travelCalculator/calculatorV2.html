@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <style>
+       
+        </style>
+
+    </head>
+    <body>
+        <input type="text" id="peoplenum" name="peoplenum" />
+        <input type="text" id="timenum" name="timenum" />
+        <input type="text" id="domesticper" name="domesticper" />
+        <input type="text" id="interper" name="interper" />
+        <br />
+        <button type="button" onclick="cal()">Get Answers!</button>
+
+        <p id="result" name="result"></p>
+        
+
+        <script>
+        function cal(){
+            var textType = Node.textContent ? 'textContent' : 'innerText',
+                peoplenum = parseFloat(document.getElementById("peoplenum").value) || 0,
+                timenum = parseFloat(document.getElementById("timenum").value) || 0,
+                domesticper = parseFloat(document.getElementById("domesticper").value) || 0,
+                interper = parseFloat(document.getElementById("interper").value) || 0,
+                result = document.getElementById("result"),
+                travelresult = (peoplenum * 100 + timenum * 10) * domesticper + (peoplenum * 100 + timenum * 10) * interper;
+
+                console.log(travelresult)
+
+                result[textType] = travelresult;
+        };
+       
+        </script>
+
+    </body>
+</html>
