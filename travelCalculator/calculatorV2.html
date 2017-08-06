@@ -10,14 +10,16 @@
 
     </head>
     <body>
-        <input type="text" id="peoplenum" name="peoplenum" />
-        <input type="text" id="timenum" name="timenum" />
-        <input type="text" id="domesticper" name="domesticper" />
-        <input type="text" id="interper" name="interper" />
+        <input type="text" id="peoplenum" name="peoplenum" /> People
+        <br />
+        <input type="text" id="timenum" name="timenum" /> Times
+        <br />
+        <input type="text" id="domesticper" name="domesticper" />% Domestic Trip
+        <input type="text" id="interper" name="interper" />% International Trip
         <br />
         <button type="button" onclick="cal()">Get Answers!</button>
-
-        <p id="result" name="result"></p>
+        <br />
+        Saving: <p id="result" name="result"></p>
         
 
         <script>
@@ -28,7 +30,7 @@
                 domesticper = parseFloat(document.getElementById("domesticper").value) || 0,
                 interper = parseFloat(document.getElementById("interper").value) || 0,
                 result = document.getElementById("result"),
-                travelresult = (peoplenum * 100 + timenum * 10) * domesticper + (peoplenum * 100 + timenum * 10) * interper;
+                travelresult = (peoplenum * 100 + timenum * 10) * (0.01 * domesticper) + (peoplenum * 100 + timenum * 10) * (0.01 * interper);
 
                 console.log(travelresult)
 
