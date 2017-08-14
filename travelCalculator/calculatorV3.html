@@ -43,9 +43,27 @@
 
         .saving {
             margin-left: 100px;
-            margin-top: 20px;
+            margin-top: 30px;
             height: 300px;
         }
+
+        #result_button{
+            color: #fff;
+            background-color: #ed1c24;
+            font-size: 15px;
+            padding: 10px 30px 10px 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result_button:focus {
+            outline:0;
+        }
+
+        p{
+            color: #ed1c24;
+        }
+
        
         </style>
 
@@ -64,7 +82,7 @@
                 Annual Total: $ <input type="text" id="total" name="total" />
                 <br />
                
-                <button type="button" onclick="cal()">See Saving</button>
+                <button id="result_button" type="button" onclick="cal()">SEE RESULTS</button>
                 <br />
             </div>
 
