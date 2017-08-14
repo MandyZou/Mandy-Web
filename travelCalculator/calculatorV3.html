@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Cinzel|Josefin+Sans" rel="stylesheet">
+
+        <style>
+        body{
+            background-image: url("N-CO-1.1ABC_Image2_crop.jpg");
+            background-size: 1000px;
+            background-repeat: no-repeat;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 20px;
+        }
+
+        #calculator-area {
+            width: 1200px;
+            height: 700px;
+            padding-top: 100px;
+            margin: 100px 0 60px 300px;
+            background-color: white;
+        }
+
+        .spending {
+            margin-left: 100px;
+        }
+        input {
+            margin-bottom: 20px;
+        }
+
+        .saving {
+            margin-left: 100px;
+            margin-top: 20px;
+        }
+       
+        </style>
+
+    </head>
+    <body>
+        
+        <div id="calculator-area">
+            <div class="spending">
+                Annual Airfare Spending: $ <input type="text" id="airfare" name="airfare" />
+                <br />
+                Annual Hotel Spending: $ <input type="text" id="hotel" name="hotel" />
+                <br />
+                Annual Car Spending: $ <input type="text" id="car" name="car" />
+                <br />
+                Annual Total: $ <input type="text" id="total" name="total" />
+                <br />
+               
+                <button type="button" onclick="cal()">See How Much You Could Save</button>
+                <br />
+            </div>
+
+            <div class="saving">
+                Average Airfare Savings: $<p id="air_result" name="air_result"></p>
+                Average Hotel Savings: $<p id="hotel_result" name="hotel_result"></p>
+                Average Car Savings: $<p id="car_result" name="car_result"></p>
+                Estimated Total Hard Dollar Savings: $<p id="hard_result" name="hard_result"></p>
+                Return on Investment: $<p id="return_result" name="return_result"></p>
+            </div>
+        </div>
+        
+
+        <script>
+        function cal(){
+            var textType = Node.textContent ? 'textContent' : 'innerText',
+                peoplenum = parseFloat(document.getElementById("peoplenum").value) || 0,
+                timenum = parseFloat(document.getElementById("timenum").value) || 0,
+                domesticper = parseFloat(document.getElementById("domesticper").value) || 0,
+                interper = parseFloat(document.getElementById("interper").value) || 0,
+                result = document.getElementById("result"),
+                travelresult = (peoplenum * 100 + timenum * 10) * (0.01 * domesticper) + (peoplenum * 100 + timenum * 10) * (0.01 * interper);
+
+                console.log(travelresult)
+
+                result[textType] = travelresult;
+        };
+
+        //https://www.codecademy.com/courses/web-advanced-en-x6JWW/0/1
+        //https://codepen.io/lalwanivikas/pen/eZxjqo
+        //http://jsfiddle.net/davidThomas/wxhU9/4/
+        //https://stackoverflow.com/questions/15994510/javascript-text-input-calculator
+        
+       
+        </script>
+
+    </body>
+</html>
