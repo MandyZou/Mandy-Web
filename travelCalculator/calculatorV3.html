@@ -4,14 +4,15 @@
         <title>Calculator</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+        <!-- Framework -->
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-        <link href="https://fonts.googleapis.com/css?family=Cinzel|Josefin+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Cinzel|Josefin+Sans:400,600" rel="stylesheet">
 
         <style>
         body{
-            background-image: url("N-CO-1.1ABC_Image2_crop.jpg");
-            background-size: 1000px;
+            background-image: url("background-photo.png");
+            background-size: 900px;
             background-repeat: no-repeat;
             font-family: 'Josefin Sans', sans-serif;
             font-size: 20px;
@@ -20,21 +21,30 @@
         #calculator-area {
             width: 1200px;
             height: 700px;
-            padding-top: 100px;
+            padding-top: 25px;
             margin: 100px 0 60px 300px;
             background-color: white;
+        }
+
+        h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 30px;
+            color: #ed1c24;
+            box-shadow: inset 0 -1px 0 #ed1c24;
+        }
+
+        input {
+            margin-bottom: 20px;
         }
 
         .spending {
             margin-left: 100px;
         }
-        input {
-            margin-bottom: 20px;
-        }
 
         .saving {
             margin-left: 100px;
             margin-top: 20px;
+            height: 300px;
         }
        
         </style>
@@ -44,6 +54,7 @@
         
         <div id="calculator-area">
             <div class="spending">
+                <h1>SPENDING</h1>
                 Annual Airfare Spending: $ <input type="text" id="airfare" name="airfare" />
                 <br />
                 Annual Hotel Spending: $ <input type="text" id="hotel" name="hotel" />
@@ -53,11 +64,12 @@
                 Annual Total: $ <input type="text" id="total" name="total" />
                 <br />
                
-                <button type="button" onclick="cal()">See How Much You Could Save</button>
+                <button type="button" onclick="cal()">See Saving</button>
                 <br />
             </div>
 
             <div class="saving">
+                <h1>SAVING</h1>
                 Average Airfare Savings: $<p id="air_result" name="air_result"></p>
                 Average Hotel Savings: $<p id="hotel_result" name="hotel_result"></p>
                 Average Car Savings: $<p id="car_result" name="car_result"></p>
