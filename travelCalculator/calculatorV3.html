@@ -60,7 +60,7 @@
             outline:0;
         }
 
-        p{
+        span{
             color: #ed1c24;
         }
 
@@ -88,11 +88,11 @@
 
             <div class="saving">
                 <h1>SAVING</h1>
-                Average Airfare Savings: $<p id="air_result" name="air_result"></p>
-                Average Hotel Savings: $<p id="hotel_result" name="hotel_result"></p>
-                Average Car Savings: $<p id="car_result" name="car_result"></p>
-                Estimated Total Hard Dollar Savings: $<p id="hard_result" name="hard_result"></p>
-                Return on Investment: $<p id="return_result" name="return_result"></p>
+                <p>Average Airfare Savings: $ <span id="air_result" name="air_result"></span></p>
+                <p>Average Hotel Savings: $ <span id="hotel_result" name="hotel_result"></span></p>
+                <p>Average Car Savings: $ <span id="car_result" name="car_result"></span></p>
+                <p>Estimated Total Hard Dollar Savings: $ <span id="hard_result" name="hard_result"></span></p>
+                <p>Return on Investment: $ <span id="return_result" name="return_result"></span></p>
             </div>
         </div>
         
@@ -100,16 +100,21 @@
         <script>
         function cal(){
             var textType = Node.textContent ? 'textContent' : 'innerText',
-                peoplenum = parseFloat(document.getElementById("peoplenum").value) || 0,
-                timenum = parseFloat(document.getElementById("timenum").value) || 0,
-                domesticper = parseFloat(document.getElementById("domesticper").value) || 0,
-                interper = parseFloat(document.getElementById("interper").value) || 0,
-                result = document.getElementById("result"),
-                travelresult = (peoplenum * 100 + timenum * 10) * (0.01 * domesticper) + (peoplenum * 100 + timenum * 10) * (0.01 * interper);
+                airfare = parseFloat(document.getElementById("airfare").value) || 0,
+                hotel = parseFloat(document.getElementById("hotel").value) || 0,
+                car = parseFloat(document.getElementById("car").value) || 0,
+                //saving name
+                air_result = document.getElementById("air_result"),
+                hotel_result = document.getElementById("hotel_result"),
+                car_result = document.getElementById("car_result"),
+                //calculating...
+                air_saving = airfare * 0.2,
+                hotel_saving = hotel * 0.15,
+                car_saving = car * 0.25;
 
-                console.log(travelresult)
-
-                result[textType] = travelresult;
+                air_result[textType] = air_saving;
+                hotel_result[textType] = hotel_saving;
+                car_result[textType] = car_saving;
         };
 
         //https://www.codecademy.com/courses/web-advanced-en-x6JWW/0/1
