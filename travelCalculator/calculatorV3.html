@@ -101,6 +101,13 @@
         </div>        
 
         <script>
+        //add commas to thousands place
+        function numberWithCommas(x) {
+            var parts = x.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return parts.join(".");
+        };
+
         function cal(){
             var textType = Node.textContent ? 'textContent' : 'innerText',
                 airfare = parseFloat(document.getElementById("airfare").value) || 0,
@@ -120,13 +127,12 @@
                 hard_saving = air_saving + hotel_saving + car_saving,
                 return_saving = total_spending / hard_saving;
 
-                air_result[textType] = air_saving;
-                hotel_result[textType] = hotel_saving;
-                car_result[textType] = car_saving;
-                hard_result[textType] = hard_saving;
-                return_result[textType] = return_saving;
+                air_result[textType] = numberWithCommas(air_saving);
+                hotel_result[textType] = numberWithCommas(hotel_saving);
+                car_result[textType] = numberWithCommas(car_saving);
+                hard_result[textType] = numberWithCommas(hard_saving);
+                return_result[textType] = return_saving.toFixed(2);
 
-                console.log(hard_result)
         };
 
         //https://www.codecademy.com/courses/web-advanced-en-x6JWW/0/1
