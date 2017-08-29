@@ -9,6 +9,8 @@
 
         <link href="https://fonts.googleapis.com/css?family=Cinzel|Josefin+Sans:400,600" rel="stylesheet">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
         <style>
         body{
             background-image: url("background-photo-3.png");
@@ -50,6 +52,11 @@
             margin-right: 100px;
         }
 
+        .animated .zoomInRight {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
         .saving {
             margin-left: 100px;
             margin-right: 100px;
@@ -71,7 +78,7 @@
             outline:0;
         }
 
-        span{
+        .saving span{
             color: #ed1c24;
         }
 
@@ -106,9 +113,9 @@
 
     </head>
     <body>
-        <h1 id="headline">Calculate Your Business Travel Savings</h1>
+        <h1 id="headline" class="animated fadeInRight">Calculate Your Business Travel Savings</h1>
         <div id="calculator-area">
-            <div class="spending">
+            <div class="spending animated fadeInUp" style="-webkit-animation-delay: 0.5s;"> 
                 <h2>SPENDING</h2>
                 Annual Airfare Spending: $ <input type="text" id="airfare" name="airfare" />
                 <br />
@@ -123,16 +130,16 @@
                 <br />
             </div>
 
-            <div class="saving">
+            <div class="saving animated fadeInUp" style="-webkit-animation-delay: 0.8s;">
                 <h2>SAVINGS</h2>
-                <p>Average Airfare Savings: <span style="color: #ed1c24">$</span> <span id="air_result" name="air_result"></span></p>
-                <p>Average Hotel Savings: <span style="color: #ed1c24">$</span> <span id="hotel_result" name="hotel_result"></span></p>
-                <p>Average Car Savings: <span style="color: #ed1c24">$</span> <span id="car_result" name="car_result"></span></p>
-                <p>Estimated Total Hard Dollar Savings: <span style="color: #ed1c24">$</span> <span id="hard_result" name="hard_result"></span></p>
-                <p>Return on Investment: <span id="return_result" name="return_result"></span><span style="color: #ed1c24">%</span></p>
+                <p>Average Airfare Savings: <span style="color: #ed1c24">$</span> <span id="air_result" name="air_result" style="display:inline-block;"></span></p>
+                <p>Average Hotel Savings: <span style="color: #ed1c24">$</span> <span id="hotel_result" name="hotel_result" style="display:inline-block;"></span></p>
+                <p>Average Car Savings: <span style="color: #ed1c24">$</span> <span id="car_result" name="car_result" style="display:inline-block;"></span></p>
+                <p>Estimated Total Hard Dollar Savings: <span style="color: #ed1c24">$</span> <span id="hard_result" name="hard_result" style="display:inline-block;"></span></p>
+                <p>Return on Investment: <span id="return_result" name="return_result"></span><span style="color: #ed1c24" style="display:inline-block;">%</span></p>
             </div>
 
-            <div class="ending">
+            <div class="ending animated fadeInUp" style="-webkit-animation-delay: 1s;">
                 <p id="ending_text">Put these savings into action with help from the professionals at Travel Leaders Group.</p>
                 <button type="button" id="learn_more" onclick="link()">LEARN MORE</button>
                 <img src="linkedin_logo.png" style="width: 30px; margin-left: 30px;"></img>
@@ -142,6 +149,15 @@
         </div>        
 
         <script>
+        $("#learn_more").mouseover(function(){
+            $(this).addClass("animated bounceIn");
+        });
+
+        $("button").mouseout(function(){
+            $(this).removeClass("animated bounceIn");
+        });
+
+
         //Add up total spending automatically
         $("#car").keyup(function(){
              var textType = Node.textContent ? 'textContent' : 'innerText',
@@ -179,10 +195,15 @@
                 return_saving = ((air_saving + hotel_saving + car_saving)/(airfare + hotel + car))*100;
 
                 air_result[textType] = numberWithCommas(air_saving.toFixed(0));
+                $("#air_result").addClass("animated tada");
                 hotel_result[textType] = numberWithCommas(hotel_saving.toFixed(0));
+                $("#hotel_result").addClass("animated tada");
                 car_result[textType] = numberWithCommas(car_saving.toFixed(0));
+                $("#car_result").addClass("animated tada");
                 hard_result[textType] = numberWithCommas(hard_saving.toFixed(0));
+                $("#hard_result").addClass("animated tada");
                 return_result[textType] = return_saving.toFixed(0);
+                $("#return_result").addClass("animated tada");
 
         };
 
