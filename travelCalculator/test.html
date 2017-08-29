@@ -1,0 +1,19 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<input type="text" name="value1" id="textone">
+<input type="text" name="value2" id="texttwo">
+<input type="text" name="result" id="result">
+
+<script>
+    $('#texttwo').keyup(function(){
+        var textone;
+        var texttwo;
+        textone = parseFloat($('#textone').val());
+        texttwo = parseFloat($('#texttwo').val());
+        var result = textone + texttwo;
+        $('#result').val(result.toFixed(2));
+
+
+    });
+</script>
