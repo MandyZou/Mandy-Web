@@ -82,8 +82,9 @@
         }
 
         #ending_text {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 8px;
+            width: 80%;
         }
 
         #learn_more{
@@ -123,17 +124,18 @@
             </div>
 
             <div class="saving">
-                <h2>SAVING</h2>
-                <p>Average Airfare Savings: $ <span id="air_result" name="air_result"></span></p>
-                <p>Average Hotel Savings: $ <span id="hotel_result" name="hotel_result"></span></p>
-                <p>Average Car Savings: $ <span id="car_result" name="car_result"></span></p>
-                <p>Estimated Total Hard Dollar Savings: $ <span id="hard_result" name="hard_result"></span></p>
-                <p>Return on Investment: <span id="return_result" name="return_result"></span>%</p>
+                <h2>SAVINGS</h2>
+                <p>Average Airfare Savings: <span style="color: #ed1c24">$</span> <span id="air_result" name="air_result"></span></p>
+                <p>Average Hotel Savings: <span style="color: #ed1c24">$</span> <span id="hotel_result" name="hotel_result"></span></p>
+                <p>Average Car Savings: <span style="color: #ed1c24">$</span> <span id="car_result" name="car_result"></span></p>
+                <p>Estimated Total Hard Dollar Savings: <span style="color: #ed1c24">$</span> <span id="hard_result" name="hard_result"></span></p>
+                <p>Return on Investment: <span id="return_result" name="return_result"></span><span style="color: #ed1c24">%</span></p>
             </div>
 
             <div class="ending">
                 <p id="ending_text">Put these savings into action with help from the professionals at Travel Leaders Group.</p>
                 <button type="button" id="learn_more" onclick="link()">LEARN MORE</button>
+                <img src="linkedin_logo.png" style="width: 30px; margin-left: 30px;"></img>
             </div>
 
             <img src="36k_logo_bug.png" style="width: 80px; position: relative; left:800px; bottom: 10px"></img>
@@ -147,7 +149,7 @@
                  hotel = parseFloat(document.getElementById("hotel").value) || 0,
                  car = parseFloat(document.getElementById("car").value) || 0,
                  total_spending = airfare + hotel + car;
-                 $("#total_spending").val(total_spending.toFixed(2)); 
+                 $("#total_spending").val(total_spending.toFixed(0)); 
         });
 
         //add commas to thousands place
@@ -176,11 +178,11 @@
                 hard_saving = air_saving + hotel_saving + car_saving,
                 return_saving = ((air_saving + hotel_saving + car_saving)/(airfare + hotel + car))*100;
 
-                air_result[textType] = numberWithCommas(air_saving.toFixed(2));
-                hotel_result[textType] = numberWithCommas(hotel_saving.toFixed(2));
-                car_result[textType] = numberWithCommas(car_saving.toFixed(2));
-                hard_result[textType] = numberWithCommas(hard_saving.toFixed(2));
-                return_result[textType] = return_saving.toFixed(2);
+                air_result[textType] = numberWithCommas(air_saving.toFixed(0));
+                hotel_result[textType] = numberWithCommas(hotel_saving.toFixed(0));
+                car_result[textType] = numberWithCommas(car_saving.toFixed(0));
+                hard_result[textType] = numberWithCommas(hard_saving.toFixed(0));
+                return_result[textType] = return_saving.toFixed(0);
 
         };
 
@@ -190,7 +192,7 @@
 
 
         // //Automatically add commas
-        // $('input').keyup(function(event) {
+        // $('#airfare').keyup(function(event) {
 
         //   // skip for arrow keys
         //   if(event.which >= 37 && event.which <= 40) return;
