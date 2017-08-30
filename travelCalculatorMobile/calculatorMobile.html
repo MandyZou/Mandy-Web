@@ -22,7 +22,7 @@
 
         #calculator-area {
             width: 900px;
-            height: 1530px;
+            height: 1700px; /*White Space*/
             padding-top: 25px;
             margin-top: 20px;
             margin-left: 40px;
@@ -58,6 +58,10 @@
         .spending-mobile {
             margin-bottom: 50px;
             font-size: 30px;
+        }
+
+        .spending-input-mobile{
+            margin-left: 200px;
         }
 
         .animated .zoomInRight {
@@ -130,13 +134,21 @@
              <h1 id="headline" class="animated fadeInRight">Calculate Your Business Travel Savings</h1>
             <div class="spending animated fadeInUp" style="-webkit-animation-delay: 0.5s;"> 
                 <h2>SPENDING</h2>
-                <span class="spending-mobile"><img src="airplane.png" style="width:50px"></img>Annual Airfare Spending: $ <input type="text" id="airfare" name="airfare" /></span>
+                <span class="spending-mobile"><img src="airplane.png" style="width:50px"></img>Annual Airfare Spending: 
                 <br />
-                <span class="spending-mobile"><img src="hotel.png" style="width:50px"></img>Annual Hotel Spending: $ <input type="text" id="hotel" name="hotel" /></span>
+                <span class="spending-input-mobile">$ <input type="text" id="airfare" name="airfare" /></span></span>
                 <br />
-                <span class="spending-mobile"><img src="car.png" style="width:50px">Annual Car Spending: $ <input type="text" id="car" name="car" /></span>
+                <span class="spending-mobile"><img src="hotel.png" style="width:50px"></img>Annual Hotel Spending: 
                 <br />
-                <span class="spending-mobile"><img src="luggage.png" style="width:50px">Annual Total: $ <input type="text" id="total_spending" name="total_spending" /></span>
+                <span class="spending-input-mobile">$ <input type="text" id="hotel" name="hotel" /></span></span>
+                <br />
+                <span class="spending-mobile"><img src="car.png" style="width:50px">Annual Car Spending: 
+                <br />
+                <span class="spending-input-mobile">$ <input type="text" id="car" name="car" /></span></span>
+                <br />
+                <span class="spending-mobile"><img src="luggage.png" style="width:50px">Annual Total: 
+                <br />
+                <span class="spending-input-mobile">$ <input type="text" id="total_spending" name="total_spending" /></span></span>
                 <br />
                
                 <button id="result_button" type="button" onclick="cal()">SEE RESULTS</button>
