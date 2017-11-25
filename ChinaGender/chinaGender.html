@@ -114,7 +114,8 @@
             .attr("x1", 0)
             .attr("y1", 60)
             .attr("x2", 2300)
-            .attr("y2", 60);
+            .attr("y2", 60)
+            .style("stroke", "#999999");
 
     };
 
@@ -127,10 +128,19 @@
 
     <script>
     $("#all-asia-button").click(function(){
-        $(".Asia").css("fill","black");
-        $(".Asia-text").css("visibility","visible");
-        $(".Asia-numbers").css("visibility","visible");
+        var n = $(".Asia").css("fill");
+
+    //     if(n = "black"){
+    //     $(".Asia").css("fill","black");
+    //     $(".Asia-text").css("visibility","visible");
+    //     $(".Asia-numbers").css("visibility","visible");
+    // } else {
+        $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
+        $(".Asia-text").css("visibility","hidden");
+        $(".Asia-numbers").css("visibility","hidden");
+    // }
     });
+
 
     $("#all-comm-button").click(function(){
         $(".Social").css("fill","black");
