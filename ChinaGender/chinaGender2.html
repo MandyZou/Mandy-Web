@@ -5,7 +5,8 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Hind+Madurai|Patua+One" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Hind+Madurai|Patua+One" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Assistant:800|Hind+Madurai|Patua+One" rel="stylesheet">
 
     <style>
         body {
@@ -22,9 +23,10 @@
         h1 {
             text-align: center;
             font-size: 80px;
-            font-family: 'Patua One', cursive;
+            font-family: 'Assistant', sans-serif;
+            line-height: 90px;
             color: #084c8f;
-            margin-bottom: 35px;
+            margin-bottom: 50px;
         }
 
         .h1-china {
@@ -45,7 +47,7 @@
 
         .button-group{
             float: left;
-            margin-left: 20px;
+            margin-left: 25px;
         }
 
         button {
@@ -54,6 +56,8 @@
             color: white;
             font-size: 13px;
             margin-left: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
             cursor: pointer;
         }
 
@@ -85,6 +89,11 @@
             color: #999;
         }
 
+        #compare-gg-container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
     </style>
 </head>
 
@@ -93,9 +102,8 @@
             <img src="manyunzou.png" style="width: 100px; margin-top: 20px;" />
     </div>
 
-    <h1>How does <span class="h1-china">China</span> Perform 
-        <br/>
-        in <span class="h1-underline">Gender Difference</span>?</h1>
+    <h1>How is <span class="h1-china">China's</span> 
+        <br/><span class="h1-underline">Gender Gap</span> Progress?</h1>
 
     <p class="article-content">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae libero dolor. Quisque eget ornare tellus. Cras eleifend nec tellus vitae laoreet. Ut eu pretium nisi, vitae semper urna. Mauris sit amet tortor nunc. Nullam vel odio tortor. Praesent ut elit rutrum, faucibus lorem mollis, pharetra nisi. Donec bibendum neque quis dui tristique pharetra. Morbi lobortis sapien a ipsum mattis, et porta arcu consectetur. Sed dapibus, magna quis ultrices interdum, erat felis fringilla dui, non sollicitudin neque lacus vel neque. Integer a odio eu quam gravida ullamcorper sit amet dapibus urna. Ut tempor risus ex, a sagittis ipsum tempor at. Suspendisse in lectus maximus, tempor velit ac, tincidunt mi.
@@ -123,10 +131,12 @@
         </div>
 
         <div id="gg-all"></div>
-        <p class="chart-sidenote">*Drag/Scroll on bars to zoom in chart</p>
+        <p class="chart-sidenote">*Drag/Scroll bars to zoom in chart</p>
     </div>
     <!-- End of all asia container -->
 
+
+    <!-- gg-all graphic code -->
     <script>
     var margin = {top: 20, left: 20, right: 20, bottom: 20},
         width = 1200 - margin.left - margin.right,
@@ -396,6 +406,51 @@
     <p class="article-content">
         Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
     </p>
+
+    <div id="compare-gg-container">
+        <div id="gg-compare"></div>
+
+    </div>
+
+    <!-- gg-compare graphic code -->
+    <script type="text/javascript">
+    var com_margin = {top: 20, right: 20, bottom: 30, left: 40},
+        com_width = 960 - margin.left - margin.right,
+        com_height = 500 - margin.top - margin.bottom;
+
+    var xScale = d3.scaleLinear()
+        .range([0, width]);
+
+    var yScale = d3.scaleLinear()
+        .range([height, 0]);
+
+    var xAxis_com = d3.axisBottom(xScale);
+
+    var yAxis_com = d3.axisLeft(yScale);
+
+    var svg_com = d3.select("#gg-compare").append("svg")
+            .attr("width", com_width + com_margin.left + com_margin.right)
+            .attr("height", com_height + com_margin.top + com_margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + com_margin.left + "," + com_margin.top + ")");
+
+    d3.queue()
+        .defer(d3.csv, "gg-edu.csv", type)
+        .defer(d3.csv, "gg-health.csv", type)
+        .defer(d3.csv, "gg-poli.csv", type)
+        .defer(d3.csv, "gg_econ.csv", type)
+        .await(ready);
+
+    function ready(error, edu, health, poli, econ){
+        if (error) throw error;
+
+
+
+    }
+
+
+
+    </script>
 
 </body>
 </html>
