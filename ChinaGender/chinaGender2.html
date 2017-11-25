@@ -8,7 +8,9 @@
     <!-- // <script type="text/javascript" src="allButton.js"></script> -->
 
     <style>
-
+        #x_axis path{
+            display: none;
+        }
 
     </style>
 </head>
@@ -38,6 +40,14 @@
                     .attr("id","gg-all-graphic")
                     .call(d3.zoom().on("zoom", zoom));
 
+        svg_all.append("line")
+            .style("stroke","black")
+            .attr("x1", 0)
+            .attr("y1", 80)
+            .attr("x2", 2300)
+            .attr("y2", 80)
+            .style("stroke", "#999999");
+
         // For zoom in, name every part of the axis separately
         var x = d3.scaleLinear()
                     .domain([0.5,0.8])
@@ -48,7 +58,7 @@
         var x_axis = svg_all.append("g")
                         .attr("id","x_axis")
                         .attr("transform", "translate(75,0)")
-                        .style("display","none")
+                        // .style("display","none")
                         .call(xAxis);
 
         var bars = svg_all.selectAll(".bar")
@@ -116,14 +126,6 @@
                                         return "hidden"};
                                 });
 
-        svg_all.append("line")
-            .style("stroke","black")
-            .attr("x1", 0)
-            .attr("y1", 80)
-            .attr("x2", 2300)
-            .attr("y2", 80)
-            .style("stroke", "#999999");
-
 
         function zoom(){
            svg_all.transition()
@@ -145,7 +147,13 @@
                                     return new_xScale(0);
                                 }
             })
-                        .style("stroke","#000");
+                        .style("stroke", function(d) {
+                            if(d.Countries == "China"){
+                                return "#C8515F";
+                            } else {
+                                return "#000"
+                            }
+                        });
             barsText.attr("x",function(d){
                                 if(d.Global > 0){
                                     return new_xScale(d.Global);
@@ -153,7 +161,13 @@
                                     return new_xScale(0);
                                 }
             })
-                        .style("stroke","#000");
+                        .style("stroke",function(d) {
+                            if(d.Countries == "China"){
+                                return "#C8515F";
+                            } else {
+                                return "#000"
+                            }
+                        });
     };
 
     };
@@ -169,18 +183,51 @@
     </script>
 
     <script>
-    $("#all-asia-button").click(function(){
-        // var n = $(".Asia").css("fill");
+    // $("#all-asia-button").click(function(){
+    //     var n = $(".Asia").css("fill");
 
-        $(".Asia").css("fill","#324167");
-        $(".Asia-text").css("visibility","visible");
-        $(".Asia-numbers").css("visibility","visible");
-    // // } else {
+    //     if(n = "rgba(201, 201, 201,0.6)"){
+    //     $(".Asia").css("fill","#324167");
+    //     $(".Asia-text").css("visibility","visible");
+    //     $(".Asia-numbers").css("visibility","visible");
+    // } else {
     //     $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
     //     $(".Asia-text").css("visibility","hidden");
     //     $(".Asia-numbers").css("visibility","hidden");
-    // // }
+    // }
+    // });
+
+    var asiaChange = true;
+    var asiaChange2 = true;
+
+    $("#all-asia-button").click(function(){
+        // $(".Asia").css("fill", asiaChange ? this.value: "#324167");
+        // $(".Asia-text").toggle();
+        // // $(".Asia-text").show();
+        // asiaChange = ! asiaChange;
+        // asiaChange2 = ! asiaChange2;
+
+
+        if($(".Asia-text").css("visbility") == "hidden"){
+            $(".Asia-text").css("visibility","visible");
+        } else {
+            $(".Asia-text").css("visibility","hidden");
+        }
     });
+
+    // $("#all-asia-button").click(function(){
+    //     $(".Asia-text").css("visibility","visible");
+    // })
+
+// toggle(function(){
+//         $(".Asia").css("fill","#324167");
+//         // $(".Asia-text").css("visibility","visible");
+//         // $(".Asia-numbers").css("visibility","visible");
+//     }, function() {
+//         $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
+//         // $(".Asia-text").css("visibility","hidden");
+//         // $(".Asia-numbers").css("visibility","hidden");
+//     });
 
 
     $("#all-comm-button").click(function(){
