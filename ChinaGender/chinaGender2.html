@@ -15,7 +15,7 @@
 
         .intro {
             text-align: right;
-            margin-right: 15px;
+            margin-right: 40px;
             margin-bottom: 50px;
         }
 
@@ -130,7 +130,7 @@
     <script>
     var margin = {top: 20, left: 20, right: 20, bottom: 20},
         width = 1200 - margin.left - margin.right,
-        height = 150 - margin.top - margin.bottom;
+        height = 180 - margin.top - margin.bottom;
 
     d3.queue()
         .defer(d3.csv, "China_all.csv", type)
@@ -179,13 +179,21 @@
                                 return x(0);
                             }
                         })
-                        .attr("width", 5)
+                        .attr("width", function(d){
+                            if(d.Countries == "Average"){
+                                return 2;
+                            } else {
+                                return 5;
+                            }
+                        })
                         .attr("y", 50)
                         .attr("height", 60)
                         .attr("class", function(d){return d.Countries + " " + d.Category1 + " " + d.Category2 + " " + d.Category3 + " " + d.Category4; })
                         .attr("fill", function(d){
                             if (d.Countries == "China"){
                                 return "#C8515F";
+                            } else if (d.Countries == "Average"){
+                                return "#195F84"
                             } else {
                             return "rgba(201, 201, 201,0.6)"};
                         });
@@ -230,7 +238,11 @@
                                 .style("visibility", function(d){
                                     if (d.Countries == "China"){
                                             return "visible";
-                                        } else {
+                                        } 
+                                        // else if (d.Countries == "Average"){
+                                        //     return "visible"
+                                        // }
+                                        else {
                                         return "hidden"};
                                 });
 
@@ -277,6 +289,23 @@
                             }
                         });
     };
+
+    // For legend
+    svg_all.append("line")
+            .style("stroke","black")
+            .attr("x1", 0)
+            .attr("y1", 140)
+            .attr("x2", 25)
+            .attr("y2", 140)
+            .style("stroke", "#195F84")
+            .style("stroke-width", "3");
+
+    svg_all.append("text")
+            .attr("x", 35)
+            .attr("y", 145)
+            .style("font-size", "13px")
+            .text("Global Weighted Average: 0.68");
+
 
     };
     // End of function ready()
