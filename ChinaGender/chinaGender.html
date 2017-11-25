@@ -41,6 +41,14 @@
                 .domain([0.5,0.8])
                 .range([0, width]);
 
+// For zoom in, name every part of the axis separately
+        // var xAxis = d3.axisBottom(x);
+
+        // var x_axis = svg_all.append("g")
+        //                 .attr("id","x_axis")
+        //                 .attr("transform", "translate(75,0)")
+        //                 .call(xAxis);
+
         svg_all.selectAll(".bar")
                 .data(data)
             .enter().append("rect")
@@ -55,17 +63,13 @@
                 .attr("y", 30)
                 .attr("height", 60)
                 .attr("class", function(d){return d.Countries + " " + d.Category1 + " " + d.Category2 + " " + d.Category3 + " " + d.Category4; })
-                // .attr("cate1", function(d){return d.Category1; })
-                // .attr("cate2", function(d){return d.Category2; })
-                // .attr("cate3", function(d){return d.Category3; })
-                // .attr("cate4", function(d){return d.Category4; })
                 .attr("fill", function(d){
                     if (d.Countries == "China"){
                         return "#000000";
                     } else {
                     return "rgba(201, 201, 201,0.6)"};
                 });
-
+                
 //Append text here
         svg_all.selectAll("text.bar")
             .data(data)
@@ -117,12 +121,15 @@
             .attr("y2", 60)
             .style("stroke", "#999999");
 
+
     };
+
 
     function type(d) {
         d.Global = +d.Global;
         return d;
     };
+
 
     </script>
 
