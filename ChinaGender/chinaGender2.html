@@ -67,54 +67,54 @@
                         .attr("class", function(d){return d.Countries + " " + d.Category1 + " " + d.Category2 + " " + d.Category3 + " " + d.Category4; })
                         .attr("fill", function(d){
                             if (d.Countries == "China"){
-                                return "#000000";
+                                return "#C8515F";
                             } else {
                             return "rgba(201, 201, 201,0.6)"};
                         });
 
 
 //Append text here
-        svg_all.selectAll("text.bar")
-            .data(data)
-        .enter().append("text")
-            .attr("class", function(d){return d.Countries + "-numbers" + " " + d.Category1 + "-numbers" + " " + d.Category2 + "-numbers" + " " + d.Category3 + "-numbers" + " " + d.Category4 + "-numbers"; })
-            .attr("text-anchor","middle")
-            .attr("x", function(d){
-                    if(d.Global > 0){
-                        return x(d.Global);
-                    } else {
-                        return x(0);
-                    }
-                })
-            .attr("y", 110)
-            .text(function(d){return d.Global})
-            .style("visibility", function(d){
-                if (d.Countries == "China"){
-                        return "visible";
-                    } else {
-                    return "hidden"};
-            });
+        var barsNumbers = svg_all.selectAll("text.bar")
+                                .data(data)
+                            .enter().append("text")
+                                .attr("class", function(d){return d.Countries + "-numbers" + " " + d.Category1 + "-numbers" + " " + d.Category2 + "-numbers" + " " + d.Category3 + "-numbers" + " " + d.Category4 + "-numbers"; })
+                                .attr("text-anchor","middle")
+                                .attr("x", function(d){
+                                        if(d.Global > 0){
+                                            return x(d.Global);
+                                        } else {
+                                            return x(0);
+                                        }
+                                    })
+                                .attr("y", 110)
+                                .text(function(d){return d.Global})
+                                .style("visibility", function(d){
+                                    if (d.Countries == "China"){
+                                            return "visible";
+                                        } else {
+                                        return "hidden"};
+                                });
 
-            svg_all.selectAll("text.bar")
-            .data(data)
-        .enter().append("text")
-            .attr("class", function(d){return d.Countries + "-text" + " " + d.Category1 + "-text" + " " + d.Category2 + "-text" + " " + d.Category3 + "-text" + " " + d.Category4 + "-text"; })
-            .attr("text-anchor","middle")
-            .attr("x", function(d){
-                    if(d.Global > 0){
-                        return x(d.Global);
-                    } else {
-                        return x(0);
-                    }
-                })
-            .attr("y", 25)
-            .text(function(d){return d.Countries})
-            .style("visibility", function(d){
-                if (d.Countries == "China"){
-                        return "visible";
-                    } else {
-                    return "hidden"};
-            });
+         var barsText =  svg_all.selectAll("text.bar")
+                                .data(data)
+                            .enter().append("text")
+                                .attr("class", function(d){return d.Countries + "-text" + " " + d.Category1 + "-text" + " " + d.Category2 + "-text" + " " + d.Category3 + "-text" + " " + d.Category4 + "-text"; })
+                                .attr("text-anchor","middle")
+                                .attr("x", function(d){
+                                        if(d.Global > 0){
+                                            return x(d.Global);
+                                        } else {
+                                            return x(0);
+                                        }
+                                    })
+                                .attr("y", 25)
+                                .text(function(d){return d.Countries})
+                                .style("visibility", function(d){
+                                    if (d.Countries == "China"){
+                                            return "visible";
+                                        } else {
+                                        return "hidden"};
+                                });
 
         svg_all.append("line")
             .style("stroke","black")
@@ -137,7 +137,23 @@
                                 } else {
                                     return new_xScale(0);
                                 }
-        });
+            });
+            barsNumbers.attr("x",function(d){
+                                if(d.Global > 0){
+                                    return new_xScale(d.Global);
+                                } else {
+                                    return new_xScale(0);
+                                }
+            })
+                        .style("stroke","#000");
+            barsText.attr("x",function(d){
+                                if(d.Global > 0){
+                                    return new_xScale(d.Global);
+                                } else {
+                                    return new_xScale(0);
+                                }
+            })
+                        .style("stroke","#000");
     };
 
     };
@@ -154,34 +170,33 @@
 
     <script>
     $("#all-asia-button").click(function(){
-        var n = $(".Asia").css("fill");
+        // var n = $(".Asia").css("fill");
 
-    //     if(n = "black"){
-    //     $(".Asia").css("fill","black");
-    //     $(".Asia-text").css("visibility","visible");
-    //     $(".Asia-numbers").css("visibility","visible");
-    // } else {
-        $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
-        $(".Asia-text").css("visibility","hidden");
-        $(".Asia-numbers").css("visibility","hidden");
-    // }
+        $(".Asia").css("fill","#324167");
+        $(".Asia-text").css("visibility","visible");
+        $(".Asia-numbers").css("visibility","visible");
+    // // } else {
+    //     $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
+    //     $(".Asia-text").css("visibility","hidden");
+    //     $(".Asia-numbers").css("visibility","hidden");
+    // // }
     });
 
 
     $("#all-comm-button").click(function(){
-        $(".Social").css("fill","black");
+        $(".Social").css("fill","#5AB0CD");
         $(".Social-text").css("visibility","visible");
         $(".Social-numbers").css("visibility","visible");
     });
 
     $("#all-gdp-button").click(function(){
-        $(".GDP").css("fill","black");
+        $(".GDP").css("fill","#005E7C");
         $(".GDP-text").css("visibility","visible");
         $(".GDP-numbers").css("visibility","visible");
     });
 
     $("#all-popu-button").click(function(){
-        $(".Popu").css("fill","black");
+        $(".Popu").css("fill","#9BBEC7");
         $(".Popu-text").css("visibility","visible");
         $(".Popu-numbers").css("visibility","visible");
     });
