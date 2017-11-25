@@ -4,15 +4,23 @@
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- // <script type="text/javascript" src="allButton.js"></script> -->
+
+    <style>
+
+
+    </style>
 </head>
 
 <body>
+    <button id="all-asia-button">Asia</button><button id="all-comm-button">Communist States</button><button id="all-gdp-button">GDP TOP 10</button><button id="all-popu-button">Population Top 10</button>
     <div id="gg-all"></div>
 
     <script>
     var margin = {top: 20, left: 20, right: 20, bottom: 20},
-        width = 1000 - margin.left - margin.right,
-        height = 100 - margin.top - margin.bottom;
+        width = 1200 - margin.left - margin.right,
+        height = 200 - margin.top - margin.bottom;
 
     var svg_all = d3.select("#gg-all")
                     .append("svg")
@@ -46,14 +54,44 @@
                 .attr("width", 5)
                 .attr("y", 30)
                 .attr("height", 60)
-                .attr("class", function(d){return d.Countries; })
-                .attr("fill","rgba(201, 201, 201,0.6)");
+                .attr("class", function(d){return d.Countries + " " + d.Category1 + " " + d.Category2 + " " + d.Category3 + " " + d.Category4; })
+                // .attr("cate1", function(d){return d.Category1; })
+                // .attr("cate2", function(d){return d.Category2; })
+                // .attr("cate3", function(d){return d.Category3; })
+                // .attr("cate4", function(d){return d.Category4; })
+                .attr("fill", function(d){
+                    if (d.Countries == "China"){
+                        return "#000000";
+                    } else {
+                    return "rgba(201, 201, 201,0.6)"};
+                });
 
 //Append text here
         svg_all.selectAll("text.bar")
             .data(data)
         .enter().append("text")
-            .attr("class", function(d){return d.Countries + "-text"; })
+            .attr("class", function(d){return d.Countries + "-numbers" + " " + d.Category1 + "-numbers" + " " + d.Category2 + "-numbers" + " " + d.Category3 + "-numbers" + " " + d.Category4 + "-numbers"; })
+            .attr("text-anchor","middle")
+            .attr("x", function(d){
+                    if(d.Global > 0){
+                        return x(d.Global);
+                    } else {
+                        return x(0);
+                    }
+                })
+            .attr("y", 110)
+            .text(function(d){return d.Global})
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                        return "visible";
+                    } else {
+                    return "hidden"};
+            });
+
+            svg_all.selectAll("text.bar")
+            .data(data)
+        .enter().append("text")
+            .attr("class", function(d){return d.Countries + "-text" + " " + d.Category1 + "-text" + " " + d.Category2 + "-text" + " " + d.Category3 + "-text" + " " + d.Category4 + "-text"; })
             .attr("text-anchor","middle")
             .attr("x", function(d){
                     if(d.Global > 0){
@@ -63,22 +101,55 @@
                     }
                 })
             .attr("y", 25)
-            .text(function(d){return d.Global});
+            .text(function(d){return d.Countries})
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                        return "visible";
+                    } else {
+                    return "hidden"};
+            });
 
-        svg_all.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x)
-                    .ticks(0)
-                    .tickSize(0));
+        svg_all.append("line")
+            .style("stroke","black")
+            .attr("x1", 0)
+            .attr("y1", 60)
+            .attr("x2", 2300)
+            .attr("y2", 60);
 
     };
 
     function type(d) {
-    d.Global = +d.Global;
-    return d;
-    }
+        d.Global = +d.Global;
+        return d;
+    };
 
     </script>
 
+    <script>
+    $("#all-asia-button").click(function(){
+        $(".Asia").css("fill","black");
+        $(".Asia-text").css("visibility","visible");
+        $(".Asia-numbers").css("visibility","visible");
+    });
+
+    $("#all-comm-button").click(function(){
+        $(".Social").css("fill","black");
+        $(".Social-text").css("visibility","visible");
+        $(".Social-numbers").css("visibility","visible");
+    });
+
+    $("#all-gdp-button").click(function(){
+        $(".GDP").css("fill","black");
+        $(".GDP-text").css("visibility","visible");
+        $(".GDP-numbers").css("visibility","visible");
+    });
+
+    $("#all-popu-button").click(function(){
+        $(".Popu").css("fill","black");
+        $(".Popu-text").css("visibility","visible");
+        $(".Popu-numbers").css("visibility","visible");
+    });
+
+    </script>
 </body>
 </html>
