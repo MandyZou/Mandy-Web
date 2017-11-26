@@ -1,0 +1,133 @@
+body {
+            font-family: 'Hind Madurai', sans-serif;
+            background-color: #fbf5e0;
+        }
+
+        .intro {
+            text-align: right;
+            margin-right: 40px;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 100px;
+            font-family: 'Assistant', sans-serif;
+            line-height: 100px;
+            color: #084c8f;
+            margin-bottom: 90px;
+        }
+
+        .h1-china {
+            color: #C8515F;
+        }
+
+        .h1-underline {
+            text-decoration: underline;
+        }
+
+        #x_axis path{
+            display: none;
+        }
+
+        /*For all graphic buttons group*/
+
+        .button-group01{
+            float: left;
+        }
+
+        .button-group{
+            float: left;
+            margin-left: 25px;
+        }
+
+        button {
+            border: none;
+            background-color: #2589BD;
+            color: white;
+            font-size: 13px;
+            margin-left: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #195f84;
+        }
+
+        button:focus {
+            outline: 0;
+            background-color: #195f84;
+        }
+
+
+        /* For econEdu graphic buttons group */
+        .compare-button-group01{
+            float: left;
+            margin-left: 18px;
+        }
+
+        .compare-button-group{
+            float: left;
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .article-content{
+            width: 50%;
+            margin: 0 auto;
+            padding-bottom: 20px;
+            font-size: 18px;
+            line-height: 30px;
+        }
+
+        #all-asia-container{
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .chart-sidenote {
+            font-style: italic;
+            font-size: 13px;
+            color: #999;
+        }
+
+        #compare-gg-container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        #gg-compare {
+            margin-top: 40px;
+        }
+
+        .compare-gg-title {
+            font-family: 'Patua One', sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .compare-gg-vs{
+            color: #adadad;
+        }
+
+
+/* Tooltip */
+        .tooltip{
+            position: absolute;
+            font-size: 12px;
+            width:  auto;
+            height: auto;
+            pointer-events: none;
+            background-color: white;
+            border: black solid 1px;
+            padding: 5px;
+        }
+
+        .tooltip-countries {
+            font-size: 15px;
+            font-weight: bolder;
+        }

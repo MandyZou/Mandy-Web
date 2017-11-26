@@ -7,125 +7,8 @@
 
     <!-- <link href="https://fonts.googleapis.com/css?family=Hind+Madurai|Patua+One" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Assistant:800|Hind+Madurai|Patua+One" rel="stylesheet">
+    <link href="chinaGenderStyle.css" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Hind Madurai', sans-serif;
-            background-color: #fbf5e0;
-        }
-
-        .intro {
-            text-align: right;
-            margin-right: 40px;
-            margin-bottom: 50px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 80px;
-            font-family: 'Assistant', sans-serif;
-            line-height: 90px;
-            color: #084c8f;
-            margin-bottom: 50px;
-        }
-
-        .h1-china {
-            color: #C8515F;
-        }
-
-        .h1-underline {
-            text-decoration: underline;
-        }
-
-        #x_axis path{
-            display: none;
-        }
-
-        /*For all graphic buttons group*/
-
-        .button-group01{
-            float: left;
-        }
-
-        .button-group{
-            float: left;
-            margin-left: 25px;
-        }
-
-        button {
-            border: none;
-            background-color: #2589BD;
-            color: white;
-            font-size: 13px;
-            margin-left: 5px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #195f84;
-        }
-
-        button:focus {
-            outline: 0;
-            background-color: #195f84;
-        }
-
-
-        /* For econEdu graphic buttons group */
-        .compare-button-group01{
-            float: left;
-            margin-left: 18px;
-        }
-
-        .compare-button-group{
-            float: left;
-            margin-left: 25px;
-            margin-bottom: 20px;
-        }
-
-        .article-content{
-            width: 50%;
-            margin: 0 auto;
-            padding-bottom: 20px;
-            font-size: 18px;
-            line-height: 30px;
-        }
-
-        #all-asia-container{
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        .chart-sidenote {
-            font-style: italic;
-            font-size: 13px;
-            color: #999;
-        }
-
-        #compare-gg-container {
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        #gg-compare {
-            margin-top: 40px;
-        }
-
-        .compare-gg-title {
-            font-family: 'Patua One', sans-serif;
-            font-weight: bold;
-            font-size: 25px;
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-
-        .compare-gg-vs{
-            color: #adadad;
-        }
-
-    </style>
 </head>
 
 <body>
@@ -487,12 +370,7 @@
             .attr("transform", "translate(" + com_margin.left + "," + com_margin.top + ")");
 
     d3.queue()
-        // .defer(d3.csv, "gg_econhealth.csv")
-        // .defer(d3.csv, "gg_econpoli.csv")
         .defer(d3.csv, "gg-eduecon.csv")
-        // .defer(d3.csv, "gg-eduhealth.csv")
-        // .defer(d3.csv, "gg-edupoli.csv")
-        // .defer(d3.csv, "gg-healthpoli.csv")
         .await(ready);
 
     function ready(error, eduEcon){
@@ -505,6 +383,28 @@
                     .data(eduEcon)
                 .enter()
                     .append("g");
+
+// Add tooltips
+        var econEdu_tooltip = d3.select("#gg-compare-econEdu").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var econEdu_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Economy: " + d.Econ + "<br/>Education: " + d.Edu;
+
+            econEdu_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var econEdu_tipMouseout = function(d){
+            econEdu_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
 
         node.append("circle")
             .attr("class","dot")
@@ -537,7 +437,9 @@
                     } else if (d.Countries == "China"){
                         return "econEdu-China";
                     }
-            });
+            })
+            .on("mouseover", econEdu_tipMouseover)
+            .on("mouseout", econEdu_tipMouseout);
 
         node.append("text")
             .attr("x", function(d){return xScale(d.Econ) -20;})
@@ -579,6 +481,7 @@
                 .call(yAxis_com);
 
     }
+    // End of ready function code
 
 
 
@@ -705,6 +608,28 @@
                 .enter()
                     .append("g");
 
+        // Add tooltips
+        var econHealth_tooltip = d3.select("#gg-compare-econHealth").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var econHealth_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Economy: " + d.Econ + "<br/>Health: " + d.Health;
+
+            econHealth_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var econHealth_tipMouseout = function(d){
+            econHealth_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
         node_econHealth.append("circle")
             .attr("class","dot")
             .attr("cx", function(d) {return xScale_econHealth(d.Econ); })
@@ -736,7 +661,9 @@
                     } else if (d.Countries == "China"){
                         return "econHealth-China";
                     }
-            });
+            })
+            .on("mouseover", econHealth_tipMouseover)
+            .on("mouseout", econHealth_tipMouseout);
 
         node_econHealth.append("text")
             .attr("x", function(d){return xScale_econHealth(d.Econ) -20;})
@@ -771,7 +698,6 @@
               .text("Health and Survival");   
 
 
-
         svg_econHealth.append("g")
                 .attr("transform","translate(0," + econHealth_height + ")")
                 .call(xAxis_econHealth);
@@ -779,8 +705,8 @@
         svg_econHealth.append("g")
                 .call(yAxis_econHealth);
 
-    }
-
+    };
+    // End of ready function
 
 
     </script>
@@ -889,6 +815,28 @@
                 .enter()
                     .append("g");
 
+        // Add tooltips
+        var econPoli_tooltip = d3.select("#gg-compare-econPoli").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var econPoli_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Economy: " + d.Econ + "<br/>Political: " + d.Poli;
+
+            econPoli_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var econPoli_tipMouseout = function(d){
+            econPoli_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
         node_econPoli.append("circle")
             .attr("class","dot")
             .attr("cx", function(d) {return xScale_econPoli(d.Econ); })
@@ -920,7 +868,9 @@
                     } else if (d.Countries == "China"){
                         return "econPoli-China";
                     }
-            });
+            })
+            .on("mouseover", econPoli_tipMouseover)
+            .on("mouseout", econPoli_tipMouseout);
 
         node_econPoli.append("text")
             .attr("x", function(d){return xScale_econPoli(d.Econ) -20;})
@@ -953,8 +903,6 @@
               .style("font-size", "13px")
               .style("fill","#5D5D5D")
               .text("Political Empowerment");   
-
-
 
         svg_econPoli.append("g")
                 .attr("transform","translate(0," + econPoli_height + ")")
@@ -1073,6 +1021,28 @@
                 .enter()
                     .append("g");
 
+        // Add tooltips
+        var eduHealth_tooltip = d3.select("#gg-compare-eduHealth").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var eduHealth_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Education: " + d.Edu + "<br/>Health: " + d.Health;
+
+            eduHealth_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var eduHealth_tipMouseout = function(d){
+            eduHealth_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
         node_eduHealth.append("circle")
             .attr("class","dot")
             .attr("cx", function(d) {return xScale_eduHealth(d.Edu); })
@@ -1104,7 +1074,9 @@
                     } else if (d.Countries == "China"){
                         return "eduHealth-China";
                     }
-            });
+            })
+            .on("mouseover", eduHealth_tipMouseover)
+            .on("mouseout", eduHealth_tipMouseout);
 
         node_eduHealth.append("text")
             .attr("x", function(d){return xScale_eduHealth(d.Edu) -20;})
@@ -1262,6 +1234,29 @@
                 .enter()
                     .append("g");
 
+        // Add tooltips
+        var eduPoli_tooltip = d3.select("#gg-compare-eduPoli").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var eduPoli_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Political: " + d.Poli + "<br/>Education: " + d.Edu;
+
+            eduPoli_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var eduPoli_tipMouseout = function(d){
+            eduPoli_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
+
         node_eduPoli.append("circle")
             .attr("class","dot")
             .attr("cx", function(d) {return xScale_eduPoli(d.Poli); })
@@ -1293,7 +1288,9 @@
                     } else if (d.Countries == "China"){
                         return "poliEdu-China";
                     }
-            });
+            })
+            .on("mouseover", eduPoli_tipMouseover)
+            .on("mouseout", eduPoli_tipMouseout);
 
         node_eduPoli.append("text")
             .attr("x", function(d){return xScale_eduPoli(d.Poli) -20;})
@@ -1449,6 +1446,28 @@
                 .enter()
                     .append("g");
 
+        // Add tooltips
+        var healthPoli_tooltip = d3.select("#gg-compare-healthPoli").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var healthPoli_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries  + "</span><br/>Political: " + d.Poli + "<br/>Health: " + d.Health;
+
+            healthPoli_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var healthPoli_tipMouseout = function(d){
+            healthPoli_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
         node_healthPoli.append("circle")
             .attr("class","dot")
             .attr("cx", function(d) {return xScale_healthPoli(d.Poli); })
@@ -1480,7 +1499,9 @@
                     } else if (d.Countries == "China"){
                         return "healthPoli-China";
                     }
-            });
+            })
+            .on("mouseover", healthPoli_tipMouseover)
+            .on("mouseout", healthPoli_tipMouseout);
 
         node_healthPoli.append("text")
             .attr("x", function(d){return xScale_healthPoli(d.Poli) -20;})
