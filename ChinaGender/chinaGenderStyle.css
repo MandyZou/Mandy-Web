@@ -1,4 +1,4 @@
-body {
+    body {
             font-family: 'Hind Madurai', sans-serif;
             background-color: #fbf5e0;
         }
@@ -89,8 +89,7 @@ body {
         }
 
         #all-asia-container{
-            width: 90%;
-            margin: 0 auto;
+            margin-left: 20px;
         }
 
         .chart-sidenote {
@@ -100,8 +99,7 @@ body {
         }
 
         #compare-gg-container {
-            width: 90%;
-            margin: 0 auto;
+            margin-left: 20px;
         }
 
         #gg-compare {
