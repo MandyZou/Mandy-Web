@@ -14,7 +14,7 @@
 
 <body>
     <div class="intro">
-            <img src="M.png" style="width: 50px;" />
+            <a target="_blank" href="https://manyunzou.github.io/"><img src="M.png" style="width: 50px;" /></a>
     </div>
 
     <h1>How is <span class="h1-china">China's</span> 
@@ -346,7 +346,7 @@
 
     <!-- gg-compare-econEdu graphic code -->
     <script type="text/javascript">
-    var com_margin = {top: 20, right: 20, bottom: 50, left: 60},
+    var com_margin = {top: 20, right: 20, bottom: 70, left: 60},
         com_width = 1200 - margin.left - margin.right,
         com_height = 300 - margin.top - margin.bottom;
 
@@ -500,6 +500,22 @@
                 .style("stroke","black")
                 .style("stroke-dasharray", ("3, 3"));
 
+// For legend
+        svg_com_econEdu.append("line")
+                .style("stroke","black")
+                .attr("x1", 0)
+                .attr("y1", 320)
+                .attr("x2", 30)
+                .attr("y2", 320)
+                .style("stroke","black")
+                .style("stroke-width","1")
+                .style("stroke-dasharray", ("3, 4"));
+
+        svg_com_econEdu.append("text")
+                .attr("x", 40)
+                .attr("y", 325)
+                .style("font-size", "13px")
+                .text("Global Weighted Average");
 
     }
     // End of ready function code
@@ -588,7 +604,7 @@
     <!-- gg-compare-econHealth graphic code -->
     <script type="text/javascript">
 
-    var econHealth_margin = {top: 20, right: 20, bottom: 50, left: 60},
+    var econHealth_margin = {top: 20, right: 20, bottom: 70, left: 60},
         econHealth_width = 1200 - margin.left - margin.right,
         econHealth_height = 300 - margin.top - margin.bottom;
 
@@ -743,6 +759,24 @@
                 .style("stroke","black")
                 .style("stroke-dasharray", ("3, 3"));
 
+        // For legend
+        svg_econHealth.append("line")
+                .style("stroke","black")
+                .attr("x1", 0)
+                .attr("y1", 320)
+                .attr("x2", 30)
+                .attr("y2", 320)
+                .style("stroke","black")
+                .style("stroke-width","1")
+                .style("stroke-dasharray", ("3, 4"));
+
+        svg_econHealth.append("text")
+                .attr("x", 40)
+                .attr("y", 325)
+                .style("font-size", "13px")
+                .text("Global Weighted Average");
+
+
     };
     // End of ready function
 
@@ -812,7 +846,7 @@
     <!-- gg-compare-econPoli graphic code -->
     <script type="text/javascript">
 
-    var econPoli_margin = {top: 20, right: 20, bottom: 50, left: 60},
+    var econPoli_margin = {top: 20, right: 20, bottom: 70, left: 60},
         econPoli_width = 1200 - margin.left - margin.right,
         econPoli_height = 300 - margin.top - margin.bottom;
 
@@ -966,8 +1000,24 @@
                 .style("stroke","black")
                 .style("stroke-dasharray", ("3, 3"));
 
-    }
+        // For legend
+        svg_econPoli.append("line")
+                .style("stroke","black")
+                .attr("x1", 0)
+                .attr("y1", 320)
+                .attr("x2", 30)
+                .attr("y2", 320)
+                .style("stroke","black")
+                .style("stroke-width","1")
+                .style("stroke-dasharray", ("3, 4"));
 
+        svg_econPoli.append("text")
+                .attr("x", 40)
+                .attr("y", 325)
+                .style("font-size", "13px")
+                .text("Global Weighted Average");
+
+    }
 
 
     </script>
@@ -1035,7 +1085,7 @@
     <!-- gg-compare-eduHeath graphic code -->
     <script type="text/javascript">
 
-    var eduHealth_margin = {top: 20, right: 20, bottom: 50, left: 60},
+    var eduHealth_margin = {top: 20, right: 20, bottom: 70, left: 60},
         eduHealth_width = 1200 - margin.left - margin.right,
         eduHealth_height = 300 - margin.top - margin.bottom;
 
@@ -1191,6 +1241,23 @@
                 .style("stroke","black")
                 .style("stroke-dasharray", ("3, 3"));
 
+        // For legend
+         svg_eduHealth.append("line")
+                .style("stroke","black")
+                .attr("x1", 0)
+                .attr("y1", 320)
+                .attr("x2", 30)
+                .attr("y2", 320)
+                .style("stroke","black")
+                .style("stroke-width","1")
+                .style("stroke-dasharray", ("3, 4"));
+
+         svg_eduHealth.append("text")
+                .attr("x", 40)
+                .attr("y", 325)
+                .style("font-size", "13px")
+                .text("Global Weighted Average");
+
     }
 
 
@@ -1261,7 +1328,7 @@
     <!-- gg-compare-eduHeath graphic code -->
     <script type="text/javascript">
 
-    var eduPoli_margin = {top: 20, right: 20, bottom: 50, left: 60},
+    var eduPoli_margin = {top: 20, right: 20, bottom: 70, left: 60},
         eduPoli_width = 1200 - margin.left - margin.right,
         eduPoli_height = 300 - margin.top - margin.bottom;
 
@@ -1420,6 +1487,23 @@
                 .style("stroke","black")
                 .style("stroke-dasharray", ("3, 3"));
 
+        // For legend
+        svg_eduPoli.append("line")
+                .style("stroke","black")
+                .attr("x1", 0)
+                .attr("y1", 320)
+                .attr("x2", 30)
+                .attr("y2", 320)
+                .style("stroke","black")
+                .style("stroke-width","1")
+                .style("stroke-dasharray", ("3, 4"));
+
+        svg_eduPoli.append("text")
+                .attr("x", 40)
+                .attr("y", 325)
+                .style("font-size", "13px")
+                .text("Global Weighted Average");
+
 
     }
 
@@ -1491,7 +1575,7 @@
     <!-- gg-compare-eduHeath graphic code -->
     <script type="text/javascript">
 
-    var healthPoli_margin = {top: 20, right: 20, bottom: 50, left: 60},
+    var healthPoli_margin = {top: 20, right: 20, bottom: 70, left: 60},
         healthPoli_width = 1200 - margin.left - margin.right,
         healthPoli_height = 300 - margin.top - margin.bottom;
 
@@ -1646,6 +1730,23 @@
                 .attr("y2", 10.5)
                 .style("stroke","black")
                 .style("stroke-dasharray", ("3, 3"));
+
+        // For legend
+        svg_healthPoli.append("line")
+                .style("stroke","black")
+                .attr("x1", 0)
+                .attr("y1", 320)
+                .attr("x2", 30)
+                .attr("y2", 320)
+                .style("stroke","black")
+                .style("stroke-width","1")
+                .style("stroke-dasharray", ("3, 4"));
+
+        svg_healthPoli.append("text")
+                .attr("x", 40)
+                .attr("y", 325)
+                .style("font-size", "13px")
+                .text("Global Weighted Average");
 
     }
 
