@@ -262,15 +262,15 @@
     //     $(".Asia-text").css("visibility","visible");
     // })
 
-// toggle(function(){
-//         $(".Asia").css("fill","#324167");
-//         // $(".Asia-text").css("visibility","visible");
-//         // $(".Asia-numbers").css("visibility","visible");
-//     }, function() {
-//         $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
-//         // $(".Asia-text").css("visibility","hidden");
-//         // $(".Asia-numbers").css("visibility","hidden");
-//     });
+    // toggle(function(){
+    //         $(".Asia").css("fill","#324167");
+    //         // $(".Asia-text").css("visibility","visible");
+    //         // $(".Asia-numbers").css("visibility","visible");
+    //     }, function() {
+    //         $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
+    //         // $(".Asia-text").css("visibility","hidden");
+    //         // $(".Asia-numbers").css("visibility","hidden");
+    //     });
 
 
     $("#all-comm-button").click(function(){
@@ -479,6 +479,24 @@
 
         svg_com_econEdu.append("g")
                 .call(yAxis_com);
+
+// Add average line
+        svg_com_econEdu.append("line")
+                .attr("x1", 673)
+                .attr("x2", 673)
+                .attr("y1", 0)
+                .attr("y2", 260)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
+        svg_com_econEdu.append("line")
+                .attr("x1", 0)
+                .attr("x2", 1170)
+                .attr("y1", 13)
+                .attr("y2", 13)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
 
     }
     // End of ready function code
@@ -705,6 +723,23 @@
         svg_econHealth.append("g")
                 .call(yAxis_econHealth);
 
+// Add average line
+        svg_econHealth.append("line")
+                .attr("x1", 673)
+                .attr("x2", 673)
+                .attr("y1", 0)
+                .attr("y2", 260)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
+        svg_econHealth.append("line")
+                .attr("x1", 0)
+                .attr("x2", 1170)
+                .attr("y1", 10.5)
+                .attr("y2", 10.5)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
     };
     // End of ready function
 
@@ -911,6 +946,23 @@
         svg_econPoli.append("g")
                 .call(yAxis_econPoli);
 
+// Add average line
+        svg_econPoli.append("line")
+                .attr("x1", 673)
+                .attr("x2", 673)
+                .attr("y1", 0)
+                .attr("y2", 260)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
+        svg_econPoli.append("line")
+                .attr("x1", 0)
+                .attr("x2", 1170)
+                .attr("y1", 200)
+                .attr("y2", 200)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
     }
 
 
@@ -1112,14 +1164,29 @@
               .style("fill","#5D5D5D")
               .text("Health and Survival");   
 
-
-
         svg_eduHealth.append("g")
                 .attr("transform","translate(0," + eduHealth_height + ")")
                 .call(xAxis_eduHealth);
 
         svg_eduHealth.append("g")
                 .call(yAxis_eduHealth);
+
+// Add average line
+        svg_eduHealth.append("line")
+                .attr("x1", 1102)
+                .attr("x2", 1102)
+                .attr("y1", 0)
+                .attr("y2", 260)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
+        svg_eduHealth.append("line")
+                .attr("x1", 0)
+                .attr("x2", 1170)
+                .attr("y1", 10)
+                .attr("y2", 10)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
 
     }
 
@@ -1218,9 +1285,7 @@
             .attr("transform", "translate(" + eduPoli_margin.left + "," + eduPoli_margin.top + ")");
 
     d3.queue()
-        // .defer(d3.csv, "gg-eduecon.csv")
         .defer(d3.csv, "gg-edupoli.csv")
-        // .defer(d3.csv, "gg-healthpoli.csv")
         .await(ready);
 
     function ready(error, eduPoli){
@@ -1334,6 +1399,24 @@
 
         svg_eduPoli.append("g")
                 .call(yAxis_eduPoli);
+
+// Add average line
+        svg_eduPoli.append("line")
+                .attr("x1", 267)
+                .attr("x2", 267)
+                .attr("y1", 0)
+                .attr("y2", 260)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
+        svg_eduPoli.append("line")
+                .attr("x1", 0)
+                .attr("x2", 1170)
+                .attr("y1", 13)
+                .attr("y2", 13)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
 
     }
 
@@ -1543,6 +1626,23 @@
 
         svg_healthPoli.append("g")
                 .call(yAxis_healthPoli);
+
+// Add average line
+        svg_healthPoli.append("line")
+                .attr("x1", 267)
+                .attr("x2", 267)
+                .attr("y1", 0)
+                .attr("y2", 260)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
+
+        svg_healthPoli.append("line")
+                .attr("x1", 0)
+                .attr("x2", 1170)
+                .attr("y1", 10.5)
+                .attr("y2", 10.5)
+                .style("stroke","black")
+                .style("stroke-dasharray", ("3, 3"));
 
     }
 
