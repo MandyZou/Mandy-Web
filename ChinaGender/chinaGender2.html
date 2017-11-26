@@ -41,6 +41,8 @@
             display: none;
         }
 
+        /*For all graphic buttons group*/
+
         .button-group01{
             float: left;
         }
@@ -68,6 +70,19 @@
         button:focus {
             outline: 0;
             background-color: #195f84;
+        }
+
+
+        /* For econEdu graphic buttons group */
+        .compare-button-group01{
+            float: left;
+            margin-left: 18px;
+        }
+
+        .compare-button-group{
+            float: left;
+            margin-left: 25px;
+            margin-bottom: 20px;
         }
 
         .article-content{
@@ -103,6 +118,7 @@
             font-weight: bold;
             font-size: 25px;
             margin-left: 25px;
+            margin-bottom: 15px;
         }
 
         .compare-gg-vs{
@@ -217,7 +233,7 @@
                             if (d.Countries == "China"){
                                 return "#C8515F";
                             } else if (d.Countries == "Average"){
-                                return "#195F84"
+                                return "#2589BD"
                             } else {
                             return "rgba(201, 201, 201,0.6)"};
                         });
@@ -321,7 +337,7 @@
             .attr("y1", 140)
             .attr("x2", 25)
             .attr("y2", 140)
-            .style("stroke", "#195F84")
+            .style("stroke", "#2589BD")
             .style("stroke-width", "3");
 
     svg_all.append("text")
@@ -424,6 +440,22 @@
     <div id="compare-gg-container">
         <h3 class="compare-gg-title">Economic Participation and Opportunity <span class="compare-gg-vs">vs</span> Educational Attainment</h3>
 
+        <div class="compare-button-group01">
+        <button id="econEdu-asia-button">Show Asia</button><button id="econEdu-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econEdu-comm-button">Show Communist States</button><button id="econEdu-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econEdu-gdp-button">Show GDP TOP 10</button><button id="econEdu-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econEdu-popu-button">Show Population Top 10</button><button id="econEdu-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
         <div id="gg-compare-econEdu"></div>
 
     <!-- gg-compare-econEdu graphic code -->
@@ -492,6 +524,19 @@
                     } else {
                         return "#999";
                     }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "econEdu-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "econEdu-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "econEdu-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "econEdu-Social";
+                    } else if (d.Countries == "China"){
+                        return "econEdu-China";
+                    }
             });
 
         node.append("text")
@@ -526,41 +571,6 @@
               .style("fill","#5D5D5D")
               .text("Educational Attainment");   
 
-        // svg_com.selectAll(".dot")
-        //         .data(econHealth)
-        //     .enter().append("circle")
-        //         .attr("class","dot")
-        //         .attr("r", 3.5)
-        //         .attr("cx", function(d) {return xScale(d.Econ); })
-        //         .attr("cy", function(d) {return yScale(d.Health); })
-        //         // .style("fill",function(d){
-        //         //     if (d.Category1 == "Asia"){
-        //         //         return "#324167";
-        //         //     } else if (d.Category2 == "GDP"){
-        //         //         return "#005E7C";
-        //         //     } else if (d.Category3 == "Popu"){
-        //         //         return "#9BBEC7";
-        //         //     } else if (d.Category4 == "Social"){
-        //         //         return "#5AB0CD";
-        //         //     } else if (d.Countries == "China"){
-        //         //         return "#C8515F";
-        //         //     }
-        //         // });
-        //         .style("fill", function(d){
-        //             if (d.Countries == "China"){
-        //                 return "#C8515F";
-        //             } else {
-        //                 return "rgb(201, 201, 201)";
-        //             }
-        //         })
-        //         .style("stroke", function(d){
-        //             if (d.Countries == "China"){
-        //                 return "none";
-        //             } else {
-        //                 return "#999";
-        //             }
-        //         });
-
         svg_com_econEdu.append("g")
                 .attr("transform","translate(0," + com_height + ")")
                 .call(xAxis_com);
@@ -574,11 +584,80 @@
 
     </script>
 
+    <script>
+    $("#econEdu-asia-button").click(function(){
+        $(".econEdu-asia").css("fill","#324167");
+        // $(".Asia-text").css("visibility","visible");
+        // $(".Asia-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-asia-button-hide").click(function(){
+        $(".econEdu-asia").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".Asia-text").css("visibility","hidden");
+        // $(".Asia-numbers").css("visibility","hidden");
+    });
+
+    $("#econEdu-comm-button").click(function(){
+        $(".econEdu-Social").css("fill","#5AB0CD");
+        // $(".Social-text").css("visibility","visible");
+        // $(".Social-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-comm-button-hide").click(function(){
+        $(".econEdu-Social").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".Social-text").css("visibility","hidden");
+        // $(".Social-numbers").css("visibility","hidden");
+    });
+
+    $("#econEdu-gdp-button").click(function(){
+        $(".econEdu-GDP").css("fill","#005E7C");
+        // $(".GDP-text").css("visibility","visible");
+        // $(".GDP-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-gdp-button-hide").click(function(){
+        $(".econEdu-GDP").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".GDP-text").css("visibility","hidden");
+        // $(".GDP-numbers").css("visibility","hidden");
+    });
+
+    $("#econEdu-popu-button").click(function(){
+        $(".econEdu-Popu").css("fill","#9BBEC7");
+        // $(".Popu-text").css("visibility","visible");
+        // $(".Popu-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-popu-button-hide").click(function(){
+        $(".econEdu-Popu").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".Popu-text").css("visibility","hidden");
+        // $(".Popu-numbers").css("visibility","hidden");
+    });
+
+
+    </script>
+
     <p class="article-content" style="margin-top: 50px">
         Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
     </p>
 
     <h3 class="compare-gg-title">Economic Participation and Opportunity  <span class="compare-gg-vs">vs</span>  Health and Survival</h3>
+
+
+        <div class="compare-button-group01">
+        <button id="econHealth-asia-button">Show Asia</button><button id="econHealth-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econHealth-comm-button">Show Communist States</button><button id="econHealth-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econHealth-gdp-button">Show GDP TOP 10</button><button id="econHealth-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econHealth-popu-button">Show Population Top 10</button><button id="econHealth-popu-button-hide">Hide Population Top 10</button>
+        </div>
 
         <div id="gg-compare-econHealth"></div>
 
@@ -613,11 +692,6 @@
 
     d3.queue()
         .defer(d3.csv, "gg_econhealth.csv")
-        // .defer(d3.csv, "gg_econpoli.csv")
-        // .defer(d3.csv, "gg-eduecon.csv")
-        // .defer(d3.csv, "gg-eduhealth.csv")
-        // .defer(d3.csv, "gg-edupoli.csv")
-        // .defer(d3.csv, "gg-healthpoli.csv")
         .await(ready);
 
     function ready(error, econHealth){
@@ -648,6 +722,19 @@
                         return "none";
                     } else {
                         return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "econHealth-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "econHealth-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "econHealth-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "econHealth-Social";
+                    } else if (d.Countries == "China"){
+                        return "econHealth-China";
                     }
             });
 
@@ -698,11 +785,63 @@
 
     </script>
 
+        <script>
+    $("#econHealth-asia-button").click(function(){
+        $(".econHealth-asia").css("fill","#324167");
+    });
+
+    $("#econHealth-asia-button-hide").click(function(){
+        $(".econHealth-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econHealth-comm-button").click(function(){
+        $(".econHealth-Social").css("fill","#5AB0CD");
+    });
+
+    $("#econHealth-comm-button-hide").click(function(){
+        $(".econHealth-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econHealth-gdp-button").click(function(){
+        $(".econHealth-GDP").css("fill","#005E7C");
+    });
+
+    $("#econHealth-gdp-button-hide").click(function(){
+        $(".econHealth-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econHealth-popu-button").click(function(){
+        $(".econHealth-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#econHealth-popu-button-hide").click(function(){
+        $(".econHealth-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
     <p class="article-content" style="margin-top: 50px">
         Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
     </p>
 
     <h3 class="compare-gg-title">Economic Participation and Opportunity  <span class="compare-gg-vs">vs</span> Political Empowerment</h3>
+
+        <div class="compare-button-group01">
+        <button id="econPoli-asia-button">Show Asia</button><button id="econPoli-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econPoli-comm-button">Show Communist States</button><button id="econPoli-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econPoli-gdp-button">Show GDP TOP 10</button><button id="econPoli-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econPoli-popu-button">Show Population Top 10</button><button id="econPoli-popu-button-hide">Hide Population Top 10</button>
+        </div>
 
         <div id="gg-compare-econPoli"></div>
 
@@ -737,10 +876,6 @@
 
     d3.queue()
         .defer(d3.csv, "gg_econpoli.csv")
-        // .defer(d3.csv, "gg-eduecon.csv")
-        // .defer(d3.csv, "gg-eduhealth.csv")
-        // .defer(d3.csv, "gg-edupoli.csv")
-        // .defer(d3.csv, "gg-healthpoli.csv")
         .await(ready);
 
     function ready(error, econPoli){
@@ -771,6 +906,19 @@
                         return "none";
                     } else {
                         return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "econPoli-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "econPoli-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "econPoli-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "econPoli-Social";
+                    } else if (d.Countries == "China"){
+                        return "econPoli-China";
                     }
             });
 
@@ -821,11 +969,63 @@
 
     </script>
 
+    <script>
+    $("#econPoli-asia-button").click(function(){
+        $(".econPoli-asia").css("fill","#324167");
+    });
+
+    $("#econPoli-asia-button-hide").click(function(){
+        $(".econPoli-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econPoli-comm-button").click(function(){
+        $(".econPoli-Social").css("fill","#5AB0CD");
+    });
+
+    $("#econPoli-comm-button-hide").click(function(){
+        $(".econPoli-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econPoli-gdp-button").click(function(){
+        $(".econPoli-GDP").css("fill","#005E7C");
+    });
+
+    $("#econPoli-gdp-button-hide").click(function(){
+        $(".econPoli-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econPoli-popu-button").click(function(){
+        $(".econPoli-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#econPoli-popu-button-hide").click(function(){
+        $(".econPoli-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
     <p class="article-content" style="margin-top: 50px">
         Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
     </p>
 
     <h3 class="compare-gg-title">Educational Attainment  <span class="compare-gg-vs">vs</span> Health and Survival</h3>
+
+        <div class="compare-button-group01">
+        <button id="eduHealth-asia-button">Show Asia</button><button id="eduHealth-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="eduHealth-comm-button">Show Communist States</button><button id="eduHealth-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="eduHealth-gdp-button">Show GDP TOP 10</button><button id="eduHealth-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="eduHealth-popu-button">Show Population Top 10</button><button id="eduHealth-popu-button-hide">Hide Population Top 10</button>
+        </div>
 
         <div id="gg-compare-eduHealth"></div>
 
@@ -859,10 +1059,7 @@
             .attr("transform", "translate(" + eduHealth_margin.left + "," + eduHealth_margin.top + ")");
 
     d3.queue()
-        // .defer(d3.csv, "gg-eduecon.csv")
         .defer(d3.csv, "gg-eduhealth.csv")
-        // .defer(d3.csv, "gg-edupoli.csv")
-        // .defer(d3.csv, "gg-healthpoli.csv")
         .await(ready);
 
     function ready(error, eduHealth){
@@ -893,6 +1090,19 @@
                         return "none";
                     } else {
                         return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "eduHealth-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "eduHealth-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "eduHealth-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "eduHealth-Social";
+                    } else if (d.Countries == "China"){
+                        return "eduHealth-China";
                     }
             });
 
@@ -945,12 +1155,64 @@
 
     </script>
 
+    <script>
+    $("#eduHealth-asia-button").click(function(){
+        $(".eduHealth-asia").css("fill","#324167");
+    });
+
+    $("#eduHealth-asia-button-hide").click(function(){
+        $(".eduHealth-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#eduHealth-comm-button").click(function(){
+        $(".eduHealth-Social").css("fill","#5AB0CD");
+    });
+
+    $("#eduHealth-comm-button-hide").click(function(){
+        $(".eduHealth-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#eduHealth-gdp-button").click(function(){
+        $(".eduHealth-GDP").css("fill","#005E7C");
+    });
+
+    $("#eduHealth-gdp-button-hide").click(function(){
+        $(".eduHealth-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#eduHealth-popu-button").click(function(){
+        $(".eduHealth-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#eduHealth-popu-button-hide").click(function(){
+        $(".eduHealth-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
 
     <p class="article-content" style="margin-top: 50px">
         Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
     </p>
 
     <h3 class="compare-gg-title"> Political Empowerment <span class="compare-gg-vs">vs</span> Educational Attainment</h3>
+
+        <div class="compare-button-group01">
+        <button id="poliEdu-asia-button">Show Asia</button><button id="poliEdu-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="poliEdu-comm-button">Show Communist States</button><button id="poliEdu-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="poliEdu-gdp-button">Show GDP TOP 10</button><button id="poliEdu-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="poliEdu-popu-button">Show Population Top 10</button><button id="poliEdu-popu-button-hide">Hide Population Top 10</button>
+        </div>
 
         <div id="gg-compare-eduPoli"></div>
 
@@ -1012,11 +1274,24 @@
                         return "rgb(201, 201, 201)";
                     }
                 })
-                .style("stroke", function(d){
+            .style("stroke", function(d){
                     if (d.Countries == "China"){
                         return "none";
                     } else {
                         return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "poliEdu-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "poliEdu-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "poliEdu-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "poliEdu-Social";
+                    } else if (d.Countries == "China"){
+                        return "poliEdu-China";
                     }
             });
 
@@ -1069,12 +1344,64 @@
 
     </script>
 
+    <script>
+    $("#poliEdu-asia-button").click(function(){
+        $(".poliEdu-asia").css("fill","#324167");
+    });
+
+    $("#poliEdu-asia-button-hide").click(function(){
+        $(".poliEdu-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#poliEdu-comm-button").click(function(){
+        $(".poliEdu-Social").css("fill","#5AB0CD");
+    });
+
+    $("#poliEdu-comm-button-hide").click(function(){
+        $(".poliEdu-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#poliEdu-gdp-button").click(function(){
+        $(".poliEdu-GDP").css("fill","#005E7C");
+    });
+
+    $("#poliEdu-gdp-button-hide").click(function(){
+        $(".poliEdu-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#poliEdu-popu-button").click(function(){
+        $(".poliEdu-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#poliEdu-popu-button-hide").click(function(){
+        $(".poliEdu-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
 
     <p class="article-content" style="margin-top: 50px">
         Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
     </p>
 
     <h3 class="compare-gg-title">Political Empowerment <span class="compare-gg-vs">vs</span> Health and Survival</h3>
+
+        <div class="compare-button-group01">
+        <button id="healthPoli-asia-button">Show Asia</button><button id="healthPoli-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="healthPoli-comm-button">Show Communist States</button><button id="healthPoli-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="healthPoli-gdp-button">Show GDP TOP 10</button><button id="healthPoli-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="healthPoli-popu-button">Show Population Top 10</button><button id="healthPoli-popu-button-hide">Hide Population Top 10</button>
+        </div>
 
         <div id="gg-compare-healthPoli"></div>
 
@@ -1134,11 +1461,24 @@
                         return "rgb(201, 201, 201)";
                     }
                 })
-                .style("stroke", function(d){
+            .style("stroke", function(d){
                     if (d.Countries == "China"){
                         return "none";
                     } else {
                         return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "healthPoli-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "healthPoli-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "healthPoli-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "healthPoli-Social";
+                    } else if (d.Countries == "China"){
+                        return "healthPoli-China";
                     }
             });
 
@@ -1176,8 +1516,6 @@
               .style("fill","#5D5D5D")
               .text("Educational Attainment");   
 
-
-
         svg_healthPoli.append("g")
                 .attr("transform","translate(0," + healthPoli_height + ")")
                 .call(xAxis_healthPoli);
@@ -1186,6 +1524,41 @@
                 .call(yAxis_healthPoli);
 
     }
+
+    </script>
+
+    <script>
+    $("#healthPoli-asia-button").click(function(){
+        $(".healthPoli-asia").css("fill","#324167");
+    });
+
+    $("#healthPoli-asia-button-hide").click(function(){
+        $(".healthPoli-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#healthPoli-comm-button").click(function(){
+        $(".healthPoli-Social").css("fill","#5AB0CD");
+    });
+
+    $("#healthPoli-comm-button-hide").click(function(){
+        $(".healthPoli-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#healthPoli-gdp-button").click(function(){
+        $(".healthPoli-GDP").css("fill","#005E7C");
+    });
+
+    $("#healthPoli-gdp-button-hide").click(function(){
+        $(".healthPoli-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#healthPoli-popu-button").click(function(){
+        $(".healthPoli-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#healthPoli-popu-button-hide").click(function(){
+        $(".healthPoli-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
 
     </script>
 
