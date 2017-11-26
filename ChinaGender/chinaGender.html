@@ -1,33 +1,60 @@
 <html>
 <head>
-    <title>How China Performs in Gender Difference?</title>
+    <title>How does China Perform in Gender Difference?</title>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- // <script type="text/javascript" src="allButton.js"></script> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Hind+Madurai|Patua+One" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Assistant:800|Hind+Madurai|Patua+One" rel="stylesheet">
+    <link href="chinaGenderStyle.css" rel="stylesheet">
 
-    <style>
-
-
-    </style>
 </head>
 
 <body>
-    <button id="all-asia-button">Asia</button><button id="all-comm-button">Communist States</button><button id="all-gdp-button">GDP TOP 10</button><button id="all-popu-button">Population Top 10</button>
-    <div id="gg-all"></div>
+    <div class="intro">
+            <img src="manyunzou.png" style="width: 100px; margin-top: 20px;" />
+    </div>
 
+    <h1>How is <span class="h1-china">China's</span> 
+        <br/><span class="h1-underline">Gender Gap</span> Progress?</h1>
+
+    <p class="article-content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae libero dolor. Quisque eget ornare tellus. Cras eleifend nec tellus vitae laoreet. Ut eu pretium nisi, vitae semper urna. Mauris sit amet tortor nunc. Nullam vel odio tortor. Praesent ut elit rutrum, faucibus lorem mollis, pharetra nisi. Donec bibendum neque quis dui tristique pharetra. Morbi lobortis sapien a ipsum mattis, et porta arcu consectetur. Sed dapibus, magna quis ultrices interdum, erat felis fringilla dui, non sollicitudin neque lacus vel neque. Integer a odio eu quam gravida ullamcorper sit amet dapibus urna. Ut tempor risus ex, a sagittis ipsum tempor at. Suspendisse in lectus maximus, tempor velit ac, tincidunt mi.
+    </p>
+
+    <p class="article-content" style="margin-bottom: 30px">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
+    <div id="all-asia-container">
+        <div class="button-group01">
+        <button id="all-asia-button">Show Asia</button><button id="all-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="button-group">
+        <button id="all-comm-button">Show Communist States</button><button id="all-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="button-group">
+        <button id="all-gdp-button">Show GDP TOP 10</button><button id="all-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="button-group">
+        <button id="all-popu-button">Show Population Top 10</button><button id="all-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
+        <div id="gg-all"></div>
+        <p class="chart-sidenote">*Drag/Scroll bars to zoom in chart</p>
+    </div>
+    <!-- End of all asia container -->
+
+
+    <!-- gg-all graphic code -->
     <script>
     var margin = {top: 20, left: 20, right: 20, bottom: 20},
         width = 1200 - margin.left - margin.right,
-        height = 200 - margin.top - margin.bottom;
-
-    var svg_all = d3.select("#gg-all")
-                    .append("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
+        height = 180 - margin.top - margin.bottom;
 
     d3.queue()
         .defer(d3.csv, "China_all.csv", type)
@@ -36,93 +63,175 @@
     function ready(error, data){
         if(error) throw error;
 
-        var x = d3.scaleLinear()
-                // .domain(d3.extent(data, function(d){ return d.Global; }))
-                .domain([0.5,0.8])
-                .range([0, width]);
-
-// For zoom in, name every part of the axis separately
-        // var xAxis = d3.axisBottom(x);
-
-        // var x_axis = svg_all.append("g")
-        //                 .attr("id","x_axis")
-        //                 .attr("transform", "translate(75,0)")
-        //                 .call(xAxis);
-
-        svg_all.selectAll(".bar")
-                .data(data)
-            .enter().append("rect")
-                .attr("x", function(d){
-                    if(d.Global > 0){
-                        return x(d.Global);
-                    } else {
-                        return x(0);
-                    }
-                })
-                .attr("width", 5)
-                .attr("y", 30)
-                .attr("height", 60)
-                .attr("class", function(d){return d.Countries + " " + d.Category1 + " " + d.Category2 + " " + d.Category3 + " " + d.Category4; })
-                .attr("fill", function(d){
-                    if (d.Countries == "China"){
-                        return "#000000";
-                    } else {
-                    return "rgba(201, 201, 201,0.6)"};
-                });
-                
-//Append text here
-        svg_all.selectAll("text.bar")
-            .data(data)
-        .enter().append("text")
-            .attr("class", function(d){return d.Countries + "-numbers" + " " + d.Category1 + "-numbers" + " " + d.Category2 + "-numbers" + " " + d.Category3 + "-numbers" + " " + d.Category4 + "-numbers"; })
-            .attr("text-anchor","middle")
-            .attr("x", function(d){
-                    if(d.Global > 0){
-                        return x(d.Global);
-                    } else {
-                        return x(0);
-                    }
-                })
-            .attr("y", 110)
-            .text(function(d){return d.Global})
-            .style("visibility", function(d){
-                if (d.Countries == "China"){
-                        return "visible";
-                    } else {
-                    return "hidden"};
-            });
-
-            svg_all.selectAll("text.bar")
-            .data(data)
-        .enter().append("text")
-            .attr("class", function(d){return d.Countries + "-text" + " " + d.Category1 + "-text" + " " + d.Category2 + "-text" + " " + d.Category3 + "-text" + " " + d.Category4 + "-text"; })
-            .attr("text-anchor","middle")
-            .attr("x", function(d){
-                    if(d.Global > 0){
-                        return x(d.Global);
-                    } else {
-                        return x(0);
-                    }
-                })
-            .attr("y", 25)
-            .text(function(d){return d.Countries})
-            .style("visibility", function(d){
-                if (d.Countries == "China"){
-                        return "visible";
-                    } else {
-                    return "hidden"};
-            });
+        var svg_all = d3.select("#gg-all")
+                    .append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.top + "," + margin.left + ")")
+                    .attr("id","gg-all-graphic")
+                    .call(d3.zoom().on("zoom", zoom));
 
         svg_all.append("line")
             .style("stroke","black")
             .attr("x1", 0)
-            .attr("y1", 60)
+            .attr("y1", 80)
             .attr("x2", 2300)
-            .attr("y2", 60)
+            .attr("y2", 80)
             .style("stroke", "#999999");
+
+        // For zoom in, name every part of the axis separately
+        var x = d3.scaleLinear()
+                    .domain([0.5,0.8])
+                    .range([0, width]);
+
+        var xAxis = d3.axisBottom(x);
+
+        var x_axis = svg_all.append("g")
+                        .attr("id","x_axis")
+                        .attr("transform", "translate(75,0)")
+                        .call(xAxis);
+
+        var bars = svg_all.selectAll(".bar")
+                        .data(data)
+                    .enter().append("rect")
+                        .attr("x", function(d){
+                            if(d.Global > 0){
+                                return x(d.Global);
+                            } else {
+                                return x(0);
+                            }
+                        })
+                        .attr("width", function(d){
+                            if(d.Countries == "Average"){
+                                return 2;
+                            } else {
+                                return 5;
+                            }
+                        })
+                        .attr("y", 50)
+                        .attr("height", 60)
+                        .attr("class", function(d){return d.Countries + " " + d.Category1 + " " + d.Category2 + " " + d.Category3 + " " + d.Category4; })
+                        .attr("fill", function(d){
+                            if (d.Countries == "China"){
+                                return "#C8515F";
+                            } else if (d.Countries == "Average"){
+                                return "#2589BD"
+                            } else {
+                            return "rgba(201, 201, 201,0.6)"};
+                        });
+
+
+//Append text here
+        var barsNumbers = svg_all.selectAll("text.bar")
+                                .data(data)
+                            .enter().append("text")
+                                .attr("class", function(d){return d.Countries + "-numbers" + " " + d.Category1 + "-numbers" + " " + d.Category2 + "-numbers" + " " + d.Category3 + "-numbers" + " " + d.Category4 + "-numbers"; })
+                                .attr("text-anchor","middle")
+                                .attr("x", function(d){
+                                        if(d.Global > 0){
+                                            return x(d.Global);
+                                        } else {
+                                            return x(0);
+                                        }
+                                    })
+                                .attr("y", 130)
+                                .text(function(d){return d.Global})
+                                .style("visibility", function(d){
+                                    if (d.Countries == "China"){
+                                            return "visible";
+                                        } else {
+                                        return "hidden"};
+                                });
+
+         var barsText =  svg_all.selectAll("text.bar")
+                                .data(data)
+                            .enter().append("text")
+                                .attr("class", function(d){return d.Countries + "-text" + " " + d.Category1 + "-text" + " " + d.Category2 + "-text" + " " + d.Category3 + "-text" + " " + d.Category4 + "-text"; })
+                                .attr("text-anchor","middle")
+                                .attr("x", function(d){
+                                        if(d.Global > 0){
+                                            return x(d.Global);
+                                        } else {
+                                            return x(0);
+                                        }
+                                    })
+                                .attr("y", 40)
+                                .text(function(d){return d.Countries})
+                                .style("visibility", function(d){
+                                    if (d.Countries == "China"){
+                                            return "visible";
+                                        } 
+                                        // else if (d.Countries == "Average"){
+                                        //     return "visible"
+                                        // }
+                                        else {
+                                        return "hidden"};
+                                });
+
+
+        function zoom(){
+           svg_all.transition()
+                .duration(50)
+                .call(xAxis.scale(d3.event.transform.rescaleX(x)));
+
+            var new_xScale = d3.event.transform.rescaleX(x);
+            bars.attr("x",function(d){
+                                if(d.Global > 0){
+                                    return new_xScale(d.Global);
+                                } else {
+                                    return new_xScale(0);
+                                }
+            });
+            barsNumbers.attr("x",function(d){
+                                if(d.Global > 0){
+                                    return new_xScale(d.Global);
+                                } else {
+                                    return new_xScale(0);
+                                }
+            })
+                        .style("stroke", function(d) {
+                            if(d.Countries == "China"){
+                                return "#C8515F";
+                            } else {
+                                return "#000"
+                            }
+                        });
+            barsText.attr("x",function(d){
+                                if(d.Global > 0){
+                                    return new_xScale(d.Global);
+                                } else {
+                                    return new_xScale(0);
+                                }
+            })
+                        .style("stroke",function(d) {
+                            if(d.Countries == "China"){
+                                return "#C8515F";
+                            } else {
+                                return "#000"
+                            }
+                        });
+    };
+
+    // For legend
+    svg_all.append("line")
+            .style("stroke","black")
+            .attr("x1", 0)
+            .attr("y1", 140)
+            .attr("x2", 25)
+            .attr("y2", 140)
+            .style("stroke", "#2589BD")
+            .style("stroke-width", "3");
+
+    svg_all.append("text")
+            .attr("x", 35)
+            .attr("y", 145)
+            .style("font-size", "13px")
+            .text("Global Weighted Average: 0.68");
 
 
     };
+    // End of function ready()
 
 
     function type(d) {
@@ -135,38 +244,1352 @@
 
     <script>
     $("#all-asia-button").click(function(){
-        var n = $(".Asia").css("fill");
+        $(".Asia").css("fill","#324167");
+        $(".Asia-text").css("visibility","visible");
+        $(".Asia-numbers").css("visibility","visible");
+    });
 
-    //     if(n = "black"){
-    //     $(".Asia").css("fill","black");
-    //     $(".Asia-text").css("visibility","visible");
-    //     $(".Asia-numbers").css("visibility","visible");
-    // } else {
+    $("#all-asia-button-hide").click(function(){
         $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
         $(".Asia-text").css("visibility","hidden");
         $(".Asia-numbers").css("visibility","hidden");
-    // }
     });
+
+    // var asiaChange = true;
+    // var asiaChange2 = true;
+
+    // $("#all-asia-button").click(function(){
+    //     $(".Asia-text").css("visibility","visible");
+    // })
+
+// toggle(function(){
+//         $(".Asia").css("fill","#324167");
+//         // $(".Asia-text").css("visibility","visible");
+//         // $(".Asia-numbers").css("visibility","visible");
+//     }, function() {
+//         $(".Asia").css("fill","rgba(201, 201, 201,0.6)");
+//         // $(".Asia-text").css("visibility","hidden");
+//         // $(".Asia-numbers").css("visibility","hidden");
+//     });
 
 
     $("#all-comm-button").click(function(){
-        $(".Social").css("fill","black");
+        $(".Social").css("fill","#5AB0CD");
         $(".Social-text").css("visibility","visible");
         $(".Social-numbers").css("visibility","visible");
     });
 
+    $("#all-comm-button-hide").click(function(){
+        $(".Social").css("fill","rgba(201, 201, 201,0.6)");
+        $(".Social-text").css("visibility","hidden");
+        $(".Social-numbers").css("visibility","hidden");
+    });
+
     $("#all-gdp-button").click(function(){
-        $(".GDP").css("fill","black");
+        $(".GDP").css("fill","#005E7C");
         $(".GDP-text").css("visibility","visible");
         $(".GDP-numbers").css("visibility","visible");
     });
 
+    $("#all-gdp-button-hide").click(function(){
+        $(".GDP").css("fill","rgba(201, 201, 201,0.6)");
+        $(".GDP-text").css("visibility","hidden");
+        $(".GDP-numbers").css("visibility","hidden");
+    });
+
     $("#all-popu-button").click(function(){
-        $(".Popu").css("fill","black");
+        $(".Popu").css("fill","#9BBEC7");
         $(".Popu-text").css("visibility","visible");
         $(".Popu-numbers").css("visibility","visible");
     });
 
+    $("#all-popu-button-hide").click(function(){
+        $(".Popu").css("fill","rgba(201, 201, 201,0.6)");
+        $(".Popu-text").css("visibility","hidden");
+        $(".Popu-numbers").css("visibility","hidden");
+    });
+
+
     </script>
+
+    <p class="article-content" style="margin-top: 30px">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae libero dolor. Quisque eget ornare tellus. Cras eleifend nec tellus vitae laoreet. Ut eu pretium nisi, vitae semper urna. Mauris sit amet tortor nunc. Nullam vel odio tortor. Praesent ut elit rutrum, faucibus lorem mollis, pharetra nisi. Donec bibendum neque quis dui tristique pharetra. Morbi lobortis sapien a ipsum mattis, et porta arcu consectetur. Sed dapibus, magna quis ultrices interdum, erat felis fringilla dui, non sollicitudin neque lacus vel neque. Integer a odio eu quam gravida ullamcorper sit amet dapibus urna. Ut tempor risus ex, a sagittis ipsum tempor at. Suspendisse in lectus maximus, tempor velit ac, tincidunt mi.
+    </p>
+
+    <p class="article-content">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
+    <div id="compare-gg-container">
+        <h3 class="compare-gg-title">Economic Participation and Opportunity <span class="compare-gg-vs">vs</span> Educational Attainment</h3>
+
+        <div class="compare-button-group01">
+        <button id="econEdu-asia-button">Show Asia</button><button id="econEdu-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econEdu-comm-button">Show Communist States</button><button id="econEdu-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econEdu-gdp-button">Show GDP TOP 10</button><button id="econEdu-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econEdu-popu-button">Show Population Top 10</button><button id="econEdu-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
+        <div id="gg-compare-econEdu"></div>
+
+    <!-- gg-compare-econEdu graphic code -->
+    <script type="text/javascript">
+    var com_margin = {top: 20, right: 20, bottom: 50, left: 60},
+        com_width = 1200 - margin.left - margin.right,
+        com_height = 300 - margin.top - margin.bottom;
+
+    var xScale = d3.scaleLinear()
+        .range([0, com_width]);
+
+    var yScale = d3.scaleLinear()
+        .range([com_height, 0]);
+
+    var xAxis_com = d3.axisBottom(xScale)
+                        .ticks(5)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var yAxis_com = d3.axisLeft(yScale)
+                        .ticks(3)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var svg_com_econEdu = d3.select("#gg-compare-econEdu").append("svg")
+            .attr("width", com_width + com_margin.left + com_margin.right)
+            .attr("height", com_height + com_margin.top + com_margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + com_margin.left + "," + com_margin.top + ")");
+
+    d3.queue()
+        .defer(d3.csv, "gg-eduecon.csv")
+        .await(ready);
+
+    function ready(error, eduEcon){
+        if (error) throw error;
+
+        xScale.domain([0,1]);
+        yScale.domain([0,1]);
+
+        var node = svg_com_econEdu.selectAll("g")
+                    .data(eduEcon)
+                .enter()
+                    .append("g");
+
+// Add tooltips
+        var econEdu_tooltip = d3.select("#gg-compare-econEdu").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var econEdu_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Economy: " + d.Econ + "<br/>Education: " + d.Edu;
+
+            econEdu_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var econEdu_tipMouseout = function(d){
+            econEdu_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
+        node.append("circle")
+            .attr("class","dot")
+            .attr("cx", function(d) {return xScale(d.Econ); })
+            .attr("cy", function(d) {return yScale(d.Edu); })
+            .attr("r", 3.5)
+            .style("fill", function(d){
+                    if (d.Countries == "China"){
+                        return "#C8515F";
+                    } else {
+                        return "rgb(201, 201, 201)";
+                    }
+                })
+                .style("stroke", function(d){
+                    if (d.Countries == "China"){
+                        return "none";
+                    } else {
+                        return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "econEdu-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "econEdu-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "econEdu-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "econEdu-Social";
+                    } else if (d.Countries == "China"){
+                        return "econEdu-China";
+                    }
+            })
+            .on("mouseover", econEdu_tipMouseover)
+            .on("mouseout", econEdu_tipMouseout);
+
+        node.append("text")
+            .attr("x", function(d){return xScale(d.Econ) -20;})
+            .attr("y", function(d){return yScale(d.Edu) + 20; })
+            .text(function(d){
+                return d.Countries;
+            })
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                    return "visible";
+                } else {
+                    return "hidden";
+                }
+            });
+
+        svg_com_econEdu.append("text")
+                .attr("transform",
+                    "translate(" + (com_width/2) + "," + (com_height + com_margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .style("font-size", "13px")
+                .style("fill","#5D5D5D")
+                .text("Economic Participation and Opportunity");
+
+        svg_com_econEdu.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", (0 - com_margin.left))
+              .attr("x",0 - (com_height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-size", "13px")
+              .style("fill","#5D5D5D")
+              .text("Educational Attainment");   
+
+        svg_com_econEdu.append("g")
+                .attr("transform","translate(0," + com_height + ")")
+                .call(xAxis_com);
+
+        svg_com_econEdu.append("g")
+                .call(yAxis_com);
+
+    }
+    // End of ready function code
+
+
+
+    </script>
+
+    <script>
+    $("#econEdu-asia-button").click(function(){
+        $(".econEdu-asia").css("fill","#324167");
+        // $(".Asia-text").css("visibility","visible");
+        // $(".Asia-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-asia-button-hide").click(function(){
+        $(".econEdu-asia").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".Asia-text").css("visibility","hidden");
+        // $(".Asia-numbers").css("visibility","hidden");
+    });
+
+    $("#econEdu-comm-button").click(function(){
+        $(".econEdu-Social").css("fill","#5AB0CD");
+        // $(".Social-text").css("visibility","visible");
+        // $(".Social-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-comm-button-hide").click(function(){
+        $(".econEdu-Social").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".Social-text").css("visibility","hidden");
+        // $(".Social-numbers").css("visibility","hidden");
+    });
+
+    $("#econEdu-gdp-button").click(function(){
+        $(".econEdu-GDP").css("fill","#005E7C");
+        // $(".GDP-text").css("visibility","visible");
+        // $(".GDP-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-gdp-button-hide").click(function(){
+        $(".econEdu-GDP").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".GDP-text").css("visibility","hidden");
+        // $(".GDP-numbers").css("visibility","hidden");
+    });
+
+    $("#econEdu-popu-button").click(function(){
+        $(".econEdu-Popu").css("fill","#9BBEC7");
+        // $(".Popu-text").css("visibility","visible");
+        // $(".Popu-numbers").css("visibility","visible");
+    });
+
+    $("#econEdu-popu-button-hide").click(function(){
+        $(".econEdu-Popu").css("fill","rgba(201, 201, 201,0.6)");
+        // $(".Popu-text").css("visibility","hidden");
+        // $(".Popu-numbers").css("visibility","hidden");
+    });
+
+
+    </script>
+
+    <p class="article-content" style="margin-top: 50px">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
+    <h3 class="compare-gg-title">Economic Participation and Opportunity  <span class="compare-gg-vs">vs</span>  Health and Survival</h3>
+
+
+        <div class="compare-button-group01">
+        <button id="econHealth-asia-button">Show Asia</button><button id="econHealth-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econHealth-comm-button">Show Communist States</button><button id="econHealth-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econHealth-gdp-button">Show GDP TOP 10</button><button id="econHealth-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econHealth-popu-button">Show Population Top 10</button><button id="econHealth-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
+        <div id="gg-compare-econHealth"></div>
+
+    <!-- gg-compare-econHealth graphic code -->
+    <script type="text/javascript">
+
+    var econHealth_margin = {top: 20, right: 20, bottom: 50, left: 60},
+        econHealth_width = 1200 - margin.left - margin.right,
+        econHealth_height = 300 - margin.top - margin.bottom;
+
+    var xScale_econHealth = d3.scaleLinear()
+        .range([0, econHealth_width]);
+
+    var yScale_econHealth = d3.scaleLinear()
+        .range([econHealth_height, 0]);
+
+    var xAxis_econHealth = d3.axisBottom(xScale_econHealth)
+                        .ticks(5)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var yAxis_econHealth = d3.axisLeft(yScale_econHealth)
+                        .ticks(3)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var svg_econHealth = d3.select("#gg-compare-econHealth").append("svg")
+            .attr("width", econHealth_width + econHealth_margin.left + econHealth_margin.right)
+            .attr("height", econHealth_height + econHealth_margin.top + econHealth_margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + econHealth_margin.left + "," + econHealth_margin.top + ")");
+
+    d3.queue()
+        .defer(d3.csv, "gg_econhealth.csv")
+        .await(ready);
+
+    function ready(error, econHealth){
+        if (error) throw error;
+
+        xScale_econHealth.domain([0,1]);
+        yScale_econHealth.domain([0,1]);
+
+        var node_econHealth = svg_econHealth.selectAll("g")
+                    .data(econHealth)
+                .enter()
+                    .append("g");
+
+        // Add tooltips
+        var econHealth_tooltip = d3.select("#gg-compare-econHealth").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var econHealth_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Economy: " + d.Econ + "<br/>Health: " + d.Health;
+
+            econHealth_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var econHealth_tipMouseout = function(d){
+            econHealth_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
+        node_econHealth.append("circle")
+            .attr("class","dot")
+            .attr("cx", function(d) {return xScale_econHealth(d.Econ); })
+            .attr("cy", function(d) {return yScale_econHealth(d.Health); })
+            .attr("r", 3.5)
+            .style("fill", function(d){
+                    if (d.Countries == "China"){
+                        return "#C8515F";
+                    } else {
+                        return "rgb(201, 201, 201)";
+                    }
+                })
+                .style("stroke", function(d){
+                    if (d.Countries == "China"){
+                        return "none";
+                    } else {
+                        return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "econHealth-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "econHealth-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "econHealth-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "econHealth-Social";
+                    } else if (d.Countries == "China"){
+                        return "econHealth-China";
+                    }
+            })
+            .on("mouseover", econHealth_tipMouseover)
+            .on("mouseout", econHealth_tipMouseout);
+
+        node_econHealth.append("text")
+            .attr("x", function(d){return xScale_econHealth(d.Econ) -20;})
+            .attr("y", function(d){return yScale_econHealth(d.Health) + 20; })
+            .text(function(d){
+                return d.Countries;
+            })
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                    return "visible";
+                } else {
+                    return "hidden";
+                }
+            });
+
+        svg_econHealth.append("text")
+                .attr("transform",
+                    "translate(" + (econHealth_width/2) + "," + (econHealth_height + econHealth_margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .style("font-size", "13px")
+                .style("fill","#5D5D5D")
+                .text("Economic Participation and Opportunity");
+
+        svg_econHealth.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", (0 - econHealth_margin.left))
+              .attr("x",0 - (econHealth_height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-size", "13px")
+              .style("fill","#5D5D5D")
+              .text("Health and Survival");   
+
+
+        svg_econHealth.append("g")
+                .attr("transform","translate(0," + econHealth_height + ")")
+                .call(xAxis_econHealth);
+
+        svg_econHealth.append("g")
+                .call(yAxis_econHealth);
+
+    };
+    // End of ready function
+
+
+    </script>
+
+        <script>
+    $("#econHealth-asia-button").click(function(){
+        $(".econHealth-asia").css("fill","#324167");
+    });
+
+    $("#econHealth-asia-button-hide").click(function(){
+        $(".econHealth-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econHealth-comm-button").click(function(){
+        $(".econHealth-Social").css("fill","#5AB0CD");
+    });
+
+    $("#econHealth-comm-button-hide").click(function(){
+        $(".econHealth-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econHealth-gdp-button").click(function(){
+        $(".econHealth-GDP").css("fill","#005E7C");
+    });
+
+    $("#econHealth-gdp-button-hide").click(function(){
+        $(".econHealth-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econHealth-popu-button").click(function(){
+        $(".econHealth-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#econHealth-popu-button-hide").click(function(){
+        $(".econHealth-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
+    <p class="article-content" style="margin-top: 50px">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
+    <h3 class="compare-gg-title">Economic Participation and Opportunity  <span class="compare-gg-vs">vs</span> Political Empowerment</h3>
+
+        <div class="compare-button-group01">
+        <button id="econPoli-asia-button">Show Asia</button><button id="econPoli-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econPoli-comm-button">Show Communist States</button><button id="econPoli-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econPoli-gdp-button">Show GDP TOP 10</button><button id="econPoli-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="econPoli-popu-button">Show Population Top 10</button><button id="econPoli-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
+        <div id="gg-compare-econPoli"></div>
+
+    <!-- gg-compare-econPoli graphic code -->
+    <script type="text/javascript">
+
+    var econPoli_margin = {top: 20, right: 20, bottom: 50, left: 60},
+        econPoli_width = 1200 - margin.left - margin.right,
+        econPoli_height = 300 - margin.top - margin.bottom;
+
+    var xScale_econPoli = d3.scaleLinear()
+        .range([0, econPoli_width]);
+
+    var yScale_econPoli = d3.scaleLinear()
+        .range([econPoli_height, 0]);
+
+    var xAxis_econPoli = d3.axisBottom(xScale_econPoli)
+                        .ticks(5)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var yAxis_econPoli = d3.axisLeft(yScale_econPoli)
+                        .ticks(3)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var svg_econPoli = d3.select("#gg-compare-econPoli").append("svg")
+            .attr("width", econPoli_width + econPoli_margin.left + econPoli_margin.right)
+            .attr("height", econPoli_height + econPoli_margin.top + econPoli_margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + econPoli_margin.left + "," + econPoli_margin.top + ")");
+
+    d3.queue()
+        .defer(d3.csv, "gg_econpoli.csv")
+        .await(ready);
+
+    function ready(error, econPoli){
+        if (error) throw error;
+
+        xScale_econPoli.domain([0,1]);
+        yScale_econPoli.domain([0,1]);
+
+        var node_econPoli = svg_econPoli.selectAll("g")
+                    .data(econPoli)
+                .enter()
+                    .append("g");
+
+        // Add tooltips
+        var econPoli_tooltip = d3.select("#gg-compare-econPoli").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var econPoli_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Economy: " + d.Econ + "<br/>Political: " + d.Poli;
+
+            econPoli_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var econPoli_tipMouseout = function(d){
+            econPoli_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
+        node_econPoli.append("circle")
+            .attr("class","dot")
+            .attr("cx", function(d) {return xScale_econPoli(d.Econ); })
+            .attr("cy", function(d) {return yScale_econPoli(d.Poli); })
+            .attr("r", 3.5)
+            .style("fill", function(d){
+                    if (d.Countries == "China"){
+                        return "#C8515F";
+                    } else {
+                        return "rgb(201, 201, 201)";
+                    }
+                })
+                .style("stroke", function(d){
+                    if (d.Countries == "China"){
+                        return "none";
+                    } else {
+                        return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "econPoli-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "econPoli-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "econPoli-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "econPoli-Social";
+                    } else if (d.Countries == "China"){
+                        return "econPoli-China";
+                    }
+            })
+            .on("mouseover", econPoli_tipMouseover)
+            .on("mouseout", econPoli_tipMouseout);
+
+        node_econPoli.append("text")
+            .attr("x", function(d){return xScale_econPoli(d.Econ) -20;})
+            .attr("y", function(d){return yScale_econPoli(d.Poli) - 10; })
+            .text(function(d){
+                return d.Countries;
+            })
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                    return "visible";
+                } else {
+                    return "hidden";
+                }
+            });
+
+        svg_econPoli.append("text")
+                .attr("transform",
+                    "translate(" + (econPoli_width/2) + "," + (econPoli_height + econPoli_margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .style("font-size", "13px")
+                .style("fill","#5D5D5D")
+                .text("Economic Participation and Opportunity");
+
+        svg_econPoli.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", (0 - econPoli_margin.left))
+              .attr("x",0 - (econPoli_height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-size", "13px")
+              .style("fill","#5D5D5D")
+              .text("Political Empowerment");   
+
+        svg_econPoli.append("g")
+                .attr("transform","translate(0," + econPoli_height + ")")
+                .call(xAxis_econPoli);
+
+        svg_econPoli.append("g")
+                .call(yAxis_econPoli);
+
+    }
+
+
+
+    </script>
+
+    <script>
+    $("#econPoli-asia-button").click(function(){
+        $(".econPoli-asia").css("fill","#324167");
+    });
+
+    $("#econPoli-asia-button-hide").click(function(){
+        $(".econPoli-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econPoli-comm-button").click(function(){
+        $(".econPoli-Social").css("fill","#5AB0CD");
+    });
+
+    $("#econPoli-comm-button-hide").click(function(){
+        $(".econPoli-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econPoli-gdp-button").click(function(){
+        $(".econPoli-GDP").css("fill","#005E7C");
+    });
+
+    $("#econPoli-gdp-button-hide").click(function(){
+        $(".econPoli-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#econPoli-popu-button").click(function(){
+        $(".econPoli-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#econPoli-popu-button-hide").click(function(){
+        $(".econPoli-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
+    <p class="article-content" style="margin-top: 50px">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
+    <h3 class="compare-gg-title">Educational Attainment  <span class="compare-gg-vs">vs</span> Health and Survival</h3>
+
+        <div class="compare-button-group01">
+        <button id="eduHealth-asia-button">Show Asia</button><button id="eduHealth-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="eduHealth-comm-button">Show Communist States</button><button id="eduHealth-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="eduHealth-gdp-button">Show GDP TOP 10</button><button id="eduHealth-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="eduHealth-popu-button">Show Population Top 10</button><button id="eduHealth-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
+        <div id="gg-compare-eduHealth"></div>
+
+    <!-- gg-compare-eduHeath graphic code -->
+    <script type="text/javascript">
+
+    var eduHealth_margin = {top: 20, right: 20, bottom: 50, left: 60},
+        eduHealth_width = 1200 - margin.left - margin.right,
+        eduHealth_height = 300 - margin.top - margin.bottom;
+
+    var xScale_eduHealth = d3.scaleLinear()
+        .range([0, eduHealth_width]);
+
+    var yScale_eduHealth = d3.scaleLinear()
+        .range([eduHealth_height, 0]);
+
+    var xAxis_eduHealth = d3.axisBottom(xScale_eduHealth)
+                        .ticks(5)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var yAxis_eduHealth = d3.axisLeft(yScale_eduHealth)
+                        .ticks(3)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var svg_eduHealth = d3.select("#gg-compare-eduHealth").append("svg")
+            .attr("width", eduHealth_width + eduHealth_margin.left + eduHealth_margin.right)
+            .attr("height", eduHealth_height + eduHealth_margin.top + eduHealth_margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + eduHealth_margin.left + "," + eduHealth_margin.top + ")");
+
+    d3.queue()
+        .defer(d3.csv, "gg-eduhealth.csv")
+        .await(ready);
+
+    function ready(error, eduHealth){
+        if (error) throw error;
+
+        xScale_eduHealth.domain([0,1]);
+        yScale_eduHealth.domain([0,1]);
+
+        var node_eduHealth = svg_eduHealth.selectAll("g")
+                    .data(eduHealth)
+                .enter()
+                    .append("g");
+
+        // Add tooltips
+        var eduHealth_tooltip = d3.select("#gg-compare-eduHealth").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var eduHealth_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Education: " + d.Edu + "<br/>Health: " + d.Health;
+
+            eduHealth_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var eduHealth_tipMouseout = function(d){
+            eduHealth_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
+        node_eduHealth.append("circle")
+            .attr("class","dot")
+            .attr("cx", function(d) {return xScale_eduHealth(d.Edu); })
+            .attr("cy", function(d) {return yScale_eduHealth(d.Health); })
+            .attr("r", 3.5)
+            .style("fill", function(d){
+                    if (d.Countries == "China"){
+                        return "#C8515F";
+                    } else {
+                        return "rgb(201, 201, 201)";
+                    }
+                })
+                .style("stroke", function(d){
+                    if (d.Countries == "China"){
+                        return "none";
+                    } else {
+                        return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "eduHealth-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "eduHealth-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "eduHealth-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "eduHealth-Social";
+                    } else if (d.Countries == "China"){
+                        return "eduHealth-China";
+                    }
+            })
+            .on("mouseover", eduHealth_tipMouseover)
+            .on("mouseout", eduHealth_tipMouseout);
+
+        node_eduHealth.append("text")
+            .attr("x", function(d){return xScale_eduHealth(d.Edu) -20;})
+            .attr("y", function(d){return yScale_eduHealth(d.Health) + 20; })
+            .text(function(d){
+                return d.Countries;
+            })
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                    return "visible";
+                } else {
+                    return "hidden";
+                }
+            });
+
+// X-axis Label
+        svg_eduHealth.append("text")
+                .attr("transform",
+                    "translate(" + (eduHealth_width/2) + "," + (eduHealth_height + eduHealth_margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .style("font-size", "13px")
+                .style("fill","#5D5D5D")
+                .text("Educational Attainment");
+
+// Y-axis Label
+        svg_eduHealth.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", (0 - eduHealth_margin.left))
+              .attr("x",0 - (eduHealth_height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-size", "13px")
+              .style("fill","#5D5D5D")
+              .text("Health and Survival");   
+
+
+
+        svg_eduHealth.append("g")
+                .attr("transform","translate(0," + eduHealth_height + ")")
+                .call(xAxis_eduHealth);
+
+        svg_eduHealth.append("g")
+                .call(yAxis_eduHealth);
+
+    }
+
+
+
+    </script>
+
+    <script>
+    $("#eduHealth-asia-button").click(function(){
+        $(".eduHealth-asia").css("fill","#324167");
+    });
+
+    $("#eduHealth-asia-button-hide").click(function(){
+        $(".eduHealth-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#eduHealth-comm-button").click(function(){
+        $(".eduHealth-Social").css("fill","#5AB0CD");
+    });
+
+    $("#eduHealth-comm-button-hide").click(function(){
+        $(".eduHealth-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#eduHealth-gdp-button").click(function(){
+        $(".eduHealth-GDP").css("fill","#005E7C");
+    });
+
+    $("#eduHealth-gdp-button-hide").click(function(){
+        $(".eduHealth-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#eduHealth-popu-button").click(function(){
+        $(".eduHealth-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#eduHealth-popu-button-hide").click(function(){
+        $(".eduHealth-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
+
+    <p class="article-content" style="margin-top: 50px">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
+    <h3 class="compare-gg-title"> Political Empowerment <span class="compare-gg-vs">vs</span> Educational Attainment</h3>
+
+        <div class="compare-button-group01">
+        <button id="poliEdu-asia-button">Show Asia</button><button id="poliEdu-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="poliEdu-comm-button">Show Communist States</button><button id="poliEdu-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="poliEdu-gdp-button">Show GDP TOP 10</button><button id="poliEdu-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="poliEdu-popu-button">Show Population Top 10</button><button id="poliEdu-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
+        <div id="gg-compare-eduPoli"></div>
+
+    <!-- gg-compare-eduHeath graphic code -->
+    <script type="text/javascript">
+
+    var eduPoli_margin = {top: 20, right: 20, bottom: 50, left: 60},
+        eduPoli_width = 1200 - margin.left - margin.right,
+        eduPoli_height = 300 - margin.top - margin.bottom;
+
+    var xScale_eduPoli = d3.scaleLinear()
+        .range([0, eduPoli_width]);
+
+    var yScale_eduPoli = d3.scaleLinear()
+        .range([eduPoli_height, 0]);
+
+    var xAxis_eduPoli = d3.axisBottom(xScale_eduPoli)
+                        .ticks(5)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var yAxis_eduPoli = d3.axisLeft(yScale_eduPoli)
+                        .ticks(3)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var svg_eduPoli = d3.select("#gg-compare-eduPoli").append("svg")
+            .attr("width", eduPoli_width + eduPoli_margin.left + eduPoli_margin.right)
+            .attr("height", eduPoli_height + eduPoli_margin.top + eduPoli_margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + eduPoli_margin.left + "," + eduPoli_margin.top + ")");
+
+    d3.queue()
+        // .defer(d3.csv, "gg-eduecon.csv")
+        .defer(d3.csv, "gg-edupoli.csv")
+        // .defer(d3.csv, "gg-healthpoli.csv")
+        .await(ready);
+
+    function ready(error, eduPoli){
+        if (error) throw error;
+
+        xScale_eduPoli.domain([0,1]);
+        yScale_eduPoli.domain([0,1]);
+
+        var node_eduPoli = svg_eduPoli.selectAll("g")
+                    .data(eduPoli)
+                .enter()
+                    .append("g");
+
+        // Add tooltips
+        var eduPoli_tooltip = d3.select("#gg-compare-eduPoli").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var eduPoli_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries + "</span><br/>Political: " + d.Poli + "<br/>Education: " + d.Edu;
+
+            eduPoli_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var eduPoli_tipMouseout = function(d){
+            eduPoli_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
+
+        node_eduPoli.append("circle")
+            .attr("class","dot")
+            .attr("cx", function(d) {return xScale_eduPoli(d.Poli); })
+            .attr("cy", function(d) {return yScale_eduPoli(d.Edu); })
+            .attr("r", 3.5)
+            .style("fill", function(d){
+                    if (d.Countries == "China"){
+                        return "#C8515F";
+                    } else {
+                        return "rgb(201, 201, 201)";
+                    }
+                })
+            .style("stroke", function(d){
+                    if (d.Countries == "China"){
+                        return "none";
+                    } else {
+                        return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "poliEdu-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "poliEdu-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "poliEdu-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "poliEdu-Social";
+                    } else if (d.Countries == "China"){
+                        return "poliEdu-China";
+                    }
+            })
+            .on("mouseover", eduPoli_tipMouseover)
+            .on("mouseout", eduPoli_tipMouseout);
+
+        node_eduPoli.append("text")
+            .attr("x", function(d){return xScale_eduPoli(d.Poli) -20;})
+            .attr("y", function(d){return yScale_eduPoli(d.Edu) - 10; })
+            .text(function(d){
+                return d.Countries;
+            })
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                    return "visible";
+                } else {
+                    return "hidden";
+                }
+            });
+
+// X-axis Label
+        svg_eduPoli.append("text")
+                .attr("transform",
+                    "translate(" + (eduPoli_width/2) + "," + (eduPoli_height + eduPoli_margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .style("font-size", "13px")
+                .style("fill","#5D5D5D")
+                .text("Political Empowerment");
+
+// Y-axis Label
+        svg_eduPoli.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", (0 - eduPoli_margin.left))
+              .attr("x",0 - (eduPoli_height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-size", "13px")
+              .style("fill","#5D5D5D")
+              .text("Educational Attainment");   
+
+
+
+        svg_eduPoli.append("g")
+                .attr("transform","translate(0," + eduPoli_height + ")")
+                .call(xAxis_eduPoli);
+
+        svg_eduPoli.append("g")
+                .call(yAxis_eduPoli);
+
+    }
+
+
+
+    </script>
+
+    <script>
+    $("#poliEdu-asia-button").click(function(){
+        $(".poliEdu-asia").css("fill","#324167");
+    });
+
+    $("#poliEdu-asia-button-hide").click(function(){
+        $(".poliEdu-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#poliEdu-comm-button").click(function(){
+        $(".poliEdu-Social").css("fill","#5AB0CD");
+    });
+
+    $("#poliEdu-comm-button-hide").click(function(){
+        $(".poliEdu-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#poliEdu-gdp-button").click(function(){
+        $(".poliEdu-GDP").css("fill","#005E7C");
+    });
+
+    $("#poliEdu-gdp-button-hide").click(function(){
+        $(".poliEdu-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#poliEdu-popu-button").click(function(){
+        $(".poliEdu-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#poliEdu-popu-button-hide").click(function(){
+        $(".poliEdu-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+
+    </script>
+
+
+    <p class="article-content" style="margin-top: 50px">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
+    <h3 class="compare-gg-title">Political Empowerment <span class="compare-gg-vs">vs</span> Health and Survival</h3>
+
+        <div class="compare-button-group01">
+        <button id="healthPoli-asia-button">Show Asia</button><button id="healthPoli-asia-button-hide">Hide Asia</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="healthPoli-comm-button">Show Communist States</button><button id="healthPoli-comm-button-hide">Hide Communist States</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="healthPoli-gdp-button">Show GDP TOP 10</button><button id="healthPoli-gdp-button-hide">Hide GDP TOP 10</button>
+        </div>
+
+        <div class="compare-button-group">
+        <button id="healthPoli-popu-button">Show Population Top 10</button><button id="healthPoli-popu-button-hide">Hide Population Top 10</button>
+        </div>
+
+        <div id="gg-compare-healthPoli"></div>
+
+    <!-- gg-compare-eduHeath graphic code -->
+    <script type="text/javascript">
+
+    var healthPoli_margin = {top: 20, right: 20, bottom: 50, left: 60},
+        healthPoli_width = 1200 - margin.left - margin.right,
+        healthPoli_height = 300 - margin.top - margin.bottom;
+
+    var xScale_healthPoli = d3.scaleLinear()
+        .range([0, healthPoli_width]);
+
+    var yScale_healthPoli = d3.scaleLinear()
+        .range([healthPoli_height, 0]);
+
+    var xAxis_healthPoli = d3.axisBottom(xScale_healthPoli)
+                        .ticks(5)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var yAxis_healthPoli = d3.axisLeft(yScale_healthPoli)
+                        .ticks(3)
+                        .tickSize(0)
+                        .tickPadding(10);
+
+    var svg_healthPoli = d3.select("#gg-compare-healthPoli").append("svg")
+            .attr("width", healthPoli_width + healthPoli_margin.left + healthPoli_margin.right)
+            .attr("height", healthPoli_height + healthPoli_margin.top + healthPoli_margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + healthPoli_margin.left + "," + healthPoli_margin.top + ")");
+
+    d3.queue()
+        .defer(d3.csv, "gg-healthpoli.csv")
+        .await(ready);
+
+    function ready(error, healthPoli){
+        if (error) throw error;
+
+        xScale_healthPoli.domain([0,1]);
+        yScale_healthPoli.domain([0,1]);
+
+        var node_healthPoli = svg_healthPoli.selectAll("g")
+                    .data(healthPoli)
+                .enter()
+                    .append("g");
+
+        // Add tooltips
+        var healthPoli_tooltip = d3.select("#gg-compare-healthPoli").append("div")
+                            .attr("class","tooltip")
+                            .style("opacity", 0);
+
+        var healthPoli_tipMouseover = function(d){
+            var html = "<span class='tooltip-countries'>" + d.Countries  + "</span><br/>Political: " + d.Poli + "<br/>Health: " + d.Health;
+
+            healthPoli_tooltip.html(html)
+                    .style("left", (d3.event.pageX -30) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px")
+                .transition()
+                    .duration(100) // ms
+                      .style("opacity", .9) // started as 0!
+        };
+
+        var healthPoli_tipMouseout = function(d){
+            healthPoli_tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0);
+        };
+
+        node_healthPoli.append("circle")
+            .attr("class","dot")
+            .attr("cx", function(d) {return xScale_healthPoli(d.Poli); })
+            .attr("cy", function(d) {return yScale_healthPoli(d.Health); })
+            .attr("r", 3.5)
+            .style("fill", function(d){
+                    if (d.Countries == "China"){
+                        return "#C8515F";
+                    } else {
+                        return "rgb(201, 201, 201)";
+                    }
+                })
+            .style("stroke", function(d){
+                    if (d.Countries == "China"){
+                        return "none";
+                    } else {
+                        return "#999";
+                    }
+            })
+            .attr("class", function(d){
+                if (d.Category1 == "Asia"){
+                        return "healthPoli-asia";
+                    } else if (d.Category2 == "GDP"){
+                        return "healthPoli-GDP";
+                    } else if (d.Category3 == "Popu"){
+                        return "healthPoli-Popu";
+                    } else if (d.Category4 == "Social"){
+                        return "healthPoli-Social";
+                    } else if (d.Countries == "China"){
+                        return "healthPoli-China";
+                    }
+            })
+            .on("mouseover", healthPoli_tipMouseover)
+            .on("mouseout", healthPoli_tipMouseout);
+
+        node_healthPoli.append("text")
+            .attr("x", function(d){return xScale_healthPoli(d.Poli) -20;})
+            .attr("y", function(d){return yScale_healthPoli(d.Health) + 20; })
+            .text(function(d){
+                return d.Countries;
+            })
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                    return "visible";
+                } else {
+                    return "hidden";
+                }
+            });
+
+// X-axis Label
+        svg_healthPoli.append("text")
+                .attr("transform",
+                    "translate(" + (healthPoli_width/2) + "," + (healthPoli_height + healthPoli_margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .style("font-size", "13px")
+                .style("fill","#5D5D5D")
+                .text("Political Empowerment");
+
+// Y-axis Label
+        svg_healthPoli.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", (0 - healthPoli_margin.left))
+              .attr("x",0 - (healthPoli_height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-size", "13px")
+              .style("fill","#5D5D5D")
+              .text("Health and Survival");   
+
+        svg_healthPoli.append("g")
+                .attr("transform","translate(0," + healthPoli_height + ")")
+                .call(xAxis_healthPoli);
+
+        svg_healthPoli.append("g")
+                .call(yAxis_healthPoli);
+
+    }
+
+    </script>
+
+    <script>
+    $("#healthPoli-asia-button").click(function(){
+        $(".healthPoli-asia").css("fill","#324167");
+    });
+
+    $("#healthPoli-asia-button-hide").click(function(){
+        $(".healthPoli-asia").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#healthPoli-comm-button").click(function(){
+        $(".healthPoli-Social").css("fill","#5AB0CD");
+    });
+
+    $("#healthPoli-comm-button-hide").click(function(){
+        $(".healthPoli-Social").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#healthPoli-gdp-button").click(function(){
+        $(".healthPoli-GDP").css("fill","#005E7C");
+    });
+
+    $("#healthPoli-gdp-button-hide").click(function(){
+        $(".healthPoli-GDP").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    $("#healthPoli-popu-button").click(function(){
+        $(".healthPoli-Popu").css("fill","#9BBEC7");
+    });
+
+    $("#healthPoli-popu-button-hide").click(function(){
+        $(".healthPoli-Popu").css("fill","rgba(201, 201, 201,0.6)");
+    });
+
+    </script>
+
+
+    </div>
+    <!-- Compare-gg-container -->
+
+    <p class="article-content" style="margin-top: 50px">
+        Fusce ornare mi ut tempor pretium. Proin at nunc ultrices, maximus libero quis, sollicitudin est. Praesent aliquet viverra turpis, et ullamcorper tellus. In a luctus lectus, eu auctor nunc. Quisque id aliquet mi. Mauris tempor ut ex at pretium. Praesent a orci nisl. Fusce accumsan dolor sed semper commodo. Proin eget neque lorem.
+    </p>
+
 </body>
 </html>
