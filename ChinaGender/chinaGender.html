@@ -918,6 +918,20 @@
                     .style("opacity", 0);
         };
 
+        node_econPoli.append("text")
+            .attr("x", function(d){return xScale_econPoli(d.Econ) -20;})
+            .attr("y", function(d){ return yScale_econPoli(d.Poli) - 10;})
+            .text(function(d){
+                return d.Countries;
+            })
+            .style("visibility", function(d){
+                if (d.Countries == "China"){
+                    return "visible";
+                } else {
+                    return "hidden";
+                }
+            });
+
         node_econPoli.append("circle")
             .attr("class","dot")
             .attr("cx", function(d) {return xScale_econPoli(d.Econ); })
@@ -933,10 +947,17 @@
                 .style("stroke", function(d){
                     if (d.Countries == "China"){
                         return "none";
+                    } else if (d.Countries == "United States" || d.Countries == "Japan" || d.Countries == "Russia" || d.Countries == "Korea" || d.Countries == "Singapore"){
+                        return "#000";
                     } else {
                         return "#999";
                     }
-            })
+                })
+                .style("stroke-width", function(d){
+                    if (d.Countries == "United States" || d.Countries == "Japan" || d.Countries == "Russia" || d.Countries == "Korea" || d.Countries == "Singapore") {
+                        return "2px";
+                    }
+                })
             .attr("class", function(d){
                 if (d.Category1 == "Asia"){
                         return "econPoli-asia";
@@ -953,19 +974,6 @@
             .on("mouseover", econPoli_tipMouseover)
             .on("mouseout", econPoli_tipMouseout);
 
-        node_econPoli.append("text")
-            .attr("x", function(d){return xScale_econPoli(d.Econ) -20;})
-            .attr("y", function(d){return yScale_econPoli(d.Poli) - 10; })
-            .text(function(d){
-                return d.Countries;
-            })
-            .style("visibility", function(d){
-                if (d.Countries == "China"){
-                    return "visible";
-                } else {
-                    return "hidden";
-                }
-            });
 
         svg_econPoli.append("text")
                 .attr("transform",
@@ -1175,6 +1183,8 @@
                 .style("stroke", function(d){
                     if (d.Countries == "China"){
                         return "none";
+                    } else if (d.Countries == "Mongolia" || d.Countries == "Myanmar" || d.Countries == "Brunei"){
+                        return "#000";
                     } else {
                         return "#999";
                     }
