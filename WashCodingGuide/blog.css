@@ -19,6 +19,10 @@ h6, .h6 {
   color: #333;
 }
 
+h3, h4 {
+  font-weight: bold;
+}
+
 
 /*
  * Override Bootstrap's default container.
@@ -83,14 +87,16 @@ h6, .h6 {
   padding-bottom: 20px;
 }
 .blog-title {
+  font-family: 'Bungee', cursive;
+  font-size: 90px;
   margin-top: 30px;
-  margin-bottom: 0;
-  font-size: 60px;
+  margin-bottom: 30px;
   font-weight: normal;
 }
 .blog-description {
   font-size: 20px;
   color: #999;
+  margin-left: 10px;
 }
 
 
@@ -101,12 +107,13 @@ h6, .h6 {
 .blog-main {
   font-size: 18px;
   line-height: 1.5;
+  padding-right: 100px;
 }
 
 /* Sidebar modules for boxing content */
 .sidebar-module {
   padding: 15px;
-  margin: 0 -15px 15px;
+  margin: 40px -15px 15px;
 }
 .sidebar-module-inset {
   padding: 15px;
@@ -138,9 +145,11 @@ h6, .h6 {
  */
 
 .blog-post {
+  margin-top: 40px;
   margin-bottom: 60px;
 }
 .blog-post-title {
+  font-family: 'Bungee', cursive;
   margin-bottom: 5px;
   font-size: 40px;
 }
@@ -148,6 +157,14 @@ h6, .h6 {
   margin-bottom: 20px;
   color: #999;
 }
+.code-sign {
+  font-family: 'Mukta', sans-serif;
+  font-size: 15px;
+  font-style: italic;
+  color: #666666;
+  margin-top: 20px;
+}
+
 
 
 /*
