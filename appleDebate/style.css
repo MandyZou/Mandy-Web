@@ -1,0 +1,141 @@
+/* for all page */
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.headvisual {
+    height: 80vh;
+    padding-top: 50px;
+    margin-bottom: 60px;
+    background: #9fcca3;
+    background-image: url("img/headvisual.png");
+    background-size: cover;
+}
+
+.date{
+    font-size: 18px;
+    color: #5b5e5f;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 120px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.headvisual h1{
+    font-size: 60px;
+    line-height: 80px;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.text-green{
+    color: green;
+}
+
+.headvisual button{
+    padding: 16px 25px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,.16);
+    transition: all .2s cubic-bezier(.55,0,.1,1);
+    color: #222;
+    background: #fff;
+    border-radius: 0;
+    border: 1px solid #cdcdcd;
+    outline: none;
+}
+
+
+/* let the debate begin! */
+#debate {
+    margin-top: 100px;
+}
+
+section {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/*#second{
+    margin-top: 30px;
+}
+
+#third{
+    margin-top: 30px;
+}
+
+#forth{
+    margin-top: 30px;
+}
+*/
+.message {
+  width: 60%;
+  border: 2px solid #dedede;
+  border-radius: 5px;
+  padding: 0 0 0 30px;
+  margin: 10px 0;
+}
+
+.message_html {
+    color: #666666;
+}
+
+
+.voice {
+  border: 2px solid #f1f1f1;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.anti {
+  border-color: #a2e562;
+  background-color: #a2e562;
+}
+
+.voice::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.voice img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.voice img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+
+
+.is-visible{
+    display: none;
+}
+
+.is-display{
+    display:block;
+}

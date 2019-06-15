@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>苹果绿了吗</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+    <div class='headvisual'>
+        <p class='date'>/企业节能减排/</p>
+        <h1>苹果真的绿了？<span id='changeText' class='text-green'>真的。</span></h1>
+        <div style='text-align:center'><button class='beginButton'>开始辩论</button></div>
+    </div>
+
+    <div class='debate-container'>
+        <main id='debate'>
+
+          <!-- 第一轮 -->
+            <section id='first'>
+                <div class="message">
+                  <p>Apple 现已在全球采用 100% 可再生能源供电</p>
+                  <p class='message_html'>www.apple.com</p>
+                </div>
+
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p>看到了么？苹果已经完全使用新能源了。</p>
+                  <span class="time-right">11:00</span>
+                </div>
+
+                <div class="voice anti">
+                  <img src="img/anti.jpg" alt="Avatar" class="right" style="width:100%;">
+                  <p>才怪，我家附近的苹果商店全部使用可再生能源供电？</p>
+                  <span class="time-left">11:01</span>
+                </div>
+
+            </section>
+
+          <!-- 第二轮 -->
+            <section id='second' class='is-visible' style='margin-top: 50px'>
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p style='margin-left: 13%;'>并不是从风电场、光伏电站拉根电线到苹果商店才叫使用可再生能源。如果要这样做，全世界要拉多少电线？APPLE通过两种方式实现100%可再生能源供电，第一种是直接的可再生能源供应，第二种是通过购买可再生能源证书（RECs）实现。</p>
+                  <span class="time-right">11:05</span>
+                </div>
+
+                <div class="voice anti">
+                  <img src="img/anti.jpg" alt="Avatar" class="right" style="width:100%;">
+                  <p>胡扯。买了别人的清洁电力也能算在自己头上？一次考试，我考了50分，你考了50分，我能花钱买你的50分，然后回家和我妈说我考了100分吗？苹果公司只是在和你玩障眼法而已。</p>
+                  <span class="time-left">11:06</span>
+                </div>
+            </section>
+
+
+          <!-- 第三轮 -->
+            <section id='third' class='is-visible' style='margin-top: 50px'> 
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p style='margin-left: 13%;'>这个比喻不恰当，不管是风电还是火电，终端用户使用的电力产品都是一样的，没办法区分是火电还是风电，所以证书的作用就代表了电网消纳了相应的可再生能源，而这些电最终是被电网的用户用掉了。苹果买了绿证，就意味着相应的可再生能源电量被使用了，苹果实现了可再生能源电力供应。</p>
+                  <span class="time-right">11:10</span>
+                </div>
+
+                <div class="voice anti">
+                  <img src="img/anti.jpg" alt="Avatar" class="right" style="width:100%;">
+                  <p>emma, 偷梁换柱罢了，何况你现在把火电核电啥的都关掉，阴天雨天的时候你看看苹果零售店的Siri还能愉快的和你对话不？何况苹果公司的数据库需要稳定不间断的能源供应。</p>
+                  <span class="time-left">11:11</span>
+                </div>
+            </section>
+
+          <!-- 第四轮 -->
+
+            <section id='forth' class='is-visible' style='margin-top: 50px'>
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p>大兄弟你听过APPLE PARK吗？这是苹果的总部基地，它建立了自给自足的微电网系统，通过17MW的屋顶光伏和10MW的储能实现自发自用。</p>
+                  <span class="time-right">11:12</span>
+                </div>
+
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p style='margin-left: 13%;'>储能完全可以实现电力的稳定供应，苹果在北卡罗来纳州梅登的数据中心就建有20MW光伏项目和10MW的沼气燃料电池厂，每年能够提供2.44 亿千瓦时的可再生能源电量。</p>
+                  <span class="time-right">11:14</span>
+                </div>
+
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p style='margin-left: 13%;'>购买可再生能源证书属于间接实现可再生能源供电，这是由电力产品本身特性决定的。APPLE实际上是通过置换化石能源发电量的方式实现可再生能源供电，进而减少全球的碳排放。</p>
+                  <span class="time-right">11:16</span>
+                </div>
+
+                <div class="voice anti">
+                  <img src="img/anti.jpg" alt="Avatar" class="right" style="width:100%;">
+                  <p>66666，这是以偏概全，苹果其实根本不敢离网。还有他们在上游生产和中游运输的能源消耗占其总能源消耗的80%以上，只强调自己在下游端零售店和办公室等采用可再生能源，明显避重就轻。</p>
+                  <span class="time-left">11:18</span>
+                </div>
+            </section>
+
+            <!-- 第五轮 -->
+
+            <section id='fifth' class='is-visible' style='margin-top: 50px'>
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p style='margin-left: 13%;'>你说的是苹果的供应商，供应商并不属于APPLE公司，这些供应商是否选择使用可再生能源取决于企业自身，而且苹果也在积极帮助供应商减少化石能源的使用，并过渡到利用新的可再生能源。</p>
+                  <span class="time-right">11:19</span>
+                </div>
+
+                <div class="voice">
+                  <img src="img/pro.jpg" alt="Avatar" style="width:100%;">
+                  <p>你简直不可理喻。苹果在上游中游供应商根本不属于苹果公司，这些供应商是否选择使用可再生能源关TM苹果什么事，而且你知不知道苹果也在积极帮助供应商减少化石能源的使用？</p>
+                  <span class="time-right">11:20</span>
+                </div>
+
+                <img src='img/emoji.png' style='width:50%'>
+            </section>
+
+
+            <!-- 结尾 -->
+            <section id='sixth' class='is-visible' style='margin-top: 50px'>
+                <!-- <div class="voice anti">
+                  <img src="img/anti.jpg" alt="Avatar" style="width:100%;">
+                  <p>话这么多。我们去吃饭嘛？</p>
+                  <span class="time-right">11:21</span>
+                </div> -->
+
+                <img src='img/ending.png' style='width:120%'>
+            </section>
+
+        </main>
+    </div>
+
+<script>
+    var text = ["才怪！","真的。"];
+    var counter = 0;
+    var elem = $("#changeText");
+    setInterval(change, 1500);
+    function change() {
+        elem.fadeOut(function(){
+            elem.html(text[counter]);
+            counter++;
+            if(counter >= text.length) { counter = 0; }
+            $(elem).fadeIn();
+        });
+    };
+
+
+    $('.beginButton').click(function(){
+        // console.log('hahahahaha')
+        $('html,body').animate({
+        scrollTop: $(".debate-container").offset().top-20},
+        1500);
+    });
+
+    $('#first .anti').click(function(){
+        // console.log('clicked!')
+        $('#second').addClass('is-display')
+        $('html,body').animate({
+        scrollTop: $("#second").offset().top-10},
+        1500);
+        // $('#second ').addClass('animated bounceOutRight')
+    });
+
+    $('#second .anti').click(function(){
+        // console.log('clicked!')
+        $('#third').addClass('is-display')
+        $('html,body').animate({
+        scrollTop: $("#third").offset().top-10},
+        1500);
+    });
+
+    $('#third .anti').click(function(){
+        // console.log('clicked!')
+        $('#forth').addClass('is-display')
+        $('html,body').animate({
+        scrollTop: $("#forth").offset().top-10},
+        1500);
+    });    
+
+    $('#forth .anti').click(function(){
+        // console.log('clicked!')
+        $('#fifth').addClass('is-display')
+        $('html,body').animate({
+        scrollTop: $("#fifth").offset().top-10},
+        1500);
+    });
+
+    $('#fifth .voice').click(function(){
+        // console.log('clicked!')
+        $('#sixth').addClass('is-display')
+        $('html,body').animate({
+        scrollTop: $("#sixth").offset().top-10},
+        1500);
+    });    
+
+
+
+    </script>
+
+
+</body>
+</html>
